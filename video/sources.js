@@ -8,3 +8,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/gztv5_vi
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/dage_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/luttt_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/jpyy2_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xanimu_video.js

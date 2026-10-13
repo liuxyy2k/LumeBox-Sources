@@ -17,6 +17,7 @@ luttt_detail.html
 luttt_list.html
 luttt_list_p2.html
 luttt_play.html
+luttt_filters.html
 p5mh_chapter.html
 p5mh_chapter_p2.html
 p5mh_chapter_p3.html
@@ -89,3 +90,35 @@ jpyy2_search.json
 jpyy2_detail.json
 jpyy2_episode.json
 jpyy2_plot_movie.json
+
+# xanimu（XAnimu 成人动漫视频站，xanimu.one / xanimu.art 同站；WordPress + kolortube）
+xanimu_home.html
+xanimu_cats.html
+xanimu_cat.html
+xanimu_cat_p2.html
+xanimu_cat_last.html
+xanimu_search.html
+xanimu_search_p2.html
+xanimu_filter_latest.html
+xanimu_post.html
+xanimu_post_new.html
+
+# gmh（G社漫画，g-mh.org / godamh.com 同站；Astro 前端 + apikk API，正文解码器在 gmh_decoder.txt）
+gmh_home.html
+gmh_list.html
+gmh_hots.html
+gmh_dayup.html
+gmh_newss.html
+gmh_tag.html
+gmh_manga.html
+gmh_manga_api.json
+gmh_chapter_api.json
+gmh_decoder.txt
+# mycomic（MYCOMIC，mycomic.com/cn；服务端渲染，整站在 Cloudflare 后面）
+mycomic_list.html
+mycomic_list_p2.html
+mycomic_list_p3.html
+mycomic_list_last.html
+mycomic_search.html
+mycomic_detail.html
+mycomic_chapter.html

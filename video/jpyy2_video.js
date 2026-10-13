@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jpyy2_video","name":"金牌影院","version":"1.0.0","category":"video"}
+// LumeSource: {"id":"jpyy2_video","name":"金牌影院","version":"1.0.1","category":"video"}
 
 // 站点：https://jpyy2.com（Next.js 前端 + 自建 JSON API）
 //
@@ -67,7 +67,7 @@ var HOME_LIMIT = 12;
 var LumeSource = {
   id: 'jpyy2_video',
   name: '金牌影院',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'video',
 
   // ---------------------------------------------------------------- 契约方法
@@ -239,7 +239,11 @@ var LumeSource = {
     return {
       kind: 'video',
       url: chosen.url,
-      headers: { 'Referer': SITE_URL + '/' },
+      // Referer 必须用**我们实际请求的那个域**（手机域 / 主域），**不能**用镜域 jpyy2.com：
+      // 实测部分 CDN 直链（如 ppvod011.blbtgg.com）对 `Referer: https://jpyy2.com/`
+      // 直接回 **403**（同一地址不带 Referer 或带 m.vv3nwjk.com 都是 200），
+      // App 会把这个头透传给播放器 → m3u8/分片全 403 → 「播放连接中断」。
+      headers: { 'Referer': (await this.__originOf(await this.__activeHost())) + '/' },
       qualities: qualities
     };
   },
@@ -425,6 +429,18 @@ var LumeSource = {
   },
 
   /// 候选域列表：桥接地址（配置了就只有它）→ 记住的可用域 → 默认候选表。
+  /// 当前生效的域（记忆优先 → 候选表首个），给 Referer 用。
+  async __activeHost() {
+    var hosts = await this.__hosts();
+    return hosts.length ? hosts[0] : SITE_URL;
+  },
+
+  /// 域 → origin（去路径）。
+  __originOf(host) {
+    var match = /^https?:\/\/[^\/]+/.exec(String(host || ''));
+    return match ? match[0] : SITE_URL;
+  },
+
   async __hosts() {
     var bridge = '';
     try {

@@ -13,6 +13,10 @@
 //         封面**只在 data-original 里**（lazyload，src 是空的）。
 //   分类  GET /mcata 的导航：`/mcata/{类}/ob/time/st/all` 形态的锚点
 //         （全部/韩漫/日漫/3D漫画/真人美女/单本）。分类 id 直接存这个路径段。
+//   筛选  站点自己的列表 URL 就带两个维度（实测分类页里那两排就是它们）：
+//           · 状态 `st`：all 全部 / serialized 更新中 / completed 已完结
+//           · 排序 `ob`：time 按时间 / hits 按阅读
+//         本源做成 `filters()` 的两组，`list()` 拼进 `/mcata/{类}/ob/{排序}/st/{状态}/page/N`。
 //   更新  GET /nm   最新更新整表页（实测 180 条、**没有分页器**，只有第 1 页）。
 //   排行  GET /mrank  排行榜：`li.ranklist_item`（**不是** vodlist_item），
 //         多块（每周排行…），标题在 `h4.title`，封面在 `div.ranklist_thumb[data-original]`。
@@ -83,6 +87,31 @@ var LumeSource = {
     return result;
   },
 
+  /// 筛选：站点自己的两个维度（状态 / 排序，来自列表页 URL 的 st 与 ob 段）。
+  async filters() {
+    return {
+      groups: [
+        {
+          id: 'status',
+          title: '状态',
+          options: [
+            { id: 'all', title: '全部' },
+            { id: 'serialized', title: '更新中' },
+            { id: 'completed', title: '已完结' }
+          ]
+        },
+        {
+          id: 'sort',
+          title: '排序',
+          options: [
+            { id: 'time', title: '按时间' },
+            { id: 'hits', title: '按阅读' }
+          ]
+        }
+      ]
+    };
+  },
+
   /// 首页：最新更新（整表页）+ 两个分类的首屏，每块 12 条。
   ///
   /// **逐块 try/catch + 软截止**：沙箱给单次调用的墙钟预算是 3–10 秒（默认 10），
@@ -151,7 +180,14 @@ var LumeSource = {
     }
 
     if (!category) category = 'all';
-    var url = '/mcata/' + encodeURIComponent(category) + '/ob/time/st/all/page/' + page;
+    // 筛选（站点自己的 URL 维度）：只认白名单值，别把任意串拼进地址。
+    var selected = argument && argument.filters ? argument.filters : {};
+    var sort = String(selected.sort == null ? '' : selected.sort).split(',')[0];
+    var status = String(selected.status == null ? '' : selected.status).split(',')[0];
+    if (sort !== 'hits') sort = 'time';
+    if (status !== 'serialized' && status !== 'completed') status = 'all';
+    var url = '/mcata/' + encodeURIComponent(category) + '/ob/' + sort
+      + '/st/' + status + '/page/' + page;
     var pageHtml = await this.__get(url);
     var items = this.__listItems(pageHtml);
     return { items: items, hasMore: this.__hasNextPage(pageHtml, page, items.length) };

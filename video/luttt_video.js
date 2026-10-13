@@ -1,12 +1,15 @@
-// LumeSource: {"id":"luttt_video","name":"北觅影视","version":"1.0.0","category":"video"}
+// LumeSource: {"id":"luttt_video","name":"北觅影视","version":"1.1.0","category":"video"}
 
 // 站点：https://v.luttt.com （苹果CMS 10 + conch/hl 模板，服务端渲染 HTML）
 //
 // 结构（2026-10-08 实测直连可用，无需 Cookie/无需过验证）：
 //   · 分类：`/vodtype/{id}.html`；一级分类在首页导航里（电影/电视剧/…），
 //     取不到就回退内置的常用几项。
-//   · 列表：`/vodshow/{type1}--------{page}---.html`
-//     （苹果CMS 的标准 URL 形态；page=1 时是 `/vodshow/{type1}-----------.html`）。
+//   · 列表：`/vodshow/{f0}-{f1}-…-{f11}.html`（苹果CMS 的标准 12 段形态）：
+//     f0=类型、f1=地区、f2=排序(time/hits/score)、f4=语言、f5=字母、f8=页码、f11=年份，
+//     其余段留空。page=1 时 f8 留空 → `/vodshow/{type1}-----------.html`。
+//   · 筛选：站点列表页那几排（地区/语言/字母/年份/排序）就是上面这些字段——本源把它们
+//     从页面里**实时抓**成 `filters()`（选项 id 记成「段位|值」），`list()` 按段位回填。
 //     条目在 `ul.hl-vod-list > li.hl-list-item` 里：`a.hl-item-thumb`
 //     带 href="/voddetail/{id}.html" + title + data-original（封面，懒加载占位）。
 //   · 搜索：`/vodsearch/{关键词}----------{page}---.html`（关键词按 URL 编码）。
@@ -24,7 +27,7 @@ var PAGE_SIZE = 36;
 var LumeSource = {
   id: 'luttt_video',
   name: '北觅影视',
-  version: '1.0.0',
+  version: '1.1.0',
   category: 'video',
 
   async categories() {
@@ -58,6 +61,68 @@ var LumeSource = {
     return boards;
   },
 
+  /// 筛选：从列表页的筛选条实时抓（地区 / 语言 / 字母 / 年份 / 排序）。
+  ///
+  /// 站点把筛选做成 URL 的固定字段位（苹果CMS 的 12 段形态），所以选项 id 记成
+  /// **「段位|值」**（例：`1|大陆`），`list()` 按段位写回，脚本不写死任何分类名。
+  /// 类型（f0）不在这里——它由分类那一排负责。
+  async filters() {
+    var html = await this.__get(BASE_URL + '/vodshow/1-----------.html');
+    var groups = [];
+    var seen = {};
+    var rowPattern = /<div class="hl-filter-item hl-filter-text[^"]*">\s*<span>([^<]{1,10})<\/span>\s*<\/div>\s*<ul class="hl-filter-list[^"]*">([\s\S]{0,6000}?)<\/ul>/g;
+    var row;
+    while ((row = rowPattern.exec(html)) !== null) {
+      var title = this.__clean(row[1]);
+      if (!title || seen[title]) continue;
+      var options = [];
+      var linkPattern = /<a href="(\/vodshow\/([^"]+)\.html)"[^>]*>([^<]{1,20})<\/a>/g;
+      var link;
+      var optionSeen = {};
+      while ((link = linkPattern.exec(row[2])) !== null) {
+        var fields = decodeURIComponent(link[2]).split('-');
+        var pos = -1;
+        var value = '';
+        for (var i = 1; i < fields.length; i++) {
+          if (fields[i]) {
+            pos = i;
+            value = fields[i];
+            break;
+          }
+        }
+        if (pos < 0 || !value) continue;
+        var text = this.__clean(link[3]);
+        if (!text) continue;
+        var id = pos + '|' + value;
+        if (optionSeen[id]) continue;
+        optionSeen[id] = true;
+        options.push({ id: id, title: text });
+      }
+      if (!options.length) continue;
+      seen[title] = true;
+      groups.push({ id: 'facet-' + groups.length, title: title, options: options });
+    }
+    // 排序是另一处（列表右上「按最新 / 按最热 / 按评分」，URL 的 f2 段）。
+    var sortOptions = [];
+    var sortSeen = {};
+    var sortPattern = /<a[^>]+href="\/vodshow\/1--([a-z]{2,10})-{6,}\.html"[^>]*>([^<]{1,10})<\/a>/g;
+    var sortMatch;
+    while ((sortMatch = sortPattern.exec(html)) !== null) {
+      var sortText = this.__clean(sortMatch[2]);
+      var sortId = '2|' + sortMatch[1];
+      if (!sortText || sortSeen[sortId]) continue;
+      sortSeen[sortId] = true;
+      sortOptions.push({ id: sortId, title: sortText });
+    }
+    if (sortOptions.length) {
+      groups.push({ id: 'facet-sort', title: '排序', options: sortOptions });
+    }
+    if (!groups.length) {
+      console.warn('[luttt] 筛选条没解析出来：' + html.length + ' 字符');
+    }
+    return groups;
+  },
+
   async list(argument) {
     var page = argument && argument.page ? Number(argument.page) : 1;
     if (!(page > 0)) page = 1;
@@ -69,8 +134,21 @@ var LumeSource = {
     if (keyword) {
       html = await this.__get(BASE_URL + '/vodsearch/' + this.__segment(keyword) + '----------' + page + '---.html');
     } else {
-      // 苹果CMS 标准分页 URL：/vodshow/{type1}--------{page}---.html
-      html = await this.__get(BASE_URL + '/vodshow/' + this.__segment(category) + '--------' + page + '---.html');
+      // 苹果CMS 12 段形态：f0=类型、f8=页码，其余段位由筛选回填（没选就留空）。
+      var fields = ['', '', '', '', '', '', '', '', '', '', '', ''];
+      fields[0] = this.__segment(category);
+      var filters = argument && argument.filters ? argument.filters : {};
+      var keys = Object.keys(filters);
+      for (var k = 0; k < keys.length; k++) {
+        var raw = String(filters[keys[k]] == null ? '' : filters[keys[k]]).split(',')[0];
+        var parts = raw.split('|');
+        var pos = Number(parts[0]);
+        if (!(pos >= 1 && pos <= 11) || pos === 8) continue;
+        if (!parts[1]) continue;
+        fields[pos] = this.__segment(parts[1]);
+      }
+      if (page > 1) fields[8] = String(page);
+      html = await this.__get(BASE_URL + '/vodshow/' + fields.join('-') + '.html');
     }
     var items = this.__listItems(html);
     var hasMore = items.length >= PAGE_SIZE && this.__hasNextPage(html);
@@ -292,6 +370,13 @@ var LumeSource = {
       if ((status === 403 || status === 503 || status === 429) &&
           /just a moment|__cf_chl|cf-chl|challenge-platform|cf-mitigated|checking your browser/i.test(body)) {
         throw new Error('NEED_WEBVIEW_VERIFY：站点触发了 Cloudflare 人机校验（HTTP ' + status + ' ' + url + '）');
+      }
+      // 567：站点/CDN 的「访问被拒」拦截页（实测**按 IP 地区**拦：国内直连 200，
+      // 走境外代理出口就返回 567 + 一张纯 HTML 拦截页，没有 JS 挑战可过）。
+      // 这不是网页视图能救回来的那种 WAF，如实说明原因，别把用户引到验证窗。
+      if (status === 567) {
+        throw new Error('北觅影视拒绝了当前网络的访问（HTTP 567，站点按 IP 地区拦截）：'
+          + url + '——请直连或换一个该站可用的网络出口。');
       }
       throw new Error('拉取失败：HTTP ' + status + ' ' + url);
     }

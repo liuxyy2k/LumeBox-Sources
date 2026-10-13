@@ -1,4 +1,4 @@
-// LumeSource: {"id":"nnhanman_comic","name":"NN韩漫","version":"1.2.1","category":"comic"}
+// LumeSource: {"id":"nnhanman_comic","name":"NN韩漫","version":"1.3.0","category":"comic"}
 
 // 站点：https://nnhanman.net （韩漫站，qTcms 手机模板，Cloudflare 前置）
 //
@@ -15,8 +15,11 @@
 //      `<picture>` 内的 `<img src>`（旁边 webp 的 `<source srcset>` 不用）。
 //      /update、/update/newbook、/update/recommend、/ranking 是另一套
 //      `.itemBox/.itemImg/.itemTxt`（两套都认）。
-//   2. **分页**：`/comics/<分类>/ob/time/st/all`，第 N 页 `/page/N`（快照实测 18 条/页、
-//      末页 15 条）。`?page=N` 站点不认（实测 `…/all?page=2` 与第 1 页逐条相同），
+//   2. **分页**：`/comics/<分类>/ob/{time|hits}/st/{all|serialized|completed}`，第 N 页 `/page/N`
+//      （快照实测 18 条/页、末页 15 条）。`ob` 与 `st` 同时就是站点自己的两排筛选——排序
+//      time 按时间 / hits 按热度，状态 all 全部 / serialized 连载中 / completed 已完结；
+//      本源把它们做成 filters() 两组，list() 只改写这两段（其余照旧）。
+//      `?page=N` 站点不认（实测 `…/all?page=2` 与第 1 页逐条相同），
 //      所以只走路径式。有没有下一页由 `.pagination-wrap` 里的 `/page/<n>` 决定：
 //      末页（第 147 页）快照里最大只到 146（当前页是 `<li class="active"><a href="#">`），
 //      所以「有比当前页更大的页码」才算有下一页。
@@ -111,7 +114,7 @@ var IMAGE_ATTRS = ['src', 'data-src', 'data-original', 'data-echo', 'data-lazy-s
 var LumeSource = {
   id: 'nnhanman_comic',
   name: 'NN韩漫',
-  version: '1.2.1',
+  version: '1.3.0',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -145,6 +148,31 @@ var LumeSource = {
     return [];
   },
 
+  /// 筛选：站点列表页自带的两排（状态 / 排序），值就是它 URL 里的 st 与 ob 段。
+  async filters() {
+    return {
+      groups: [
+        {
+          id: 'status',
+          title: '状态',
+          options: [
+            { id: 'all', title: '全部' },
+            { id: 'serialized', title: '连载中' },
+            { id: 'completed', title: '已完结' }
+          ]
+        },
+        {
+          id: 'sort',
+          title: '排序',
+          options: [
+            { id: 'time', title: '按时间' },
+            { id: 'hits', title: '按热度' }
+          ]
+        }
+      ]
+    };
+  },
+
   async list(argument) {
     var page = argument && argument.page ? Number(argument.page) : 1;
     if (!(page > 0)) page = 1;
@@ -152,6 +180,7 @@ var LumeSource = {
     var category = argument && argument.categoryId ? String(argument.categoryId).trim() : '';
 
     var url = this.__listUrl(category, keyword, page);
+    if (url) url = this.__withFacets(url, argument && argument.filters);
     if (!url) {
       // 整表页（/update、/ranking…）站点只有第 1 页：第 2 页不该去请求（会 404）。
       console.warn('[nnhanman] 「' + category + '」只有第 1 页，第 ' + page + ' 页返回空');
@@ -239,6 +268,19 @@ var LumeSource = {
     var path = this.__categoryPath(category);
     if (this.__isSinglePagePath(path)) return page > 1 ? '' : path;
     return page > 1 ? path.replace(/\/$/, '') + '/page/' + page : path;
+  },
+
+  /// 把列表地址里的 `/ob/{排序}/st/{状态}` 换成筛选选择（值走白名单，认不出就不动）。
+  __withFacets(url, filters) {
+    if (!filters) return url;
+    var sort = String(filters.sort == null ? '' : filters.sort).split(',')[0];
+    var status = String(filters.status == null ? '' : filters.status).split(',')[0];
+    if (sort !== 'hits') sort = '';
+    if (status !== 'serialized' && status !== 'completed') status = '';
+    if (!sort && !status) return url;
+    return url.replace(/\/ob\/(?:time|hits)\/st\/(?:all|serialized|completed)/, function () {
+      return '/ob/' + (sort || 'time') + '/st/' + (status || 'all');
+    });
   },
 
   __categoryPath(category) {

@@ -294,6 +294,345 @@ test('xnovel: 命中反诈/运营商拦截页（200 + 「国家反诈中心」�
   );
 });
 
+
+// ------------------------------------------------------------------ XAnimu（xanimu.one / xanimu.art）
+
+test('xanimu: 首页/分类快照解析出 47 条（封面首张 src、其余 data-src 都要认）', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_cat.html') });
+  var page = await source.list({ categoryId: '36900-2d', page: 1 });
+  // 快照里 48 个 video-block，其中一个没有 data-post-id（站点自己的装饰块），
+  // 所以条目数是 47——脚本只认带 data-post-id 的卡片。
+  assert.equal(page.items.length, 47);
+  assert.equal(page.hasMore, true);
+  assert.equal(page.items[0].id, '108866');
+  assert.equal(page.items[0].title, 'Mime Dash, Derpixon X 高清hmv');
+  assert.match(page.items[0].cover, /^https:\/\/jre1cpolr1frc\.7132p\.cc\/storage\//);
+  assert.match(page.items[0].subtitle, /min/);
+  // 第 2 条走的是懒加载 data-src（首张才是 src）——两种都要有封面。
+  assert.match(page.items[1].cover, /^https:\/\/jre1cpolr1frc\.7132p\.cc\/storage\//);
+  // 分类路径要拼进请求地址（裸中文按段编码）。
+  assert.match(source.__urls[0], /\/zh-CN\/36900-2d\/$/);
+});
+
+test('xanimu: 分类末页（没有 a.next）hasMore=false；翻页地址是 /page/N/', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_cat_last.html') });
+  var last = await source.list({ categoryId: '36900-2d', page: 51 });
+  assert.equal(last.hasMore, false);
+  assert.equal(last.items.length, 30);
+  assert.match(source.__urls[0], /\/zh-CN\/36900-2d\/page\/51\/$/);
+});
+
+test('xanimu: 搜索（?s=）与搜索翻页（/page/N/?s=）', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, {
+    '/page/2/': snapshot('xanimu_search_p2.html'),
+    '/zh-CN/': snapshot('xanimu_search.html')
+  });
+  var first = await source.list({ keyword: '3d', page: 1 });
+  assert.equal(first.items.length, 47);
+  assert.equal(first.hasMore, true);
+  assert.match(source.__urls[0], /\/zh-CN\/\?s=3d$/);
+
+  var second = await source.list({ keyword: '3d', page: 2 });
+  assert.equal(second.items.length, 47);
+  assert.match(source.__urls[1], /\/zh-CN\/page\/2\/\?s=3d$/);
+});
+
+test('xanimu: 排序开关（filters.sort）拼成站点的 ?filter=', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_filter_latest.html') });
+
+  var groups = await source.filters();
+  assert.equal(groups.groups.length, 1);
+  assert.equal(JSON.stringify(groups.groups[0].options.map(function (o) { return o.id; })),
+    JSON.stringify(['popular', 'latest', 'most-viewed', 'longest']));
+
+  var list = await source.list({ categoryId: 'all', filters: { sort: 'latest' }, page: 1 });
+  assert.equal(list.items.length, 47);
+  assert.equal(list.items[0].id, '298342', '?filter=latest 的第一条应是最新那条');
+  assert.match(source.__urls[0], /\/zh-CN\/\?filter=latest$/);
+
+  // 「受欢迎」是站点默认（不带参数）。
+  await source.list({ categoryId: 'all', filters: { sort: 'popular' }, page: 1 });
+  assert.equal(/filter=/.test(source.__urls[1]), false, '受欢迎不该带 filter 参数');
+});
+
+test('xanimu: 分类从导航实时读（id 是 /zh-CN/ 后的路径，标题用中文展示名）', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_home.html') });
+  var categories = await source.categories();
+  assert.equal(categories[0].id, 'all');
+  assert.ok(categories.length >= 40, '分类数应 >= 40，实际 ' + categories.length);
+  assert.ok(categories.some(function (c) { return c.id === '36900-2d' && c.title === '2D'; }));
+  // 中文展示名优先（AI porn 的分类显示名是「AI色情」）。
+  assert.ok(categories.some(function (c) { return c.title === 'AI色情'; }));
+  // 子分类的 id 带层级（Disney 下的阿拉丁）。
+  assert.ok(categories.some(function (c) { return c.id.indexOf('9479-disney') === 0; }));
+});
+
+test('xanimu: 详情（标题/封面/简介/分类/标签/时长）与单集目录', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_post.html') });
+
+  var detail = await source.detail({ id: '212' });
+  assert.equal(detail.title, '史上最佳的无尽触手电影！');
+  assert.match(detail.cover, /^https:\/\/st1\.nosofiles\.com\/.+_poster\.jpg/);
+  assert.match(detail.description, /触手/);
+  assert.equal(JSON.stringify(detail.tags),
+    JSON.stringify(['变态', '大胸', '口交', '肛门', '射精', '恋物癖', '喷射', '双重穿透', '触手']));
+  assert.equal(JSON.stringify(detail.extra.categories.split('、')), JSON.stringify(['3D', '触手']));
+  assert.match(detail.subtitle, /52 分 28 秒/);
+  assert.match(detail.subtitle, /2019-06-05/, '副标题带上发布日期');
+  // extra 里留站点的原始时间戳（副标题只截日期）。
+  assert.equal(detail.extra.uploadDate, '2019-06-05T22:18:36+00:00');
+  assert.equal(detail.extra.duration, '52 分 28 秒');
+  // 详情用 ?p={id}（301 到正式地址），不解析中文 slug。
+  assert.match(source.__urls[0], /\/zh-CN\/\?p=212$/);
+
+  var chapters = await source.chapters({ id: '212' });
+  assert.equal(JSON.stringify(chapters), JSON.stringify([{ id: '1', title: '正片' }]));
+});
+
+test('xanimu: 播放地址是两条 mp4（high/low），verify 令牌原样保留', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  stubRoutes(source, { '/zh-CN/': snapshot('xanimu_post.html') });
+  var content = await source.content({ id: '212', chapterId: '1' });
+  assert.equal(content.kind, 'video');
+  assert.equal(content.qualities.length, 2);
+  assert.equal(JSON.stringify(content.qualities.map(function (q) { return q.label; })),
+    JSON.stringify(['高清', '标清']));
+  assert.match(content.url, /_high\.mp4\?verify=/);
+  assert.equal(content.url, content.qualities[0].url, '默认线路取站点自己的第一条（high）');
+  // `%3D` 是令牌的一部分，**不能**再解一次码。
+  assert.match(content.qualities[0].url, /%3D$/);
+});
+
+test('xanimu: 域名链（.art 首选）；首选连不上就换下一个并记住可用的那个', async function () {
+  var source = stubStore(loadSource('xanimu_video.js'));
+  var attempts = [];
+  source.http = {
+    get: async function (url) {
+      attempts.push(url);
+      if (url.indexOf('xanimu.art') >= 0) throw new Error('网络请求失败：Connection reset');
+      return { status: 200, body: snapshot('xanimu_home.html') };
+    }
+  };
+  var categories = await source.categories();
+  assert.ok(categories.length > 1);
+  assert.match(attempts[0], /^https:\/\/xanimu\.art\//);
+  assert.match(attempts[1], /^https:\/\/xanimu\.one\//);
+
+  // 第二轮：直接用记住的 .one，不再去撞 .art。
+  attempts.length = 0;
+  await source.categories();
+  assert.equal(attempts.length, 1);
+  assert.match(attempts[0], /^https:\/\/xanimu\.one\//);
+});
+
+
+// ------------------------------------------------------------------ G社漫画（g-mh.org）
+
+test('gmh: 列表快照解析出 18 条（slug 作 id、封面 img.card、标题 h3.cardtitle）', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  stubRoutes(source, { '/manga': snapshot('gmh_list.html') });
+  var page = await source.list({ categoryId: 'all', page: 1 });
+  assert.equal(page.items.length, 18);
+  assert.equal(page.hasMore, true, '目录页有 /manga/page/{N} 分页器');
+  assert.equal(page.items[0].id, 'wuliandianfeng-pikapi');
+  assert.equal(page.items[0].title, '武炼巅峰');
+  assert.match(page.items[0].cover, /^https:\/\/c-nc-1\.6wm\.top\/manga\//);
+  assert.match(source.__urls[0], /\/manga$/);
+});
+
+test('gmh: 搜索如实拒绝（站点没有搜索，不返回假的空结果）', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  var attempts = [];
+  source.http = { get: async function (url) { attempts.push(url); return { status: 200, body: '' }; } };
+  await assert.rejects(
+    function () { return source.list({ keyword: 'naruto', page: 1 }); },
+    function (error) {
+      assert.match(String(error.message), /没有搜索/);
+      return true;
+    }
+  );
+  assert.equal(attempts.length, 0, '不该为一个不存在的搜索端点发请求');
+});
+
+test('gmh: 分类 = 四个栏目 + 站点自己的题材/标签（实时抓）', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  stubRoutes(source, { '/manga': snapshot('gmh_list.html') });
+  var categories = await source.categories();
+  assert.equal(JSON.stringify(categories.slice(0, 4).map(function (c) { return c.id; })),
+    JSON.stringify(['all', 'hots', 'dayup', 'newss']));
+  assert.ok(categories.some(function (c) { return c.id === 'genre:kr' && c.title === '韩漫'; }),
+    '题材组应含 genre:kr');
+  assert.ok(categories.some(function (c) { return c.id.indexOf('tag:') === 0; }),
+    '标签组应被解析出来');
+});
+
+test('gmh: 详情（作品页 data-mid + 页面元信息）与目录（接口 chapters 升序）', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  stubRoutes(source, {
+    '/api/v2/manga/get': snapshot('gmh_manga_api.json'),
+    '/manga/': snapshot('gmh_manga.html')
+  });
+  var detail = await source.detail({ id: 'wujiakegui-yiming' });
+  assert.equal(detail.title, '无家可归');
+  // 封面取 og:image（本作封面）；页面上第一张 img.card 是推荐位，属于别的作品。
+  assert.match(detail.cover, /^https:\/\/c-nc-1\.6wm\.top\/manga\/wujiakegui-yiming\//);
+  assert.equal(detail.extra.mid, '4418');
+  assert.equal(detail.extra.author, '佚名');
+  assert.equal(detail.extra.genre, '韩漫');
+  assert.ok(detail.tags.length >= 1);
+  assert.match(detail.subtitle, /共 20 话/);
+
+  var chapters = await source.chapters({ id: 'wujiakegui-yiming' });
+  assert.equal(chapters.length, 20);
+  assert.equal(chapters[0].id, '1266718');
+  assert.match(chapters[0].title, /第01话/);
+});
+
+test('gmh: 被站点防护拦下（403）时换域，全被拦才抛 NEED_WEBVIEW_VERIFY', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  var attempts = [];
+  source.http = {
+    get: async function (url) {
+      attempts.push(url);
+      if (url.indexOf('g-mh.org') >= 0) throw new Error('网络请求失败：Connection reset');
+      return { status: 403, body: '<html><title>Just a moment...</title></html>' };
+    }
+  };
+  await assert.rejects(
+    function () { return source.list({ categoryId: 'all', page: 1 }); },
+    function (error) {
+      assert.match(String(error.message), /NEED_WEBVIEW_VERIFY/);
+      return true;
+    }
+  );
+  assert.equal(attempts.length, 2, '两个候选域都要试过');
+});
+
+test('gmh: 正文走「站点自己的解码器」（快照里解码器原样跑，出 38 张图）', async function () {
+  var source = stubStore(loadSource('gmh_comic.js'));
+  stubRoutes(source, {
+    '/api/v2/chapter/getinfo': snapshot('gmh_chapter_api.json'),
+    '/chapter-decoder.js': snapshot('gmh_decoder.txt'),
+    '/manga/': snapshot('gmh_manga.html')
+  });
+  var content = await source.content({ id: 'wujiakegui-yiming', chapterId: '1266718' });
+  assert.equal(content.kind, 'images');
+  assert.equal(content.images.length, 38);
+  assert.match(content.images[0], /^https:\/\/c-nd2-1\.6wm\.top\/wujiakegui\/ac3f6\//);
+  assert.match(content.images[0], /\.webp$/);
+});
+
+// ------------------------------------------------------------------ MYCOMIC（mycomic.com/cn）
+
+test('mycomic: 列表 30 条/页（标题取 alt、副标题取「最新话」）', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/comics': snapshot('mycomic_list.html') });
+  var page = await source.list({ categoryId: 'all', page: 1 });
+  assert.equal(page.items.length, 30);
+  assert.equal(page.hasMore, true);
+  assert.equal(page.items[0].id, '55355');
+  assert.equal(page.items[0].title, '猎人游戏W');
+  assert.match(page.items[0].cover, /^https:\/\/biccam\.com\/comics\/55355-/);
+  assert.equal(page.items[0].subtitle, '第07话');
+});
+
+test('mycomic: 中间页 hasMore=true、真站末页（第 1845 页）hasMore=false', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/comics': snapshot('mycomic_list_p3.html') });
+  var mid = await source.list({ categoryId: 'all', page: 3 });
+  assert.equal(mid.hasMore, true, '第 3 页后面还有（快照里能看到 page=1845）');
+
+  // 末页快照取自真站第 1845 页：没有 page=1846，也没有 rel="next"。
+  stubRoutes(source, { '/comics': snapshot('mycomic_list_last.html') });
+  var last = await source.list({ categoryId: 'all', page: 1845 });
+  assert.equal(last.hasMore, false);
+  assert.equal(last.items.length, 8, '末页只剩余数条目（1845 页 × 30 条）');
+});
+
+test('mycomic: 搜索与筛选拼成站点自己的查询串（keyword / filter[key] / sort）', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/comics': snapshot('mycomic_search.html') });
+  await source.list({ keyword: '海贼', page: 1 });
+  assert.match(source.__urls[0], /keyword=%E6%B5%B7%E8%B4%BC/);
+
+  await source.list({
+    categoryId: 'sort-popular',
+    filters: { tag: 'rexue', country: 'japan', end: '1' },
+    page: 2
+  });
+  assert.match(source.__urls[1], /sort=-views/);
+  assert.match(source.__urls[1], /filter%5Btag%5D=rexue/);
+  assert.match(source.__urls[1], /filter%5Bcountry%5D=japan/);
+  assert.match(source.__urls[1], /filter%5Bend%5D=1/);
+  assert.match(source.__urls[1], /page=2/);
+});
+
+test('mycomic: 筛选分组从列表页实时抓（含中文标题与选项）', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/comics': snapshot('mycomic_list.html') });
+  var filters = await source.filters();
+  var titles = filters.groups.map(function (g) { return g.title; });
+  assert.equal(JSON.stringify(titles),
+    JSON.stringify(['作品类型', '适合受众', '作品地区', '目前进度', '出品年份', '排序']));
+  var tag = filters.groups[0];
+  assert.ok(tag.options.length >= 30, '作品类型应有 30+ 个选项，实际 ' + tag.options.length);
+  assert.ok(tag.options.some(function (o) { return o.id === 'tag=rexue'; }));
+  assert.ok(filters.groups[5].options.some(function (o) { return o.id === 'sort-popular'; }));
+});
+
+test('mycomic: 详情（标题/封面/作者/状态/简介/标签）+ 目录升序（站点默认倒序）', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/comics/': snapshot('mycomic_detail.html') });
+  var detail = await source.detail({ id: '1128' });
+  assert.equal(detail.title, 'ONE PIECE航海王');
+  assert.equal(detail.extra.author, '尾田榮一郎');
+  assert.equal(detail.extra.status, '连载中');
+  assert.equal(detail.extra.country, '日本');
+  assert.equal(detail.extra.chapters, 473);
+  assert.match(detail.subtitle, /共 603 话/);
+  assert.ok(detail.tags.indexOf('热血') >= 0);
+
+  var chapters = await source.chapters({ id: '1128' });
+  assert.equal(chapters.length, 473);
+  assert.equal(chapters[0].title, '第00话前传', '旧→新升序：第一项是前传');
+  assert.equal(chapters[chapters.length - 1].id, '817597', '最后一项是最新话');
+});
+
+test('mycomic: 正文图片是明文（img.page → biccam.com/chapters/…）', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  stubRoutes(source, { '/chapters/': snapshot('mycomic_chapter.html') });
+  var content = await source.content({ id: '1128', chapterId: '817597' });
+  assert.equal(content.kind, 'images');
+  assert.equal(content.images.length, 12);
+  assert.match(content.images[0], /^https:\/\/biccam\.com\/chapters\/817597\/1-/);
+});
+
+test('mycomic: Cloudflare 挑战页（403）抛 NEED_WEBVIEW_VERIFY 让 App 拉起网页视图', async function () {
+  var source = stubStore(loadSource('mycomic_comic.js'));
+  source.http = {
+    get: async function () {
+      return {
+        status: 403,
+        body: '<html><head><title>Just a moment...</title></head><body>enable javascript</body></html>'
+      };
+    }
+  };
+  await assert.rejects(
+    function () { return source.list({ categoryId: 'all', page: 1 }); },
+    function (error) {
+      assert.match(String(error.message), /NEED_WEBVIEW_VERIFY/);
+      return true;
+    }
+  );
+});
+
 // ------------------------------------------------------------------ 金牌影院（jpyy2.com / vv3nwjk.com）
 
 test('jpyy2: 首页 / 列表 / 详情 / 选集 / 播放地址（按快照 JSON 解析）', async function () {
