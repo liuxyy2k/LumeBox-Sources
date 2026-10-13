@@ -1,0 +1,102 @@
+{
+ "code": 200,
+ "msg": "操作成功",
+ "data": [
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "喜剧",
+   "itemValue": "22",
+   "sortOrder": 1
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "动作",
+   "itemValue": "23",
+   "sortOrder": 2
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "科幻",
+   "itemValue": "30",
+   "sortOrder": 3
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "爱情",
+   "itemValue": "26",
+   "sortOrder": 4
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "悬疑",
+   "itemValue": "27",
+   "sortOrder": 5
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "奇幻",
+   "itemValue": "87",
+   "sortOrder": 6
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "剧情",
+   "itemValue": "37",
+   "sortOrder": 7
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "恐怖",
+   "itemValue": "36",
+   "sortOrder": 8
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "犯罪",
+   "itemValue": "35",
+   "sortOrder": 9
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "动画",
+   "itemValue": "33",
+   "sortOrder": 10
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "惊悚",
+   "itemValue": "34",
+   "sortOrder": 11
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "战争",
+   "itemValue": "25",
+   "sortOrder": 12
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "冒险",
+   "itemValue": "31",
+   "sortOrder": 13
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "灾难",
+   "itemValue": "81",
+   "sortOrder": 25
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "伦理",
+   "itemValue": "83",
+   "sortOrder": 27
+  },
+  {
+   "dictCode": "FILTER_PLOT",
+   "itemText": "其他",
+   "itemValue": "43",
+   "sortOrder": 99
+  }
+ ]
+}

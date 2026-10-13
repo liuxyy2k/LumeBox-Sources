@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QL6YSDRWEV"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-QL6YSDRWEV');
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="description" content="h漫分享小站">
+	<meta name="keywords" content="h漫,嗶咔,18h,紳士,成人漫畫,H圖,H本子,j圖, pica">
+	<meta name="juicyads-site-verification" content="92d1559a83b75fab2761a7256444d42d"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="Trafficstars" content="86195">
+	<meta name="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" content="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" />
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>JComic</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/view/css/bootstrap.min.css?aa" rel="stylesheet">
+	<!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="/view/css/custom.css?20220214" rel="stylesheet">
+	<!--<link rel="preload" href="/view/fonts/glyphicons-halflings-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">-->
+
+	
+	<script src="/view/jquery.js"></script>
+	<script src="/view/jquery.lazyload.js"></script>
+	<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-87476157-1', 'auto');
+	 
+	ga('send', 'pageview');	  
+	  
+	  
+	$(function() {
+		$("img.lazy").lazyload({
+			threshold : 5000
+		});
+	});
+	
+	/*
+	var mq = window.matchMedia("(min-width: 800px)");
+	//var mq2 = window.matchMedia("(max-width: 799px)");
+
+	 mq.addListener(WidthChange);
+	 //mq2.addListener(WidthChange);
+	// media query event handler
+	$( document ).ready(function() {
+	if (matchMedia) {
+	  WidthChange(mq);
+	}
+	});
+	*/
+
+	// media query change
+	/*
+	function WidthChange(mq) {
+	  if (mq.matches) {
+		$( ".adbannerD" ).css({'display':'block'});
+		$( ".adbannerM" ).css({'display':'none'});
+		
+		console.log("desktop");
+
+	  } else {
+		$( ".adbannerM" ).css({'display':'block'});
+		$( ".adbannerD" ).css({'display':'none'});
+		
+		console.log("mobile");
+	  }
+
+	}
+	*/
+	function search(){
+	var search = document.getElementById('search').value;
+	if (search)
+		window.location = '/search/'+search;
+	}
+	function setCookie(cname, cvalue, exdays) {
+	  const d = new Date();
+	  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	  let expires = "expires="+ d.toUTCString();
+	  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	function getCookie(cname) {
+	  let name = cname + "=";
+	  let decodedCookie = decodeURIComponent(document.cookie);
+	  let ca = decodedCookie.split(';');
+	  for(let i = 0; i <ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+		  c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		  return c.substring(name.length, c.length);
+		}
+	  }
+	  return "";
+	}
+	</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set up the Intersection Observer
+    // rootMargin "800px" means: "Start decoding and downloading when the image is 800 pixels away from the screen"
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let img = entry.target;
+                let lockedStr = img.getAttribute('data-locked');
+                
+                if (lockedStr) {
+                    try {
+                        // 1. Strip the junk prefix
+                        let cleanStr = lockedStr.replace("JCOMIC_TRAPS_", "");
+                        
+                        // 2. Reverse back to Base64
+                        let unreversed = cleanStr.split('').reverse().join('');
+                        
+                        // 3. Decode and load the image
+                        img.src = atob(unreversed);
+                        
+                        // Clean up
+                        img.removeAttribute('data-locked');
+                    } catch (error) {
+                        console.error("Failed to unlock image.");
+                    }
+                }
+                
+                // Stop observing the image once it has been triggered
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "800px 0px 800px 0px" });
+
+    // Find all protected images and attach the observer
+    const images = document.querySelectorAll('.jcomic-img');
+    images.forEach(img => {
+        imageObserver.observe(img);
+    });
+});
+</script>
+</head>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">   
+	
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                
+                <a class="navbar-brand d-none" href="/">
+                	<span class="glyphicon glyphicon-fire"></span> 
+                	JComic
+                </a>
+				<div class="form-inline navbar-right" style="display:flex">
+					<input class="form-control" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" id="search-btn" onclick="search();">Search</button>
+				  </div>
+				  
+            </div>
+			
+            <!-- Navbar links -->
+			
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        
+                    </li>
+                </ul>
+				
+            </div>
+			
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+
+<body>
+    <!-- Content -->
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">歡迎光臨 JComic.net
+                 </h1>
+			</div>
+        </div>
+		<div class="row">
+		<div class="col-sm-12 col-xm-12 col-centered adbannerD" style="padding-top:5px">
+			<!-- JuicyAds v3.0 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script><ins id="563554" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':563554});</script>
+			
+		<!--JuicyAds END-->
+		</div>
+				</div>
+	</div>
+<script>
+document.title = document.title+" - "+$("h1").text();
+
+</script>
+        <!-- /.row -->
+  <!-- Projects Row -->
+        <!-- /.row -->
+
+
+
+        <!-- Projects Row -->
+	<div class="container">	
+        <div class="row">
+			
+			
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/最近更新">
+                    <img class="img-responsive" src="/cat/new.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/最近更新">最近更新</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/隨機">
+                    <img class="img-responsive" src="/cat/translate.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/隨機">隨機</a>
+                </h3>
+                
+            </div>
+            <div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/全彩">
+                    <img class="img-responsive" src="/cat/全彩.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/全彩">全彩</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/長篇">
+                    <img class="img-responsive" src="/cat/長篇.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/長篇">長篇</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/單行本">
+                    <img class="img-responsive" src="/cat/Loveland.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/單行本">單行本</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/同人">
+                    <img class="img-responsive" src="/cat/同人.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/同人">同人</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/短篇">
+                    <img class="img-responsive" src="/cat/短篇.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/短篇">短篇</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/Cosplay">
+                    <img class="img-responsive" src="/cat/cosplay.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/Cosplay">Cosplay</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/歐美">
+                    <img class="img-responsive" src="/cat/67edd79c63e037afcd6309c25ad312a1.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/歐美">歐美</a>
+                </h3>
+                
+            </div>
+			
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/WEBTOON">
+                    <img class="img-responsive" src="/cat/52a81f09-32a0-422b-bba3-207eb4d22520.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/WEBTOON">WEBTOON</a>
+                </h3>
+                
+            </div>
+		
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/圓神領域">
+                    <img class="img-responsive" src="/cat/cat_cirle.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/圓神領域">圓神領域</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/碧藍幻想">
+                    <img class="img-responsive" src="/cat/blue.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/碧藍幻想">碧藍幻想</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/CG雜圖">
+                    <img class="img-responsive" src="/cat/CG雜圖.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/CG雜圖">CG雜圖</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/英語 ENG">
+                    <img class="img-responsive" src="/cat/英語 ENG.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/英語 ENG">英語 ENG</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/生肉">
+                    <img class="img-responsive" src="/cat/生肉.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/生肉">生肉</a>
+                </h3>
+               
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/純愛">
+                    <img class="img-responsive" src="/cat/純愛.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/純愛">純愛</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/百合花園">
+                    <img class="img-responsive" src="/cat/百合花園.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/百合花園">百合花園</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/耽美花園">
+                    <img class="img-responsive" src="/cat/1492872524635.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/耽美花園">耽美花園</a>
+                </h3>
+               
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/偽娘哲學">
+                    <img class="img-responsive" src="/cat/偽娘哲學.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/偽娘哲學">偽娘哲學</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/後宮閃光">
+                    <img class="img-responsive" src="/cat/後宮閃光.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/後宮閃光">後宮閃光</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/扶他樂園">
+                    <img class="img-responsive" src="/cat/扶他樂園.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/扶他樂園">扶他樂園</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/姐姐系">
+                    <img class="img-responsive" src="/cat/姐姐系.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/姐姐系">姐姐系</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/妹妹系">
+                    <img class="img-responsive" src="/cat/妹妹系.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/妹妹系">妹妹系</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/SM">
+                    <img class="img-responsive" src="/cat/SM.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/SM">SM</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/性轉換">
+                    <img class="img-responsive" src="/cat/性轉換.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/性轉換">性轉換</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/足の恋">
+                    <img class="img-responsive" src="/cat/足の恋.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/足の恋">足の恋</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/重口地帶">
+                    <img class="img-responsive" src="/cat/重口地帶.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/重口地帶">重口地帶</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/人妻">
+                    <img class="img-responsive" src="/cat/人妻.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/人妻">人妻</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/NTR">
+                    <img class="img-responsive" src="/cat/NTR.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/NTR">NTR</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/強暴">
+                    <img class="img-responsive" src="/cat/強暴.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/強暴">強暴</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/非人類">
+                    <img class="img-responsive" src="/cat/非人類.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/非人類">非人類</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/艦隊收藏">
+                    <img class="img-responsive" src="/cat/艦隊收藏.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/艦隊收藏">艦隊收藏</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/Love Live">
+                    <img class="img-responsive" src="/cat/Love Live.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/Love Live">Love Live</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/SAO 刀劍神域">
+                    <img class="img-responsive" src="/cat/SAO 刀劍神域.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/SAO 刀劍神域">SAO 刀劍神域</a>
+                </h3>
+                
+            </div>
+        
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/Fate">
+                    <img class="img-responsive" src="/cat/Fate.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/Fate">Fate</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/東方">
+                    <img class="img-responsive" src="/cat/東方.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/東方">東方</a>
+                </h3>
+                
+            </div>
+			<div class="col-xs-4 col-md-2 portfolio-item">
+                <a href="/cat/禁書目錄">
+                    <img class="img-responsive" src="/cat/禁書目錄.jpg" alt="">
+                </a>
+                <h3>
+                    <a href="/cat/禁書目錄">禁書目錄</a>
+                </h3>
+                
+            </div>
+			
+        </div>
+
+    </div>
+
+	
+	<footer>
+	
+		<div class="footer-blurb">
+			<div class="container">
+			
+			</div>
+        </div>
+        
+        <div class="copyright">
+        	<div class="container">
+        		<p>Copyright &copy; JComic.net 2017</p>
+        	</div>
+        </div>
+	</footer>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/view/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

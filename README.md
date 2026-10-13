@@ -25,12 +25,16 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | 色友漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/seyoumanhua_comic.js` |
 | NN韩漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nnhanman_comic.js` |
 | 18禁漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jm18_comic.js` |
+| X漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_comic.js` |
+| JComic | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js` |
 | CA情色小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/99xs_novel.js` |
 | xChina 小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xchina_novel.js` |
 | X小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xxiaoshuo_novel.js` |
+| 夜读小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xnovel_novel.js` |
 | 瓜子影视 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/gztv5_video.js` |
 | 大哥视频 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/dage_video.js` |
 | 北觅影视 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/luttt_video.js` |
+| 金牌影院 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/jpyy2_video.js` |
 
 要点：
 
@@ -59,12 +63,16 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | comic/seyoumanhua_comic.js | `seyoumanhua_comic` | 色友漫画 | 1.0.0 | 直连可用 |
 | comic/nnhanman_comic.js | `nnhanman_comic` | NN韩漫 | 1.2.0 | qTcms 手机模板：解析按**真站快照**写（列表走 `/comics/<类>/ob/time/st/all/page/N`，封面 `img src`） |
 | comic/jm18_comic.js | `jm18_comic` | 18禁漫 | 1.0.0 | MacCMS + conch 主题：列表 `li.hl-list-item`（封面只在 `data-original`）、`/comic-lists/{类}/ob/time/st/all/page/N` 分页 |
+| comic/xman6_comic.js | `xman6_comic` | X漫 | 1.0.0 | 另一套 MacCMS 皮肤：列表 `li.vodlist_item`、`/mcata/{类}/ob/time/st/all/page/N`；排行页是 `li.ranklist_item`（另一套标记）；正文图在 `img[data-src]` |
+| comic/jcomic_comic.js | `jcomic_comic` | JComic | 1.0.0 | 条目有 `/eps/`（多话）与 `/page/`（单页）两形态，**作品 id 存路径**；正文图是 `JCOMIC_TRAPS_` 倒序 base64，脚本内解码；**图片直链是 60 秒签名 S3 地址**（站点限制，见脚本头部） |
 | novel/99xs_novel.js | `99xs_novel` | CA情色小说 | 2.1.0 | 根路径有「继续访问」拦截页，源自带 cookie |
 | novel/xchina_novel.js | `xchina_novel` | xChina 小说 | 1.0.0 | 详情/正文常被 CF 拦：抛标记走网页视图 |
 | novel/xxiaoshuo_novel.js | `xxiaoshuo_novel` | X小说 | 1.0.0 | 直连可用 |
+| novel/xnovel_novel.js | `xnovel_novel` | 夜读小说 | 1.0.0 | Tailwind 站：列表 `a.list-card`（`/novels/{N}`、`/tag/{slug}/{N}`、`/search?q=&page=`）；正文取 `article#read-article` 的 `<p>` 并剔掉 `div.extra_c_2` 广告块；目录第 1 章要做「工具条 / 开始阅读」去噪；正常页里带 CF 的 jsd 信标**不能**当校验页判据，反诈拦截页（200 + 3KB）会给出可读原因 |
 | video/gztv5_video.js | `gztv5_video` | 瓜子影视 | 3.0.0 | Nuxt SPA + 独立 API；偶发 CF |
 | video/dage_video.js | `dage_video` | 大哥视频 | 2.3.0 | 响应是「编码信封」，脚本内含纯 JS 解码 |
 | video/luttt_video.js | `luttt_video` | 北觅影视 | 1.0.0 | 苹果CMS，直连可用 |
+| video/jpyy2_video.js | `jpyy2_video` | 金牌影院 | 1.0.0 | jpyy2.com（= vv3nwjk.com）：自建 JSON API + 签名头（md5→sha1，脚本内实现）。**主域挂在 reCAPTCHA v3 WAF 后面（521），手机域 `m.vv3nwjk.com` 没有**——脚本按「手机域 → 主域 → 镜域」试，全被拦才抛 `WAF_RECAPTCHA_V3` 提示配桥接；分页参数是 `pageNum` |
 
 ## 写一个源（契约速查）
 

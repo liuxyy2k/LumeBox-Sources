@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="zh" class="tk-font" id="html-theme">
+
+<head>
+    <script>
+        (function() {
+            try {
+                var raw = localStorage.getItem("yx.ui.theme");
+                var theme = "dark";
+                if (raw) {
+                    try {
+                        var parsed = JSON.parse(raw);
+                        if (parsed === "light" || parsed === "dark") theme = parsed;
+                    } catch (_) {
+                        if (raw === "light" || raw === "dark") theme = raw;
+                    }
+                }
+                document.documentElement.dataset.theme = theme;
+            } catch (e) {
+                document.documentElement.dataset.theme = "dark";
+            }
+        })();
+    </script>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png?v=1.0.3" />
+    <title>夜读小说 - 成人小说阅读站 | 精选情色文学</title>
+    <meta name="description" content="夜读小说提供高质量成人小说阅读，包括情色小说、两性文学、情欲故事、有声成人小说、以及原创成人文学作品。">
+    <meta name="keywords" content="">
+            <link rel="canonical" href="https://x-novel.com/">
+                <link rel="stylesheet" href="/assets/css/design-tokens.css?v=1780998800">
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780998799">
+    <link rel="stylesheet" href="/assets/css/list-cards.css?v=1780998800">
+    <script src="/assets/scripts/storage.js"></script>
+    <script src="/assets/scripts/readerState.js?v=1773970008"></script>
+    <script src="/assets/scripts/toast.js"></script>
+        <script>
+        window.TOUCH_PAYLOAD = {
+            site_id: 7,
+            page: 0,
+            objects: []        };
+    </script>
+    <script>
+        window.YX_SEARCH_TRENDING = ["妈妈","母子","岳母","女儿","催眠","绿帽","性奴","萝莉","我的","丝袜","强奸","调教","系统","淫妻","换妻","母狗","刘艳","黑人","女友","露出"];
+    </script>
+    <script src="/service/assets/touch-runtime.js?v=1.1.2" defer></script><script src="/service/assets/links-runtime.js?v=1.1.2" defer></script><link rel="stylesheet" href="/service/assets/links-style.css?v=1.1.1"></head>
+
+<body class="bg-[var(--bg)] text-[var(--text-2)] antialiased min-h-screen flex flex-col">
+    <aside id="mobile-bottom-bar" class="mobile-bottom-bar-shadow md:hidden fixed bottom-0 left-0 right-0 z-40 flex items-stretch min-h-14 bg-[var(--surface)] border-t border-[var(--border)]" style="padding-bottom: env(safe-area-inset-bottom, 0);" role="toolbar" aria-label="移动端底部工具栏">
+    <a href="/" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="首页"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🏠</span><span class="mobile-bar-label text-[10px] leading-tight">首页</span></a>
+    <a href="/novels" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="最新"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🆕</span><span class="mobile-bar-label text-[10px] leading-tight">最新</span></a>
+        <button type="button" id="mobile-bar-category-btn" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition border-0 bg-transparent cursor-pointer font-inherit" aria-label="分类" aria-expanded="false" aria-haspopup="dialog"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🏷️</span><span class="mobile-bar-label text-[10px] leading-tight">分类</span></button>
+        <a href="/tag/audio" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="有声"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🎧</span><span class="mobile-bar-label text-[10px] leading-tight">有声</span></a>
+    <a href="/series" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="系列"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">📚</span><span class="mobile-bar-label text-[10px] leading-tight">系列</span></a>
+    <a href="/authors" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="作者"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">✍️</span><span class="mobile-bar-label text-[10px] leading-tight">作者</span></a>
+    <a href="/musics" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="主题曲"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🎵</span><span class="mobile-bar-label text-[10px] leading-tight">主题曲</span></a>
+    <a href="/history" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="历史"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">🕐</span><span class="mobile-bar-label text-[10px] leading-tight">历史</span></a>
+    <a href="/favorites" class="mobile-bar-btn flex-1 min-w-0 flex flex-col items-center justify-center py-2 gap-1.5 text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] active:bg-[var(--border)] tk-transition" aria-label="收藏"><span class="mobile-bar-icon text-xl leading-none" aria-hidden="true">❤️</span><span class="mobile-bar-label text-[10px] leading-tight">收藏</span></a>
+</aside>
+
+<!-- Tag List 模态窗：仅默认布局且存在首页展示标签时输出 -->
+<div id="mobile-tag-list-overlay" class="mobile-tag-list-overlay fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none tk-transition md:hidden" aria-hidden="true"></div>
+<div id="mobile-tag-list-modal" class="mobile-tag-list-modal fixed left-0 right-0 bottom-0 z-50 max-h-[70vh] overflow-hidden rounded-t-[var(--radius-lg)] bg-[var(--surface)] border-t border-[var(--border)] shadow-[var(--shadow-lg)] transform translate-y-full tk-transition md:hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-tag-list-title">
+    <div class="flex items-center justify-between py-3 px-4 border-b border-[var(--border)]">
+        <h2 id="mobile-tag-list-title" class="text-base font-semibold text-[var(--text)]">小说分类</h2>
+        <button type="button" id="mobile-tag-list-close" class="w-10 h-10 flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition" aria-label="关闭">✕</button>
+    </div>
+    <div class="overflow-y-auto py-3 px-4 max-h-[calc(70vh-52px)]">
+        <div class="grid grid-cols-2 gap-2">
+                        <a href="/tag/wife" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">人妻女友</a>
+                        <a href="/tag/student" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">学生校园</a>
+                        <a href="/tag/anime" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">动漫游戏</a>
+                        <a href="/tag/celebrities" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">名人明星</a>
+                        <a href="/tag/fantasy" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">古典玄幻</a>
+                        <a href="/tag/family" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">家庭乱伦</a>
+                        <a href="/tag/group" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">多人群交</a>
+                        <a href="/tag/exposure" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">露出暴露</a>
+                        <a href="/tag/bdsm" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">强暴性虐</a>
+                        <a href="/tag/lgbt" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">同性主题</a>
+                        <a href="/tag/ntr" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">绿帽主题</a>
+                        <a href="/tag/boys" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">耽美小说</a>
+                        <a href="/tag/comic" class="mobile-tag-list-item block py-3 px-4 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition text-center">漫画小说</a>
+                    </div>
+    </div>
+</div>
+<style>
+.mobile-bottom-bar-shadow {
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08), 0 -2px 6px rgba(0, 0, 0, 0.04);
+}
+[data-theme="dark"] .mobile-bottom-bar-shadow,
+.dark .mobile-bottom-bar-shadow {
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.35), 0 -2px 6px rgba(0, 0, 0, 0.2);
+}
+.mobile-tag-list-overlay.open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 100;
+}
+.mobile-tag-list-modal.open {
+    transform: translateY(0) !important;
+    z-index: 100;
+}
+.mobile-bar-cta { border-radius: var(--radius-sm); }
+</style>
+<script>
+(function() {
+    var btn = document.getElementById('mobile-bar-category-btn');
+    var overlay = document.getElementById('mobile-tag-list-overlay');
+    var modal = document.getElementById('mobile-tag-list-modal');
+    var closeBtn = document.getElementById('mobile-tag-list-close');
+    if (!btn || !overlay || !modal) return;
+    function open() {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    }
+    function close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', function() {
+        if (modal.classList.contains('open')) close(); else open();
+    });
+    overlay.addEventListener('click', close);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+})();
+</script>
+
+
+
+
+
+
+    <header class="sticky top-0 z-50 border-b bg-[var(--surface)] border-[var(--border)] shadow-[var(--shadow-sm)] tk-transition" role="banner">
+        <nav class="tk-container h-14 flex items-center justify-between gap-4" aria-label="主导航">
+            <a href="/" class="flex items-center gap-2 shrink-0 tk-transition">
+                <span class="font-semibold text-[var(--text)] text-lg">夜读小说</span>
+                <span class="hidden sm:inline tk-meta"></span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-1 flex-1 justify-center max-w-2xl">
+                <a href="/novels" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition">最新收录</a>
+
+                                    <div class="relative group">
+                        <button type="button" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition flex items-center gap-1">
+                            <span>小说分类</span>
+                            <span class="text-[10px]" aria-hidden="true">▾</span>
+                        </button>
+                        <!-- pt-2 填满与按钮的间隙，鼠标移入该区域仍保持 group-hover -->
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 hidden group-hover:block z-40">
+                            <div class="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-lg)] py-3 px-4 min-w-[280px] max-w-[400px]">
+                                <div class="grid grid-cols-2 gap-2">
+                                                                            <a href="/tag/wife" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="人妻女友">
+                                            人妻女友                                        </a>
+                                                                            <a href="/tag/student" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="学生校园">
+                                            学生校园                                        </a>
+                                                                            <a href="/tag/anime" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="动漫游戏">
+                                            动漫游戏                                        </a>
+                                                                            <a href="/tag/celebrities" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="名人明星">
+                                            名人明星                                        </a>
+                                                                            <a href="/tag/fantasy" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="古典玄幻">
+                                            古典玄幻                                        </a>
+                                                                            <a href="/tag/family" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="家庭乱伦">
+                                            家庭乱伦                                        </a>
+                                                                            <a href="/tag/group" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="多人群交">
+                                            多人群交                                        </a>
+                                                                            <a href="/tag/exposure" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="露出暴露">
+                                            露出暴露                                        </a>
+                                                                            <a href="/tag/bdsm" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="强暴性虐">
+                                            强暴性虐                                        </a>
+                                                                            <a href="/tag/lgbt" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="同性主题">
+                                            同性主题                                        </a>
+                                                                            <a href="/tag/ntr" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="绿帽主题">
+                                            绿帽主题                                        </a>
+                                                                            <a href="/tag/boys" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="耽美小说">
+                                            耽美小说                                        </a>
+                                                                            <a href="/tag/comic" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" title="漫画小说">
+                                            漫画小说                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                                <a href="/tag/audio" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition">🎧有声</a>
+                <a href="/series" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition">系列</a>
+                <a href="/authors" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition">作者</a>
+                <a href="/musics" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition">主题曲</a>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+                <div class="relative flex items-center group" id="search-wrap">
+                    <button type="button" class="md:hidden w-10 h-10 flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--muted)] hover:bg-[var(--surface-2)] shrink-0 tk-transition" aria-label="打开搜索" id="search-toggle">⌕</button>
+                    <span class="hidden md:inline absolute left-2 top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none z-0" aria-hidden="true">⌕</span>
+                    <input type="search" id="nav-search" placeholder="搜索书名、作者…" aria-label="搜索小说" autocomplete="off"
+                        class="w-0 min-w-0 max-w-0 max-md:!w-36 max-md:!min-w-36 max-md:!max-w-36 md:w-44 md:min-w-44 md:max-w-44 md:shrink-0 md:group-focus-within:w-44 md:group-focus-within:min-w-44 md:group-focus-within:max-w-44 lg:w-52 lg:min-w-52 lg:max-w-52 lg:group-focus-within:w-52 lg:group-focus-within:min-w-52 lg:group-focus-within:max-w-52 transition-[color,background-color,box-shadow] duration-[var(--motion-duration)] ease-[var(--motion-ease)] outline-none border border-transparent focus:outline focus:outline-2 focus:outline-offset-0 focus:outline-[var(--ring)] rounded-[var(--radius-md)] pl-3 pr-3 py-2 text-sm max-md:placeholder:text-xs bg-[var(--surface-2)] focus:bg-[var(--surface)] text-[var(--text)] placeholder-[var(--muted)] relative z-10 box-border">
+                    <div id="search-dropdown" class="absolute top-full left-0 mt-1 min-w-full w-max max-w-[min(24rem,100vw)] bg-[var(--surface)] rounded-[var(--radius-md)] border border-[var(--border)] shadow-[var(--shadow-lg)] py-3 px-3 max-h-64 overflow-y-auto hidden z-50"></div>
+                </div>
+                <button type="button" id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] tk-transition" aria-label="切换浅色/暗色主题">
+                    <span id="theme-icon" aria-hidden="true">🌙</span>
+                </button>
+                <a href="/history" class="hidden md:inline-flex px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] tk-transition items-center" aria-label="阅读历史">阅读历史</a>
+                <span class="relative hidden md:inline-flex items-center">
+                    <a href="/favorites" class="px-3 py-2 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:bg-[var(--surface-2)] tk-transition items-center" aria-label="收藏">收藏</a>
+                    <span id="nav-fav-badge" class="absolute -top-0.5 -right-0.5 min-w-[14px] h-[14px] px-0.5 flex items-center justify-center text-[9px] font-medium rounded-full bg-[var(--accent)] text-[var(--accent-contrast)] opacity-90 hidden" aria-hidden="true"></span>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <script>
+        (function() {
+            function updateNavFavBadge() {
+                var badge = document.getElementById('nav-fav-badge');
+                if (!badge) return;
+                var rs = window.yxReaderState;
+                var n = rs && rs.getFavorites ? rs.getFavorites().length : 0;
+                if (n > 0) {
+                    badge.textContent = n > 99 ? '99+' : String(n);
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateNavFavBadge);
+            } else {
+                updateNavFavBadge();
+            }
+            window.yxUpdateNavFavBadge = updateNavFavBadge;
+        })();
+    </script>
+<main class="site-main main-content flex-1 bg-[var(--bg)]">
+    
+<!-- 热门标签（置顶紧凑版） -->
+<section class="tk-container tk-section pt-4 pb-3 home-tags-top-gap" aria-labelledby="tags-heading">
+    <div class="flex items-center justify-between mb-3">
+        <h2 id="tags-heading" class="tk-h2 mb-0 text-base md:text-lg leading-tight">🔥 热门标签</h2>
+    </div>
+    <div class="home-tags-scroll flex flex-nowrap md:flex-wrap gap-2 md:gap-2 overflow-x-auto md:overflow-visible max-h-[96px] md:max-h-[96px]">
+                <a href="/tag/wife" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            人妻女友        </a>
+                <a href="/tag/student" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            学生校园        </a>
+                <a href="/tag/anime" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            动漫游戏        </a>
+                <a href="/tag/celebrities" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            名人明星        </a>
+                <a href="/tag/fantasy" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            古典玄幻        </a>
+                <a href="/tag/family" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            家庭乱伦        </a>
+                <a href="/tag/group" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            多人群交        </a>
+                <a href="/tag/exposure" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            露出暴露        </a>
+                <a href="/tag/bdsm" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            强暴性虐        </a>
+                <a href="/tag/lgbt" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            同性主题        </a>
+                <a href="/tag/ntr" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            绿帽主题        </a>
+                <a href="/tag/boys" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            耽美小说        </a>
+                <a href="/tag/comic" class="home-tag-pill inline-flex items-center justify-center flex-shrink-0 md:flex-shrink text-[14px]">
+            漫画小说        </a>
+            </div>
+</section>
+
+<!-- 最新收录 -->
+<section id="latest" class="tk-container tk-section" aria-labelledby="latest-heading">
+    <div class="flex items-center justify-between mb-6">
+        <h2 id="latest-heading" class="tk-h2 mb-0">最新收录</h2>
+        <a href="/novels" class="tk-transition text-sm font-medium text-[var(--text-2)] hover:text-[var(--text)]">更多 →</a>
+    </div>
+    <div class="list-card-grid" role="list">
+        <a href="/novel/j9rf1t4t4i" class="list-card" role="listitem" title="老婆陪我换配偶" data-novel-id="6093f3730b02c">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            8章
+        </span>
+                        <img src="/assets/cover/6093f3730b02c.webp" alt="老婆陪我换配偶 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">这时的我，上身仅穿着一件T恤，下面就穿着一条收腰的休闲裤，脚上是在家里才穿的软底拖鞋，也没顾上换，就一路向小区东大门狂奔，一边跑，一边虔诚的感谢上苍，知道秋彤要来慰藉我这个“鳏夫”，就让老婆的那个什么重要会议延期结束，貌似在故意安排两个女人不撞车……还老远呢，我就看见秋彤在向我挥手了，她那亭亭玉立的身姿和挥手时洋溢于表的喜悦，凿实令我激动不已。我也就还老远的就张开了双臂，象是要用一个“飞拥”，迎接她的到来，快飞”到秋彤跟前的时候，她双手把旅行背包拧起，伸到我面前：“哥……你少神些啊……这里这么多人……不用双手啦……背包很轻……”</div>
+            <div class="tooltip-meta">8 章 · 6.9万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">老婆陪我换配偶</div>
+        <div class="list-card-author">jiandan000</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/j8v4fr86ye" class="list-card" role="listitem" title="别让你太太去外企上班" data-novel-id="60b8df46f2168">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            4章
+        </span>
+                        <img src="/assets/cover/60b8df46f2168.webp" alt="别让你太太去外企上班 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">大屏幕的变化，让在场的人渐渐地都静了下来。轮放照片的FLASH被关掉了，虽然音乐依旧播放着，MEDIAPLAY播放器里弹出来的画面却让所有人为之震惊，甚至无法接受。虽然是用手机拍摄的，但所有人一上来就认出了屏幕上那个正边打着手机，边用卫生纸从后擦抹着那里的光屁股女人，而刘杰手上的酒瓶直接掉到了地上。当时，她浑身上下除了丝巾和高跟拖鞋就只有束腹衣包着丰韵白皙的身体，两只大得往外排还镶着大黑乳晕的肥奶正跟着身体微微抖颤着，一条笔直的刀疤清晰地印在那极为饱满且被屄毛衬得更白的小肚子上，看得在场男人们当场眼神迷离，居然还有个家伙鼻血也流出来了，肉色的屏幕顷刻间成了整场人视线的焦点。</div>
+            <div class="tooltip-meta">4 章 · 2.1万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">别让你太太去外企上班</div>
+        <div class="list-card-author">macooops3</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/is9133bkua" class="list-card" role="listitem" title="我和妹妹雯雯" data-novel-id="6362d7a74101c">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            81章
+        </span>
+                        <img src="/assets/cover/6362d7a74101c.webp" alt="我和妹妹雯雯 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">我的真实人生经历改编，我挣扎了好久，不喜兄妹乱派者请勿继续阅读，并请不要责备我，我也是真的一直活得很痛苦。我一直想让自己相信爱上妹妹，与妹妹发生关系，不是罪。就如同变性人或同志的爱，也没有罪，只是这个社会规范常识，无法容忍有血缘关系的亲人发生性行为，这才是我们的罪，并逼得我因此犯错。或许从一开始，这一切就已经错了……</div>
+            <div class="tooltip-meta">81 章 · 27.7万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">我和妹妹雯雯</div>
+        <div class="list-card-author">20Xela</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi1ezanput" class="list-card" role="listitem" title="疯狂交合与温泉露出" data-novel-id="6acbfdc50f5fb">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            3章
+        </span>
+                        <img src="/assets/cover/6acbfdc50f5fb.webp" alt="疯狂交合与温泉露出 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">他眼珠一转，起身假意醉酒，脚步踉跄，身子摇晃，眼看要摔倒，旁边刘艳赶紧过来搀扶，黄鸿发顺势靠在女老师软绵绵的娇躯上，胳膊顿时碰到了那硕大丰盈的豪乳，那销魂的触感让他兴奋不已，嘴上却含糊不清的说道：“大妹子，不用管我，我自己能走。”他越这样说，刘艳反而也不敢撒手，毕竟黄鸿发是自己叫来喝酒的，真出了事，自己没法和夏芸交代，只能扶着对方沉重的身子往院子里走去，浑然不觉乳房被对方胳膊不停挤压摩擦着。黄鸿发心中得意，自己总算是碰到了这对让自己朝思暮想的豪乳，虽然只是胳膊而不是手，只是想想马军那小子天天都能随意把玩巨乳，还能和刘艳合体交欢，享受巫山云雨，心里又有些吃味。</div>
+            <div class="tooltip-meta">3 章 · 1.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">疯狂交合与温泉露出</div>
+        <div class="list-card-author">易柳</div>
+        <div class="list-card-series">淫乱航线</div>
+    </div>
+</a>
+<a href="/novel/i4mexkor38" class="list-card" role="listitem" title="阴阳长生法——11" data-novel-id="672cd7235fa7a">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            20章
+        </span>
+                        <img src="/assets/cover/672cd7235fa7a.webp" alt="阴阳长生法——11 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">凤傲仙媚眼如丝的看着魏央，继而又把胸口的旗袍口子解开，但只能够看见一个白皙的口子，巨乳并没有袒露出来。便是这种似露非露的样子最为诱人，还没等魏央主动伸手钻进去，凤傲仙就已经捉住他的手掌，把他手掌按在了裸露的胸口。“只可以摸哦……”凤傲仙低声说道，魏央那里受得了这般诱惑，随后手掌快速的钻入了旗袍内，用力的握住那颗异于常人的巨乳。可是捏揉了一下，他总是感觉不舒服，上面隔着乳罩，手感差了很多。凤傲仙被他这般捏揉着乳房，身子微微颤抖了起来，但并不影响她的美脚在里着黑色丝袜的肉棒上套弄的速度，而且套弄的速度越来越快。</div>
+            <div class="tooltip-meta">20 章 · 8.9万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">阴阳长生法——11</div>
+        <div class="list-card-author">色道宗师</div>
+        <div class="list-card-series">阴阳长生法</div>
+    </div>
+</a>
+<a href="/novel/ilu7q4ejtw" class="list-card" role="listitem" title="骑士的血脉(下）" data-novel-id="6469e1f0b3aba">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            102章
+        </span>
+                        <img src="/assets/cover/6469e1f0b3aba.webp" alt="骑士的血脉(下） 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">自从练成“金丝茧”之后，莉娜的身体变得异常绵软，利奇稍微一握，两只手立刻陷进双乳之中。利奇的女人除了那位女皇陛下全部注射过淫药，乳房和乳房顶端殷红一点最敏感不过，被利奇一阵略微粗鲁的揉捏，莉娜顿时有了感觉。她星眸微闭，鼻翼轻轻地张合不停。利奇俯下身体，把舌头凑到莉娜的肉缝上，轻轻地舔了舔，他已经很久没有这么做了。莉娜的身体明显一抖，利奇此刻用的技巧正是以前她教的，让她想起往日的情景。</div>
+            <div class="tooltip-meta">102 章 · 99.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">骑士的血脉(下）</div>
+        <div class="list-card-author">血珊瑚</div>
+        <div class="list-card-series">骑士的血脉</div>
+    </div>
+</a>
+<a href="/novel/iu3kn1e3as" class="list-card" role="listitem" title="我和姐姐与她的朋友" data-novel-id="6316f849a286a">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            12章
+        </span>
+                        <img src="/assets/cover/6316f849a286a.webp" alt="我和姐姐与她的朋友 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">那泳衣似乎不需要多少布料就可以作成的。泳衣覆盖下的乳房，似乎只有两个小小的三角形，只盖住了乳头，而整个胸部却好像要抖落出来一般。看看后面的屁股则是呈T字形、条状形的下半身裤子，使得整个丰满的屁股都显露出来。这种样子看在卓也的心里，使得他整个脸突然之间就胀红了。</div>
+            <div class="tooltip-meta">12 章 · 3.7万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">我和姐姐与她的朋友</div>
+        <div class="list-card-author"></div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi2bb8ww4z" class="list-card" role="listitem" title="豪乳老师刘艳——第七部07" data-novel-id="6acac315de3ed">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            24章
+        </span>
+                        <img src="/assets/cover/6acac315de3ed.webp" alt="豪乳老师刘艳——第七部07 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">黄鸿发亲吻着刘艳的乳房，一只手往下摸到对方光溜溜大大腿，又探入到胯间触碰着那丰腴阴户用手指拨弄起来。很快便感觉到手指潮湿，他知道女老师已经动情，便将对方衣服全都脱掉，顿时女老师曼妙雪白的娇躯就彻底暴露在眼前，灯光下两只雪白坚挺的乳房不住起伏，下身阴毛乌黑发亮，隐约可以看红润阴唇，肉洞正在分泌着淫水。“不行啊，真的不行。”刘艳喃喃自语，依然在挣扎着。黄鸿发知道此刻不能犹豫，直接掏出了肉棒，分开女老师的大腿，将龟头抵住滑溜溜的穴口，用力一挺，圆滚滚的龟头就噗嗤一声插了进去。</div>
+            <div class="tooltip-meta">24 章 · 7.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">豪乳老师刘艳——第七部07</div>
+        <div class="list-card-author">tttjjj_200</div>
+        <div class="list-card-series">豪乳老师刘艳</div>
+    </div>
+</a>
+<a href="/novel/i8ptzo1go6" class="list-card" role="listitem" title="纽约物语" data-novel-id="6684b3f59d3f8">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            3章
+        </span>
+                        <img src="/assets/cover/6684b3f59d3f8.webp" alt="纽约物语 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">表嫂只好继续趴在窗缘，忍受我那干死人的鸡巴从后面来回地抽动。她银牙紧咬，浑身颤抖。终于见她老公弄好了车子，转身向她作了一个OK的手势，盖上前盖，坐回到驾驶座，准备启动。当车子缓缓驶离的时后，表嫂再也忍受不住了，媚眼一闭，小脸往上仰起，“啊啊”的一声狂浪叫着，来了高潮，丢精了！我放开了她的屁股，让她回身进来。表嫂一把扑在我的怀里，双双睡倒在床上。“你这小鬼头，真的好坏好坏啊！这样地戏弄我，也不怕被你表哥察觉？”表嫂恨恨地捏了我的脸蛋一把，眼直视着我说道。我傻傻地笑着，不回嘴，并不慌不忙地开始除掉了彼此身上的衣物。</div>
+            <div class="tooltip-meta">3 章 · 0.9万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">纽约物语</div>
+        <div class="list-card-author">蛔</div>
+        <div class="list-card-series">阿庆淫传</div>
+    </div>
+</a>
+<a href="/novel/idgnkqd7r5" class="list-card" role="listitem" title="逍遥小散仙之谁是天子17——在劫难逃" data-novel-id="65c1ff9b04fdf">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            10章
+        </span>
+                        <img src="/assets/cover/65c1ff9b04fdf.webp" alt="逍遥小散仙之谁是天子17——在劫难逃 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">皇后朝簪儿呶了下嘴，待她摒退屋里的两个小宫娥，这才拉开其上黄绸系带，将画卷徐徐推开。小玄蓦尔愣住。原来画中绘着个横陈秀榻的丰腴妇人，姿容艳丽玉润珠圆，身上只穿件描金大牡丹罗纱衫子，酥胸半袒，态极娇懒，眉目似乎有点眼熟，再一细瞧，赫是那日在观烟楼上调侃过自己的汤贵妃。旁有题跋：《纱橱春意》半含羞同入纱橱。紧挽云乌，牢把犀梳。万种风流，十分娇媚，无限欢娱。桃腮芳心较足，搂腰肢玉体全酥。何必踌躇，不索趑趄。试问娇娃，春意如何？“这……这不是汤贵妃么？”小玄讶问。</div>
+            <div class="tooltip-meta">10 章 · 6.2万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">逍遥小散仙之谁是天子17——在劫难逃</div>
+        <div class="list-card-author">迷男</div>
+        <div class="list-card-series">逍遥小散仙</div>
+    </div>
+</a>
+<a href="/novel/hi23meko4c" class="list-card" role="listitem" title="熟女名器系统" data-novel-id="6aca05fa30042">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            48章
+        </span>
+                        <img src="/assets/cover/6aca05fa30042.webp" alt="熟女名器系统 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">他喘着粗气，一巴掌拍在她臀上，留下鲜红的掌印，“夹这么紧是想弄死我？”他开始抽插，起初是缓慢而深重的，每一下都直抵花心，碾过她最敏感的那一点。龙玥的呻吟变得断断续续，身体随着他的节奏前后晃动，乳房在重力作用下摇摆，乳尖摩擦着床单。“说，想要吗？”王小明突然停下，性器只留一个头部在里面，恶意地画着圈。龙玥咬着唇不回答，臀部却不由自主地向后顶，试图让他进入更深。王小明冷笑，猛地向后撤出，看着她因突然的空虚而颤抖。“不说就别想要。”他冷酷地宣布。“要……我要……”龙玥终于崩溃般地呜咽出声，转过头用湿润的眼睛望着他，“求你……老公……”</div>
+            <div class="tooltip-meta">48 章 · 19.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">熟女名器系统</div>
+        <div class="list-card-author">富梅洛</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi23nyulj3" class="list-card" role="listitem" title="妻女充满褶皱的菊花蕾" data-novel-id="6aca0517ddb21">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            3章
+        </span>
+                        <img src="/assets/cover/6aca0517ddb21.webp" alt="妻女充满褶皱的菊花蕾 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">回过神来的我开始注意到她胸前那半隐半现的美丽乳房，于是我挣开被她握着的手，伸向了她的睡衣。我那笨拙的左手折腾了几下也没有把她睡衣的扣子解开，女儿移开我的手，善解人意地说道：“爸，我来吧，病了还不老实！”我对她笑了笑，手按住她的后背，稍微用了下力，小叶便向我挪了挪身子，她胸前那秀丽的风景便已凑到我的面前。“真乖！”我嚅嚅道，同时把手放到了上侧的玉乳上，脸则紧贴着下面的那只。淡淡的清香传入我的鼻中，我不禁惬意地闭上了眼睛。“嘻嘻，爸爸现在真像个乖宝宝一样。”女儿银铃般的笑声传入我的耳中，同时我感到自己的头被她用手向怀里压了压。</div>
+            <div class="tooltip-meta">3 章 · 2.1万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">妻女充满褶皱的菊花蕾</div>
+        <div class="list-card-author">风景画</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+    </div>
+</section>
+
+<!-- 有声小说 -->
+<section class="tk-container tk-section" aria-labelledby="audio-heading">
+    <div class="flex items-center justify-between mb-6">
+        <h2 id="audio-heading" class="tk-h2 mb-0">🎧 有声小说</h2>
+                <a href="/tag/audio" class="tk-transition text-sm font-medium text-[var(--text-2)] hover:text-[var(--text)]">更多 →</a>
+    </div>
+    <div class="list-card-grid" role="list">
+        <a href="/novel/hi23k3dm9o" class="list-card" role="listitem" title="操逼成首富14" data-novel-id="6aca0477759a2">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            50章
+        </span>
+                        <img src="/assets/cover/6aca0477759a2.webp" alt="操逼成首富14 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">秦淮茹就每次都深深地把龟头吞进了喉咙里，吐出的时候，嘴唇紧紧地吮吸着从根部一直到龟头，爽的罗松不断的张着嘴大喘气。手两下卷起秦淮茹的长裙，大手玩弄着秦淮茹湿漉漉黏糊糊的阴部，另一只手伸下去摆弄着秦淮茹垂荡着的一对乳房。很快秦淮茹就感觉到了罗松要射精的感觉，在罗松异能的控制下，一点点的稀薄的精液已经从龟头上流出，秦淮茹快速的来了两下，伴随着鼻音的哼声，刚刚将大鸡巴深深的含进嘴里，就感觉到了大鸡巴一跳。“哦哦……淮茹……你也太用力了……我射了……”</div>
+            <div class="tooltip-meta">50 章 · 15.6万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">操逼成首富14</div>
+        <div class="list-card-author">雨是苍天在哭泣</div>
+        <div class="list-card-series">操逼成首富</div>
+    </div>
+</a>
+<a href="/novel/iwtklli9zv" class="list-card" role="listitem" title="母子斗士" data-novel-id="62a6390b56145">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            8章
+        </span>
+                        <img src="/assets/cover/62a6390b56145.webp" alt="母子斗士 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">虽然塞丽丝卡的脸的上半部带着面具，但看她尖尖的下巴，高挺的鼻梁，应当不会难看。话说回来，有她这么一副完美的身体，就是长得差点也无所谓了。裁判唠唠叨叨地讲述了一下耳朵听出茧子来的注意事项，便宣布比赛开始！我除掉短裤，她也脱下装备，我们都是赤裸相对了。“哦，小家伙，你的本钱可真是不错呀，不仅大，还这么硬，一会儿比赛结束我一定要你做我的男宠，你可是我第一个看上的男人，不要让我失望呀……”塞丽丝卡风骚地说着。</div>
+            <div class="tooltip-meta">8 章 · 2.2万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">母子斗士</div>
+        <div class="list-card-author"></div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi50sb4t5p" class="list-card" role="listitem" title="大学的单男幸福生活04" data-novel-id="6ac7daa78cac3">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            50章
+        </span>
+                        <img src="/assets/cover/6ac7daa78cac3.webp" alt="大学的单男幸福生活04 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">我换到另一侧，牙齿轻轻蹭过。她的腿在沙发上蜷起来，黑丝袜摩擦的细响贴着我的手臂。我空出的那只手顺着小腹往下，摸到情趣短裤的边缘，指尖探进去，触到已经湿润的缝。老哥在旁边伸出手，很自然地摸了摸嫂子的头发，再滑到她裸露的那侧乳房，用指腹碾了碾被我冷落的乳尖。晴姐颤了一下，转头看向他，被他托着下巴，交换了一个短促的吻。我把她的睡裙彻底褪到腰下，让她半躺在沙发上。黑色吊带丝袜勒着大腿，和情趣短裤的系带绞在一起。我跪到地毯上，低头吻她小腹，再吻到短裤边缘，鼻尖顶开一点，呼吸喷在湿处。</div>
+            <div class="tooltip-meta">50 章 · 19.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">大学的单男幸福生活04</div>
+        <div class="list-card-author">remember</div>
+        <div class="list-card-series">大学的单男幸福生活</div>
+    </div>
+</a>
+<a href="/novel/hi50o0nicm" class="list-card" role="listitem" title="妻子和女儿" data-novel-id="6ac7d9af111f8">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            3章
+        </span>
+                        <img src="/assets/cover/6ac7d9af111f8.webp" alt="妻子和女儿 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">小丹身体的全部已经呈现在我的眼前，我呆了，小丹身体的美让我旋晕，雪白的肌肤，细细的腰部，平坦的腹部，圆而丰满臀部，还有那匀称的双腿，这完全不像平时看似瘦弱的小丹。我的眼光在小丹双腿间微微露出的黑色和胸头美丽的乳房打转，下体本已软下的肉棒慢慢地又挺了起来，让紧紧的内裤约束得涨痛。小丹刚刚洗好脸，此时打开花洒任水从上而下冲洗身体，我终于忍不住拉开裤链，将发硬的肉棒拉了出来，用力地握着搓动起来。小丹用毛巾擦拭着身体，不论是擦过乳房引起乳房的颤动，还是叉开双腿用毛巾擦拭下体的模样，都在我的小腹的那团火浇上一瓢油。</div>
+            <div class="tooltip-meta">3 章 · 1.8万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">妻子和女儿</div>
+        <div class="list-card-author">风景画</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/ilu18h0tal" class="list-card" role="listitem" title="骑士的血脉(中)" data-novel-id="64692c11cb813">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            96章
+        </span>
+                        <img src="/assets/cover/64692c11cb813.webp" alt="骑士的血脉(中) 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">但是前面却偏偏敞开着，乳房全都半露着，下面同样也是一费无遗，穿成这样，她居然还带着一副细框眼镜，如果只看脸的话，谁都会以爲她是一名教师或者学者，这分知性的感觉更令她增添了几分妖异的魅力。而第I次见面的爱莎却穿得最简单，她穿的是I件衬衫，不过这是一件纱质的衬衫，几乎是半透明的，完全可以看到那两点殷红，和底下芳草菲葬翼地方。</div>
+            <div class="tooltip-meta">96 章 · 95.7万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">骑士的血脉(中)</div>
+        <div class="list-card-author">血珊瑚</div>
+        <div class="list-card-series">骑士的血脉</div>
+    </div>
+</a>
+<a href="/novel/i4mesd1t70" class="list-card" role="listitem" title="阴阳长生法——10" data-novel-id="672cd6d7c8a52">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            20章
+        </span>
+                        <img src="/assets/cover/672cd6d7c8a52.webp" alt="阴阳长生法——10 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">“小坏蛋……竟然大逆不道的把女帝娘娘压在床上，朕要好好惩罚你。”林烟霞媚眼如丝的看着魏央，继而美臀又轻轻的晃动了几下，下面传来一阵噗嗤噗嗤的响声。“嗯哼……”她朱唇张开，轻轻呻吟了一声，随后把美臀高高翘起，离开了那根粗大的肉棒。肉穴内残留的淫液不断的流淌下来，落在了魏央小腹上。“人家这里好痒……”林烟霞撒娇的说道，把一对巨乳放在了魏央嘴前。“那要我怎么办啊。”魏央装作无辜的说道，“又不是我的原因。”“都怪你……大坏蛋……大白痴……大淫魔……”还没等林烟霞的话说完，魏央便张口含住了她左边的乳头，用力一吸，啵的一声，上面传来清脆的摩擦声，继而巨乳赫然摆动。</div>
+            <div class="tooltip-meta">20 章 · 8.7万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">阴阳长生法——10</div>
+        <div class="list-card-author">色道宗师</div>
+        <div class="list-card-series">阴阳长生法</div>
+    </div>
+</a>
+<a href="/novel/hi62opbl3r" class="list-card" role="listitem" title="豪乳老师刘艳——第七部06" data-novel-id="6ac68dd9db5c9">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            25章
+        </span>
+                        <img src="/assets/cover/6ac68dd9db5c9.webp" alt="豪乳老师刘艳——第七部06 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">宋楚河此刻也是欲火燃烧，将下身抵住妻子蓬门，挤开两扇门扉，进入到那熟悉的花园秘境，只觉得溪水潺潺，嫩滑紧窄，不亚于当年新婚的感觉，搂住何思云丰腴腰肢，便开始缓缓动作起来。“嗯嗯……”何思云螓首高昂，朱唇张开，发出绵长呻吟，被丈夫火热阴茎顶的穴内酥麻，那强烈的快感顺着阴道往全身弥漫，宫颈口也剧烈收缩着，涌出粘稠蜜汁，润滑着龟头，两条大腿更是紧紧夹着宋楚河的后腰，扭动肥臀，两座丰满乳房也不住晃动。看着妻子娇媚红润的容颜，听着那迷人的呻吟声，宋楚河也是忘情投入，动作幅度加大，抽插的频率也越来越快，他要向妻子证明自己不仅是一个合格的公仆，更是一个合格的丈夫。</div>
+            <div class="tooltip-meta">25 章 · 7.6万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">豪乳老师刘艳——第七部06</div>
+        <div class="list-card-author">tttjjj_200</div>
+        <div class="list-card-series">豪乳老师刘艳</div>
+    </div>
+</a>
+<a href="/novel/i99rtyckty" class="list-card" role="listitem" title="妈妈的女助理" data-novel-id="666df0e909728">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            3章
+        </span>
+                        <img src="/assets/cover/666df0e909728.webp" alt="妈妈的女助理 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">花阿姨开始用她那纤细的手指套弄起我的老二，眼睛不停的盯着我看。她可能是想看我那尴尬的表情吧！她越抽越快，还不时的用舌尖舔我龟头。没想到还不到两分钟，屁股一抖动，我居然射泄了，还将精液射在花阿姨的脸部和胸前的衣服上。花阿姨奸奸的笑了笑说：“嘻嘻…怎么这么快就出来了啊！嘿，一定是平时打得太多，弄坏身体了吧？”没想到那么快就结束了，想必是太过紧张﹑兴奋，加上恐惧感，初次在花阿姨帮我打手枪就丢了脸。我两眼疑惑的望着花阿姨，并想解辨说些什么的。花阿姨笑着又说：“没关系啦！你第一次被女人摸得太爽了吧？嘻嘻嘻…那么快就出来是很正常的啦！”</div>
+            <div class="tooltip-meta">3 章 · 0.8万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">妈妈的女助理</div>
+        <div class="list-card-author">蛔</div>
+        <div class="list-card-series">阿庆淫传</div>
+    </div>
+</a>
+<a href="/novel/idhp0mfh74" class="list-card" role="listitem" title="逍遥小散仙之谁是天子16——天命运数" data-novel-id="65c0ae752e78e">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            10章
+        </span>
+                        <img src="/assets/cover/65c0ae752e78e.webp" alt="逍遥小散仙之谁是天子16——天命运数 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">宝娘娘暗暗烦恼，岂愿在这里听皇帝与女儿云雨相欢，然与他们只有一石之隔，声音声声传来，清晰如在耳畔，着实无可奈何。雪妃几时有过这等真正交接之欢，从前都是又冰又痛，每回俱是苦苦挨受，而今却是火热刚强，过处无不爽利快美，但给刺到深处，更是酸麻欲酥，整个人几欲化去。小玄浅研深搠，瞧着她那乳鸽般雪滑的双乳可人，手覆上去，扣住一只微微用力地揉搓。雪妃玉颊生晕，她本就清丽极绝，此时越发迷人。</div>
+            <div class="tooltip-meta">10 章 · 6.2万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">逍遥小散仙之谁是天子16——天命运数</div>
+        <div class="list-card-author">迷男</div>
+        <div class="list-card-series">逍遥小散仙</div>
+    </div>
+</a>
+<a href="/novel/j4z68w1t4r" class="list-card" role="listitem" title="淫乱圈子" data-novel-id="6157483bbe4e5">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            12章
+        </span>
+                        <img src="/assets/cover/6157483bbe4e5.webp" alt="淫乱圈子 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">接下来的一周时间，老婆和萧玉树正式谈起了恋爱，本来玉树就对她百般追求，女人只要流露出一丝妥协，就等于是捅破了窗户纸，男方就会获得这样一个信息：这个女人最终会被自己俘获占有。说的俗气一点，女人只要一撅屁股，男人就会闻着骚味扑上去。玉树经常约妻子去吃饭、看电影，两人的关系迅速升温。只差没有上过床了。</div>
+            <div class="tooltip-meta">12 章 · 8.1万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">淫乱圈子</div>
+        <div class="list-card-author">fenghaige</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi679swm1l" class="list-card" role="listitem" title="社区公用的熟肉厕所" data-novel-id="6ac572295cac7">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            12章
+        </span>
+                        <img src="/assets/cover/6ac572295cac7.webp" alt="社区公用的熟肉厕所 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">妈妈轻轻娇吟了一声，语调说不出的婉转，原来是身后的黑人杰森也侧过身子来用他的手掌掐住妈妈饱满肥嫩的硕乳乳根，正肆无忌惮地用力揉捏把玩，五根手指几乎完全陷在蓬松莹白的乳肉当中。一对沉甸甸的、曾用神圣母乳哺育我的、象征着伟大母爱的乳房，此刻却在熟母咯咯娇笑声中贴在黑人情夫身上、被握在另一名黑人手里，充当用于调情的淫肉玩具。而妈妈闪耀着黑人腥臭口水光泽的敏感奶头始终挺立着，明白无误地表达着丰满熟母的情欲与喜悦。</div>
+            <div class="tooltip-meta">12 章 · 7.2万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">社区公用的熟肉厕所</div>
+        <div class="list-card-author">鉄ron5</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hi6761pcfx" class="list-card" role="listitem" title="操逼成首富13" data-novel-id="6ac57171c3963">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            49章
+        </span>
+                        <img src="/assets/cover/6ac57171c3963.webp" alt="操逼成首富13 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">听到罗松淫乱的夸奖，李心梅欣喜地往上挺了几下肥屄，让大鸡巴操她更加容易，柔软双手放在罗松揉捏她巨乳的大手上配合地增加力度，满脸绯红地看着罗松“唔啊啊……大龟头又顶住子宫口了……主人……大鸡巴再快点……好舒服……母狗心梅身体都麻了……用力抓心梅的乳房……啊啊啊……好爽……”罗松听着李心梅的淫乱浪叫，看着她色情淫秽的玉脸，胯下大鸡巴不停提速加力，两只大手伸出两根手指用力捏住坚硬粉嫩的奶头扭捏了一下，向上拉起，然后一只大手稍微用力拍打了一下肥嫩饱满的巨乳。“啪……”一声跟操逼啪啪声不一样的声音响起，少女胸前的肥嫩巨乳摇晃了几下。</div>
+            <div class="tooltip-meta">49 章 · 14.6万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">操逼成首富13</div>
+        <div class="list-card-author">雨是苍天在哭泣</div>
+        <div class="list-card-series">操逼成首富</div>
+    </div>
+</a>
+    </div>
+</section>
+
+<!-- 热门阅读 -->
+<section class="tk-container tk-section" aria-labelledby="hot-heading">
+    <div class="flex items-center justify-between mb-6">
+        <h2 id="hot-heading" class="tk-h2 mb-0">热门阅读</h2>
+        <a href="/novels?sort=hot" class="tk-transition text-sm font-medium text-[var(--text-2)] hover:text-[var(--text)]">更多 →</a>
+    </div>
+    <div class="list-card-grid" role="list">
+        <a href="/novel/jfygc440cs" class="list-card" role="listitem" title="少妇白洁" data-novel-id="5f958adb5c392">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            40章
+        </span>
+                        <img src="/assets/cover/5f958adb5c392.webp?v=2" alt="少妇白洁 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">白洁，今年二十四岁，毕业于一所地方师范学院，在中国北方一所小镇中学教语文，这是一个高中和初中混合的学校，高中有宿舍，也有一部分学生在外面租房子住，学校的升学率很低，管理也很混乱。白洁这几天正为了评职称的事闹心，白洁毕业才只有两年，虽说学历够了，可资历太浅，但如果学校的先进生产者能选她，那就有把握多了。那就全靠校长的推荐了。刚结婚两个月的白洁说是一个天生尤物也并不过分。皮肤白嫩，散发出一种健康的光泽；粉面桃腮，一双标准的杏眼，总是有一种淡淡的迷蒙，仿佛弯着一汪秋水；淡淡的秀眉，小巧的红唇总是似笑非笑的抿着。</div>
+            <div class="tooltip-meta">40 章 · 35.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">少妇白洁</div>
+        <div class="list-card-author">豺狼末日</div>
+        <div class="list-card-series">少妇白洁</div>
+    </div>
+</a>
+<a href="/novel/j76p3nkcrg" class="list-card" role="listitem" title="校园春色系列" data-novel-id="60fdb7650bdc2">
+    <div class="list-card-cover-wrap">
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            56章
+        </span>
+                        <img src="/assets/cover/60fdb7650bdc2.webp" alt="校园春色系列 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">高中女生共有十一人，无论如何多出一个人，所以指导老师藤尾也需要轮番上阵。对手是二年级的杉田美雪，长得大又圆的眼睛闪着羞怯的眼光。学生穿的白色的习剑上衣及红色裙子，只有藤尾穿蓝色习剑用上衣及黑色的裙子。室内发出十一位少女特有的香气，唯一的男生藤尾正兴奋着。“喂……”美雪很认真地学习着。由于被朋友半强迫半引诱的加入剑道社，又由于个人太过于害羞，所以虽已二年级了，尚未取得初段的资格。迎面而来的竹剑，藤尾轻轻地横扫在美雪的脸上。“啊……”被击到脸部的美雪痛苦不堪，顿时失去平衡，而藤尾更是不断地攻击。</div>
+            <div class="tooltip-meta">56 章 · 45.5万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">校园春色系列</div>
+        <div class="list-card-author"></div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/j4j5igr7ik" class="list-card" role="listitem" title="妈，您人设崩了！" data-novel-id="616a8305b4b92">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            278章
+        </span>
+                        <img src="/assets/cover/616a8305b4b92.webp" alt="妈，您人设崩了！ 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">一个熟透了的美妇人端着饭从厨房里款款走出来，美妇人看着三十七八岁的样子，大概一米七左右，应该是刚回到家中就急着做家务，上身还穿着剪裁得体的白衬衣，下身搭配着黑色紧身西裤，把完美的身段曲线恰到好处的勾勒了出来。坚挺饱满的乳峰高高耸立，随着走动微微的震颤，衬衣自肋下徒然收紧，勾画出纤细而不失风韵的腰肢，平坦的小腹看不到一丝赘肉，端的是婀娜多姿，两条浑圆笔直的长腿被合体的西裤紧紧包里着，走动间优雅的姿态让人移不开眼睛。</div>
+            <div class="tooltip-meta">278 章 · 139.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">妈，您人设崩了！</div>
+        <div class="list-card-author">臀控</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/j7bkw17yrm" class="list-card" role="listitem" title="新婚妻子" data-novel-id="60f709e6c819c">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            27章
+        </span>
+                        <img src="/assets/cover/60f709e6c819c.webp" alt="新婚妻子 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">我抑制不住来到女厕所门外，女厕所的门把手也是没有了，我从大洞往里看。一下子我的肾上腺激素激素分泌，噌的一下鸡巴勃起差点将牛仔裤撑破。只见我老婆人趴在厕所的墙壁上，双手扶着墙，俏脸贴着墙上的瓷砖，身子躬成90度，大屁股向后厥着，两条笔直修长的美腿像两边分开，短裙已经被推倒腰间，而内裤却在一边的足踝上挂着。而菜老板就在老婆身后，粗糙的大手握着老婆的纤腰，大屁股向前疯狂的顶动，干得老婆丰美的屁股扑哧，噗哧，臀浪一波一波。而老婆的上衣小袄也早就被解开，旗袍上襟已被打开，两只大奶子垂成淫荡优美的木瓜形，随着菜老板得肏弄一摇一摇得，拍打着墙上的瓷砖，也啪啪的响。</div>
+            <div class="tooltip-meta">27 章 · 23.0万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">新婚妻子</div>
+        <div class="list-card-author">我爱曹仁妻</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hiopv6xvyt" class="list-card" role="listitem" title="高考陪读的妈妈（完善版）" data-novel-id="6ab050aec1f4b">
+    <div class="list-card-cover-wrap">
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            4章
+        </span>
+                        <img src="/assets/cover/6ab050aec1f4b.webp" alt="高考陪读的妈妈（完善版） 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">暂无简介</div>
+            <div class="tooltip-meta">4 章 · 1.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">高考陪读的妈妈（完善版）</div>
+        <div class="list-card-author"></div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/jdn0t3hlt5" class="list-card" role="listitem" title="同学妈妈的淫乱" data-novel-id="5ff4a6e82f2f7">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            4章
+        </span>
+                        <img src="/assets/cover/5ff4a6e82f2f7.webp" alt="同学妈妈的淫乱 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">刘太太和许太太一反常态，竟然没穿衣服，赤裸的身上只罩了件透明的纱袍。两个女人披在身上的沙袍，一个是淡粉色一个是淡绿色，根本遮不住光溜溜的肉体。一木妈愣神了，她看到刘太太还穿了条红色丁字裤遮住阴部，而许太太下面什么也没穿，清晰可见一团黑黑的阴毛。</div>
+            <div class="tooltip-meta">4 章 · 2.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">同学妈妈的淫乱</div>
+        <div class="list-card-author">通过</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hoivj4kyo8" class="list-card" role="listitem" title="穿越到可以随便做爱的世界" data-novel-id="69c1b782341d6">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            48章
+        </span>
+                        <img src="/assets/cover/69c1b782341d6.webp" alt="穿越到可以随便做爱的世界 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">谁要进来？是医生？警察？父母？朋友？同事？甚至是老板？但门完全打开之后，我惊呆了，探身进来的居然是一个二十多岁左右的美女，而且……美女身上居然是全裸的！严格来说她不是全裸，因为下体还穿着一条黑色的小内裤，除此之外，再无寸缕。精致的面容，高挑的身材，丰满的乳房，修长的双腿和平坦的小腹，藕臂葱指，还有一头长发，全都无遮无挡地映入我眼帘中……我的表情一定很古怪，眼睛直勾勾地盯着突如其来的祼女，头脑一片混乱，下体也不争气地挺了起来。更怪的是，她的表情，丝毫没有因为我看见了裸体害羞而尖叫，看上去还很高兴，转身说了一句我差点崩溃的说话：“老公快来！他醒了！”我靠！老公！！</div>
+            <div class="tooltip-meta">48 章 · 57.5万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">穿越到可以随便做爱的世界</div>
+        <div class="list-card-author">兰陵不谢花</div>
+        <div class="list-card-series">穿越到可以随便做爱的世界</div>
+    </div>
+</a>
+<a href="/novel/jf4yo6xx5r" class="list-card" role="listitem" title="混乱艺校" data-novel-id="5fb6298492141">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            99章
+        </span>
+                        <img src="/assets/cover/5fb6298492141.webp" alt="混乱艺校 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">先说下我们的主角--杨一凡，人如其名一个平凡的人，现实的一个不能再平凡的人，唯一拿得出手的就是专业知识以及一米八零的身高，对了还有国色天香的女友--波香。你可能好奇为什么有波这个姓氏，我只能说我知道的也不是很多，只是知道女友是哈尼族的奕车人，对于这个少数民族的了解我也是第一次接触女友之后才了解。</div>
+            <div class="tooltip-meta">99 章 · 54.2万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">混乱艺校</div>
+        <div class="list-card-author">小女纸02</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hy9twq7hzp" class="list-card" role="listitem" title="女神堕落系统" data-novel-id="68306d8630d8b">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            330章
+        </span>
+                        <img src="/assets/cover/68306d8630d8b.webp" alt="女神堕落系统 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">闲来无事，自从经历妈妈的撸管，妹妹的口交，曾经让他倍感刺激的“学习资料”也索然无味了。视频毕竟是视频，哪有发生在现实来的刺激，还是乱伦，虽然还没达到这种地步，可他内心已有觊觎之心。为了继续获得来自妈妈的福利，杨昊然少见的在自己房间内自学。</div>
+            <div class="tooltip-meta">330 章 · 103.6万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">女神堕落系统</div>
+        <div class="list-card-author">浮生若梦</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/hiwsoiey9o" class="list-card" role="listitem" title="乱伦到底" data-novel-id="6aa706ed75ba2">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            11章
+        </span>
+                        <img src="/assets/cover/6aa706ed75ba2.webp" alt="乱伦到底 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">“啊……不要……哎哟……好姐姐，饶了小妹子吧。”小姨突然翻过身，将妈妈压住了，把妈妈的衬裤一下子剥了下来。看着湿润的阴毛黑密密的爬满在妈妈小腹上，我几乎要泄了。小姨脱下连衣裙，倒跨着扎在妈妈双腿间狂舔起来，发出“吧唧吧唧”声。看着妈妈伸在空中的优美腿部曲线，真是有种说不出的淫荡。而小姨的乳房在胸罩中来回摆动，挤压出一条深深的乳沟，更是显得诱惑。“啊……小琼……姐……姐受不了啦……”妈妈的淫叫声与小姨的舔刮声响成了一片。</div>
+            <div class="tooltip-meta">11 章 · 8.4万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">乱伦到底</div>
+        <div class="list-card-author"></div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/je5j2d9wiv" class="list-card" role="listitem" title="极品好儿媳" data-novel-id="5fdf81904bcb9">
+    <div class="list-card-cover-wrap">
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            12章
+        </span>
+                        <img src="/assets/cover/5fdf81904bcb9.webp" alt="极品好儿媳 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">秦雨今年24岁，身高一米六八，是一家私立学校的任课老师。下班后，秦雨从拥挤的公交车上下来，步行来到家中，这套两居室的温馨小屋是他们夫妻刚刚贷款买下的婚房。拿出钥匙开开门，秦雨发现卫生间亮着灯，还有哗哗水声，一定是丈夫在洗澡。刚才挤公交车，自己身上出了好多汗，她也想好好洗一下，来到卧室，对着镜子开始宽衣。“如果我进去跟他一起洗，他一定会冲动。”幻想着丈夫张开双臂，把自己紧紧抱住，她的脸微微红了，“或许，他等不到洗完澡，在卫生间就会要了自己。”</div>
+            <div class="tooltip-meta">12 章 · 21.5万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">极品好儿媳</div>
+        <div class="list-card-author">秦雨</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+<a href="/novel/jieqlpx3lr" class="list-card" role="listitem" title="艺术学院女教师孙晴晴" data-novel-id="5f30f7c389021">
+    <div class="list-card-cover-wrap">
+                <span class="list-card-audio-badge" aria-label="有声小说">🎧</span>
+                        <span class="list-card-chapter-pill" aria-label="总章节数">
+            5章
+        </span>
+                        <img src="/assets/cover/5f30f7c389021.webp" alt="艺术学院女教师孙晴晴 封面" loading="lazy" width="400" height="600">
+                <div class="list-card-tooltip">
+            <div class="tooltip-brief">她们共有四位教师和三位学生参与了拍摄，每人拍了上百张，最后学院挑选其中最好的几百张制成了教材，然后把所有照片装订成册，发给每一位参与拍摄者。这次参与拍摄的有孙晴晴舞蹈系的周小琳老师表演系的莫慧老师罗明娟老师以及舞蹈系学生会主席肖丽丽，团干部陈雪表演系学生会干部刘妙今。她们七个人都是艺院里出名的美女，而孙晴晴无论身材还相貌更是其中最出色的。平时秦刘老四等人见了孙晴晴都是眼都不眨的，现在可以看她们的人体照片了，一个个更是心急如焚。孙晴晴去房间拿相册时，张铁杆就问了：“孙老师，你们真的是脱光光给人家照的呀？”孙晴晴笑着骂了他一句：“你急什么啊看你一幅流氓样拿出来你不就什么都看到了吗？”刘老四也说：“你这铁杆也真笨，不脱光怎么叫人体艺术。”</div>
+            <div class="tooltip-meta">5 章 · 4.9万字</div>
+        </div>
+    </div>
+    <div class="list-card-body">
+        <div class="list-card-title">艺术学院女教师孙晴晴</div>
+        <div class="list-card-author">插翅难飞</div>
+        <div class="list-card-series"></div>
+    </div>
+</a>
+    </div>
+</section>
+
+<!-- 自定义样式：首页热门标签紧凑布局 -->
+<style>
+.home-tags-top-gap {
+    margin-top: 15px;
+}
+.home-tags-scroll {
+    gap: 8px;
+    max-height: 96px;
+    overflow-y: hidden;
+    padding: 4px 0;
+}
+.home-tag-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background-color: #f3f4f6;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+}
+.home-tag-pill:hover {
+    border-color: var(--border-hover);
+    background-color: #e5e7eb;
+    color: var(--text);
+}
+/* 深色模式：pill 用深色背景 + 浅色字，保证对比度与 hover 可读 */
+[data-theme="dark"] .home-tag-pill,
+.dark .home-tag-pill {
+    border-color: var(--border);
+    background-color: var(--surface-2);
+    color: var(--text);
+}
+[data-theme="dark"] .home-tag-pill:hover,
+.dark .home-tag-pill:hover {
+    border-color: var(--border-hover);
+    background-color: var(--border-hover);
+    color: var(--text);
+}
+@media (min-width: 768px) {
+    .home-tags-scroll {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+}
+@media (max-width: 767.98px) {
+    .home-tags-scroll {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+</style>
+
+<script>
+(function() {
+    'use strict';
+    var rs = window.yxReaderState;
+    if (rs && rs.isFavorite) {
+        var cards = document.querySelectorAll('.list-card[data-novel-id]');
+        cards.forEach(function(card) {
+            var id = card.getAttribute('data-novel-id');
+            if (id && rs.isFavorite(id)) {
+                var wrap = card.querySelector('.list-card-cover-wrap');
+                if (wrap && !wrap.querySelector('.list-card-fav-badge')) {
+                    var badge = document.createElement('span');
+                    badge.className = 'list-card-fav-badge';
+                    badge.setAttribute('aria-label', '已收藏');
+                    badge.textContent = '❤';
+                    wrap.appendChild(badge);
+                }
+            }
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    'use strict';
+    var cards = document.querySelectorAll('.list-card');
+    cards.forEach(function(card) {
+        var wrap = card.querySelector('.list-card-cover-wrap');
+        var tooltip = card.querySelector('.list-card-tooltip');
+        if (!wrap || !tooltip) return;
+        var show = function() { tooltip.classList.add('show'); };
+        var hide = function() { tooltip.classList.remove('show'); };
+        wrap.addEventListener('mouseenter', show);
+        wrap.addEventListener('mouseleave', hide);
+        var longPressTimer;
+        wrap.addEventListener('touchstart', function() { longPressTimer = setTimeout(show, 500); }, { passive: true });
+        wrap.addEventListener('touchend', function() { clearTimeout(longPressTimer); }, { passive: true });
+        wrap.addEventListener('touchcancel', function() { clearTimeout(longPressTimer); }, { passive: true });
+        tooltip.addEventListener('touchstart', function(e) { e.stopPropagation(); });
+        document.addEventListener('touchstart', function(e) { if (!e.target.closest('.list-card')) hide(); }, { passive: true });
+    });
+})();
+</script>
+</main>
+
+    <footer class="hidden md:block mt-auto border-t border-[var(--border)] bg-[var(--surface)]" role="contentinfo">
+        <div class="tk-container py-8 md:py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 tk-meta text-sm">
+                <div>
+                    <p class="font-medium text-[var(--text-2)] mb-2">夜读小说</p>
+                    <p class="text-[var(--muted)]">精选收录中文成人小说，注重阅读体验与内容质量。</p>
+                </div>
+                <div>
+                    <p class="font-medium text-[var(--text-2)] mb-2">链接</p>
+                    <ul class="space-y-1 text-[var(--muted)]">
+                        <li><a href="/novels" class="hover:text-[var(--text-2)] tk-transition">最新收录</a></li>
+                        <li><a href="/contact" class="hover:text-[var(--text-2)] tk-transition">联系反馈 / 版权投诉</a></li>
+                        <li><a href="/2257" class="hover:text-[var(--text-2)] tk-transition">2257 合规声明</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-medium text-[var(--text-2)] mb-2">免责声明</p>
+                    <p class="text-[var(--muted)]">本站仅做精选与推荐，内容版权归原作者与首发平台所有。请支持正版阅读。</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-[var(--border)] yx-friend-links">
+                <p class="text-xs text-[var(--muted)] mb-2">友情链接</p>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs leading-6">
+                    <a href="/exchange" class="yx-friend-exchange" rel="nofollow">交换友链+</a>
+                    <a href="https://xchina.co" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuAe-1ul8uSqpgHub1jeyghs")'>小黄书</a><a href="https://xchina.app" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuMao1ruE9OLE8uMVSAT79aM")'>成人APP精选</a><a href="https://javd.me" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuOH9K8jXvjguQNlPNTYPvY4")'>JAVD</a><a href="https://myjav.tv" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuKbS1sVQYzWaM-S6W6V0vJ4")'>MyJav</a><a href="https://topnav.ai" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuNMC2W3OTrqOjhj9QKvUcNg")'>AI成人导航</a><a href="https://huangguo.video" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuG7uct0OlhfUP4R3t_fUwHk")'>黄果剧场</a><a href="https://sexgps.net" rel="nofollow noopener" target="_blank" onclick='window.__sharedServiceReport("WmN0VDF8qOxn-2-XbhZjuPMi4DVA9prlDypXMCP7V88")'>色情导航</a>                </div>
+            </div>
+            <style>
+                .yx-friend-links a { color: var(--muted); transition: color .2s ease; }
+                .yx-friend-links a:hover { color: var(--text-2); }
+                .yx-friend-links a.yx-friend-exchange { color: var(--text-2); font-weight: 500; }
+                .yx-friend-links a.yx-friend-exchange:hover { color: var(--text); }
+            </style>
+            <div class="mt-8 pt-6 border-t border-[var(--border)] text-center text-[var(--muted)] text-xs space-y-1">
+                <p>
+                    <a href="/2257" class="hover:text-[var(--text-2)] tk-transition">18 U.S.C. 2257 Compliance</a>
+                    <span class="mx-2" aria-hidden="true">·</span>
+                    <a href="/contact" class="hover:text-[var(--text-2)] tk-transition">DMCA / Copyright</a>
+                </p>
+                <p>&copy; 2026 夜读小说. 保留相关权利.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    (function () {
+        var toggle = document.getElementById('search-toggle');
+        var input = document.getElementById('nav-search');
+        if (toggle && input) toggle.addEventListener('click', function () { input.focus(); });
+    })();
+    </script>
+    <script>
+    (function () {
+        var input = document.getElementById('nav-search');
+        var dropdown = document.getElementById('search-dropdown');
+        if (!input) return;
+
+        function sanitizeKeyword(raw) {
+            raw = (raw || '').toString();
+            raw = raw.replace(/[+\s\u3000]+/g, ' ').trim();
+            if (!raw) return '';
+            raw = raw.replace(/[^0-9a-zA-Z\u4e00-\u9fff ]+/g, ' ');
+            raw = raw.replace(/\s+/g, ' ').trim();
+            if (!raw) return '';
+
+            var parts = raw.split(/\s+/).filter(Boolean);
+            var seen = Object.create(null);
+            var out = [];
+            for (var i = 0; i < parts.length; i++) {
+                var p = parts[i];
+                var key = p.toLowerCase();
+                if (seen[key]) continue;
+                seen[key] = 1;
+                out.push((p.length > 10 ? Array.from(p).slice(0, 10).join('') : p));
+                if (out.length >= 2) break;
+            }
+            return out.join('+');
+        }
+
+        function goSearch(text) {
+            var kw = sanitizeKeyword(text != null ? text : input.value);
+            if (!kw) return;
+            var plain = kw.replace(/\+/g, '');
+            if (plain.length < 2) {
+                (window.yxToast && window.yxToast.alert ? window.yxToast.alert.bind(window.yxToast) : alert)('请输入至少两个字（或两个词）作为搜索关键字');
+                return;
+            }
+            var seg = encodeURIComponent(kw);
+            window.location.href = '/search?q=' + seg;
+        }
+
+        function buildSuggestionsHtml() {
+            var history = (window.yxReaderState && window.yxReaderState.getSearchHistory) ? window.yxReaderState.getSearchHistory() : [];
+            var history20 = history.slice(0, 20);
+            var trending = (typeof window.YX_SEARCH_TRENDING !== 'undefined' && Array.isArray(window.YX_SEARCH_TRENDING)) ? window.YX_SEARCH_TRENDING : [];
+            var parts = [];
+            var historyContent = history20.length > 0
+                ? history20.map(function (kw) {
+                    return '<a href="#" class="search-suggestion-item px-2 py-1.5 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" data-keyword="' + escapeHtml(kw) + '">' + escapeHtml(kw) + '</a>';
+                }).join('')
+                : '<span class="text-sm text-[var(--muted)]">您还没有搜索记录</span>';
+            parts.push('<div class="py-1.5"><p class="text-xs text-[var(--muted)] mb-1.5 px-0.5">搜索历史</p><div class="flex flex-wrap gap-1 max-h-[3.25rem] overflow-hidden">' + historyContent + '</div></div>');
+            if (trending.length > 0) {
+                var trendLinks = trending.map(function (kw) {
+                    return '<a href="#" class="search-suggestion-item px-2 py-1.5 rounded-[var(--radius-sm)] text-sm text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] tk-transition whitespace-nowrap overflow-hidden text-ellipsis" data-keyword="' + escapeHtml(kw) + '">' + escapeHtml(kw) + '</a>';
+                }).join('');
+                parts.push('<div class="pt-2 border-t border-[var(--border)]"><p class="text-xs text-[var(--muted)] mb-1.5 px-0.5">大家都在搜</p><div class="flex flex-wrap gap-1">' + trendLinks + '</div></div>');
+            }
+            return parts.join('');
+        }
+        function escapeHtml(s) {
+            var div = document.createElement('div');
+            div.textContent = s;
+            return div.innerHTML;
+        }
+
+        function showDropdown() {
+            if (!dropdown) return;
+            dropdown.innerHTML = buildSuggestionsHtml();
+            dropdown.classList.remove('hidden');
+            dropdown.style.display = '';
+        }
+        function hideDropdown() {
+            if (dropdown) {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        input.addEventListener('focus', function () {
+            showDropdown();
+        });
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                goSearch();
+            }
+        });
+
+        if (dropdown) {
+            dropdown.addEventListener('mousedown', function (e) {
+                var a = e.target && e.target.closest ? e.target.closest('a.search-suggestion-item') : null;
+                if (!a) return;
+                e.preventDefault();
+                var kw = a.getAttribute('data-keyword');
+                if (kw != null) goSearch(kw);
+            });
+            dropdown.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            var wrap = document.getElementById('search-wrap');
+            if (wrap && !wrap.contains(e.target)) hideDropdown();
+        });
+        input.addEventListener('blur', function () {
+            setTimeout(function () {
+                if (dropdown && document.activeElement && !dropdown.contains(document.activeElement)) hideDropdown();
+            }, 150);
+        });
+    })();
+    </script>
+    <script>
+    (function () {
+        var html = document.documentElement;
+        var btn = document.getElementById('theme-toggle');
+        var icon = document.getElementById('theme-icon');
+        if (!btn) return;
+
+        function getTheme() {
+            try {
+                var t = (window.yxStorage && yxStorage.get('ui.theme')) || localStorage.getItem('yx.ui.theme') || 'dark';
+                if (t === 'light' || t === 'dark') return t;
+                try {
+                    var p = JSON.parse(t);
+                    return (p === 'light' || p === 'dark') ? p : 'dark';
+                } catch (_) { return 'dark'; }
+            } catch (e) { return 'dark'; }
+        }
+
+        function apply(theme) {
+            if (theme !== 'light' && theme !== 'dark') theme = 'dark';
+            html.dataset.theme = theme;
+            try {
+                if (window.yxStorage) yxStorage.set('ui.theme', theme);
+                else localStorage.setItem('yx.ui.theme', JSON.stringify(theme));
+            } catch (e) {}
+            if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        }
+
+        apply(html.dataset.theme || getTheme());
+
+        btn.addEventListener('click', function () {
+            var cur = html.dataset.theme || getTheme();
+            var next = cur === 'dark' ? 'light' : 'dark';
+            apply(next);
+        });
+    })();
+    </script>
+<div class="md:hidden h-14 flex-shrink-0" aria-hidden="true"></div>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a49c9936792710a6',t:'MTc5MTg3NjIwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

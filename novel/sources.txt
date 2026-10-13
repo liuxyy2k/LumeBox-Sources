@@ -8,3 +8,4 @@
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/99xs_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xchina_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xxiaoshuo_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xnovel_novel.js

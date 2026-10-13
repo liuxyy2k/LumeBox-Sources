@@ -49,3 +49,43 @@ nnhanman_detail.html
 nnhanman_chapter.html
 nnhanman_search.html
 nnhanman_search_p2.html
+
+# xman6（X漫，xman6.com；MacCMS + conch 主题）
+xman6_home.html
+xman6_cata.html
+xman6_cat.html
+xman6_cat_p2.html
+xman6_new.html
+xman6_rank.html
+xman6_search.html
+xman6_detail.html
+xman6_read.html
+# jcomic（JComic，jcomic.net；图片是 JCOMIC_TRAPS_ 倒序 base64）
+jcomic_home.html
+jcomic_cat.html
+jcomic_cat_p2.html
+jcomic_cat_last.html
+jcomic_search.html
+jcomic_eps.html
+jcomic_eps_marked.html
+jcomic_page1.html
+jcomic_page_single.html
+# xnovel（夜读小说，x-novel.com）
+xnovel_home.html
+xnovel_list.html
+xnovel_list_p2.html
+xnovel_list_last.html
+xnovel_tag.html
+xnovel_search.html
+xnovel_detail.html
+xnovel_detail_short.html
+xnovel_chapter.html
+xnovel_blocked.html
+# jpyy2（金牌影院，jpyy2.com → vv3nwjk.com；JSON API，签名头）
+jpyy2_types.json
+jpyy2_home.json
+jpyy2_list.json
+jpyy2_search.json
+jpyy2_detail.json
+jpyy2_episode.json
+jpyy2_plot_movie.json

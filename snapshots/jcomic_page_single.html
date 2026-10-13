@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QL6YSDRWEV"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-QL6YSDRWEV');
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="description" content="h漫分享小站">
+	<meta name="keywords" content="h漫,嗶咔,18h,紳士,成人漫畫,H圖,H本子,j圖, pica">
+	<meta name="juicyads-site-verification" content="92d1559a83b75fab2761a7256444d42d"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="Trafficstars" content="86195">
+	<meta name="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" content="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" />
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>JComic</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/view/css/bootstrap.min.css?aa" rel="stylesheet">
+	<!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="/view/css/custom.css?20220214" rel="stylesheet">
+	<!--<link rel="preload" href="/view/fonts/glyphicons-halflings-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">-->
+
+	
+	<script src="/view/jquery.js"></script>
+	<script src="/view/jquery.lazyload.js"></script>
+	<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-87476157-1', 'auto');
+	 
+	ga('send', 'pageview');	  
+	  
+	  
+	$(function() {
+		$("img.lazy").lazyload({
+			threshold : 5000
+		});
+	});
+	
+	/*
+	var mq = window.matchMedia("(min-width: 800px)");
+	//var mq2 = window.matchMedia("(max-width: 799px)");
+
+	 mq.addListener(WidthChange);
+	 //mq2.addListener(WidthChange);
+	// media query event handler
+	$( document ).ready(function() {
+	if (matchMedia) {
+	  WidthChange(mq);
+	}
+	});
+	*/
+
+	// media query change
+	/*
+	function WidthChange(mq) {
+	  if (mq.matches) {
+		$( ".adbannerD" ).css({'display':'block'});
+		$( ".adbannerM" ).css({'display':'none'});
+		
+		console.log("desktop");
+
+	  } else {
+		$( ".adbannerM" ).css({'display':'block'});
+		$( ".adbannerD" ).css({'display':'none'});
+		
+		console.log("mobile");
+	  }
+
+	}
+	*/
+	function search(){
+	var search = document.getElementById('search').value;
+	if (search)
+		window.location = '/search/'+search;
+	}
+	function setCookie(cname, cvalue, exdays) {
+	  const d = new Date();
+	  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	  let expires = "expires="+ d.toUTCString();
+	  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	function getCookie(cname) {
+	  let name = cname + "=";
+	  let decodedCookie = decodeURIComponent(document.cookie);
+	  let ca = decodedCookie.split(';');
+	  for(let i = 0; i <ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+		  c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		  return c.substring(name.length, c.length);
+		}
+	  }
+	  return "";
+	}
+	</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set up the Intersection Observer
+    // rootMargin "800px" means: "Start decoding and downloading when the image is 800 pixels away from the screen"
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let img = entry.target;
+                let lockedStr = img.getAttribute('data-locked');
+                
+                if (lockedStr) {
+                    try {
+                        // 1. Strip the junk prefix
+                        let cleanStr = lockedStr.replace("JCOMIC_TRAPS_", "");
+                        
+                        // 2. Reverse back to Base64
+                        let unreversed = cleanStr.split('').reverse().join('');
+                        
+                        // 3. Decode and load the image
+                        img.src = atob(unreversed);
+                        
+                        // Clean up
+                        img.removeAttribute('data-locked');
+                    } catch (error) {
+                        console.error("Failed to unlock image.");
+                    }
+                }
+                
+                // Stop observing the image once it has been triggered
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "800px 0px 800px 0px" });
+
+    // Find all protected images and attach the observer
+    const images = document.querySelectorAll('.jcomic-img');
+    images.forEach(img => {
+        imageObserver.observe(img);
+    });
+});
+</script>
+</head>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">   
+	
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                
+                <a class="navbar-brand d-none" href="/">
+                	<span class="glyphicon glyphicon-fire"></span> 
+                	JComic
+                </a>
+				<div class="form-inline navbar-right" style="display:flex">
+					<input class="form-control" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" id="search-btn" onclick="search();">Search</button>
+				  </div>
+				  
+            </div>
+			
+            <!-- Navbar links -->
+			
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        
+                    </li>
+                </ul>
+				
+            </div>
+			
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+ <body><div class="container">
+
+
+<!--new popunder-->
+<!--hilltop--><script>
+(function(fcs){
+var d = document, s = d.createElement('script'), l = d.scripts[d.scripts.length - 1];
+s.settings = fcs || {};
+s.src = "\/\/waterloggedkind.com\/c-DI9U6.bl2W5JlhSgW\/Qk9uN\/j\/Qa2QOeDck\/5cN\/SK0H2KNVDuYC4MOeT\/kg2S";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script><!--new popunder end-->
+<!-- Heading -->
+        <div class="row">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">主頁</a></li>
+			<li class="breadcrumb-item"><a href="/eps/侵入者">侵入者</a></li><li class="breadcrumb-item active" aria-current="page">第1話</li> 	    </ol>
+		</nav>
+          <h1>侵入者 (47)</h1><a href="/author/甚助屋 (甚助)"><button type="button" class="btn btn-primary">甚助屋 (甚助)<span class="badge badge-light"></span></button></a><b style='color:white'>6accf47406c14237faa18342</b>		<p class='comic-category'>分類: </p><a href="/cat/短篇"><button type="button" class="btn btn-primary">短篇<span class="badge badge-light"></span></button></a><a href="/cat/強暴"><button type="button" class="btn btn-primary">強暴<span class="badge badge-light"></span></button></a><p id="eps">第1話</p>        </div>
+		<!--
+<a href="https://www.liquidfire.mobi/redirect?sl=16&t=dr&track=99275_184109&siteid=184109" target="_blank" class="float hidden" id="popclick">
+	<p class="fa my-float">支持營運 一天一按<br><br>サポート業務 1日1回押す</p>
+</a>
+-->
+ <script>
+document.title = document.title+" - "+$("h1").text()+" "+$("#author").text();
+if(getCookie("lq_check")!=1){
+	$('#popclick').removeClass('hidden');
+}
+	$('#popclick').on('click', function(evt) {
+    console.log(getCookie("lq_check"));
+	setCookie("lq_check",1,1);
+	$('#popclick').addClass('hidden');
+	ga('send', 'event', 'Banner', 'click', 'lq_banner');
+	//$('#popclick').hide();❎
+    //return false;//Returning false prevents the event from continuing up the chain
+	});
+</script><div class="container">
+
+<div class="row col-lg-12 col-md-12 col-xs-12">
+<button type="button" class="btn btn-primary" disabled>上一章<span class="badge badge-light"></span></button><a href="/eps/侵入者"><button type="button" class="btn btn-primary">章節列表<span class="badge badge-light"></span></button></a><button type="button" class="btn btn-primary" disabled>下一章<span class="badge badge-light"></span></button></div>
+</div>
+<div class="row col-lg-12 col-md-12 col-xs-12">
+<div class="col-sm-12 col-xm-12 col-centered adbannerD" style="padding-top:5px">
+			<!-- JuicyAds v3.0 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script><ins id="563554" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':563554});</script>
+			
+		<!--JuicyAds END-->
+		</div>
+		<img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_=MjYiBTZ0QzNkNjZkVzN3QzYkJTZihzY0MmN0QmYyYTZzYzNkJjNwAjY3UGNzY2M5IWZwUTN2I2YyMWNhZTYwATPlJXd0Fmbnl2UtoXbB1CWmAjN9MXZylGc4VUL61WQtglJ0N3bo1zcyVGZhVGSkVmbnl2UtoXbB1CWmolMxkzM3ADVzEDMxYjMwITPlRXYE1ietFULYZCdzVWdxVmcfRzc3FmRyUyMzZkMl8Gd1FmRyUyMxATM2IDMyYkMlYTMkFDNhNGO5IDNhNzNyUjY2QTNlJGOhNWOkhTZkJzM9wWYpRnblRWZyNUL61WQtglJ2UjMBh0UtMUQNhUL0M1VB1TboRXay92ZsFUL61WQtglJEF0TMlVQQ1CRF50RJNlTV1jN1ITYoNVL05WZ052bD1ietFULY9zZwpmLz8lclZ3bD9FMw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_yQjN0cjY1YTZ1UWZiRDMzEWNwYWNyEjZiFmNiN2YkRWOxYzY2cTY5cTZiFjZ0cDOwcTMzUjZ2UDMygjZhJTO40TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SMw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_wgjYmJWZ3UTOkNDO0QWY1cTOmFWNhZjM4IjYzAzY5YmMmVjM0EGO2MmZwI2MlBzY1UzMkRTZ3gzYlBjNlFDNm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iMw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_kJGN1cTY4ITMmhDZmFTY3kTY0MTZiNDNiVjZ3UzY3EzYhhjMmZTNyUGOyUGMxMWNkhDZjdjNiNDZlZmMlVGMw0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yMw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_zUWZjdDNxkjNzEmNhJGOhhjN2MGZ3ADZzQDN3EGZ0ADNycDM2ATZkJmY4IGZmF2NzQTYzITYmNjZwIDOiFjMx0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CNw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_xIjZjdTN4YmM3EmYkVjZzUGO3cjZxMzYkFGMhFjN4QGZ3YWYkljM3MWN4IGM1MTZyATNxgzYyMmMzQWYxUTOk1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SNw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_4MTM3ETZ4IzNlNmYhVGZ4gDOwgDOjRzYmdjMzADM0YjYkRWOkZjZwUTZ0YjN5ITOzATMlRjZiRjY3cjYiFWMy0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iNw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_1czMmNjY3QDZmZmMxQWZ5U2N0Q2N2AzN0MDNiR2MlRzNwEjM5cTY0gDZygTMxMmNhdjZmRjNhF2Y0YjMykDZ20TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yNw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_zkjM1MWYhFGZiRTMzMmMxcjNyEjYhJGZ3UmNjFDM2U2N0kjN2kjN2cTZ5UTOhJ2MwcDNhNjMlNDM4ETO5MTOl1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5COw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_ihzM4UzNyEWYiFzYkZzYyIzMxMzMxUWY5UWNlRWY4AjM3IWN1QWM5IjZycTZjNjZmRTOllDNyUjZwQWOyUjYj1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SOw8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_3I2YwkTNwUjNiVmYklDM3cTZjhDNjhzN5gTNyIWMxIDNmJDM3Y2Y0MGMxMTO4YWNjhjZ5YzNwITZ5gDO3QWNm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CMx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_hJGZ5AjMhZDOmZDNiJDM3UjMxUGM3AjNkFTYhZjZ0gjYmJWO2QTYjJDOhNzY5YjMhNGZlZTZwYzMxMTO5EzN00TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SMx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_mRDM3EmN4MzM1QGZ0ADN3E2YjlTY0MDM0UDZ0ATOwUWOxMTM3MGMklTNhhTOjhjN1IjYjRjYwUWNxIWNjZDOm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iMx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_kVTMyIjNhJWZ3cTY2gjNzAjMlNzNhNWNiFjYmFTZkljY3UmZ3EGO4EjM5YTYiJWY2QzM2AjYwUjZyUGN1kTYw0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yMx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_5UzYjNDMjRWOxETN1U2N5AjYjhjZ4MGNjJjN4YzNxkTMkFWZmdTNxczNjdzMkZWZkRWYjRjYllTZ1ITYjVTYm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CNx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_mdDN2YjYmVzYjJGMmljZzQWY5kDZlJWNhRWM3YmYkZmYkZmNiFTOjV2Y0kTYzkDOwYWNlRjY1QTMxcjZhdDN50TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SNx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_3M2MzQDN4MGO0ADM0EWNiNWO0EDZzkjNmRWM5cTZyEGM3IjNmFjZkNzN4ATNwgjNyQWN1QTY2YWZ5cTY0QTN00TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iNx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_1QTOyUWZ0gzYjVGNkdjZxcDZxIjNzcTNyITZxEGMjVDN2QWMlBzY0ATM5YGNmlTY0QTNxEzN0YjZxAjZhBDZw0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yNx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_0YDNmJ2NxQ2M2EGO1UDZjRWOwkDZ0UWZmFjN3QmM1MGZmNTO4QTYxkTMxgjNhRzM2QmMiRWZ1ETZxMmYlBjMm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5COx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_yMWNmNDMxI2YzADO3QGM0I2MzIGZzMjN4gTZ2cjMwY2NzI2N3YTZjRjMjVGNwYGNjVWOzQTYjVmYhhTMwgjN40TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SOx8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><div class="col-sm-12 col-xm-12 col-centered adbannerD" style="padding-top:5px">
+			<!-- JuicyAds v3.0 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script><ins id="563554" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':563554});</script>
+			
+		<!--JuicyAds END-->
+		</div>
+		<img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_wMTNkZ2NlVDN5Q2NkN2M3ETOwITMklDO3MWZjNDN4AzY4gjYjRjYhNzNzQDMiJmY5UTNlJjN3gTYjNzMxMmNz0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CMy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_yMmNkhDZmR2N1YzMwI2YxMjY4EGNlVDNwQ2YyQTZ4MGZjVTY3gTZjJDM2kzNhhTY4MWZ2gjMlJ2M0QTM3QWOi1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SMy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_mdTMwkjN0kzMxEzY5IDZ3M2NxQGNhNTY1MzNxQTYygDNzkDZ4YTNhZWO1EWNjhDM3kDMlRWMzgTOyYTZyMDNm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iMy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_1M2M0YjMyI2Y2IDN5QGZzAjNkZWM3YWNlNmZiRDZ5YDZwgTYwcjMyEWOmVmZlZzY3QzM2IDM1ATN0cjM3QTOh1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yMy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_jJGZxIjMwUGO4MTZhVWZkJDZmRmZjNDMyMjN4MWY1ImZ3QGM2EGMycjY3EjZ1UmN4EDOkJ2YlFGZkJDNmBDN50TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CNy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_wgTM1QjZ2QDO1ADM2UWNwkTNmhjZhFDNiRWYyUjY5ITYiRGOxImZzUDMyITMyEWNjNmNxMjZwgDOlFjYhZDMk1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SNy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_kJWNmJmY1QGO0MGM3cTOjF2YzIjYxMGZmVDOwkzN3IGZyATN4MjN4EjM2QWNmF2M1AjY2MmM4ITMkNDMkJGZz0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iNy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_ldDN1ImYyADN1QDMxgTYxI2NyEmY3kDN0ATNmNGM3MTOwUTN1UTMmVDZhZWM0YjNzYTMhZmYyETZwADNhFmZ50TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yNy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_5IzMhNzYwUDZhVzNyczNyUTMwITZ5YjNwYWOhJmZ4MTOiVjM0IDM5AjNkF2YwMWY4IjM2EGN0IzMzkzYwUWMi1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5COy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_zADM2cjZkRTZ5QWO0EWY2YWZmRGZyE2N1UTNyYmN0QWN4ITM4Q2NwYzYwImMhNjY0EWNiJWMkVGMwYWY0YTM30TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SOy8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_hNDM0MDZ3kzMwEGO2UTMmVzNxMzY5ETNiJ2M0UmYiN2MyU2NmZzM3czYmJDMhZzYxImN3ITO3Y2YiRWYhhzNm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CMz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_0kTZhFDMkRzNjdTYiFzM4IWNzgDNxYzNjZGN3MDNwImNmJGNxQmNykzYkZ2Y1AzY0YTY3UGMkN2MhBDM0AjY20TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SMz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_5MWZ2gzYmJjZ4IDMiNmYhFmMygzYlZWNhVTZyQjZwgjM5YGM2UWOhlTMwATZiVDN2EWZiFzN5EmY4ADM1YDO40TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iMz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_mZmMjZWN2I2MlFGM1cDMwkDNhVWZ1EzYmZTO0cTO4YWYmRWMykzM4AzN2YjY3UTNwATMllTM3ATZ5EWZyMjZ20TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yMz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_xkTYzUGZ1cjZ4UGZiRWZ3cDO1kTM4ITZhV2Y3EDMjVzMkhzYjRjYxMWYwEGMwEWZ5E2YhVWMxgzYxYGNmNjZw0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CNz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_mFDZ1IzYjhzNhhTO0QGZ2IWY4I2MlFzYxE2MzUDNlNTYzADOmhDZiJTYidjYyEWMhZTO3UGN5EWYlF2MmBDZ10TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SNz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_2EzNlVGMwMTYhdDMwIDM1MjZwQjYyQzYkJ2Y5kTO5ATYlVDMxAjYmJTOkhzYjdjY3QTY0EDMyYWM1QWNhNTOh1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iNz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_5UzNlJjMwIWOhNjMlFWOkJWZmlzM2IWNhVmN5gTNlhzMycTOhRzMyIjZjR2YzEWYxATNiVjN5ITOwUzY4UDZy0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yNz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_0kTN1Y2Y3gzM4gjMwkzMyEGMiBTM2EjZ5ADNkJGOlFTM2ITY0UTYjNWO5IjNwYjN2ImZ0gjZiNWO5EmMzETN00TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5COz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_jFDN1QTMkZWOwEDNlRmNykTMwcjZxUGO4YWO3U2M0UGMhJjN0IjZ5kzMiR2N0gjZ5YWY2YzY4kTOlJzN3UWZi1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SOz8SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><div class="col-sm-12 col-xm-12 col-centered adbannerD" style="padding-top:5px">
+			<!-- JuicyAds v3.0 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script><ins id="563554" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':563554});</script>
+			
+		<!--JuicyAds END-->
+		</div>
+		<img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_2EzYmZDO4cDN2gTOhJWOyAjMkJTY2ImZ4YzN5ImMkhjM5cjZiJGN2MDN3IzN1QmN5gTOiZjZxgTMjZjN3MzYj1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CM08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_xYDZ4cjZ0kTOmBzN4kTYmVWZ5EjZ3MTN5UjM2czYmBTNilzM4kjZjVWOyQTN5MWOlNDOkNGZ1QGZxczM4cDM50TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SM08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_hJzYhJTM2MTZwEGMlBjYjJWMlZmN3QGN2gjMyUTZ1cjYlFGN3ImZjVDZjZTOmZjYxcTMkRDOmVmZkNTZkZWZi1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iM08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_kFGZlVmY3QzN5EmYxU2YldDNjBDMxgDOwEGN4cDZxgDOjNmMjJWNmdTM0UmZlNWYwUGOzgTY1ETZ3gDM3MGZz0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5yM08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_iFTMyIGNjZ2YxczM1QWZ5AjZzcTNwMmN4AjMzIjZ0MGMlZWN3YGO2czNkRWYkJWNjlTOmVjZ3cDOlZjY1MGOi1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5CN08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_wYjY1QGMhNjM5gTM1QzMjFzN4YjMxEWNzITZkRjY1MWZwkjNhdjMiZWZ5MmNlZTZlJWYlhjMkdjZwIDOmRDNm1TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5SN08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""><img class="img-responsive comic-thumb jcomic-img" src="" data-locked="JCOMIC_TRAPS_khjY1gTYlVWZiFWMzATN2YTZ5MWYkJTYlNWNyIGZ3YTZlBDN5EGO2MmY4QGN5MWN0UWM0kTYwITZzUDM3czMy0TZyVHdh52ZpNVL61WQtglJwYTPzVmcpBHeF1ietFULYZCdz9Ga9MnclRWYlhEZl52ZpNVL61WQtglJaJTM5MzNwQ1MxATM2IDMy0TZ0FGRtoXbB1CWmQ3clVXclJ3X0M3dhZkMlMzcGJTJvRXdhZkMlMTMwEjNyAjMGJTJ2EDZxQTYjhTOyQTYzcjM1ImN0UTZihTYjlDZ4UGZyMTPsFWa05WZkVmcD1ietFULYZiN1ITQINVLDFUTI1CNTdVQ90Ga0lmcvdGbB1ietFULYZCRB9ETZFEUtQUROdUST5UV9YTNyEGaT1CduVGdu92QtoXbB1CW/cGcq5iN08SMvIDNzgTMhFmZ3MjM0EzY2ADN3QjZjNWY28Cdl5mLjlWbvNmauMXZnFWbp9yL6MHc0RHa" alt=""></div>
+<div class="container">
+<div class="row col-lg-12 col-md-12 col-xs-12">
+<button type="button" class="btn btn-primary" disabled>上一章<span class="badge badge-light"></span></button><a href="/eps/侵入者"><button type="button" class="btn btn-primary">章節列表<span class="badge badge-light"></span></button></a><button type="button" class="btn btn-primary" disabled>下一章<span class="badge badge-light"></span></button></div>
+</div>
+</div>
+        <div class="copyright">
+        	<div class="container">
+        		<p>Copyright &copy; JComic.net 2017</p>
+        	</div>
+        </div>
+	</footer>
+
+	
+    <!-- jQuery
+    <script src="js/jquery-1.11.3.min.js"></script>
+ -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/view/js/bootstrap.min.js"></script>
+
+</body>
+<html>
+

@@ -1,0 +1,46 @@
+{
+ "code": 200,
+ "msg": "操作成功",
+ "data": {
+  "vodId": 146660,
+  "typeId": 23,
+  "typeName": "动作",
+  "typeId1": 1,
+  "vodName": "猫鼬",
+  "vodSub": "狂飙营救",
+  "vodStatus": 1,
+  "vodClass": "动作,惊悚",
+  "vodPic": "https://obs.3688baihuo.com/upload/movie/20260831/vod36903443.webp",
+  "vodPicSlide": "",
+  "vodActor": "连姆·尼森,文·瑞姆斯,玛丽莎·托梅,迈克尔·切克利斯,布雷特·塔",
+  "vodDirector": "马克·凡斯洛",
+  "vodContent": "<p>战功赫赫的战斗老兵瑞恩·“毒牙”·弗拉纳根，意外卷入一桩谋杀现场，所有证据都指向他，瞬间沦为头号嫌犯。为了洗清冤屈，也为了查明幕后真相，他驾驶自己的福特野马谢尔比GT65，以130英里的时速踏上亡命逃亡之路。身后警方围堵追捕步步紧逼，幕后黑手的截杀接踵而至，公路之上杀机四伏。他必须拿出战场上练就的全部本事，在极速狂飙里杀出一条生路，找出藏在谋杀案背后的真正黑幕。</p>",
+  "vodRemarks": "",
+  "vodPubdate": "2026-10-30",
+  "vodTotal": 0,
+  "vodSerial": "",
+  "vodArea": "美国",
+  "vodLang": "英语",
+  "vodYear": "2026",
+  "vodVersion": "蓝光",
+  "vodUpdated": 0,
+  "vodState": "",
+  "vodIsend": 1,
+  "vodHits": 41895,
+  "vodDuration": "1小时38分9秒",
+  "vodScore": 5.5,
+  "vodDoubanScore": 5.5,
+  "upCount": 3,
+  "downCount": 2,
+  "vodTag": "杰克·肯尼,阿拉·拉德,惊悚,克雷格·豪斯金,连姆尼森,迈克尔·切克利斯,欧美",
+  "episodeList": [
+   {
+    "nid": 1314815,
+    "name": "蓝光",
+    "playUrl": null,
+    "sort": 1,
+    "vodUpdated": 0
+   }
+  ]
+ }
+}

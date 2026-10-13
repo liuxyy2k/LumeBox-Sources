@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>X漫 - 禁漫的天堂</title>
+<meta name="keywords" content="禁漫,X漫 - 禁漫的天堂,禁漫乐园,禁漫天堂,韩漫,3D漫画,日漫,成人漫画,H漫画,大尺度漫画,18禁漫画,肉漫,在線漫画,最新漫画,免费漫画,H漫,韩国漫画,日本漫画,短篇漫画">  
+<meta name="description" content="X漫 - 禁漫的天堂每日更新最新最热无删减大尺度漫画，为大家免费提供漫画在线观看！请记住并传播X漫 - 禁漫的天堂，我们会更努力的！！">
+<meta name="juicyads-site-verification" content="166d78170169b6d9db798e57ea8a3b2b">
+<meta name="yandex-verification" content="ecd3968e7f9c03df" />
+<meta name="yandex-verification" content="3923cfa8556c50aa" />
+<meta name="yandex-verification" content="b14406652318cd5e" />
+<meta name="yandex-verification" content="bcdf56da72bc3d2f" />
+<meta name="yandex-verification" content="05102f6abce38e36" />
+<meta name="yandex-verification" content="d45af07c4c130b48" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/imgs/apple-icon-60x60.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/imgs/apple-icon-76x76.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/imgs/apple-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/imgs/apple-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/imgs/apple-icon-180x180.png">
+<link rel="shortcut icon" href="/imgs/favicon.svg" type="image/svg+xml" />
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" type="text/css" href="/css/mxstyle.css?v=v1.0.0">
+<link rel="stylesheet" type="text/css" href="/css/hlstyle.css?v=v1.0.2">
+<link rel="stylesheet" type="text/css" href="/css/red.css?v=v1.0.0" name="skin">
+<link rel="stylesheet" type="text/css" href="/css/white.css?v=v1.0.0" name="color">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/js/hlhtml.js?v=v1.0.0"></script>
+<style type="text/css">.balist_thumb,.vodlist_thumb,.topiclist_thumb,.artlist_thumb,.artbanner_thumb,.art_relates .artlr_pic,.play_vlist_thumb,.zbo .play_vlist_thumb.zboad,.actor_pic,.ranklist_thumb{background-image:url("/imgs/loading.png");background-repeat: no-repeat;}</style>
+<script>
+	var maccms = {
+		"path": "",
+		"mid": "0",
+		"url": "xman6.com",
+		"wapurl": "xman6.com",
+		"mob_status": "0"
+	};
+</script>
+<script type="text/javascript">
+	$(function() {
+		var cookie_style = $.cookie("mystyle");
+		if (cookie_style == null) {
+			if (white == black) {
+				$("#black").addClass("hide");
+				$("#white").removeClass("hide")
+			} else {
+				console.log(white);
+				console.log(black);
+				$("#white").addClass("hide");
+				$("#black").removeClass("hide")
+			}
+		} else {
+			$("[id='" + cookie_style + "'].mycolor").addClass("hide");
+			$("[id!='" + cookie_style + "'].mycolor").removeClass("hide")
+		}
+		if (cookie_style) {
+			switchSkin(cookie_style)
+		}
+		if (cookie_style == null) {} else {
+			$("link[name='color']").attr("href", "/css/" + cookie_style + ".css?v=4.0")
+		}
+		var $li = $(".mycolor");
+		$li.click(function() {
+			switchSkin(this.id)
+		});
+		function switchSkin(skinName) {
+			$("#" + skinName).addClass("hide").siblings().removeClass("hide");
+			$("link[name='color']").attr("href", "/css/" + skinName + ".css?v=4.0");
+			$.cookie("mystyle", skinName, {
+				path: '/',
+				expires: 10
+			})
+		}
+		var cookie_themes = $.cookie("mythemes");
+		$("#themes li[id='" + cookie_themes + "']").addClass("cur");
+		if (cookie_themes == null) {} else {
+			$("link[name='skin']").attr("href", "/css/" + cookie_themes + ".css?v=4.0")
+		}
+		var $li = $("#themes li");
+		$li.click(function() {
+			switchSkin1(this.id)
+		});
+		function switchSkin1(skinName) {
+			$("#" + skinName).addClass("cur").siblings().removeClass("cur");
+			$("link[name='skin']").attr("href", "/css/" + skinName + ".css?v=4.0");
+			$.cookie("mythemes", skinName, {
+				path: '/',
+				expires: 10
+			})
+		}
+		var changeindex = 1;
+		var clickindex = 1;
+		$(".v_change").click(function(index) {
+			var changeindex = $('.v_change').index(this);
+			$(".cbox_list").each(function(index, element) {
+				var cboxindex = $(".cbox_list").index(this);
+				if (cboxindex == changeindex) {
+					if (clickindex < 3) {
+						$(this).find(".cbox" + (clickindex)).addClass("hide").removeClass("show").addClass('hide');
+						$(this).find(".cbox" + (clickindex + 1)).removeClass("hide").addClass('show');
+						$(this).find(".cbox" + (clickindex + 2)).removeClass("show").addClass('hide');
+						clickindex++
+					} else {
+						$(this).find(".cbox" + clickindex).removeClass("show").addClass('hide');
+						$(this).find(".cbox" + 1).removeClass("hide").addClass('show');
+						clickindex = 1
+					}
+				}
+			})
+		});
+	})
+</script>
+<script type="text/javascript" src="/js/loading.js?1"></script>
+<script src="/js/jquery.adaptive.js"></script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96213708, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96213708" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J4XVSK5PSD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J4XVSK5PSD');
+</script></head>
+
+<body class="bstem">
+	<div id="topnav" class="head_box">
+		<div class="header">
+			<div class="head_a">
+				<div class="head_logo">
+					<a title="X漫 - 禁漫的天堂" class="logo logo_b" style="background-image: url(/imgs/logo_black.png);" href="/"></a>
+					<a title="X漫 - 禁漫的天堂" class="logo logo_w" style="background-image: url(/imgs/logo_white.png);" href="/"></a>
+				</div>
+				<div class="head_menu_a hidden_xs hidden_mi">
+					<ul class="top_nav clearfix">
+						<li class="active"><a href="/" title="首页">首页</a></li>
+						<li><a href="/mcata">分类</a></li>
+						<li><a href="/nm">更新</a></li>
+						<li><a href="/mrank">排行</a></li>
+						<li><a href="/bookmark">书架</a></li>
+					</ul>
+				</div>
+				<div class="head_user">
+					<ul>
+						<li class="top_ico">
+							<a href="/mrank" title="排行榜"><i class="iconfont">&#xe618;</i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<div class="head_b">
+				<a class="bk_btn fl" href="javascript:MAC.GoBack()" title="返回"><i class="iconfont">&#xe625;</i></a>
+				<span class="hd_tit fl"></span>
+				<a class="se_btn fr open-share" href="javascript:void(0)" title="分享"><i class="iconfont">&#xe615;</i></a>
+				<div class="head_menu_b">
+					<a class="menu" href="javascript:void(0)" title="全部栏目"><i class="iconfont menu_ico">&#xe640;</i><span class="hidden_xs">&nbsp;全部栏目</span></a>
+					<div class="all_menu">
+						<div class="all_menu_inner">
+
+							<div class="menu_top hidden_mb"><a class="close_menu" href="javascript:void(0)"><i class="iconfont">&#xe616;</i></a>全部栏目</div>
+							<div class="all_menu_box">
+								<ul class="nav_list clearfix">
+									<li class="active">
+										<a class="mob_btn mob_btn7" href="/" title="首页"><i class="iconfont">&#xe634;</i><span>首页</span></a>
+									</li>
+									<li>
+										<a class="mob_btn mob_btn1" href="/mcata" title="漫画分类"><i class="iconfont">&#xe630;</i><span>漫画分类</span></a>
+									</li>
+									<li>
+										<a class="mob_btn mob_btn3" href="/nm" title="最新更新禁漫"><i class="iconfont">&#xe652;</i><span>最新更新</span></a>
+									</li>
+									<li>
+										<a class="mob_btn mob_btn2" href="/mrank" title="禁漫排行榜"><i class="iconfont">&#xe618;</i><span>禁漫榜</span></a>
+									</li>
+									<li>
+										<a class="mob_btn mob_btn4" href="/bookmark" title="书架"><i class="iconfont">&#xe648;</i><span>书架</span></a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="head_search">
+					<form id="search" name="search" method="post" action="/cata.php" onsubmit="return qrsearch();">
+						<i class="iconfont">&#xe633;</i>
+						<input id="key" type="text" name="key" class="mac_wd form_control" value="" placeholder="输入书名或作者名进行查找">
+						<button class="submit" id="searchbutton" type="submit" name="submit">搜索</button>
+					</form>
+				</div>
+				<div class="head_hot_search hidden_xs">
+					<ul class="pops_list">
+					  <li><span class="hot_search_tit"><i class="iconfont">&#xe631;</i>&nbsp;热门搜索</span></li>					  
+												<li><a href="/mdetail/367659" title="继母与继姐"><span class="hot_name">继母与继姐</span></a></li>
+												<li><a href="/mdetail/367899" title="[3D]妈妈成了家裏保姆儿媳妇"><span class="hot_name">[3D]妈妈成了家裏</span></a></li>
+												<li><a href="/mdetail/367951" title="岳母为何那样"><span class="hot_name">岳母为何那样</span></a></li>
+												<li><a href="/mdetail/367988" title="老师的亲密指导"><span class="hot_name">老师的亲密指导</span></a></li>
+											</ul>
+				</div>
+			</div>
+		</div>
+    </div>
+		<div id="banstem" class="hot_banner">
+		<div class="hot_wlist">
+			<div class="hot_banner_box">
+				<div class="bg_wtop"></div>
+				<div class="banner-wtop">
+					<ul class="swiper-wrapper clearfix">
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367147" title="[3D]丝袜辣妈张静" style="background-image:url(https://xman6.com/upload_s//20240619035456380.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">[3D]丝袜辣妈张静</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/368034" title="最强家丁" style="background-image:url(https://xman6.com/upload_s//20250417085745774.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">最强家丁</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/366006" title="秋和柯基风息地牢真人" style="background-image:url(https://xman6.com/upload_s//20240304033907297.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">秋和柯基风息地牢真人</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/366431" title="夜间诊疗室" style="background-image:url(https://xman6.com/upload_s//20240905062922738.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">夜间诊疗室</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367459" title="小裤裤笔记" style="background-image:url(https://xman6.com/upload_s//20240202034650749.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">小裤裤笔记</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367883" title="嫁入豪门的老师" style="background-image:url(https://xman6.com/upload_s//20240802142017666.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">嫁入豪门的老师</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367579" title="堕落物语" style="background-image:url(https://xman6.com/upload_s//20240224065201923.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">堕落物语</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367943" title="[3D]丝袜美腿驱魔师" style="background-image:url(https://xman6.com/upload_s//20240803030840519.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">[3D]丝袜美腿驱魔师</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367437" title="寄宿日记" style="background-image:url(https://xman6.com/upload_s//20240208075548866.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">寄宿日记</p>
+									</div>
+								</div>
+							</a>
+						</li>
+												<li class="wbalist_item swiper-slide">
+							<a class="wbalist_thumb" href="/mdetail/367502" title="[3D]秘密" style="background-image:url(https://xman6.com/upload_s//20240305074706666.webp)" data-adaptive-background data-ab-css-background>
+								<div class="bg_wtop_banner"></div>
+								<div class="wbalist_titbox pic_text">
+									<div class="wbalist_con">
+										<i class="wba_ico hidden_xs"></i>
+										<p class="vodlist_title">[3D]秘密</p>
+									</div>
+								</div>
+							</a>
+						</li>
+											</ul>
+					<div class="swiper-pagination"></div>
+					<div class="banner-arrow">
+						<a class="swiper-button-prev" href="javascript:;"><i class="iconfont">&#xe625;</i></a>
+						<a class="swiper-button-next" href="javascript:;"><i class="iconfont">&#xe623;</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script type="text/javascript">
+		var bannum = document.getElementById('banstem').getElementsByTagName("li").length;
+		if (bannum < 1) {
+			$("#banstem").remove();
+			$("body").removeClass("bstem");
+		}
+	</script>
+	
+	<div class="container">
+		<!--1-->
+		<div class="row">
+		<div class="pannel">
+			<ul class="hom_sm_list vodlist_wi">
+				<li class="notice">
+				  <div class="smlist_box">
+					<marquee scrollamount="4" behavior="scroll" onmouseover=this.stop() onmouseout=this.start()>
+						欢迎来X漫 - 禁漫的天堂，未满18周岁禁止访问！！发任意信息到获最新网址:<a href="/cdn-cgi/l/email-protection#3d45505c53040d0d050d7d5a505c5451135e5250"><font color='red'><span class="__cf_email__" data-cfemail="641c09050a5d54545c54240309050d084a070b09">[email&#160;protected]</span></font></a></strong>
+					</marquee>
+					<i class="iconfont nico">&#xe62d;</i></div>
+				</li>
+				<li class="hidden_xs">
+					<div class="smlist_box list_m">
+												<a class="num1" href="/mcata/韩漫/ob/time/st/all" title="韩漫">韩漫</a>
+												<a class="num1" href="/mcata/日漫/ob/time/st/all" title="日漫">日漫</a>
+												<a class="num1" href="/mcata/3D漫画/ob/time/st/all" title="3D漫画">3D漫画</a>
+												<a class="num1" href="/mcata/真人美女/ob/time/st/all" title="真人美女">真人美女</a>
+												<a class="num1" href="/mcata/单本/ob/time/st/all" title="单本">单本</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+		</div>
+		<!--1-->
+
+		<!--2-->
+		<div class="vod_row tit_up">
+		<div class="pannel">
+			<div class="pannel_head clearfix">
+				<h2 class="title"><i class="iconfont">&#xe631;</i>最新更新</h2>
+				<a class="text_muted pull_left" href="/nm">更多<i class="iconfont more_i">&#xe623;</i></a>
+			</div>
+			<div class="cbox_list">
+				<div class="cbox1">
+					<ul class="vodlist vodlist_wi list_v12 clearfix">
+												<li class="vodlist_item num_1">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368107" title="恶次人生" data-original="https://thumb.niaopic.com/upload_s/202502/20250208012437509.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368107" title="恶次人生">恶次人生</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368107/OVGuHKcFwzFMwDKQlHQZ" title="第75話-我是徐子祥的奴隸&hearts;">第75話-我是徐子祥的奴隸&hearts;</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_2">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368202" title="暴君会长的娇媳们" data-original="https://thumb.niaopic.com/upload_s/202510/20251013135215119.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368202" title="暴君会长的娇媳们">暴君会长的娇媳们</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368202/jtFfDgDRPeBAJjxoNPOq" title="第58話-不容小覷的女人">第58話-不容小覷的女人</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_3">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368165" title="报告女班长:一根突起" data-original="https://thumb.niaopic.com/upload_s/202507/20250708013759596.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368165" title="报告女班长:一根突起">报告女班长:一根突起</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368165/wUjwcsuQtfOfdSVnRcil" title="第72話-教訓放肆的一等兵">第72話-教訓放肆的一等兵</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_4">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368184" title="借妻条约" data-original="https://thumb.niaopic.com/upload_s/202508/20250823145201489.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368184" title="借妻条约">借妻条约</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368184/gmCKUaHOQvrEcUGfVQGH" title="第65話-初嘗人妻的肉體">第65話-初嘗人妻的肉體</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_5">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368262" title="催眠偷心计" data-original="https://thumb.niaopic.com/upload_s/202603/20260330141458143.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368262" title="催眠偷心计">催眠偷心计</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368262/czpgNKVjyhLqgUehSsiK" title="第35話-任人塗鴉的肉便器">第35話-任人塗鴉的肉便器</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_6">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368281" title="撩慾按摩师" data-original="https://thumb.niaopic.com/upload_s/202606/20260601140524522.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368281" title="撩慾按摩师">撩慾按摩师</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368281/tTCdlumXonhgARpapGpJ" title="第26話-妳喜歡吃冰棒嗎?">第26話-妳喜歡吃冰棒嗎?</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_7">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368191" title="尸变家园:以身相许" data-original="https://thumb.niaopic.com/upload_s/202509/20250908145555570.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368191" title="尸变家园:以身相许">尸变家园:以身相许</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368191/xSyodMqSAqjfYLuefKDo" title="第63話-妳是賣身的妓女嗎?">第63話-妳是賣身的妓女嗎?</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_8">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368296" title="伪纯爱变态" data-original="https://thumb.niaopic.com/upload_s/202607/20260713142522784.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368296" title="伪纯爱变态">伪纯爱变态</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368296/QkClfibNuJHfjpyJwHYN" title="第20話-放飛自我的老闆娘">第20話-放飛自我的老闆娘</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_9">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368314" title="恋爱作弊百科" data-original="https://new.niaopic.com/202608/20260818135631986.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368314" title="恋爱作弊百科">恋爱作弊百科</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368314/LOsprymlNaJqgbWGqCtZ" title="第15話-難以忍耐的連續震動">第15話-難以忍耐的連續震動</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_10">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368305" title="小心不要爱上你" data-original="https://new.niaopic.com/202608/20260804134120120.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368305" title="小心不要爱上你">小心不要爱上你</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368305/UslpiCxyjQpyjbsUsvpv" title="第18話">第18話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_11">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368058" title="深层洁净达人" data-original="https://thumb.niaopic.com/upload_s/202412/20241228070819801.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368058" title="深层洁净达人">深层洁净达人</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368058/PNmJzNoanhvHLRoFdUSz" title="第82話-公司面臨大危機!">第82話-公司面臨大危機!</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_12">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368289" title="男以稀为贵" data-original="https://thumb.niaopic.com/upload_s/202606/20260623134759680.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368289" title="男以稀为贵">男以稀为贵</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368289/vBNkKXPSAjdxCZKmQkYZ" title="第21話">第21話</a></center></p>
+							</div>
+						</li>
+											</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--2-->
+
+		<!--3-->
+		<div class="vod_row tit_up">
+		<div class="pannel">
+			<div class="pannel_head clearfix">
+				<h2 class="title"><i class="iconfont">&#xe631;</i>新书上架</h2>
+				<a class="text_muted pull_left" href="/nm">更多<i class="iconfont more_i">&#xe623;</i></a>
+			</div>
+			<div class="cbox_list">
+				<div class="cbox1">
+					<ul class="vodlist vodlist_wi list_v12 clearfix">
+												<li class="vodlist_item num_1">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368335" title="一家有多妻" data-original="https://new.niaopic.com/202610/20261010140213535.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368335" title="一家有多妻">一家有多妻</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368335/XCzKbmQYQszDPCYKJNnn" title="第2话">第2话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_2">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368334" title="单身育儿好寂寞" data-original="https://new.niaopic.com/202610/20261009141246330.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368334" title="单身育儿好寂寞">单身育儿好寂寞</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368334/wLuSSenCfqXLVjdFfFMT" title="第5话">第5话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_3">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368333" title="朋友妈妈我天菜" data-original="https://new.niaopic.com/202610/20261007142927955.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368333" title="朋友妈妈我天菜">朋友妈妈我天菜</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368333/RiUHHZQhZUQoxUyGbQin" title="第7話-我知道妳是人妻，但我愛妳">第7話-我知道妳是人妻，但我愛妳</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_4">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368332" title="小心半夜鬼压床" data-original="https://new.niaopic.com/202610/20261003150311677.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368332" title="小心半夜鬼压床">小心半夜鬼压床</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368332/XQduOeUfmpxYTHTSeCdA" title="第7話">第7話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_5">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368331" title="佣兵团长的秘密" data-original="https://new.niaopic.com/202610/20261003150303833.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368331" title="佣兵团长的秘密">佣兵团长的秘密</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368331/ySInvezwLZjbJrBYgKPT" title="第6话">第6话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_6">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368330" title="爱情实验" data-original="https://new.niaopic.com/202610/20261001143619120.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368330" title="爱情实验">爱情实验</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368330/ECJsvzcboJiPjcmEiCbE" title="第3話">第3話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_7">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368329" title="最棒的她" data-original="https://new.niaopic.com/202609/20260929145709400.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368329" title="最棒的她">最棒的她</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368329/coZCToBkTGNwOqbLwIlu" title="第6話">第6話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_8">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368328" title="只有我一个男玩家" data-original="https://new.niaopic.com/202609/20260928150630870.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368328" title="只有我一个男玩家">只有我一个男玩家</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368328/jkQWDTnjCOhFKyeZwVIn" title="第7話">第7話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_9">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368327" title="慾望入门课" data-original="https://new.niaopic.com/202609/20260924163218204.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368327" title="慾望入门课">慾望入门课</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368327/yqNCjYRggbMlyvlujEzt" title="第9話-嬌喘連連的診間">第9話-嬌喘連連的診間</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_10">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368326" title="难忘的夏令营" data-original="https://new.niaopic.com/202609/20260924163226970.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368326" title="难忘的夏令营">难忘的夏令营</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368326/wSaAuXvCEnXhRulmnoxC" title="第6话">第6话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_11">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368325" title="意外的秘密交易" data-original="https://new.niaopic.com/202609/20260919142206625.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368325" title="意外的秘密交易">意外的秘密交易</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368325/CoOwSfqzogXdtyeiPgQM" title="第11話">第11話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_12">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368324" title="无人岛之主" data-original="https://new.niaopic.com/202609/20260919142212331.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368324" title="无人岛之主">无人岛之主</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368324/tMcIpVhfqafXrJMDCdLR" title="第8話">第8話</a></center></p>
+							</div>
+						</li>
+											</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--3-->
+		  
+
+		<!--4-->
+		<div class="rank_hom list_scroll">
+		<div class="row tit_up">
+			<div class="pannel">
+				<div class="pannel_head clearfix">
+					<h2 class="title"><i class="iconfont">&#xe618;</i>排行榜</h2>
+					<a class="text_muted pull_left" href="/mrank">更多<i class="iconfont more_i">&#xe623;</i></a>
+				</div>
+				<div class="rank_info">
+					<div class="list_info">
+						<div class="pannel_head clearfix"><h3 class="title">今日排行</h3></div>
+						<ul class="part_rows">
+																					<li class="ranklist_item">
+								<a title="借妻条约" href="/mdetail/368184">
+									<div class="ranklist_img">
+										<div class="ranklist_thumb lazyload" data-original="https://thumb.niaopic.com/upload_s/202508/20250823145201489.webp">
+											<span class="play hidden_xs"></span>
+											<span class="part_nums part_num1">1</span>
+											<span class="pic_text text_right text_dy"></span>
+										</div>
+									</div>
+									<div class="ranklist_txt">
+										<div class="pannel_head clearfix">
+											<span class="text_muted pull_right">
+												<i class="iconfont">&#xe631;</i>热漫
+											</span>
+											<h4 class="title">借妻条约</h4>
+										</div>
+										<p class="vodlist_sub">韩漫</p>
+										<p><span class="vodlist_sub">第65話-初嘗人妻的肉體</span></p>
+									</div>
+								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368165">
+									<span class="part_nums part_num2">2</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>报告女班长:一根突起								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/366001">
+									<span class="part_nums part_num2">3</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>美丽新世界								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368202">
+									<span class="part_nums part_num2">4</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>暴君会长的娇媳们								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367845">
+									<span class="part_nums part_num2">5</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>玩转学姊								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368149">
+									<span class="part_nums part_num2">6</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>堕落物语2								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368198">
+									<span class="part_nums part_num2">7</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>猎艷管理员								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368296">
+									<span class="part_nums part_num2">8</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>伪纯爱变态								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368107">
+									<span class="part_nums part_num2">9</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>恶次人生								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368125">
+									<span class="part_nums part_num2">10</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>熟女交换计画								</a>
+							</li>
+													</ul>
+					</div>
+				</div>
+				<div class="rank_info">
+					<div class="list_info">
+						<div class="pannel_head clearfix"><h3 class="title">本周排行</h3></div>
+						<ul class="part_rows">
+																					<li class="ranklist_item">
+								<a title="猎艷管理员" href="/mdetail/368198">
+									<div class="ranklist_img">
+										<div class="ranklist_thumb lazyload" data-original="https://thumb.niaopic.com/upload_s/202509/20250927161204779.webp">
+											<span class="play hidden_xs"></span>
+											<span class="part_nums part_num1">1</span>
+											<span class="pic_text text_right text_dy"></span>
+										</div>
+									</div>
+									<div class="ranklist_txt">
+										<div class="pannel_head clearfix">
+											<span class="text_muted pull_right">
+												<i class="iconfont">&#xe631;</i>热漫
+											</span>
+											<h4 class="title">猎艷管理员</h4>
+										</div>
+										<p class="vodlist_sub">韩漫</p>
+										<p><span class="vodlist_sub">第60話-我老公今晚不會過來</span></p>
+									</div>
+								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368143">
+									<span class="part_nums part_num2">2</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>飞机杯女神连线中								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368149">
+									<span class="part_nums part_num2">3</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>堕落物语2								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368125">
+									<span class="part_nums part_num2">4</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>熟女交换计画								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368184">
+									<span class="part_nums part_num2">5</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>借妻条约								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368271">
+									<span class="part_nums part_num2">6</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>为民服务App								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367271">
+									<span class="part_nums part_num2">7</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>异界猎妻人								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368267">
+									<span class="part_nums part_num2">8</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>女友不能说的事								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367845">
+									<span class="part_nums part_num2">9</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>玩转学姊								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367994">
+									<span class="part_nums part_num2">10</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>Setup!排球少女								</a>
+							</li>
+													</ul>
+					</div>
+				</div>
+				<div class="rank_info">
+					<div class="list_info">
+						<div class="pannel_head clearfix"><h3 class="title">本月排行</h3></div>
+						<ul class="part_rows">
+																					<li class="ranklist_item">
+								<a title="飞机杯女神连线中" href="/mdetail/368143">
+									<div class="ranklist_img">
+										<div class="ranklist_thumb lazyload" data-original="https://thumb.niaopic.com/upload_s/202505/20250502071431811.webp">
+											<span class="play hidden_xs"></span>
+											<span class="part_nums part_num1">1</span>
+											<span class="pic_text text_right text_dy"></span>
+										</div>
+									</div>
+									<div class="ranklist_txt">
+										<div class="pannel_head clearfix">
+											<span class="text_muted pull_right">
+												<i class="iconfont">&#xe631;</i>热漫
+											</span>
+											<h4 class="title">飞机杯女神连线中</h4>
+										</div>
+										<p class="vodlist_sub">韩漫</p>
+										<p><span class="vodlist_sub">第81話-邂逅初戀的心動感覺</span></p>
+									</div>
+								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368184">
+									<span class="part_nums part_num2">2</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>借妻条约								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367271">
+									<span class="part_nums part_num2">3</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>异界猎妻人								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367988">
+									<span class="part_nums part_num2">4</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>老师的亲密指导								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368198">
+									<span class="part_nums part_num2">5</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>猎艷管理员								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368149">
+									<span class="part_nums part_num2">6</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>堕落物语2								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367951">
+									<span class="part_nums part_num2">7</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>岳母为何那样								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368125">
+									<span class="part_nums part_num2">8</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>熟女交换计画								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/366001">
+									<span class="part_nums part_num2">9</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>美丽新世界								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367845">
+									<span class="part_nums part_num2">10</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>玩转学姊								</a>
+							</li>
+													</ul>
+					</div>
+				</div>
+				<div class="rank_info">
+					<div class="list_info">
+						<div class="pannel_head clearfix"><h3 class="title">总排行</h3></div>
+						<ul class="part_rows">
+																					<li class="ranklist_item">
+								<a title="洞洞杂货店" href="/mdetail/366592">
+									<div class="ranklist_img">
+										<div class="ranklist_thumb lazyload" data-original="https://thumb.niaopic.com/upload_s/202212/20221201024828781.webp">
+											<span class="play hidden_xs"></span>
+											<span class="part_nums part_num1">1</span>
+											<span class="pic_text text_right text_dy"></span>
+										</div>
+									</div>
+									<div class="ranklist_txt">
+										<div class="pannel_head clearfix">
+											<span class="text_muted pull_right">
+												<i class="iconfont">&#xe631;</i>热漫
+											</span>
+											<h4 class="title">洞洞杂货店</h4>
+										</div>
+										<p class="vodlist_sub">韩漫</p>
+										<p><span class="vodlist_sub">外傳最終話-洞口儀式的繼承人</span></p>
+									</div>
+								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/366001">
+									<span class="part_nums part_num2">2</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>美丽新世界								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368143">
+									<span class="part_nums part_num2">3</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>飞机杯女神连线中								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/366780">
+									<span class="part_nums part_num2">4</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>復仇母女丼								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367659">
+									<span class="part_nums part_num2">5</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>继母与继姐								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/368184">
+									<span class="part_nums part_num2">6</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>借妻条约								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367437">
+									<span class="part_nums part_num2">7</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>寄宿日记								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367988">
+									<span class="part_nums part_num2">8</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>老师的亲密指导								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367951">
+									<span class="part_nums part_num2">9</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>岳母为何那样								</a>
+							</li>
+																					<li class="part_eone">
+								<a href="/mdetail/367987">
+									<span class="part_nums part_num2">10</span>
+									<span class="text_muted pull_right renqi"><i class="iconfont">&#xe631;</i>&nbsp;热漫</span>协议换爱(无码版)								</a>
+							</li>
+													</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		</div>
+		<!--4-->
+
+		<!--3-->
+		<div class="vod_row tit_up">
+		<div class="pannel">
+			<div class="pannel_head clearfix">
+				<h2 class="title"><i class="iconfont">&#xe631;</i>小编推荐</h2>
+				<a class="text_muted pull_left" href="/nm">更多<i class="iconfont more_i">&#xe623;</i></a>
+			</div>
+			<div class="cbox_list">
+				<div class="cbox1">
+					<ul class="vodlist vodlist_wi list_v12 clearfix">
+												<li class="vodlist_item num_1">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368124" title="鲁蛇社畜的金手指" data-original="https://thumb.niaopic.com/upload_s/202503/20250307154318229.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368124" title="鲁蛇社畜的金手指">鲁蛇社畜的金手指</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368124/xkQCRYPvEdhfSoQKrztU" title="最終話-裝置風波平息之後&hellip;">最終話-裝置風波平息之後&hellip;</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_2">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368125" title="熟女交换计画" data-original="https://thumb.niaopic.com/upload_s/202503/20250316160546879.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368125" title="熟女交换计画">熟女交换计画</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368125/nPPbiwmjXEscBViSLgBH" title="第89話-巨乳獵物新登場">第89話-巨乳獵物新登場</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_3">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368129" title="纵夏夜之梦(无码版)" data-original="https://thumb.niaopic.com/upload_s/202503/20250319022649648.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368129" title="纵夏夜之梦(无码版)">纵夏夜之梦(无码版)</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368129/dvybBUjgVAadDXDNJkCJ" title="最終話-我的真命天女">最終話-我的真命天女</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_4">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368131" title="顶加套房的春天" data-original="https://thumb.niaopic.com/upload_s/202503/20250327013307280.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368131" title="顶加套房的春天">顶加套房的春天</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368131/LtqZHhbcoPyxYPDcpDgf" title="第85話-敞開心「胸」的社長">第85話-敞開心「胸」的社長</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_5">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368132" title="配角的生存任务" data-original="https://thumb.niaopic.com/upload_s/202503/20250329003946862.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368132" title="配角的生存任务">配角的生存任务</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368132/GPebqfVNSHITogVWkWiW" title="第80話">第80話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_6">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368134" title="公务员的桃色副业" data-original="https://thumb.niaopic.com/upload_s/202504/20250403025947297.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368134" title="公务员的桃色副业">公务员的桃色副业</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368134/oVGgLbDCQhIEcQaiXVqm" title="最終話-小孩子才做選擇">最終話-小孩子才做選擇</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_7">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368135" title="狱火重生" data-original="https://thumb.niaopic.com/upload_s/202504/20250403025952398.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368135" title="狱火重生">狱火重生</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368135/TfnzmKxKUpmjlPyMUrbS" title="最終話-復仇的意義">最終話-復仇的意義</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_8">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368137" title="最后的冲刺" data-original="https://thumb.niaopic.com/upload_s/202504/20250418013555398.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368137" title="最后的冲刺">最后的冲刺</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368137/AdgrOrhSUUooaEISAtTr" title="第80話">第80話</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_9">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368136" title="网红女老师" data-original="https://thumb.niaopic.com/upload_s/202504/20250415030229735.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368136" title="网红女老师">网红女老师</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368136/XvGtZtdlXzEbYSZfkjHw" title="最終話-深陷名為歡愉的沼澤">最終話-深陷名為歡愉的沼澤</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_10">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368141" title="拜脱拜脱App" data-original="https://thumb.niaopic.com/upload_s/202504/20250424005411622.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368141" title="拜脱拜脱App">拜脱拜脱App</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368141/PBIZEkiqTTKOJeGYvrUO" title="最終話-拜託給我幸福的結局">最終話-拜託給我幸福的結局</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_11">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368143" title="飞机杯女神连线中" data-original="https://thumb.niaopic.com/upload_s/202505/20250502071431811.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368143" title="飞机杯女神连线中">飞机杯女神连线中</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368143/VzmdeCvAhhhKrIzloWbl" title="第81話-邂逅初戀的心動感覺">第81話-邂逅初戀的心動感覺</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_12">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368144" title="爸爸也疯狂" data-original="https://thumb.niaopic.com/upload_s/202505/20250504013706441.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368144" title="爸爸也疯狂">爸爸也疯狂</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368144/zhGdUIMHPDLMcWYkWgWR" title="第43話">第43話</a></center></p>
+							</div>
+						</li>
+											</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--3-->
+
+		<!--3-->
+		<div class="vod_row tit_up">
+		<div class="pannel">
+			<div class="pannel_head clearfix">
+				<h2 class="title"><i class="iconfont">&#xe631;</i>已完結漫画</h2>
+				<a class="text_muted pull_left" href="/mcata/all/ob/time/st/completed">更多<i class="iconfont more_i">&#xe623;</i></a>
+			</div>
+			<div class="cbox_list">
+				<div class="cbox1">
+					<ul class="vodlist vodlist_wi list_v12 clearfix">
+												<li class="vodlist_item num_1">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368315" title="扑克脸姐姐的私讯" data-original="https://new.niaopic.com/202608/20260821142646729.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368315" title="扑克脸姐姐的私讯">扑克脸姐姐的私讯</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368315/ITIhESxuzoNgQWCDgumy" title="第6话">第6话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_2">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368249" title="遇见美魔女房东" data-original="https://thumb.niaopic.com/upload_s/202603/20260314145638912.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368249" title="遇见美魔女房东">遇见美魔女房东</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368249/SpzZgUlpdbaBhSEsQfqf" title="第24话">第24话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_3">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368246" title="离婚后的成瘾咨商" data-original="https://thumb.niaopic.com/upload_s/202603/20260314145615695.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368246" title="离婚后的成瘾咨商">离婚后的成瘾咨商</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368246/ICTLJaYimmzUcJuWypEI" title="第15话">第15话</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_4">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368236" title="华尔街夜色" data-original="https://thumb.niaopic.com/upload_s/202602/20260211145604949.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368236" title="华尔街夜色">华尔街夜色</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368236/EgXXCRKWkEfMVHUefAHZ" title="最終話-真正的幸福">最終話-真正的幸福</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_5">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368224" title="情慾宝鑑" data-original="https://thumb.niaopic.com/upload_s/202512/20251226143048206.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368224" title="情慾宝鑑">情慾宝鑑</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368224/PsCtvnkMHIjxaAeWuDfT" title="最終話-下女的真正目的">最終話-下女的真正目的</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_6">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368219" title="新生老司机" data-original="https://thumb.niaopic.com/upload_s/202512/20251215143606610.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368219" title="新生老司机">新生老司机</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368219/fFUsSTujPrLErPxEUdPh" title="最終話-安全護送妳到終點">最終話-安全護送妳到終點</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_7">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368214" title="罪爱人妻" data-original="https://thumb.niaopic.com/upload_s/202511/20251128140404497.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368214" title="罪爱人妻">罪爱人妻</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368214/YRqfqpClKnCRIZCauRPT" title="最終話-竣碩的最終抉擇">最終話-竣碩的最終抉擇</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_8">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368212" title="极乐泳池趴" data-original="https://thumb.niaopic.com/upload_s/202511/20251119134856478.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368212" title="极乐泳池趴">极乐泳池趴</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368212/JPnNuLsDtfGgKYIdcizj" title="最終話-很高興認識妳">最終話-很高興認識妳</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_9">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368211" title="校园禁播角落" data-original="https://thumb.niaopic.com/upload_s/202511/20251110150400253.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368211" title="校园禁播角落">校园禁播角落</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368211/ctDeJHRHvYXRwqiLrFPw" title="最終話-不滅的監視帝國">最終話-不滅的監視帝國</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_10">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368207" title="羞耻课堂" data-original="https://thumb.niaopic.com/upload_s/202510/20251031133644717.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368207" title="羞耻课堂">羞耻课堂</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368207/akReLAEvoxivLmprwlbH" title="最終話-用身體感化大眾的萬人迷老師">最終話-用身體感化大眾的萬人迷老師</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_11">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368199" title="垃圾堆捡到宠物系萌妹" data-original="https://thumb.niaopic.com/upload_s/202510/20251003144111450.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368199" title="垃圾堆捡到宠物系萌妹">垃圾堆捡到宠物系萌妹</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368199/iANbGprSxgqBjfaCQrOC" title="最終話-相伴一生的承諾">最終話-相伴一生的承諾</a></center></p>
+							</div>
+						</li>
+												<li class="vodlist_item num_12">
+							<a class="vodlist_thumb lazyload" href="/mdetail/368183" title="大凤村妇女会" data-original="https://thumb.niaopic.com/upload_s/202508/20250818134630375.webp">
+								<span class="play hidden_xs"></span>
+							</a>
+							<div class="vodlist_titbox">
+								<p class="vodlist_title"><center><a href="/mdetail/368183" title="大凤村妇女会">大凤村妇女会</a></center></p>
+								<p class="vodlist_sub"><center><a href="/mread/368183/LAEqIAUpZifZafXyGudm" title="最終話-女人何苦為難女人">最終話-女人何苦為難女人</a></center></p>
+							</div>
+						</li>
+											</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--3-->
+
+		<!--<div class="link_row">
+			<div class="pannel clearfix">
+				<div class="pannel_head clearfix">
+					<h3 class="title">友情链接</h3>
+				</div>
+				<ul class="link_text list_scroll clearfix">sdfsdfsdf</ul>
+			</div>
+		</div>-->
+
+	</div>
+
+	<style type="text/css">.pc_acmsd{display:block;}.m_acmsd{ display:none}@media(max-width:768px) {.pc_acmsd{display:none !important;}.m_acmsd{display:block !important;}}.badge101{background-color:rgba(83,109,230,.18);display:inline-block;padding:2px 4px;margin-left:4px;font-size:75%;line-height:1;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:4px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}</style>
+	<div class="foot foot_nav clearfix">
+		<div class="container">
+			<ul class="extra clearfix">
+				<li id="backtop-ico">
+					<a class="backtop" href="javascript:scroll(0,0)" title="返回顶部">
+						<span class="top_ico"><i class="iconfont">&#xe628;</i></span>
+					</a>
+				</li>
+				<li id="backtop-ico">
+					<a id="numerous" href="javascript:;" style="color: #ffffff; font-weight: bold;"></a>
+					<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/js/font.js"></script>
+				</li>
+				<li>
+					<a id="black" class="mycolor" href="javascript:void(0)" title="暗夜模式">
+						<span class="m_ico theme_ico"><i class="iconfont">&#xe656;</i></span>
+					</a>
+					<a id="white" class="mycolor hide" href="javascript:void(0)" title="白昼模式">
+						<span class="m_ico theme_ico"><i class="iconfont">&#xe657;</i></span>
+					</a>
+				</li>
+				<li class="hidden_xs">
+					<a class="mobil_q" href="javascript:void(0)" title="手机访问">
+						<span class="m_ico"><i class="iconfont">&#xe620;</i></span>
+					</a>
+					<div class="sideslip">
+						<div class="cans"></div>
+						<div class="col_pd">
+							<p class="qrcode"></p>
+							<p class="text_center">扫码用手机访问</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="fo_t">
+				<p>本站只提供WEB页面服务，本站不存储、不制作任何漫画图片，不承担任何由于内容的合法性及健康性所引起的争议和法律责任。</p>
+				<p>若本站收录内容侵犯了您的权益，请邮件与我们联系，我们将第一时间处理。</p>
+				<p>CopyRight&nbsp;&copy;&nbsp;2023 xman6.com</span>&nbsp; &nbsp;All Rights Reserved.&nbsp;&nbsp;邮箱地址：xman90080#gmail.com&nbsp; #替换为@</p>
+			</div>
+			<div class="map_nav" style="margin-top:+10px;">
+				<a href="/sitemap.xml" target="_blank">百度蜘蛛</a>
+				<span class="split_line"></span>
+				<a href="/sitemap.xml" target="_blank">神马爬虫</a>
+				<span class="split_line"></span>
+				<a href="/sitemap.xml" target="_blank">搜狗蜘蛛</a>
+				<span class="split_line"></span>
+				<a href="/sitemap.xml" target="_blank">奇虎地图</a>
+				<span class="split_line hidden_xs"></span>
+				<a class="hidden_xs" href="/sitemap.xml" target="_blank">谷歌地图</a>
+				<span class="split_line hidden_xs"></span>
+				<a class="hidden_xs" href="/sitemap.xml" target="_blank">必应爬虫</a>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="popup popup-tips none" id="popup">
+			<div class="popup-header">
+				<h3 class="popup-title">X漫 - 禁漫的天堂</h3>
+			</div>
+			<div class="popup-main">
+				<div class="popup-main">
+					<p style="font-size:18px;color:red"><b>重要提示：</b></p>
+					<div style=" margin-top: 10px;">
+					
+					</div>
+				</div>
+			</div>
+			<div class="popup-footer">
+				<div class="popup-btn close-pop">
+					好的，我记住啦
+				</div>
+			</div>
+		</div>
+		<div class="shortcuts-mobile-overlay"></div>
+	</div>
+<style>
+    .wrap-dialog-t {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        text-align: center;
+        background:rgba(0,0,0,0.9);
+        z-index: 999;
+    }
+    .dialog-t {
+        position: relative;
+        margin: 15% auto;
+        width: 330px;
+        background-color: #FFFFFF;
+    }
+    .dialog-t .dialog-header {
+        height: 40px;
+        padding: 10px;
+        background-color: red;
+		font-weight:bold;
+		color:#ffffff;
+    }
+    .dialog-t .dialog-body {
+        height: auto;
+        padding: 20px;
+    }
+    .dialog-t .dialog-footer {
+        padding: 8px;
+        background-color: whitesmoke;
+    }
+    .btn-t {
+        width: 100px;
+        padding: 2px;
+    }
+    .hide {
+        display: none;
+    }
+    .ml50-t {
+        margin-left: 50px;
+    }
+</style>
+<div class="wrap-dialog-t hide">
+    <div class="dialog-t">
+        <div class="dialog-header">
+            <span class="dialog-title">X漫-重要提醒</span>
+        </div>
+        <div class="dialog-body">
+            <span class="dialog-message"></span>
+        </div>
+        <div class="dialog-footer">
+            <input type="button" class="btn-t" id="confirm" value="已截图" />
+            <input type="button" class="btn-t ml50-t" id="cancel" value="回头再说" />
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+		var message = "未满18周岁禁止访问！！<br>请务必截图保存此界面<br>发任意信息到获最新网址:<br><a href='mailto:xman90080@gmail.com'><font color='red'>xman90080@gmail.com</font></a>";
+		dialogBox(message,
+			function () {
+				console.log("confirmed");
+				$.post("/jt.php?action=yjt",
+					function(data) {
+						console.log(data);
+					});
+			},
+			function(){
+				console.log("canceled");
+				$.post("/jt.php?action=shts",
+					function(data) {
+						console.log(data);
+					});
+			}
+		);
+    });
+    function dialogBox(message, yesCallback, noCallback){
+        if(message){
+            $('.dialog-message').html(message);
+        }
+        // 显示遮罩和对话框
+        $('.wrap-dialog-t').removeClass("hide");
+        // 确定按钮
+        $('#confirm').click(function(){
+            $('.wrap-dialog-t').addClass("hide");
+            yesCallback();
+        });
+        // 取消按钮
+        $('#cancel').click(function(){
+            $('.wrap-dialog-t').addClass("hide");
+            noCallback();
+        });
+    }
+</script>
+<script type="text/javascript" src="/js/jquery.stem.js?v=v1.0.0"></script>
+<script type="text/javascript" src="/js/hlexpand.js?v=v1.0.0"></script>
+<script type="text/javascript" src="/js/home.js"></script>
+<script type="text/javascript" src="/js/jquery.ac.js"></script>
+<script type="text/javascript" src="/js/zh.js"></script>
+</body>
+</html>

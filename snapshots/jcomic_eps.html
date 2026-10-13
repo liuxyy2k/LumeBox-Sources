@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QL6YSDRWEV"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-QL6YSDRWEV');
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="description" content="h漫分享小站">
+	<meta name="keywords" content="h漫,嗶咔,18h,紳士,成人漫畫,H圖,H本子,j圖, pica">
+	<meta name="juicyads-site-verification" content="92d1559a83b75fab2761a7256444d42d"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="Trafficstars" content="86195">
+	<meta name="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" content="95a281dba6bf112f69068dcdcd0cbf6b184a7f69" />
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>JComic</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/view/css/bootstrap.min.css?aa" rel="stylesheet">
+	<!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="/view/css/custom.css?20220214" rel="stylesheet">
+	<!--<link rel="preload" href="/view/fonts/glyphicons-halflings-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">-->
+
+	
+	<script src="/view/jquery.js"></script>
+	<script src="/view/jquery.lazyload.js"></script>
+	<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-87476157-1', 'auto');
+	 
+	ga('send', 'pageview');	  
+	  
+	  
+	$(function() {
+		$("img.lazy").lazyload({
+			threshold : 5000
+		});
+	});
+	
+	/*
+	var mq = window.matchMedia("(min-width: 800px)");
+	//var mq2 = window.matchMedia("(max-width: 799px)");
+
+	 mq.addListener(WidthChange);
+	 //mq2.addListener(WidthChange);
+	// media query event handler
+	$( document ).ready(function() {
+	if (matchMedia) {
+	  WidthChange(mq);
+	}
+	});
+	*/
+
+	// media query change
+	/*
+	function WidthChange(mq) {
+	  if (mq.matches) {
+		$( ".adbannerD" ).css({'display':'block'});
+		$( ".adbannerM" ).css({'display':'none'});
+		
+		console.log("desktop");
+
+	  } else {
+		$( ".adbannerM" ).css({'display':'block'});
+		$( ".adbannerD" ).css({'display':'none'});
+		
+		console.log("mobile");
+	  }
+
+	}
+	*/
+	function search(){
+	var search = document.getElementById('search').value;
+	if (search)
+		window.location = '/search/'+search;
+	}
+	function setCookie(cname, cvalue, exdays) {
+	  const d = new Date();
+	  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	  let expires = "expires="+ d.toUTCString();
+	  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	function getCookie(cname) {
+	  let name = cname + "=";
+	  let decodedCookie = decodeURIComponent(document.cookie);
+	  let ca = decodedCookie.split(';');
+	  for(let i = 0; i <ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+		  c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		  return c.substring(name.length, c.length);
+		}
+	  }
+	  return "";
+	}
+	</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set up the Intersection Observer
+    // rootMargin "800px" means: "Start decoding and downloading when the image is 800 pixels away from the screen"
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let img = entry.target;
+                let lockedStr = img.getAttribute('data-locked');
+                
+                if (lockedStr) {
+                    try {
+                        // 1. Strip the junk prefix
+                        let cleanStr = lockedStr.replace("JCOMIC_TRAPS_", "");
+                        
+                        // 2. Reverse back to Base64
+                        let unreversed = cleanStr.split('').reverse().join('');
+                        
+                        // 3. Decode and load the image
+                        img.src = atob(unreversed);
+                        
+                        // Clean up
+                        img.removeAttribute('data-locked');
+                    } catch (error) {
+                        console.error("Failed to unlock image.");
+                    }
+                }
+                
+                // Stop observing the image once it has been triggered
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "800px 0px 800px 0px" });
+
+    // Find all protected images and attach the observer
+    const images = document.querySelectorAll('.jcomic-img');
+    images.forEach(img => {
+        imageObserver.observe(img);
+    });
+});
+</script>
+</head>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">   
+	
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                
+                <a class="navbar-brand d-none" href="/">
+                	<span class="glyphicon glyphicon-fire"></span> 
+                	JComic
+                </a>
+				<div class="form-inline navbar-right" style="display:flex">
+					<input class="form-control" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" id="search-btn" onclick="search();">Search</button>
+				  </div>
+				  
+            </div>
+			
+            <!-- Navbar links -->
+			
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        
+                    </li>
+                </ul>
+				
+            </div>
+			
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+
+<body>
+
+    <!-- Content -->
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="row">
+            <div class="col-sm-12 col-xm-12 col-centered adbannerD" style="padding-top:5px">
+			<!-- JuicyAds v3.0 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script><ins id="563554" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':563554});</script>
+			
+		<!--JuicyAds END-->
+		</div>
+		                <h1 style="display:none">[Pixiv] Misoya (25058255) part.4（AI）                 </h1>
+				 <nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">主頁</a></li>
+					
+					<li class="breadcrumb-item active" aria-current="page">[Pixiv] Misoya (25058255) part.4（AI）</a></li>
+				  </ol>
+				</nav>
+				 <!--<a href="#" onclick="location.reload();"><small>刷新</small></a>-->
+            
+        </div>
+<script>
+document.title = document.title+" - "+$("h1").text();
+</script>
+        <!-- /.row -->
+  <!-- Projects Row -->
+  <div>
+<div class="row col-md-6 col-xs-12">	<a href="/page/[Pixiv] Misoya (25058255) part.4（AI）" >	<div class="col-xs-12 col-md-12">			<img class="img-responsive comic-thumb" src="https://images.jcomic.net/6ab01114bbe35b0ab56e70bd/1/001_22.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=32de8d9ca8be546b5273a4298ca41d16%2F20261013%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20261013T072548Z&X-Amz-SignedHeaders=host&X-Amz-Expires=60&X-Amz-Signature=13d53116f56a8ae4a8ca590e06cd6eba7ea461521feedf2c107f32f8096a8660" alt="">	</div>	<div class="col-xs-12 col-md-12 list-content">		<p class='comic-title'>[Pixiv] Misoya (25058255) part.4（AI） (6215)</p>		<p class='comic-author'>作者:</p><a href="/author/Misoya"><button type="button" class="btn btn-primary">Misoya<span class="badge badge-light"></span></button></a><br>		<p class='comic-category'>分類: </p><a href="/cat/全彩"><button type="button" class="btn btn-primary">全彩<span class="badge badge-light"></span></button></a><a href="/cat/同人"><button type="button" class="btn btn-primary">同人<span class="badge badge-light"></span></button></a><a href="/cat/CG雜圖"><button type="button" class="btn btn-primary">CG雜圖<span class="badge badge-light"></span></button></a>		<p class='comic-date'>最後更新: 2026-10-12 12:07</p>	</div>	</a></div><div class="row col-md-6 col-xs-12"><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/1"><button type="button" class="btn btn-primary">deepseek<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/2"><button type="button" class="btn btn-primary">风笛<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/3"><button type="button" class="btn btn-primary">Saber<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/4"><button type="button" class="btn btn-primary">小涂真纪<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/5"><button type="button" class="btn btn-primary">伊蕾娜<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/6"><button type="button" class="btn btn-primary">紫野遥<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/7"><button type="button" class="btn btn-primary">塔露拉·雅特利亚斯<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/8"><button type="button" class="btn btn-primary">初音未来<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/9"><button type="button" class="btn btn-primary">刻俄柏<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/10"><button type="button" class="btn btn-primary">荧<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/11"><button type="button" class="btn btn-primary">千石由乃<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/12"><button type="button" class="btn btn-primary">月雪宫子<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/13"><button type="button" class="btn btn-primary">南小鸟<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/14"><button type="button" class="btn btn-primary">吉普莉尔<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/15"><button type="button" class="btn btn-primary">初雪<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/16"><button type="button" class="btn btn-primary">月雪宫子<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/17"><button type="button" class="btn btn-primary">藿藿&符玄<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/18"><button type="button" class="btn btn-primary">薇斯纳·丝翠维莎<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/19"><button type="button" class="btn btn-primary">福贺久留美<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/20"><button type="button" class="btn btn-primary">昔涟<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/21"><button type="button" class="btn btn-primary">东雪莲<span class="badge badge-light"></span></button></a><a href="/page/[Pixiv] Misoya (25058255) part.4（AI）/22"><button type="button" class="btn btn-primary">SP9\莫娜<span class="badge badge-light"></span></button></a></div> </div>
+        <!-- /.row -->
+
+
+
+        <!-- Projects Row -->
+		<!--
+        <div class="row">
+            <div class="col-md-6 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="http://lorempixel.com/700/400/nature/5" alt="">
+                </a>
+                <h3>
+                    <a href="#">Project Title</a>
+                </h3>
+                <p>Upon yielding, kind sea subdue very seed sixth them lesser one lesser there earth days were multiply so sixth gathering fifth that man fowl made.</p>
+            </div>
+            <div class="col-md-6 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="http://lorempixel.com/700/400/nature/6" alt="">
+                </a>
+                <h3>
+                    <a href="#">Project Title</a>
+                </h3>
+                <p>Upon yielding, kind sea subdue very seed sixth them lesser one lesser there earth days were multiply so sixth gathering fifth that man fowl made.</p>
+            </div>
+        </div>
+		-->
+        <!-- Pagination -->
+	</div>
+    <!-- /.container -->
+        <!-- /.row -->
+	
+	
+	<footer>
+	
+		<div class="footer-blurb">
+			<div class="container">
+			<!--
+				<div class="row">
+					<div class="col-sm-4 footer-blurb-item">
+						<img class="img-circle" src="http://lorempixel.com/100/100/people/3" alt="" width="100" height="100">
+						<h3>My Stuff</h3>
+						<p>Upon yielding, kind sea subdue very seed sixth them lesser one lesser there earth days were multiply so sixth gathering fifth that man fowl made.</p>
+						<p><a class="btn btn-primary" href="#">More Stuff</a></p>
+					</div>
+					<div class="col-sm-4 footer-blurb-item">
+						<img class="img-circle" src="http://lorempixel.com/100/100/people/1" alt="" width="100" height="100">
+						<h3>Your Stuff</h3>
+						<p>Upon yielding, kind sea subdue very seed sixth them lesser one lesser there earth days were multiply so sixth gathering fifth that man fowl made.</p>
+						<p><a class="btn btn-primary" href="#">More Stuff</a></p>
+					</div>
+					<div class="col-sm-4 footer-blurb-item">
+						<img class="img-circle" src="http://lorempixel.com/100/100/people/2" alt="" width="100" height="100">
+						<h3>Our Stuff</h3>
+						<p>Upon yielding, kind sea subdue very seed sixth them lesser one lesser there earth days were multiply so sixth gathering fifth that man fowl made.</p>
+						<p><a class="btn btn-primary" href="#">More Stuff</a></p>
+					</div>
+
+				</div>
+				-->
+			</div>
+        </div>
+        
+        <div class="copyright">
+        	<div class="container">
+        		<p>Copyright &copy; jcomic.net 2017</p>
+        	</div>
+        </div>
+	</footer>
+
+	
+    <!-- jQuery
+    <script src="js/jquery-1.11.3.min.js"></script>
+ -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/view/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+{
+ "code": 200,
+ "msg": "操作成功",
+ "data": [
+  {
+   "typeId": 1,
+   "typePid": 0,
+   "typeName": "电影",
+   "typeJumpurl": "",
+   "banner": null
+  },
+  {
+   "typeId": 2,
+   "typePid": 0,
+   "typeName": "电视剧",
+   "typeJumpurl": "",
+   "banner": null
+  },
+  {
+   "typeId": 3,
+   "typePid": 0,
+   "typeName": "综艺",
+   "typeJumpurl": "",
+   "banner": null
+  },
+  {
+   "typeId": 4,
+   "typePid": 0,
+   "typeName": "动漫",
+   "typeJumpurl": "",
+   "banner": null
+  },
+  {
+   "typeId": 88,
+   "typePid": 0,
+   "typeName": "短剧",
+   "typeJumpurl": "",
+   "banner": null
+  },
+  {
+   "typeId": 7,
+   "typePid": 0,
+   "typeName": "体育直播",
+   "typeJumpurl": "/sports",
+   "banner": null
+  }
+ ]
+}
