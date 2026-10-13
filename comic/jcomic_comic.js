@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.0.1","category":"comic"}
 
 // 站点：https://jcomic.net（Bootstrap 站 + ccat 结构；桌面/移动同一套标记）
 //
@@ -68,7 +68,7 @@ var HOME_BUDGET_MS = 6000;   // 首页软截止（沙箱单次调用预算是 3�
 var LumeSource = {
   id: 'jcomic_comic',
   name: 'JComic',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -168,6 +168,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: info.cover,
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: info.categories.join(' · '),
       description: tags.join(' · '),
       tags: info.categories.slice(0, MAX_TAGS),
@@ -260,6 +261,7 @@ var LumeSource = {
         id: id,
         title: title || id,
         cover: coverMatch ? this.__absolute(coverMatch[1]) : '',
+        coverHeaders: { 'Referer': BASE_URL + '/' },
         subtitle: this.__clean(dateMatch ? dateMatch[1] : '')
       });
     }
@@ -318,6 +320,7 @@ var LumeSource = {
     }
     return {
       cover: this.__absolute(cover),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       author: this.__clean(this.__decodeAttr(authorMatch ? authorMatch[1] : '')),
       categories: categories
     };

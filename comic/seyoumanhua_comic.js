@@ -1,4 +1,4 @@
-// LumeSource: {"id":"seyoumanhua_comic","name":"色友漫画","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"seyoumanhua_comic","name":"色友漫画","version":"1.0.1","category":"comic"}
 //
 // 站点：https://seyoumanhua.com（MacCMS 系，WAP 模板）
 //
@@ -34,7 +34,7 @@ var HEADERS = {
 var LumeSource = {
   id: 'seyoumanhua_comic',
   name: '色友漫画',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   async categories() {
@@ -104,6 +104,7 @@ var LumeSource = {
       id: id,
       title: title || id,
       cover: this.__upgrade(this.__meta(html, 'og:image') || ''),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: this.__meta(html, 'og:author') || '',
       description: this.__clean(this.__meta(html, 'description') || '')
     };
@@ -190,6 +191,7 @@ var LumeSource = {
         id: match[1],
         title: this.__clean(match[3]),
         cover: this.__upgrade(match[2]),
+        coverHeaders: { 'Referer': BASE_URL + '/' },
         subtitle: ''
       });
     }

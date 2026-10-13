@@ -1,4 +1,4 @@
-// LumeSource: {"id":"nnhanman_comic","name":"NN韩漫","version":"1.2.0","category":"comic"}
+// LumeSource: {"id":"nnhanman_comic","name":"NN韩漫","version":"1.2.1","category":"comic"}
 
 // 站点：https://nnhanman.net （韩漫站，qTcms 手机模板，Cloudflare 前置）
 //
@@ -111,7 +111,7 @@ var IMAGE_ATTRS = ['src', 'data-src', 'data-original', 'data-echo', 'data-lazy-s
 var LumeSource = {
   id: 'nnhanman_comic',
   name: 'NN韩漫',
-  version: '1.2.0',
+  version: '1.2.1',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -181,6 +181,7 @@ var LumeSource = {
       id: url,
       title: title,
       cover: this.__detailCover(html),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: info.author ? '作者：' + info.author : info.status,
       description: this.__description(html),
       tags: info.tags,
@@ -437,6 +438,7 @@ var LumeSource = {
             id: id,
             title: this.__cut(title, 80),
             cover: this.__coverIn(window),
+            coverHeaders: { 'Referer': BASE_URL + '/' },
             subtitle: this.__itemSubtitle(window)
           });
         }
@@ -470,6 +472,7 @@ var LumeSource = {
               id: id,
               title: this.__cut(title, 80),
               cover: this.__coverIn(window),
+              coverHeaders: { 'Referer': BASE_URL + '/' },
               subtitle: this.__itemSubtitle(window)
             });
           }
@@ -503,6 +506,7 @@ var LumeSource = {
               id: id,
               title: this.__cut(title, 80),
               cover: this.__coverIn(window),
+              coverHeaders: { 'Referer': BASE_URL + '/' },
               subtitle: this.__itemSubtitle(window)
             });
           }

@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.2","category":"comic"}
 
 // 站点：https://www.92mh.com （漫画站，**整站在 Cloudflare 后面**）
 //
@@ -34,7 +34,7 @@ var MAX_CHAPTER_PAGES = 30;
 var LumeSource = {
   id: 'mh92_comic',
   name: '92漫画',
-  version: '1.0.1',
+  version: '1.0.2',
   category: 'comic',
 
   async categories() {
@@ -185,6 +185,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: this.__pic(cover),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: author ? '作者：' + author : '',
       description: description,
       tags: tags,
@@ -295,6 +296,7 @@ var LumeSource = {
           id: href,
           title: title,
           cover: this.__pic(cover),
+          coverHeaders: { 'Referer': BASE_URL + '/' },
           subtitle: ''
         });
       }

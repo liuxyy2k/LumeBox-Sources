@@ -1,4 +1,4 @@
-// LumeSource: {"id":"p5mh_comic","name":"P5漫画","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"p5mh_comic","name":"P5漫画","version":"1.0.1","category":"comic"}
 
 // 站点：https://www3.6p5mh3.click （P5韩漫，服务端渲染 HTML，站点简称 p5mh）
 //
@@ -27,7 +27,7 @@ var MAX_CHAPTER_PAGES = 20;
 var LumeSource = {
   id: 'p5mh_comic',
   name: 'P5漫画',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   async categories() {
@@ -90,6 +90,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: this.__absolute(cover),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: [author ? '作者：' + author : '', alias ? '别名：' + alias : ''].filter(function (t) { return t; }).join(' · '),
       description: description,
       tags: tags,
@@ -191,6 +192,7 @@ var LumeSource = {
           id: id,
           title: this.__clean(match[3]),
           cover: this.__absolute(match[4]),
+          coverHeaders: { 'Referer': BASE_URL + '/' },
           subtitle: this.__itemSubtitle(html, match.index)
         });
       }

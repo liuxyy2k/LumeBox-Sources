@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jm18_comic","name":"18禁漫","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"jm18_comic","name":"18禁漫","version":"1.0.1","category":"comic"}
 
 // 站点：https://18jm18.com（MacCMS v10 + conch 主题；类名前缀 hl- / conch-）
 // 桌面版与移动版是**同一套标记**（站点没有移动子域），脚本不挑 UA。
@@ -85,7 +85,7 @@ var READ_COMICS_PREFIX = '/read-comics/';
 var LumeSource = {
   id: 'jm18_comic',
   name: '18禁漫',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -158,6 +158,7 @@ var LumeSource = {
       id: path,
       title: title,
       cover: this.__detailCover(html),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: this.__cut(info.author ? '作者：' + info.author : info.status, 60),
       description: info.description,
       tags: info.tags,
@@ -420,6 +421,7 @@ var LumeSource = {
               id: id,
               title: title,
               cover: this.__absolute(this.__attr(tag, 'data-original')),
+              coverHeaders: { 'Referer': BASE_URL + '/' },
               subtitle: this.__cut(this.__classText(window, 'hl-item-sub'), 40)
             });
           }

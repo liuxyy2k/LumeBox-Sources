@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.0.1","category":"comic"}
 
 // 站点：https://xman6.com（MacCMS + conch 主题；桌面与移动共用同一套标记）
 //
@@ -57,7 +57,7 @@ var DETAIL_SCAN = 400000;    // 详情页最多扫多少字符（实测 ≈66KB�
 var LumeSource = {
   id: 'xman6_comic',
   name: 'X漫',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -170,6 +170,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: this.__detailCover(html),
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: info.status,
       description: info.description,
       tags: info.tags,
@@ -239,6 +240,7 @@ var LumeSource = {
         id: id,
         title: this.__clean(titleMatch ? titleMatch[1] : id),
         cover: this.__absolute(coverMatch ? coverMatch[1] : ''),
+        coverHeaders: { 'Referer': BASE_URL + '/' },
         subtitle: this.__clean(this.__stripTags(subMatch ? subMatch[1] : ''))
       });
     }
@@ -269,6 +271,7 @@ var LumeSource = {
         id: id,
         title: this.__clean(title || id),
         cover: this.__absolute(coverMatch ? coverMatch[1] : ''),
+        coverHeaders: { 'Referer': BASE_URL + '/' },
         subtitle: this.__clean(subMatch ? subMatch[1] : '')
       });
     }

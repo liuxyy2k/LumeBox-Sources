@@ -86,6 +86,7 @@ test('xman6: 分类页快照解析出 24 条（封面只在 data-original 里）
     id: '368107',
     title: '恶次人生',
     cover: 'https://thumb.niaopic.com/upload_s/202502/20250208012437509.webp',
+    coverHeaders: { Referer: 'https://xman6.com/' },
     subtitle: '15小时之前'
   }));
   assert.equal(result.hasMore, true);

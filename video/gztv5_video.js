@@ -1,4 +1,4 @@
-// LumeSource: {"id":"gztv5_video","name":"瓜子影视","version":"3.0.0","category":"video"}
+// LumeSource: {"id":"gztv5_video","name":"瓜子影视","version":"3.1.0","category":"video"}
 
 // 站点：https://gztv5.com （Nuxt SPA + 独立 API 域名）
 //
@@ -35,7 +35,7 @@ var PAGE_SIZE = 30;
 var LumeSource = {
   id: 'gztv5_video',
   name: '瓜子影视',
-  version: '3.0.0',
+  version: '3.1.0',
   category: 'video',
 
   async categories() {
@@ -55,6 +55,48 @@ var LumeSource = {
       items.push({ id: key, title: title });
     }
     return items;
+  },
+
+  async filters(argument) {
+    var response = await this.__post('/Search/GetCondition', {});
+    var data = response && response.data ? response.data : {};
+    var selection = argument && argument.filters ? argument.filters : {};
+    var tid = selection.tid != null ? String(selection.tid) : String(argument && argument.categoryId || '0');
+    var columns = this.__options(data.column);
+    var current = null;
+    for (var i = 0; i < columns.length; i++) {
+      if (String(columns[i].value) === tid) current = columns[i];
+    }
+    var rows = [
+      ['tid', '类型', columns],
+      ['class', '题材', current ? this.__options(current.class) : []],
+      ['area', '地区', this.__options(data.area)],
+      ['year', '年份', this.__options(data.year)],
+      ['lang', '语言', this.__options(data.lang)],
+      ['sort', '排序', this.__options(data.sort)]
+    ];
+    var groups = [];
+    var sortNames = { d_id: '综合', d_addtime: '最新', d_score: '评分' };
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r], options = [];
+      for (var j = 0; j < row[2].length; j++) {
+        var option = row[2][j] || {};
+        var value = option.value != null ? String(option.value) : String(option.id != null ? option.id : '');
+        if (!value) continue;
+        var title = String(option.name || option.title || value).trim();
+        if (value === '0') title = '全部';
+        if (row[0] === 'sort' && /�/.test(title) && sortNames[value]) title = sortNames[value];
+        options.push({ id: value, title: title });
+      }
+      if (options.length) groups.push({ id: row[0], title: row[1], options: options });
+    }
+    return groups;
+  },
+
+  __options(value) {
+    if (Array.isArray(value)) return value;
+    if (!value || typeof value !== 'object') return [];
+    return Object.keys(value).map(function (key) { return value[key]; });
   },
 
   async home() {
@@ -85,13 +127,17 @@ var LumeSource = {
     if (picked) category = String(picked);
 
     var body = {
-      area: 0,
-      year: 0,
-      sort: 'd_id',
+      area: argument && argument.filters && argument.filters.area || 0,
+      year: argument && argument.filters && argument.filters.year || 0,
+      sort: argument && argument.filters && argument.filters.sort || 'd_id',
       page: page,
       pageSize: PAGE_SIZE,
       keywords: keyword
     };
+    var filters = argument && argument.filters || {};
+    if (filters.tid != null) category = String(filters.tid) === '0' ? 'all' : String(filters.tid);
+    if (filters.class && filters.class !== '0') body.class = filters.class;
+    if (filters.lang && filters.lang !== '0') body.lang = filters.lang;
     if (category === 'all' || !category) {
       // 全部：不带任何筛选（服务端按全站返回）。
     } else if (category.indexOf('pid-') === 0) {
