@@ -28,6 +28,7 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | 18禁漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jm18_comic.js` |
 | 巴卡漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/bakamh_comic.js` |
 | HANMAN18 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/hanman18_comic.js` |
+| K漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/kmh001_comic.js` |
 | X漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_comic.js` |
 | JComic | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js` |
 | G社漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/gmh_comic.js` |
@@ -75,6 +76,7 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | comic/jcomic_comic.js | `jcomic_comic` | JComic | 1.0.0 | 条目有 `/eps/`（多话）与 `/page/`（单页）两形态，**作品 id 存路径**；正文图是 `JCOMIC_TRAPS_` 倒序 base64，脚本内解码；**图片直链是 60 秒签名 S3 地址**（站点限制，见脚本头部） |
 | comic/bakamh_comic.js | `bakamh_comic` | 巴卡漫画 | 1.0.0 | bakamh.com = **Madara 主题**（WordPress 漫画主题，结构稳定）：地址与选择器**逐条对齐 Tachiyomi/Keiyoushi 的 madara multisrc + 站点覆盖**（章节容器 `.chapter-loveYou`、状态 `.post-content_item:contains(状态)`）；列表 `/manga/page/{页}/?m_orderby=`、搜索 `?s=&post_type=wp-manga`、正文取 `.reading-content` 的 **data-src**（src 是 loading 占位）；章节按话号升序、明文图升 https、**登录锁如实提示**。本机境外出口连不上该站，未实播验证（夹具测试覆盖全部解析路径）|
 | comic/hanman18_comic.js | `hanman18_comic` | HANMAN18 | 1.0.0 | hanman18.com = **Manga18 模板**（韩漫站常用主题）：路径与选择器**逐条对齐 Keiyoushi 的 manga18 multisrc**——列表 `/list-manga/{页}[?order_by=views]`、搜索 `/list-manga/{页}?search=`、标签 `/manga-list/{标签}/{页}`、详情 `/manhwa/{slug}`、正文是章节页脚本里 **base64 的 `slides_p_path` 数组**（脚本内纯 JS 解码）；分页判定用 `.pagination > li:last-child:not(.active)`（与 multisrc 一致）。同上未实播验证 |
+| comic/kmh001_comic.js | `kmh001_comic` | K漫画 | 1.0.0 | kmh001.com（备用域 kmh.sex）= **Next.js App Router SSR**：数据**不在独立 JSON 接口里**，而是内嵌在 HTML 的 RSC 载荷（一连串 `self.__next_f.push([1,"…"])`）——脚本抽载荷再按站点字段取数。地址：首页 `/home`、连载按周 `/weekly/0..6`（0=周日）、完本 `/complete`、搜索 `/search?key=`、详情 `/comic/<24位id>`、正文 `/chapter/<24位id>`；章节在 `{"comicID":…,"data":[{_id,subtitle,title,ordinal}]}` 里（按 ordinal 升序，**括号配对切数组**，正则切会被带方括号的标题截断）；正文图片数组带 `sourceName`（多图源）→ **取图最多的那个源**，不混源；图片统一升 https。**/category 分类页未做**：那页的服务端响应里没有卡片数据（浏览器二次请求才有），与其猜不如不做。**验证方式：本机 curl 打不开该站，改用真实浏览器取回 6 个页面完整响应存档，解析内核对着真响应跑通 12 项断言**（列表/搜索/详情/章节升序/正文多图源）|
 | novel/99xs_novel.js | `99xs_novel` | CA情色小说 | 2.1.0 | 根路径有「继续访问」拦截页，源自带 cookie |
 | novel/xxiaoshuo_novel.js | `xxiaoshuo_novel` | X小说 | 1.0.0 | 直连可用 |
 | novel/xnovel_novel.js | `xnovel_novel` | 夜读小说 | 1.0.0 | Tailwind 站：列表 `a.list-card`（`/novels/{N}`、`/tag/{slug}/{N}`、`/search?q=&page=`）；正文取 `article#read-article` 的 `<p>` 并剔掉 `div.extra_c_2` 广告块；目录第 1 章要做「工具条 / 开始阅读」去噪；正常页里带 CF 的 jsd 信标**不能**当校验页判据，反诈拦截页（200 + 3KB）会给出可读原因 |
