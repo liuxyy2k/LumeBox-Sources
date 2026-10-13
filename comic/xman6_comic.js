@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.1.0","category":"comic"}
 
 // 站点：https://xman6.com（MacCMS + conch 主题；桌面与移动共用同一套标记）
 //
@@ -61,7 +61,7 @@ var DETAIL_SCAN = 400000;    // 详情页最多扫多少字符（实测 ≈66KB�
 var LumeSource = {
   id: 'xman6_comic',
   name: 'X漫',
-  version: '1.0.1',
+  version: '1.1.0',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
