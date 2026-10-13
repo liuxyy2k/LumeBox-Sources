@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.2","category":"comic"}
+// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.3","category":"comic"}
 
 // 站点：https://www.92mh.com （漫画站，**整站在 Cloudflare 后面**）
 //
@@ -34,7 +34,7 @@ var MAX_CHAPTER_PAGES = 30;
 var LumeSource = {
   id: 'mh92_comic',
   name: '92漫画',
-  version: '1.0.2',
+  version: '1.0.3',
   category: 'comic',
 
   async categories() {
@@ -308,6 +308,8 @@ var LumeSource = {
   __chapterLinks(html, id) {
     var chapters = [];
     var seen = {};
+    var bookMatch = String(id || '').match(/\/manhua\/(\d+)(?:\/|$)/);
+    var bookId = bookMatch ? bookMatch[1] : (/^\d+$/.test(String(id)) ? String(id) : '');
     var patterns = [
       // 真站点：`/manhua/{书id}/{章节id}.html`，标题在 `<span class="list_con_zj">第01话…`。
       /href="([^"]*\/manhua\/\d+\/\d+\.html)"[^>]*>([\s\S]{0,200}?)<\/a>/g,
@@ -318,6 +320,8 @@ var LumeSource = {
       var match;
       while ((match = patterns[p].exec(html)) !== null) {
         var href = match[1];
+        // Recommended comics also contain chapter links. Only accept this book.
+        if (p === 0 && bookId && href.indexOf('/manhua/' + bookId + '/') < 0) continue;
         if (seen[href]) continue;
         seen[href] = true;
         var title = this.__clean(match[2]);
@@ -328,6 +332,13 @@ var LumeSource = {
       }
       if (chapters.length) break;
     }
+    // Normalize numbered chapters before the app reverses them for display.
+    var numbered = chapters.every(function(chapter) {
+      return /^(?:第\s*)?\d+(?:\.\d+)?\s*[话話章节卷]/.test(chapter.title);
+    });
+    if (numbered) chapters.sort(function(a, b) {
+      return parseFloat(a.title.replace(/^第\s*/, '')) - parseFloat(b.title.replace(/^第\s*/, ''));
+    });
     return chapters;
   },
 
