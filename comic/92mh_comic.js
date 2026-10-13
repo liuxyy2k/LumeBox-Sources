@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"mh92_comic","name":"92漫画","version":"1.0.1","category":"comic"}
 
 // 站点：https://www.92mh.com （漫画站，**整站在 Cloudflare 后面**）
 //
@@ -34,7 +34,7 @@ var MAX_CHAPTER_PAGES = 30;
 var LumeSource = {
   id: 'mh92_comic',
   name: '92漫画',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   async categories() {
@@ -93,9 +93,7 @@ var LumeSource = {
   async __fillOne(item, attempt, deadline) {
     try {
       var html = await this.__get(this.__detailUrl(item.id));
-      var cover = this.__match(html, /<meta[^>]+property="og:image"[^>]+content="([^"]*)"/);
-      if (!cover) cover = this.__match(html, /data-original="([^"]+)"/);
-      if (!cover) cover = this.__match(html, /<img[^>]+src="([^"]+)"/);
+      var cover = this.__cover(html);
       if (cover) item.cover = this.__pic(cover);
     } catch (error) {
       if (attempt < 1 && Date.now() < (deadline || 0)) {
@@ -170,9 +168,7 @@ var LumeSource = {
       title = this.__clean(this.__match(html, /<meta[^>]+property="og:title"[^>]+content="([^"]*)"/));
     }
     if (!title) return null;
-    var cover = this.__match(html, /<meta[^>]+property="og:image"[^>]+content="([^"]*)"/);
-    if (!cover) cover = this.__match(html, /data-original="([^"]+)"/);
-    if (!cover) cover = this.__match(html, /<img[^>]+src="([^"]+)"/);
+    var cover = this.__cover(html);
     var description = this.__clean(
       this.__match(html, /<meta[^>]+name="description"[^>]+content="([^"]*)"/)
     );
@@ -331,6 +327,19 @@ var LumeSource = {
       if (chapters.length) break;
     }
     return chapters;
+  },
+
+  __cover(html) {
+    var og = this.__match(html, /<meta[^>]+property="og:image"[^>]+content="([^"]*)"/);
+    if (og && !/browser-|logo|placeholder|loading|\/images\/etc\//i.test(og)) return og;
+    var tags = String(html).match(/<img\b[^>]*>/gi) || [];
+    for (var i = 0; i < tags.length; i++) {
+      var raw = this.__match(tags[i], /(?:data-original|data-src|data-lazy-src)=["']([^"']+)["']/i)
+        || this.__match(tags[i], /\bsrc=["']([^"']+)["']/i);
+      if (!raw || /browser-|logo|placeholder|loading|\/images\/etc\/|images\/92mh/i.test(raw)) continue;
+      if (/\/cover\//i.test(raw)) return raw;
+    }
+    return '';
   },
 
   __images(html) {
