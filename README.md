@@ -38,6 +38,7 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | 北觅影视 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/luttt_video.js` |
 | 金牌影院 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/jpyy2_video.js` |
 | XAnimu | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xanimu_video.js` |
+| Chaturbate 直播 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/chaturbate_video.js` |
 
 要点：
 
@@ -78,6 +79,7 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | video/luttt_video.js | `luttt_video` | 北觅影视 | 1.1.0 | 苹果CMS：筛选条（地区/年份/语言/字母/排序）从列表页实时抓；直连可用（境外出口会被 567 拦） |
 | video/xanimu_video.js | `xanimu_video` | XAnimu | 1.0.0 | 成人动漫视频站（WordPress + kolortube 主题，中文前缀 `/zh-CN/`）：列表/分类 `?filter=latest\|most-viewed\|longest`、搜索 `?s=`、详情 `?p={数字id}`；播放是 nosofiles CDN 的两条 mp4（high/low，带站点 `verify` 令牌）；**多镜域**（xanimu.art 首选 / .one / .com 同站，按可用性自动换并记住），域名在国内常被连接重置 |
 | video/jpyy2_video.js | `jpyy2_video` | 金牌影院 | 1.0.1 | jpyy2.com（= vv3nwjk.com）：自建 JSON API + 签名头（md5→sha1，脚本内实现）。**主域挂在 reCAPTCHA v3 WAF 后面（521），手机域 `m.vv3nwjk.com` 没有**——脚本按「手机域 → 主域 → 镜域」试，全被拦才抛 `WAF_RECAPTCHA_V3` 提示配桥接；分页参数是 `pageNum` |
+| video/chaturbate_video.js | `chaturbate_video` | Chaturbate 直播 | 1.0.0 | 成人直播站（18+）：列表/搜索走站点 TS 房间接口、详情读房间页 og、播放地址取 `/get_edge_hls_url_ajax/`（**要先取房间页拿 csrftoken 再带 `X-CSRFToken`+`Cookie` POST**）；「章节」= 两条带宽线（自动/低码率）；主路径失败回落到房间页内嵌 m3u8。开发机网络连不上该站，解析逻辑用打桩行为测试跑通，导入后建议先「测试连通性」 |
 
 ## 写一个源（契约速查）
 
