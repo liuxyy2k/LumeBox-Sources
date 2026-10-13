@@ -11,3 +11,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/jpyy2_vi
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xanimu_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/chaturbate_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/dytt_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/qiyou_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/shixiong_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/rebozj_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/reboku_video.js

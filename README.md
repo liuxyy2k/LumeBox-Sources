@@ -40,6 +40,10 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | XAnimu | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xanimu_video.js` |
 | Chaturbate 直播 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/chaturbate_video.js` |
 | 电影天堂 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/dytt_video.js` |
+| 奇优影院 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/qiyou_video.js` |
+| 大师兄影视 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/shixiong_video.js` |
+| 热播之家 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/rebozj_video.js` |
+| 热播库 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/reboku_video.js` |
 
 要点：
 
@@ -82,6 +86,10 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | video/jpyy2_video.js | `jpyy2_video` | 金牌影院 | 1.0.1 | jpyy2.com（= vv3nwjk.com）：自建 JSON API + 签名头（md5→sha1，脚本内实现）。**主域挂在 reCAPTCHA v3 WAF 后面（521），手机域 `m.vv3nwjk.com` 没有**——脚本按「手机域 → 主域 → 镜域」试，全被拦才抛 `WAF_RECAPTCHA_V3` 提示配桥接；分页参数是 `pageNum` |
 | video/chaturbate_video.js | `chaturbate_video` | Chaturbate 直播 | 1.0.0 | 成人直播站（18+）：列表/搜索走站点 TS 房间接口、详情读房间页 og、播放地址取 `/get_edge_hls_url_ajax/`（**要先取房间页拿 csrftoken 再带 `X-CSRFToken`+`Cookie` POST**）；「章节」= 两条带宽线（自动/低码率）；主路径失败回落到房间页内嵌 m3u8。开发机网络连不上该站，解析逻辑用打桩行为测试跑通，导入后建议先「测试连通性」 |
 | video/dytt_video.js | `dytt_video` | 电影天堂 | 1.0.0 | 电影天堂资源站（苹果CMS V10 `api.php/provide/vod/`，**实测直连可用**）：列表默认 `ac=detail`（多花流量换封面，~190KB/页）；`class` 表里 4 个**父类在该站筛不出内容**（实测 t=1/t=4 为空），所以分类只列 28 个子类；`vod_play_from` 两条线路里 `dytt` 是网页播放页（200 空体，内核播不了 → 脚本跳过），`dyttm3u8` 是直连 HLS（实测 200 + `application/vnd.apple.mpegurl`，不需要 Referer）；线路当「清晰度」交给播放器；**个别分集上游本身就是 404**（资源站空档），换集即可 |
+| video/qiyou_video.js | `qiyou_video` | 奇优影院 | 1.0.0 | 苹果CMS + stui 主题（**规则移植自 drpy 蜘蛛 `js/奇优影院.js`**）：分类从导航实时抓、列表 `/list/{类}_{页}.html?order=time`、搜索走 `POST /search.php`；播放地址取播放页 `player_aaaa`（encrypt 0/1/2 三态都处理）。主域 `1e6e.com`（发布页 qiyoudy.info）。**本机境外出口连不上该站，未做端到端实播验证**——解析内核已用主题级夹具跑通 21 项断言 |
+| video/shixiong_video.js | `shixiong_video` | 大师兄影视 | 1.0.0 | 苹果CMS + mxpro 主题（移植自 `js/大师兄影视.js`）：列表 `/vodshow/{类}-----------{页}---.html`、搜索走联想接口 `/index.php/ajax/suggest`（**避开主题自带的人机校验滑块**）；多域 `dsxys.pro` → `dsxys.com`。同上未实播验证 |
+| video/rebozj_video.js | `rebozj_video` | 热播之家 | 1.0.0 | 苹果CMS + stui（移植自 `js/热播之家.js`）：列表 `/show/…`、搜索 `/search/{词}----------{页}---.html`；播放地址是 base64+escape 双层壳，脚本自带纯 JS 解壳（含 unescape 的本地实现，不依赖沙箱有没有 Annex B）。同上未实播验证 |
+| video/reboku_video.js | `reboku_video` | 热播库 | 1.0.0 | 苹果CMS 自定义主题（移植自 `js/热播库.js`）：列表 `/s/…`、联想接口搜索；列表按「详情链接 + 标签窗口」解析（四站共用一套逻辑，抗主题改版）。同上未实播验证 |
 
 ## 写一个源（契约速查）
 
