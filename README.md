@@ -31,7 +31,6 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | G社漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/gmh_comic.js` |
 | MYCOMIC | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mycomic_comic.js` |
 | CA情色小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/99xs_novel.js` |
-| xChina 小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xchina_novel.js` |
 | X小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xxiaoshuo_novel.js` |
 | 夜读小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xnovel_novel.js` |
 | 瓜子影视 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/gztv5_video.js` |
@@ -72,7 +71,6 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | comic/mycomic_comic.js | `mycomic_comic` | MYCOMIC | 1.0.0 | 服务端渲染（30/页、共 1845 页）；筛选/排序就是站点自己的查询串（`filter[tag|audience|country|end|year|author]`、`sort=-update\|-views`），分组与选项从列表页实时抓；目录在页面的 Alpine `chapters:` JSON 里（站点倒序 → 脚本翻成升序）；**整站在 Cloudflare 托管校验后面**，被拦时抛 `NEED_WEBVIEW_VERIFY` 走 App 的网页视图流程 |
 | comic/jcomic_comic.js | `jcomic_comic` | JComic | 1.0.0 | 条目有 `/eps/`（多话）与 `/page/`（单页）两形态，**作品 id 存路径**；正文图是 `JCOMIC_TRAPS_` 倒序 base64，脚本内解码；**图片直链是 60 秒签名 S3 地址**（站点限制，见脚本头部） |
 | novel/99xs_novel.js | `99xs_novel` | CA情色小说 | 2.1.0 | 根路径有「继续访问」拦截页，源自带 cookie |
-| novel/xchina_novel.js | `xchina_novel` | xChina 小说 | 1.0.0 | 详情/正文常被 CF 拦：抛标记走网页视图 |
 | novel/xxiaoshuo_novel.js | `xxiaoshuo_novel` | X小说 | 1.0.0 | 直连可用 |
 | novel/xnovel_novel.js | `xnovel_novel` | 夜读小说 | 1.0.0 | Tailwind 站：列表 `a.list-card`（`/novels/{N}`、`/tag/{slug}/{N}`、`/search?q=&page=`）；正文取 `article#read-article` 的 `<p>` 并剔掉 `div.extra_c_2` 广告块；目录第 1 章要做「工具条 / 开始阅读」去噪；正常页里带 CF 的 jsd 信标**不能**当校验页判据，反诈拦截页（200 + 3KB）会给出可读原因 |
 | video/gztv5_video.js | `gztv5_video` | 瓜子影视 | 3.0.0 | Nuxt SPA + 独立 API；偶发 CF |
