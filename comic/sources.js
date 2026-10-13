@@ -13,3 +13,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_co
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/gmh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mycomic_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/bakamh_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/hanman18_comic.js
