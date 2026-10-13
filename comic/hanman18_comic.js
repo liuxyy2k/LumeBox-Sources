@@ -22,9 +22,12 @@
 // - 图片地址若是明文 http，脚本统一升成 https（iOS 默认禁止明文，原样返回等于图全裂）；
 // - 站点挂 CF 时抛 `NEED_WEBVIEW_VERIFY`，App 会给「网页视图」入口过一次校验。
 //
-// 验证状态（如实说）：**本机（境外出口）连不上该站**（连接超时/重置），因此未做实播验证；
-// 解析内核用与该模板结构一致的夹具跑通（列表 / 分页判定 / 详情 / 剧集排序 / 正文 base64 解码）。
-// 导入后请先点「图源管理 → 测试连通性」。
+// 验证状态：**用真实浏览器取回真站页面存档**（首页 / 漫画列表 / 搜索 / 详情 / 阅读页），
+// 解析内核对着这些**真响应**跑通（列表条数、搜索命中、详情字段、56 章升序、正文 base64 取图）。
+// 另外实测确认了三件事，脚本已按实测改（不再照抄旧模板）：
+//   1. `?order_by=` 在真站上**无效**（views/new/latest 返回同一批）→ 不提供排序分类；
+//   2. `/manga-list/<题材>` 在真站上 **302 回首页** → 不提供题材分类（宁缺毋滥）；
+//   3. 搜索是**单页结果**（`/list-manga?search=`，第 2 页为空）→ hasMore 恒 false。
 var HOSTS = ['https://hanman18.com'];
 
 // 站点按 UA 发模板：移动端 UA 才拿到本文件解析的这套标记（桌面 UA 可能是另一套）。
@@ -42,24 +45,19 @@ var LumeSource = {
   version: '1.0.0',
   category: 'comic',
 
-  /// 分类：两个内置排序 + 站点标签（标签从列表页实时抓，改版自动跟随）。
+  /// 分类：只列**真站上实测能用**的入口（见文件头的三条实测结论）。
   async categories() {
-    await this.__pickHost();
-    var fixed = [
+    return [
       { id: 'latest', title: '最新更新' },
-      { id: 'views', title: '最多观看' }
+      { id: 'list', title: '漫画列表' }
     ];
-    try {
-      var html = await this.__page('/list-manga/1');
-      var tags = this.__tags(html);
-      return fixed.concat(tags);
-    } catch (error) {
-      // 抓标签失败不该让「分类」整块消失：两个内置排序仍可用。
-      return fixed;
-    }
   },
 
-  /// 列表 / 搜索。
+  /// 列表 / 搜索（路径按真站实测）。
+  ///
+  /// - 最新更新：第 1 页是首页 `/`，第 2 页起 `/latest-release/<页>`（站点自己的分页就这么写）；
+  /// - 漫画列表：`/list-manga/<页>`（20 条/页）；
+  /// - 搜索：`/list-manga?search=<关键词>`（站点搜索表单的 action；**单页结果**）。
   async list(argument) {
     await this.__pickHost();
     var page = argument && argument.page ? Number(argument.page) : 1;
@@ -69,16 +67,17 @@ var LumeSource = {
 
     var path;
     if (keyword) {
-      path = '/list-manga/' + page + '?search=' + encodeURIComponent(keyword);
-    } else if (category.indexOf('tag:') === 0) {
-      path = '/manga-list/' + encodeURIComponent(category.substring(4)) + '/' + page;
-    } else if (category === 'views') {
-      path = '/list-manga/' + page + '?order_by=views';
-    } else {
+      path = '/list-manga?search=' + encodeURIComponent(keyword);
+    } else if (category === 'list') {
       path = '/list-manga/' + page;
+    } else {
+      path = page <= 1 ? '/' : '/latest-release/' + page;
     }
     var html = await this.__page(path);
-    return { items: this.__items(html), hasMore: this.__hasNext(html) };
+    return {
+      items: this.__items(html),
+      hasMore: keyword ? false : this.__hasNext(html)
+    };
   },
 
   /// 详情。
@@ -88,15 +87,27 @@ var LumeSource = {
     if (!path) return null;
     var html = await this.__page(path);
     if (html === null) return null;
-    var title = this.__text(html, ['<div[^>]+class="detail_name"[^>]*>[\\s\\S]{0,80}?<h1[^>]*>([^<]+)</h1>', '<h1[^>]*>([^<]+)</h1>']);
+    // 真站上标题在 `div.detail_name` 里，但**不是固定的 h1**（实测是标题标签与纯文本混排）；
+    // 所以三层兜底：detail_name 里的 h1~h3 → detail_name 的纯文本 → og:title。
+    var title = this.__text(html, [
+      '<div[^>]+class="detail_name"[^>]*>[\\s\\S]{0,160}?<h[1-3][^>]*>([^<]+)</h[1-3]>',
+      '<div[^>]+class="detail_name"[^>]*>([^<]{1,80})<',
+      'property="og:title"[^>]*content="([^"]+)"'
+    ]);
     var cover = this.__attr(html, ['class="detail_avatar"[^>]*>[\\s\\S]{0,200}?<img[^>]+src="([^"]+)"', 'property="og:image"[^>]*content="([^"]+)"']);
     var description = this.__text(html, ['<div[^>]+class="detail_reviewContent"[^>]*>([\\s\\S]{0,1500}?)</div>']);
+    // 信息栏是 `div.detail_listInfo > div.item >（info_label + info_value）`，标签是**英文**的
+    // （Other name / Author / Artist / Status / Categories / Views，实测）；值为 "Updating"
+    // 的当没填——那是站点自己的占位（multisrc 也这么处理）。
     var status = this.__labelled(html, ['Status', '状态']);
-    var author = this.__labelled(html, ['author', 'Autor', '作者']);
+    var author = this.__labelled(html, ['Author', '作者']);
+    if (/^updating$/i.test(author)) author = '';
+    var artist = this.__labelled(html, ['Artist', '作画']);
+    if (/^updating$/i.test(artist)) artist = '';
     var genres = this.__genres(html);
     var bits = [];
     if (status) bits.push(status);
-    if (author) bits.push(author);
+    if (author || artist) bits.push('作者：' + author + (artist ? '&' + artist : ''));
     if (genres) bits.push(genres);
     return {
       id: path,
@@ -152,21 +163,39 @@ var LumeSource = {
   // ------------------------------------------------------------------ 解析
 
   /// 列表条目：`div.story_item` → a[href] / div.mg_info > div.mg_name a / img[src]。
+  ///
+  /// 切块方式：按**下一个卡片起点**切（见 [__splitByStart]），不用 `</div>` 配对——
+  /// 真站卡片里嵌着封面/信息/章节多层 div，配对法会在内层提前收口，实测 62 张卡
+  /// 只解析出 41 张、第 2 页只出 11 张。
   __items(html) {
     var text = String(html || '');
     var items = [];
     var seen = {};
-    var blocks = this.__blocks(text, { start: '<div[^>]+class="[^"]*story_item', end: '</div>\\s*</div>|</li>' });
+    var blocks = this.__splitByStart(text, '<div[^>]+class="[^"]*story_item');
     for (var i = 0; i < blocks.length; i++) {
-      var block = blocks[i];
+      // 折叠空白再匹配（真站缩进很深，带窗口的模式会被缩进顶爆）。
+      var block = blocks[i].replace(/\s+/g, ' ');
       var href = this.__attr(block, ['<a[^>]+href="([^"]+)"']);
       var path = this.__path(href);
       if (!path || seen[path]) continue;
-      var title = this.__text(block, ['class="mg_name"[^>]*>[\\s\\S]{0,40}?<a[^>]*>([^<]+)</a>', 'class="mg_name"[^>]*>([^<]+)<', 'title="([^"]+)"']);
+      // 真站有**两套卡片模板**（实测）：顶部轮播用 `story_name`、下方网格用 `mg_name`。
+      // 两套都认，标题再退到 a 的 title 属性与 a 的文字。
+      var title = this.__text(block, [
+        'class="story_name"[^>]*>[\\s\\S]{0,60}?<a[^>]*>([^<]+)</a>',
+        'class="mg_name"[^>]*>[\\s\\S]{0,60}?<a[^>]*>([^<]+)</a>',
+        'class="story_name"[^>]*>([^<]+)<',
+        'class="mg_name"[^>]*>([^<]+)<',
+        'title="([^"]+)"'
+      ]);
       if (!title) continue;
       seen[path] = true;
       var cover = this.__attr(block, ['<img[^>]+src="([^"]+)"', '<img[^>]+data-src="([^"]+)"']);
-      var note = this.__text(block, ['class="mg_chapter[^"]*"[^>]*>([^<]+)<', 'class="mg_author[^"]*"[^>]*>([^<]+)<']);
+      // 备注：网格模板给「最新话」（mg_chapter 里的章节目录链接），轮播模板给「更新时间」。
+      var note = this.__text(block, [
+        'class="mg_chapter"[^>]*>[\\s\\S]{0,240}?<a[^>]*>([^<]+)</a>',
+        'class="mg_chapter"[^"]*"[^>]*>([^<]+)<',
+        'class="story_time"[^>]*>[\\s\\S]{0,120}?<span[^>]*>([^<]+)</span>'
+      ]);
       items.push({
         id: path,
         title: title,
@@ -189,43 +218,56 @@ var LumeSource = {
     return !/class="[^"]*\bactive\b/.test(last);
   },
 
-  /// 站点标签（`div.grid_cate li > a`）→ 分类项（id 前缀 tag: 表示按标签筛）。
-  __tags(html) {
-    var text = String(html || '');
-    var box = this.__firstBlock(text, { start: '<[^>]+class="[^"]*grid_cate', end: '</ul>' });
-    if (!box) return [];
-    var result = [];
-    var seen = {};
-    var pattern = /<a[^>]+href="([^"]*\/manga-list\/([^"\/]+)[^"]*)"[^>]*>([\s\S]{0,30}?)<\/a>/gi;
-    var matched;
-    while ((matched = pattern.exec(box)) !== null) {
-      var slug = matched[2];
-      var title = this.__plain(matched[3]);
-      if (!slug || !title || seen[slug]) continue;
-      seen[slug] = true;
-      result.push({ id: 'tag:' + slug, title: title });
-    }
-    return result;
-  },
-
-  /// 章节：`div.chapter_box .item` 里的 `a`（链接 + 标题），`p` 里是日期。
+  /// 章节：章节容器里逐条 `a` 取（链接 + 标题）。
+  ///
+  /// 两条硬约束（都来自真站实测）：
+  /// 1. 只在**章节容器**范围内找（`chapter_box`），否则详情页别处的 `class="item"`
+  ///    （信息栏）会混进来；
+  /// 2. 只认**站内 `/manhwa/<作品>/<章>` 形状**的链接——真站每个章节条里还挂着一个
+  ///    网盘下载外链（`https://azmin.manga18.club/download/...`），不排除会当成章节。
   __chapters(html) {
     var text = String(html || '');
-    var blocks = this.__blocks(text, { start: '<div[^>]+class="[^"]*item', end: '</div>' });
+    // 章节容器的范围切到「下一个 chapter_box 或文档结尾」（配对切会因内层 div 提前收口）；
+    // 越界部分由下面的 /manhwa/<作品>/<章> 形状过滤兜住（相关推荐是 /manhwa/<id> 一层，不会误收）。
+    var chunks = this.__splitByStart(text, '<div[^>]+class="[^"]*chapter_box');
+    var scope = chunks.length ? chunks[0] : text;
+    var host = this.__base().replace(/^https?:\/\//, '');
     var chapters = [];
     var seen = {};
-    for (var i = 0; i < blocks.length; i++) {
-      var block = blocks[i];
-      var href = this.__attr(block, ['<a[^>]+href="([^"]+)"']);
-      var path = this.__path(href);
+    var pattern = /<a[^>]+href="([^"]+)"[^>]*>([\s\S]{0,80}?)<\/a>/gi;
+    var matched;
+    while ((matched = pattern.exec(scope)) !== null) {
+      var raw = matched[1];
+      var path = this.__path(raw);
       if (!path || seen[path]) continue;
-      // 章节链接必须比作品页更深一层（/manhwa/x 是作品，/manhwa/x/... 才是章节）。
-      if (!/\/[^\/]+\/[^\/]+/.test(path.replace(/^\/+/, ''))) continue;
+      if (!/^\/manhwa\/[^\/]+\/[^\/]+/.test(path)) continue;
+      if (/^https?:\/\//i.test(raw) && raw.indexOf(host) < 0) continue;
       seen[path] = true;
-      var title = this.__text(block, ['<a[^>]*>([^<]+)</a>']) || ('第 ' + (chapters.length + 1) + ' 话');
+      var title = this.__plain(matched[2]);
+      if (!title) continue;
       chapters.push({ id: path, title: title });
     }
     return this.__sortChapters(chapters);
+  },
+
+  /// 从每个 start 匹配处切到**下一个** start 匹配处（末块切到结尾）。
+  ///
+  /// 用途：列表卡片 / 章节条这类「多条同构块」的切分。比 `开始标记…结束标记` 配对稳：
+  /// 块里嵌套多少层 div 都不影响（配对法会在内层提前收口）。
+  __splitByStart(text, startPattern) {
+    var re = new RegExp(startPattern, 'gi');
+    var starts = [];
+    var matched;
+    while ((matched = re.exec(text)) !== null) {
+      starts.push(matched.index);
+      if (re.lastIndex === matched.index) re.lastIndex++;
+    }
+    var chunks = [];
+    for (var i = 0; i < starts.length; i++) {
+      var end = i + 1 < starts.length ? starts[i + 1] : text.length;
+      chunks.push(text.slice(starts[i], end));
+    }
+    return chunks;
   },
 
   /// 按标题里的编号升序（抓不到编号的保持原相对顺序、放到末尾）。
@@ -360,14 +402,16 @@ var LumeSource = {
     // 只收到第一个 </div> 会把 info_value 的值切在块外（实测状态 / 作者取不到）。
     var blocks = this.__blocks(text, { start: '<div[^>]+class="[^"]*item', end: '</div>\\s*</div>' });
     for (var i = 0; i < blocks.length; i++) {
-      var block = blocks[i];
+      // **先把块里的空白折叠掉**再匹配：真站缩进很深（实测 info_value 到 </div> 之间
+      // 有 150+ 个字符全是空格与换行），带「窗口长度」的模式会被缩进顶爆。
+      var block = blocks[i].replace(/\s+/g, ' ');
       var plain = this.__plain(block);
       var hit = false;
       for (var j = 0; j < labels.length; j++) {
         if (plain.indexOf(labels[j]) >= 0) { hit = true; break; }
       }
       if (!hit) continue;
-      var value = this.__text(block, ['class="info_value"[^>]*>([\\s\\S]{0,120}?)</div>', 'class="info_value"[^>]*>([^<]+)<']);
+      var value = this.__text(block, ['class="info_value"[^>]*>([\\s\\S]{0,400}?)<\\/div>', 'class="info_value"[^>]*>([^<]+)<']);
       if (value) return value;
     }
     return '';
