@@ -21,3 +21,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/z8pt_com
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jmcomic_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/rouman5_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/fxcomic_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/cartoon18_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/relamanhua_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mh18_comic.js

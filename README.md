@@ -159,3 +159,16 @@ BAKA MH 原实现已替换为 2.0.0，默认站点为 `https://bakamh.com/`，�
   网页验证窗（那两类拦截都没有 JS 挑战可过）。
 - Hanime1：播放地址在**独立播放域名**上、按播放时读取的签名地址播放；主站会话
   不复制给第三方域名（这是既有纪律）。手机侧仍需在 App 内完成网页验证。
+
+## 2026-10-15：新增三个漫画源（色漫網 / 熱辣漫畫 / 18mh漫畫）
+
+三个源都**对着真站响应写**（除了 18mh 的 .org 域名需要网页验证，用同一家的 .net 核过）。
+
+| 源 | id | 站点 | 结构要点 |
+| --- | --- | --- | --- |
+| 色漫網 | `cartoon18_comic` | cartoon18.com | 列表 `/?sort=hits\|likes\|score`、搜索 `/?q=`、分类 `/category`（74 个标签）；详情 `/v/<短id>`；章节 `/story/<数字id>/full`（**整话一页**）；正文图是 `img[src]`、**AVIF 格式**（新版 App 的 Flutter 直接解） |
+| 熱辣漫畫 | `relamanhua_comic` | relamanhua.com | 前端是 SPA，数据全在 **copymanga v3 接口**（脚本内置接口域名表并探活）：首页 `/api/v3/h5/homeIndex`、题材 `/api/v3/h5/filter/comic/tags?type=1`、列表 `/api/v3/comics`、搜索 `/api/v3/search/comic`、详情 `/api/v3/comic2/<path_word>`、章节 `/api/v3/comic/<path_word>/group/<组>/chapters`、正文 `/api/v3/comic/<path_word>/chapter/<uuid>` |
+| 18mh漫畫 | `mh18_comic` | 18mh.net / 18mh.org | 禁漫天堂系：分类 `/comic/all`（+12 个题材 `/comic/all/<代码>`）、排行/热门/最新/新作、搜索 `/comic/all?key_word=`；详情 `/comic/detail/<id>`（封面取详情页海报图，站点的 og:image 是 404 的 `/social-cover/` 生成图）；章节 `/comic/chapter/<id>/<n>`；正文 `img[data-src]`。**两家镜像互为备用**，.org 需要网页验证时会自动落到 .net |
+
+验证：三个源都用 `tools/source_live_check.mjs`（新增）跑通真站「分类 → 列表 → 详情 → 章节 → 正文」，
+分类数 76 / 21 / 17，正文分别为 125 / 18 / 18 张；`tools/cover_live_check.mjs` 另测封面不是占位图。
