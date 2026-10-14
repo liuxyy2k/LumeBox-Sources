@@ -15,3 +15,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/asmrhone
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/yazhouse_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ting13_video.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hanime1_video.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hanime_video.js

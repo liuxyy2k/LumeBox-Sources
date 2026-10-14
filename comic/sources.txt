@@ -10,7 +10,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/seyouman
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nnhanman_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jm18_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_comic.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mycomic_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/bakamh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/hanman18_comic.js
@@ -21,3 +20,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/sansi_co
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/manwa_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/z8pt_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jmcomic_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/rouman5_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/fxcomic_comic.js

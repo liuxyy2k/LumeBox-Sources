@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.join(__dirname,'..');
 async function main(){
- const fixtures=[['nnhanman_comic.js','nnhanman_list.html','nnhanman_home.html','nnhanman_detail.html'],['jcomic_comic.js','jcomic_cat.html','jcomic_home.html','jcomic_eps.html'],['seyoumanhua_comic.js','seyoumanhua_list.html',null,'seyoumanhua_comic.html']];
+ const fixtures=[['nnhanman_comic.js','nnhanman_list.html','nnhanman_home.html','nnhanman_detail.html'],['jcomic_comic.js','jcomic_cat.html','jcomic_home.html','jcomic_eps.html'],['seyoumanhua_comic.js','seyoumanhua_list.html',null,'seyoumanhua_comic.html']].filter(([file])=>fs.existsSync(path.join(root,'comic',file)));
  for(const [file,list,home,detail] of fixtures){
   const context=vm.createContext({console,setTimeout});vm.runInContext(fs.readFileSync(path.join(root,'comic',file),'utf8'),context);const source=context.LumeSource;
   function body(snapshot){source.http={get:async()=>({status:200,body:fs.readFileSync(path.join(root,'snapshots',snapshot),'utf8')})};}

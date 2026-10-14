@@ -3,6 +3,13 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 
+// 92漫画（comic/92mh_comic.js）已从仓库移除：脚本不在就整文件跳过——
+// 少了它不该让这个用例文件在 node --test 里崩成「失败」。
+if (!fs.existsSync(path.join(__dirname, '../comic/92mh_comic.js'))) {
+  console.log('跳过：comic/92mh_comic.js 已从仓库移除');
+  process.exit(0);
+}
+
 const context = vm.createContext({console});
 const script = fs.readFileSync(path.join(__dirname, '../comic/92mh_comic.js'), 'utf8');
 vm.runInContext(script, context);

@@ -14,3 +14,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xchina_n
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/hhhbook_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/hlib_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/aaccoo_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/sspwk_novel.js

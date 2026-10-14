@@ -2,6 +2,13 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const path = require('node:path');
+
+// 92漫画（comic/92mh_comic.js）已从仓库移除：脚本不在就整文件跳过。
+if (!fs.existsSync(path.join(__dirname, '../comic/92mh_comic.js'))) {
+  console.log('跳过：comic/92mh_comic.js 已从仓库移除');
+  process.exit(0);
+}
+
 const context = vm.createContext({console});
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../comic/92mh_comic.js'), 'utf8'), context);
 const source = vm.runInContext('LumeSource', context);

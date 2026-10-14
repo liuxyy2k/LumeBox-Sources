@@ -30,7 +30,6 @@ LumeBox 的内置源**不随 App 打包**，统一放在这里。App 侧「导�
 | HANMAN18 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/hanman18_comic.js` |
 | K漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/kmh001_comic.js` |
 | X漫 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_comic.js` |
-| JComic | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js` |
 | G社漫画 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/gmh_comic.js` |
 | MYCOMIC | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mycomic_comic.js` |
 | CA情色小说 | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/99xs_novel.js` |
@@ -73,19 +72,22 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | comic/xman6_comic.js | `xman6_comic` | X漫 | 1.1.0 | 另一套 MacCMS 皮肤（含筛选：状态/排序）：列表 `li.vodlist_item`、`/mcata/{类}/ob/time/st/all/page/N`；排行页是 `li.ranklist_item`（另一套标记）；正文图在 `img[data-src]` |
 | comic/gmh_comic.js | `gmh_comic` | G社漫画 | 1.0.0 | Astro 静态前端 + 自建 API（v2.apikk.top）：列表 `a[href=/manga/{slug}]`（18/页、`/manga/page/N`）；详情走作品页 `data-mid` + `/api/v2/manga/get`；**正文图片是加密串，脚本把站点自己的 `/assets/runtime/chapter-decoder.js` 取进沙箱、配最小浏览器垫片后 eval 再调它的 `r()`**（不逆向、不改写它的算法）；**站点没有搜索**，关键词如实拒绝 |
 | comic/mycomic_comic.js | `mycomic_comic` | MYCOMIC | 1.0.1 | 服务端渲染（30/页、共 1845 页）；筛选/排序就是站点自己的查询串（`filter[tag|audience|country|end|year|author]`、`sort=-update\|-views`），分组与选项从列表页实时抓；目录在页面的 Alpine `chapters:` JSON 里（站点倒序 → 脚本翻成升序）；**整站在 Cloudflare 托管校验后面**，被拦时抛 `NEED_WEBVIEW_VERIFY` 走 App 的网页视图流程 |
-| comic/jcomic_comic.js | `jcomic_comic` | JComic | 1.0.2 | 条目有 `/eps/`（多话）与 `/page/`（单页）两形态，**作品 id 存路径**；正文图是 `JCOMIC_TRAPS_` 倒序 base64，脚本内解码；**图片直链是 60 秒签名 S3 地址**（站点限制，见脚本头部） |
 | comic/bakamh_comic.js | `bakamh_comic` | 巴卡漫画 | 2.0.0 | 以 `https://bakamh.com/` 重新实现 Madara 页面适配；分页、AJAX 搜索、当前作品的章节去重与顺序、独立图片 Referer / UA、实际登录锁识别。主域名 502/404 时尝试发布页已列出的镜像；遇到网页验证如实提示。重写版 7 项脱敏回归通过；浏览器正常首页和详情结构已核对，手机端仍需完成自己的验证。 |
 | comic/hanman18_comic.js | `hanman18_comic` | HANMAN18 | 1.0.0 | hanman18.com（禁漫天堂）：**用真实浏览器取回真站页面存档后逐条核过**，不照抄旧模板。列表 `div.story_item`（**真站有两套卡片模板**：顶部轮播 `story_name`、下方网格 `mg_name`，两套都认）；最新更新第 1 页 `/`、第 2 页起 `/latest-release/<页>`；漫画列表 `/list-manga/<页>`（20/页）；搜索 `/list-manga?search=`（**单页结果**）；详情 `/manhwa/<id>`（标题 `detail_name`、封面 `detail_avatar`、简介 `detail_reviewContent`、信息栏是英文标签 Other name/Author/Artist/Status/Categories/Views）；章节在 `chapter_box` 里按**站内 /manhwa/<作品>/<章>** 形状取（同一卡片里还挂着网盘外链，已排除），按话号升序；正文是章节页 `slides_p_path` 的 **base64 数组**（脚本内纯 JS 解码）。**实测三件事已据实调整**：`?order_by=` 排序无效（不再提供排序分类）、`/manga-list/<题材>` 302 回首页（不提供题材分类）、搜索无分页。验证：对着真站存档跑通 10 项断言（首页 42 部唯一作品 / 第2页 41 / 搜索 3 条 / 详情字段 / 56 章升序 / 正文 159 张图全 https 不混源）|
 | comic/kmh001_comic.js | `kmh001_comic` | K漫画 | 1.0.0 | kmh001.com（备用域 kmh.sex）= **Next.js App Router SSR**：数据**不在独立 JSON 接口里**，而是内嵌在 HTML 的 RSC 载荷（一连串 `self.__next_f.push([1,"…"])`）——脚本抽载荷再按站点字段取数。地址：首页 `/home`、连载按周 `/weekly/0..6`（0=周日）、完本 `/complete`、搜索 `/search?key=`、详情 `/comic/<24位id>`、正文 `/chapter/<24位id>`；章节在 `{"comicID":…,"data":[{_id,subtitle,title,ordinal}]}` 里（按 ordinal 升序，**括号配对切数组**，正则切会被带方括号的标题截断）；正文图片数组带 `sourceName`（多图源）→ **取图最多的那个源**，不混源；图片统一升 https。**/category 分类页未做**：那页的服务端响应里没有卡片数据（浏览器二次请求才有），与其猜不如不做。**验证方式：本机 curl 打不开该站，改用真实浏览器取回 6 个页面完整响应存档，解析内核对着真响应跑通 12 项断言**（列表/搜索/详情/章节升序/正文多图源）|
+| comic/rouman5_comic.js | `rouman5_comic` | 肉漫屋 | 1.0.0 | rouman5.com（繁中韩漫站）= TanStack Start SSR：列表 `/books[?continued=…][&page=N]`（**页号 0 基**）、搜索 `/search?term=`（`?q=`/`?keyword=` 无效）、详情 `h1`+`og:image`+`dl.site-book-data`、剧集 `/books/<id>/<序号>`（0 基、默认正序）；正文取章节页 SSR 载荷里的 `imagePaths` 数组（图床是站点自己的代理域名 kelv47.xyz / towm85.xyz，脚本用地址里那段 base64 核对该图属于哪本书，广告图混不进来）。**对着真站取回 5 个页面存档跑通 7 项断言** |
+| comic/fxcomic_comic.js | `fxcomic_comic` | 漫小肆 | 1.0.0 | freexcomic.com 是**地址发布页**（页面里一行 `location.href="…"` 指当前站址，本版是 jjmhw9.top）：先探已知域名、不通再读发布页，换域名不用改脚本。列表 `/booklist[?end=0|1][&page=N]`、更新 `/update`、搜索 `/search?keyword=`；详情 `h1`+banner 封面+`p.subtitle`/`p.tip`（别名/作者/状态/地区/标签）+`p.content` 简介；剧集 `#detail-list-select` 的 `/chapter/<数字id>`（升序）；正文 `div.comiclist` 的 `img[data-original]`（只收 `/static/upload/` 本站图床）。封面是 CSS 背景图（`p.mh-cover` 的 style），按此解析。**对着真站 7 个页面存档跑通 6 项断言** |
 | novel/99xs_novel.js | `99xs_novel` | CA情色小说 | 2.1.0 | 根路径有「继续访问」拦截页，源自带 cookie |
 | novel/xxiaoshuo_novel.js | `xxiaoshuo_novel` | X小说 | 1.0.0 | 直连可用 |
 | novel/xnovel_novel.js | `xnovel_novel` | 夜读小说 | 1.0.0 | Tailwind 站：列表 `a.list-card`（`/novels/{N}`、`/tag/{slug}/{N}`、`/search?q=&page=`）；正文取 `article#read-article` 的 `<p>` 并剔掉 `div.extra_c_2` 广告块；目录第 1 章要做「工具条 / 开始阅读」去噪；正常页里带 CF 的 jsd 信标**不能**当校验页判据，反诈拦截页（200 + 3KB）会给出可读原因 |
+| novel/sspwk_novel.js | `sspwk_novel` | 少数派文库 | 1.0.0 | sspwk.vip（御宅屋系模板）：分类 `/booksort/<栏目号>/<页>.html`（12 个栏目号取自站点导航）；列表 `div.common-bookele`（30/页）；搜索是 **POST `/search/`**（`searchkey=`，GET 参数无效）；书名在正文「《书名》简介」的 h3 里（比 `<title>` 干净）、简介在 `<pre>`；目录 `/indexlist/<书号>/<页>/` 逐页收齐（整页重复就停）；正文取 `div#nr1` 的段落，**站点自己那条 `<ecmsxs>` 公告要剔掉**。小说没有封面，cover 如实为 null。**对着真站 6 个页面存档跑通 6 项断言** |
 | video/gztv5_video.js | `gztv5_video` | 瓜子影视 | 3.0.0 | Nuxt SPA + 独立 API；偶发 CF |
 | video/dage_video.js | `dage_video` | 大哥视频 | 2.3.0 | 响应是「编码信封」，脚本内含纯 JS 解码 |
 | video/luttt_video.js | `luttt_video` | 北觅影视 | 1.1.1 | MacCMS 页面与播放地址适配；媒体只使用播放数据明确声明的请求头，不再强加站点 Referer 和通用 UA。当前桌面网络返回 HTTP 567，用户旧日志为播放器 HTTP 403，实际播放仍需手机复测。 |
 | video/xanimu_video.js | `xanimu_video` | XAnimu | 1.0.0 | 成人动漫视频站（WordPress + kolortube 主题，中文前缀 `/zh-CN/`）：列表/分类 `?filter=latest\|most-viewed\|longest`、搜索 `?s=`、详情 `?p={数字id}`；播放是 nosofiles CDN 的两条 mp4（high/low，带站点 `verify` 令牌）；**多镜域**（xanimu.art 首选 / .one / .com 同站，按可用性自动换并记住），域名在国内常被连接重置 |
 | video/jpyy2_video.js | `jpyy2_video` | 金牌影院 | 1.0.1 | jpyy2.com（= vv3nwjk.com）：自建 JSON API + 签名头（md5→sha1，脚本内实现）。**主域挂在 reCAPTCHA v3 WAF 后面（521），手机域 `m.vv3nwjk.com` 没有**——脚本按「手机域 → 主域 → 镜域」试，全被拦才抛 `WAF_RECAPTCHA_V3` 提示配桥接；分页参数是 `pageNum` |
 | video/chaturbate_video.js | `chaturbate_video` | Chaturbate 直播 | 1.0.0 | 成人直播站（18+）：列表/搜索走站点 TS 房间接口、详情读房间页 og、播放地址取 `/get_edge_hls_url_ajax/`（**要先取房间页拿 csrftoken 再带 `X-CSRFToken`+`Cookie` POST**）；「章节」= 两条带宽线（自动/低码率）；主路径失败回落到房间页内嵌 m3u8。开发机网络连不上该站，解析逻辑用打桩行为测试跑通，导入后建议先「测试连通性」 |
+| video/hanime_video.js | `hanime_video` | H動漫網 | 1.0.0 | www.hanime.xyz（成人动漫）：列表/排序 `/`、`/?sort=hits|score|likes`、搜索 `/?q=`；详情 `/<数字id>.html`（标题取 h1 里的链接文本——h1 尾上挂着点赞按钮的 Vue 占位，整段取会把 `{{…}}` 带出来）；正文就是页面里的 `<video><source src="…/index.m3u8">`（页内 LD+JSON 的 contentUrl 兜底），单页一集 → `chapters` 只给一项「播放」；播放地址在独立播放域名上，把详细页地址作 Referer 一起交出。**对着真站 4 个页面存档跑通 3 项断言** |
 
 ## 写一个源（契约速查）
 
@@ -122,3 +124,19 @@ throw new Error('NEED_WEBVIEW_VERIFY：站点触发了 Cloudflare 人机校验�
 实际响应验证与限制见 [适配记录](docs/2026-10-14_JS-source-adaptation-report.md)。Hanime1 每次播放读取当时有效的地址，先按分辨率选择最高画质；漫蛙需要新版 App 的图片解码管线。
 
 BAKA MH 原实现已替换为 2.0.0，默认站点为 `https://bakamh.com/`，只在服务端故障时使用站点发布页列出的镜像。禁漫天堂为独立源，与现有「18禁漫」（18jm18.com）不同；阅读图片需要包含横条还原功能的新版 App。
+
+## 2026-10-14 第二批：肉漫屋 / 漫小肆（freexcomic 发布页）/ 少数派文库 / H動漫網
+
+四个源都**对着真站响应写**（用真实浏览器取回完整页面存档，解析内核就对着这些真响应跑），
+快照与断言在 `snapshots/` 与 `tools/latest_sources_regression_test.js`（21 项）：
+
+| 源 | 订阅地址（粘进 App 即可单订）|
+|----|------------------|
+| 肉漫屋（漫画） | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/rouman5_comic.js` |
+| 漫小肆（漫画，含地址发布页发现） | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/fxcomic_comic.js` |
+| 少数派文库（小说） | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/sspwk_novel.js` |
+| H動漫網（视频） | `https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hanime_video.js` |
+
+也可以用各板块的清单一次拉全（`comic/sources.js`、`novel/sources.js`、`video/sources.js`）。
+被 Cloudflare 拦下的站点按老规矩抛 `NEED_WEBVIEW_VERIFY`，在 App 里用「网页视图」过一次校验即可——
+校验取回的会话（`cf_clearance`）由 App 保管，脚本不接触 Cookie。

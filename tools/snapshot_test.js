@@ -10,9 +10,14 @@ var assert = require('node:assert/strict');
 var fs = require('node:fs');
 var path = require('node:path');
 var nodeTest = require('node:test');
+// 用例名前缀 → 脚本文件：脚本从仓库移除后，它的用例自动跳过（而不是整片红掉、
+// 把真正的回归埋住）。删源时记得把对应快照一并清理。
+var REMOVED = { 'gmh:': 'comic/gmh_comic.js', 'jcomic:': 'comic/jcomic_comic.js', '92mh:': 'comic/92mh_comic.js' };
 function test(name, fn) {
-  if (name.indexOf('gmh:') === 0 && !fs.existsSync(path.join(__dirname, '..', 'comic', 'gmh_comic.js'))) {
-    return nodeTest(name, { skip: '该源已从仓库移除' }, fn);
+  for (var prefix in REMOVED) {
+    if (name.indexOf(prefix) === 0 && !fs.existsSync(path.join(__dirname, '..', REMOVED[prefix]))) {
+      return nodeTest(name, { skip: REMOVED[prefix] + ' 已从仓库移除' }, fn);
+    }
   }
   return nodeTest(name, fn);
 }
