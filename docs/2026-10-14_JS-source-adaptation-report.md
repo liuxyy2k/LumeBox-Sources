@@ -59,7 +59,7 @@ P-02，path_type=callflow：播放页 → 提取实时 source 地址 → 按 siz
 
 禁漫天堂（18comic.vip）以站点的 `thumb-overlay-albums`、`book-name`、`btn-toolbar`、`/photo/` 和 `/media/photos/` 结构取列表、章节与图片。E-06：公开 `jquery.photo-0.4.js` 的 `get_num` 与 `onImageLoaded`；repro_command 为 `node --test tools/requested_sources_test.js`，content_hash 为 n/a（线上会更新）。F-05：severity=n/a_re，evidence_ids=E-06，confidence=高，location=禁漫阅读器，status=已实现原生图片横条还原。P-03，path_type=callflow：读取 scramble_id 和章节 ID → MD5 尾字符按 ID 区间计算横条数 → 图片管线反向排列横条并保留首条余数行 → 缓存还原后的图片。
 
-测试覆盖 268850、421925、421926 分界点，低 ID 与 GIF 不还原，并以独立逐行色块检查整数高度和带余数高度的每一个像素行。新版 App 完整回归 1630 项通过；这个处理不能证明所有收费章节或所有 CDN 在线。
+测试覆盖 268850、421925、421926 分界点，低 ID 与 GIF 不还原，并以独立逐行色块检查整数高度和带余数高度的每一个像素行。新版 App 完整回归 1631 项通过；这个处理不能证明所有收费章节或所有 CDN 在线。
 
 ## 北觅影视请求头与限制
 
