@@ -19,7 +19,10 @@ var H = {
   text: function(node) {if(!node)return '';if(node.tag==='#text')return this.entity(node.raw);if(node.tag==='script'||node.tag==='style')return '';return this.clean(node.children.map(function(n){return H.text(n);}).join(/^(?:p|div|section|article|li|br)$/.test(node.tag)?'\n':''));},
   first: function(node,pred) {return this.all(node,pred)[0];},
   links: function(node,pattern) {return this.all(node,function(n){return n.tag==='a'&&pattern.test(n.attrs.href||'');});},
-  image: function(node) {var img=this.first(node,function(n){return n.tag==='img';});return img?this.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs['data-lazy-src']||img.attrs.src,this.base+'/'):null;},
+  image: function(node) {var img=this.first(node,function(n){return n.tag==='img';});if(!img)return null;var url=this.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs['data-lazy-src']||img.attrs.src,this.base+'/');return this.isPlaceholder(url)?null:url;},
+  /// 站点自己的「没有封面」占位图（金书阁实测：`/packs/mccms/empty.png`）。
+  /// 交给 App 只会得到一张空白/破图，不如如实返回 null，让 App 用书名占位封面。
+  isPlaceholder: function(url) {return /(?:empty|no[-_]?(?:img|cover|pic)|placeholder|default[-_]?cover|nophoto)\.(?:png|jpe?g|gif|webp)(?:\?|$)/i.test(String(url||''));},
   title: function(tree) {var h=this.first(tree,function(n){return n.tag==='h1';});if(h)return this.text(h);var meta=this.first(tree,function(n){return n.tag==='meta'&&(n.attrs.property==='og:title'||n.attrs.name==='title');});if(meta)return meta.attrs.content;return this.text(this.first(tree,function(n){return n.tag==='title';}));},
   cover: function(tree) {var n=this.first(tree,function(n){return n.tag==='meta'&&n.attrs.property==='og:image';});return n?this.abs(n.attrs.content):null;},
   unique: function(items) {var seen={};return items.filter(function(i){if(!i.id||seen[i.id]||!i.title)return false;seen[i.id]=true;return true;});},

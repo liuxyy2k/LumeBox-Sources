@@ -28,13 +28,41 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://www.sansi04.com";H.name="三四漫画";
+// 站点现在的正式域名是 3004gg（列表里的链接、图床 Referer 都用它）；
+// sansi04 是旧域名，只作兜底。**图床 `imgs.34img.cc` 认 Referer 是不是 3004gg**：
+// 带 sansi04 的 Referer（或干脆不带）一律 404 —— 真机「三四漫画没封面」的根因。
+// 因此封面请求头单独用 [H.imageHeaders]，与页面请求用的 Referer 分开。
+H.base="https://www.3004gg.com";H.name="三四漫画";
+H.canonical="https://www.3004gg.com";
+H.imageHeaders=function(){return {'User-Agent':this.ua,'Referer':this.canonical+'/'};};
 var LumeSource={id:"sansi_comic",name:"三四漫画",version:"1.0.0",category:"comic",
 async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
 
-async categories(){return [{id:'/',title:'最新'},{id:'/item/%e7%9f%ad%e7%af%87%e6%bc%ab%e7%94%bb',title:'短篇'},{id:'/item/%e8%bf%9e%e8%bd%bd',title:'连载'},{id:'/item/%e5%ae%8c%e7%bb%93',title:'完结'}];},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/';if(p>1)u=u.replace(/\/$/,'')+'/page/'+p;if(a.keyword)u='/?s='+encodeURIComponent(a.keyword);var t=H.tree(await H.get(u));var items=H.all(t,function(n){return n.tag==='article'&&H.cls(n,'excerpt');}).map(function(n){var title=H.first(n,function(x){return x.tag==='h2';}),link=H.links(title||n,/\/post\/\d+\.html/)[0];return link?{id:link.attrs.href,title:H.text(title||link),cover:H.image(n),coverHeaders:H.headers()}:null;}).filter(Boolean);return {items:H.unique(items),hasMore:H.next(t,p)};},
-async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t)||H.image(H.first(t,function(n){return H.cls(n,'content');})||t),coverHeaders:H.headers()};},
+/// 分类（用户口径：分类要按网页给全）：站点的**标签页** `/item/<标签>` 就是它的
+/// 分类体系（导航与每张卡片的 `post-tags` 都指向这里）。标签从首页实时抓，
+/// 抓不到时用内置的已知标签兜底——两边都不编造站上没有的分类。
+async categories(){
+  var known=[['短篇漫画','短篇'],['连载','连载'],['完结','完结'],['都市','都市'],['精品漫画','精品'],['校园','校园']];
+  var found=[],seen={};
+  try{
+    var html=await H.get('/');
+    var re=/\/item\/([^"'<>]{1,64})"[^>]*>([^<]{1,14})</g,m;
+    while((m=re.exec(html))!==null){
+      var id=decodeURIComponent(m[1]).replace(/\/page\/\d+$/,'');
+      var title=H.clean(m[2]);
+      if(!id||!title||seen[id])continue;
+      if(/^(上一页|下一页)$/.test(title))continue;
+      seen[id]=true;
+      found.push({id:'/item/'+encodeURIComponent(id),title:title});
+    }
+  }catch(error){
+    console.warn('[sansi] 标签抓取失败，退回内置分类：'+error);
+  }
+  if(!found.length)found=known.map(function(x){return {id:'/item/'+encodeURIComponent(x[0]),title:x[1]};});
+  return [{id:'/',title:'最新'}].concat(found);
+},
+async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/';if(p>1)u=u.replace(/\/$/,'')+'/page/'+p;if(a.keyword)u='/?s='+encodeURIComponent(a.keyword);var t=H.tree(await H.get(u));var items=H.all(t,function(n){return n.tag==='article'&&H.cls(n,'excerpt');}).map(function(n){var title=H.first(n,function(x){return x.tag==='h2';}),link=H.links(title||n,/\/post\/\d+\.html/)[0];return link?{id:link.attrs.href,title:H.text(title||link),cover:H.image(n),coverHeaders:H.imageHeaders()}:null;}).filter(Boolean);return {items:H.unique(items),hasMore:H.next(t,p)};},
+async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t)||H.image(H.first(t,function(n){return H.cls(n,'content');})||t),coverHeaders:H.imageHeaders()};},
 async chapters(a){var t=H.tree(await H.get(a.id));return H.unique(H.links(t,/\/post\/\d+\/page-\d+\.html/).map(function(n){return {id:n.attrs.href,title:H.text(n)};}));},
 async content(a){var page=H.abs(a.chapterId),t=H.tree(await H.get(page));var scope=H.first(t,function(n){return H.cls(n,'article-content');})||t;var images=H.all(scope,function(n){return n.tag==='img'&&!!n.attrs['data-src'];}).map(function(n){return H.abs(n.attrs['data-src']);});return H.imageContent(images,page);}
 

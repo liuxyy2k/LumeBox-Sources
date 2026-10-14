@@ -160,16 +160,13 @@ __chapterText: function (node) {
   return H.clean(H.text(node));
 },
 
-/// 首页：最新小说（站点首页那块）+ 两块分类（玄幻 / 言情）。
-async home() {
-  var boards = [];
-  try {
-    var tree = H.tree(await H.get('/'));
-    var self = this;
-    var items = [];
-    H.all(tree, function (n) {
-      return n.tag === 'li' && H.cls(n, 'last_li');
-    }).forEach(function (li) {
+/// 首页「最新」那一块（`li.last_li`）——home() 与「没选分类」时的 list() 共用。
+__latestFromHome: function (tree) {
+  var self = this;
+  var items = [];
+  H.all(tree, function (n) {
+    return n.tag === 'li' && H.cls(n, 'last_li');
+  }).forEach(function (li) {
       var link = H.first(li, function (x) {
         return x.tag === 'a' && /^\/novel\/\d+\.html$/.test(x.attrs.href || '');
       });
@@ -183,8 +180,15 @@ async home() {
         cover: null,
         subtitle: author ? '作者：' + H.clean(H.text(author)) : null
       });
-    });
-    items = H.unique(items);
+  });
+  return H.unique(items);
+},
+
+/// 首页：最新小说（站点首页那块）+ 两块分类（玄幻 / 言情）。
+async home() {
+  var boards = [];
+  try {
+    var items = this.__latestFromHome(H.tree(await H.get('/')));
     if (items.length) boards.push({ title: '最新小说', items: items.slice(0, 12) });
   } catch (error) {
     // 首页抓不到不算致命：下面两块分类照旧。
@@ -235,7 +239,13 @@ async list(argument) {
     return { items: this.__searchItems(H.tree(raw)), hasMore: false };
   }
   var category = String(args.categoryId == null ? '' : args.categoryId).trim();
-  if (!/^\d+$/.test(category)) throw new Error('少数派文库：无效分类');
+  // 没有分类（宿主还没选，或切源后旧分类被清掉）时退回**首页最新**，
+  // 不再抛「无效分类」——真机日志里 `LumeSource.list 失败: 无效分类` 就是这里，
+  // 用户看到的是一屏脚本错误，而不是列表。
+  if (!/^\d+$/.test(category)) {
+    var latest = this.__latestFromHome(H.tree(await H.get('/')));
+    return { items: latest, hasMore: false };
+  }
   var tree = H.tree(await H.get('/booksort/' + category + '/' + page + '.html'));
   return { items: this.__items(tree), hasMore: this.__hasNext(tree, category, page) };
 },
