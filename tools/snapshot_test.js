@@ -743,3 +743,34 @@ test('jpyy2: 手机域可用后记住它（下一次请求不再重复试错）'
   await source.categories();
   assert.equal(attempts.length, 1, '第二次应直接用记住的域');
 });
+
+
+test('mycomic: WebKit序列化后的章节JSON与封面/正文请求头', async function () {
+  var source = loadSource('mycomic_comic.js');
+  var raw = source.__chapters(snapshot('mycomic_detail.html'));
+  var rendered = snapshot('mycomic_detail.html').replace(/"/g, '&quot;');
+  assert.equal(source.__chapters(rendered).length, raw.length);
+  assert.ok(raw.length > 0);
+  stubBody(source, snapshot('mycomic_list.html'));
+  var list = await source.list({page:1});
+  assert.match(list.items[0].coverHeaders.Referer, /^https:\/\/mycomic.com/);
+  stubBody(source, snapshot('mycomic_chapter.html'));
+  var content = await source.content({id:'1',chapterId:'1'});
+  assert.equal(Object.keys(content.imageHeaders).length, content.images.length);
+});
+
+test('jcomic:签名刷新重读来源页并匹配原图片，不给图床发来源页元数据', async function () {
+  var source = loadSource('jcomic_comic.js');
+  var html = snapshot('jcomic_cat.html');
+  var item = source.__listItems(html)[0];
+  var calls = 0;
+  source.http = {get: async function(url) { calls++; assert.ok(url.includes('_lume_refresh=')); return {status:200,body:html}; }};
+  var argument = {url:item.cover.split('?')[0]+'?expired=1',page:'https://jcomic.net/cat/test/1'};
+  assert.equal(await source.refreshImage(argument), item.cover);
+  assert.equal(await source.refreshImage(argument), item.cover);
+  assert.equal(calls, 1);
+  await assert.rejects(()=>source.refreshImage({url:item.cover,page:'https://other.example/'}));
+  stubBody(source, snapshot('jcomic_page_single.html'));
+  var content = await source.content({id:'/page/test',chapterId:'1'});
+  assert.equal(Object.keys(content.imageHeaders).length, content.images.length);
+});

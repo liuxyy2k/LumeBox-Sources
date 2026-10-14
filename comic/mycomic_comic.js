@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mycomic_comic","name":"MYCOMIC","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"mycomic_comic","name":"MYCOMIC","version":"1.0.1","category":"comic"}
 
 // 站点：https://mycomic.com/cn （简体中文站；同一站另有繁体版 mycomic.com）
 //
@@ -47,7 +47,7 @@ var MAX_FILTER_OPTIONS = 60; // 单个筛选组最多收多少选项
 var LumeSource = {
   id: 'mycomic_comic',
   name: 'MYCOMIC',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -171,6 +171,7 @@ var LumeSource = {
       id: id,
       title: info.title,
       cover: info.cover,
+      coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: info.subtitle,
       description: info.description,
       tags: info.tags,
@@ -206,7 +207,9 @@ var LumeSource = {
       throw new Error('MYCOMIC：章节页没认出图片（' + chapterId + '，' + html.length
         + ' 字符）——站点可能改了正文标记');
     }
-    return { kind: 'images', images: images };
+    var imageHeaders = {};
+    for (var i = 0; i < images.length; i++) imageHeaders[images[i]] = { 'Referer': BASE_URL + '/' };
+    return { kind: 'images', images: images, imageHeaders: imageHeaders };
   },
 
   // ---------------------------------------------------------------- 内部工具
@@ -240,6 +243,7 @@ var LumeSource = {
         id: id,
         title: this.__clean(altMatch ? altMatch[1] : id),
         cover: coverMatch ? this.__absolute(coverMatch[1]) : '',
+        coverHeaders: { 'Referer': BASE_URL + '/' },
         subtitle: this.__clean(latestMatch ? latestMatch[1] : '')
       });
     }
@@ -267,6 +271,7 @@ var LumeSource = {
     return {
       title: this.__clean(titleMatch ? titleMatch[1] : ''),
       cover: coverMatch ? this.__absolute(coverMatch[1]) : '',
+        coverHeaders: { 'Referer': BASE_URL + '/' },
       subtitle: this.__clean(subtitleMatch ? subtitleMatch[1] : ''),
       status: this.__clean(statusMatch ? statusMatch[1] : ''),
       author: this.__clean(authorMatch ? authorMatch[1] : ''),
@@ -279,9 +284,9 @@ var LumeSource = {
 
   /// 目录：Alpine 的 `chapters: [ {id, title}, … ]`（站点倒序 → 这里翻成升序）。
   __chapters(html) {
-    var marker = html.indexOf('chapters: [');
-    if (marker < 0) return [];
-    var start = html.indexOf('[', marker);
+    var marker = /chapters\s*:\s*\[/.exec(html);
+    if (!marker) return [];
+    var start = html.indexOf('[', marker.index);
     var depth = 0;
     var end = -1;
     for (var i = start; i < html.length; i++) {
@@ -298,7 +303,7 @@ var LumeSource = {
     if (end < 0) return [];
     var raw;
     try {
-      raw = JSON.parse(html.slice(start, end));
+      raw = JSON.parse(html.slice(start, end).replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/g, '&'));
     } catch (error) {
       console.warn('[mycomic] 章节 JSON 解析失败：' + error);
       return [];

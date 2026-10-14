@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.0.2","category":"comic"}
 
 // 站点：https://jcomic.net（Bootstrap 站 + ccat 结构；桌面/移动同一套标记）
 //
@@ -68,7 +68,7 @@ var HOME_BUDGET_MS = 6000;   // 首页软截止（沙箱单次调用预算是 3�
 var LumeSource = {
   id: 'jcomic_comic',
   name: 'JComic',
-  version: '1.0.1',
+  version: '1.0.2',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -148,6 +148,7 @@ var LumeSource = {
       : '/cat/' + encodeURIComponent(category) + '/' + page;
     var html = await this.__get(url);
     var items = this.__listItems(html);
+    for (var i = 0; i < items.length; i++) items[i].coverHeaders['X-Lume-Image-Page'] = this.__absolute(url);
     // 常态满页 30 条；不足 90% 就当最后一页（比精确读分页器稳妥：站点的
     // `&raquo;` 末页也会在，只有它是 `disabled` 才说明到头——见 __hasNextPage）。
     return { items: items, hasMore: this.__hasNextPage(html, page, items.length) };
@@ -168,7 +169,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: info.cover,
-      coverHeaders: { 'Referer': BASE_URL + '/' },
+      coverHeaders: { 'Referer': BASE_URL + '/', 'X-Lume-Image-Page': this.__absolute(this.__encPath(id)) },
       subtitle: info.categories.join(' · '),
       description: tags.join(' · '),
       tags: info.categories.slice(0, MAX_TAGS),
@@ -200,7 +201,32 @@ var LumeSource = {
       throw new Error('JComic：正文页没认出图片（' + pagePath + '，'
         + html.length + ' 字符）——站点可能改了加密串格式，把运行日志发回来');
     }
-    return { kind: 'images', images: images };
+    var imageHeaders = {};
+    for (var i = 0; i < images.length; i++) imageHeaders[images[i]] = { 'Referer': BASE_URL + '/', 'X-Lume-Image-Page': this.__absolute(this.__encPath(pagePath)) };
+    return { kind: 'images', images: images, imageHeaders: imageHeaders };
+  },
+
+  // Signed image URLs expire after 60 seconds; refresh the originating page.
+  async refreshImage(argument) {
+    var page = String(argument && argument.page || '');
+    if (page.indexOf(BASE_URL + '/') !== 0) throw new Error('图片来源页不属于当前站点');
+    var now = Date.now();
+    this.__freshImages = this.__freshImages || {};
+    var keys = Object.keys(this.__freshImages);
+    for (var k = 0; k < keys.length; k++) if (now - this.__freshImages[keys[k]].at > 20000) delete this.__freshImages[keys[k]];
+    var cached = this.__freshImages[page];
+    if (!cached || now - cached.at > 20000) {
+      cached = { at: now, pending: this.__get(page + (page.indexOf('?') >= 0 ? '&' : '?') + '_lume_refresh=' + now) };
+      this.__freshImages[page] = cached;
+    }
+    var html;
+    try { html = await cached.pending; } catch (error) { delete this.__freshImages[page]; throw error; }
+    var urls = this.__images(html);
+    var pattern = /<img[^>]+src=["']([^"']+)["']/g, match;
+    while ((match = pattern.exec(html)) !== null) urls.push(this.__absolute(match[1]));
+    var wanted = String(argument.url || '').split('?')[0];
+    for (var i = 0; i < urls.length; i++) if (urls[i].split('?')[0] === wanted) return urls[i];
+    return null;
   },
 
   // ---------------------------------------------------------------- 内部工具
@@ -416,7 +442,7 @@ var LumeSource = {
   },
 
   __absolute(url) {
-    var value = String(url || '').trim();
+    var value = String(url || '').trim().replace(/&amp;/g, '&');
     if (!value) return '';
     if (value.indexOf('http') === 0) return value;
     if (value.indexOf('//') === 0) return 'https:' + value;
