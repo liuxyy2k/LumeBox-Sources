@@ -10,7 +10,7 @@
 
 | 验证方式 | 结果与边界 |
 | --- | --- |
-| Node 脚本回归 | 55 项通过；6 项因为已移除旧源而跳过，不算通过 |
+| Node 脚本回归 | 56 项通过；6 项因为已移除旧源而跳过，不算通过 |
 | 原生 QuickJS | 18 个新增或重写脚本全部加载成功，接口与 HTML 解析探针通过 |
 | 实际普通 HTTP 响应 | 楠楠漫画、AliceSW、Book18、MM-CG、金书阁、三四漫画、XChina、ASMR Honey、亚洲声色、漫蛙、Z8PT、AACCOO 取到列表和至少一章内容/播放地址 |
 | 验证后浏览器 DOM | Hanime1 的 720/480/1080 三档地址结构、HHHBook 文章正文、Hlib `pre#content` 正文确认 |
@@ -23,7 +23,7 @@
 
 | E-id | source_ref | repro_command | content_hash |
 | --- | --- | --- | --- |
-| E-01 | `tools/requested_sources_test.js` 脱敏结构与独立 Node AES 测试向量 | `node --test tools/requested_sources_test.js` | e9eca39fa05ea2770c335fd938432d1429b2c2f4ff9a43bf0d9b61b05f186ccd |
+| E-01 | `tools/requested_sources_test.js` 脱敏结构与独立 Node AES 测试向量 | `node --test tools/requested_sources_test.js` | 5ee30d1204e39d97db130f09d8f1bd0d02998d8c5de3a49baddd42da768630db |
 | E-02 | 漫蛙公开 `/static/js/ch.js` 的图片解码代码 | 打开公开阅读页，检查 `.content-img` 的 `data-r-src` 和阅读器资源；运行 E-01 图片元数据测试 | n/a：线上内容会更新 |
 | E-03 | Z8PT 的公开 `zipaiimg.js` 和 `.showimg[rdata]` | 运行 E-01 的 ECB 地址解码测试 | n/a：线上内容会更新 |
 | E-04 | 听书网公开阅读器脚本及 `/api/mapi/play` 调用 | 对公开播放器接口核对 nid/cid/sort、sc/sp 字段；本地离线探针不发布会话数据 | n/a：线上内容会更新 |
@@ -60,3 +60,7 @@ P-02，path_type=callflow：播放页 → 提取实时 source 地址 → 按 siz
 禁漫天堂（18comic.vip）以站点的 `thumb-overlay-albums`、`book-name`、`btn-toolbar`、`/photo/` 和 `/media/photos/` 结构取列表、章节与图片。E-06：公开 `jquery.photo-0.4.js` 的 `get_num` 与 `onImageLoaded`；repro_command 为 `node --test tools/requested_sources_test.js`，content_hash 为 n/a（线上会更新）。F-05：severity=n/a_re，evidence_ids=E-06，confidence=高，location=禁漫阅读器，status=已实现原生图片横条还原。P-03，path_type=callflow：读取 scramble_id 和章节 ID → MD5 尾字符按 ID 区间计算横条数 → 图片管线反向排列横条并保留首条余数行 → 缓存还原后的图片。
 
 测试覆盖 268850、421925、421926 分界点，低 ID 与 GIF 不还原，并以独立逐行色块检查整数高度和带余数高度的每一个像素行。新版 App 完整回归 1630 项通过；这个处理不能证明所有收费章节或所有 CDN 在线。
+
+## 北觅影视请求头与限制
+
+北觅影视更新到 1.1.1。旧实现为媒体强加站点 Referer 和 `Mozilla/5.0`，这不是播放数据声明的要求，现改成只转发播放数据提供的头；两种情况的回归测试通过。用户原日志记录 AVPlayer / CoreMedia HTTP 403；本地重新请求播放元数据时站点返回 HTTP 567，未取得新媒体链接，因此未宣称已恢复实播。默认请求头修正不能解除来源服务的拒绝，仍需在手机上复测并核对新日志。

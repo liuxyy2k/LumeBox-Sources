@@ -82,7 +82,7 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | novel/xnovel_novel.js | `xnovel_novel` | 夜读小说 | 1.0.0 | Tailwind 站：列表 `a.list-card`（`/novels/{N}`、`/tag/{slug}/{N}`、`/search?q=&page=`）；正文取 `article#read-article` 的 `<p>` 并剔掉 `div.extra_c_2` 广告块；目录第 1 章要做「工具条 / 开始阅读」去噪；正常页里带 CF 的 jsd 信标**不能**当校验页判据，反诈拦截页（200 + 3KB）会给出可读原因 |
 | video/gztv5_video.js | `gztv5_video` | 瓜子影视 | 3.0.0 | Nuxt SPA + 独立 API；偶发 CF |
 | video/dage_video.js | `dage_video` | 大哥视频 | 2.3.0 | 响应是「编码信封」，脚本内含纯 JS 解码 |
-| video/luttt_video.js | `luttt_video` | 北觅影视 | 1.1.0 | 苹果CMS：筛选条（地区/年份/语言/字母/排序）从列表页实时抓；直连可用（境外出口会被 567 拦） |
+| video/luttt_video.js | `luttt_video` | 北觅影视 | 1.1.1 | MacCMS 页面与播放地址适配；媒体只使用播放数据明确声明的请求头，不再强加站点 Referer 和通用 UA。当前桌面网络返回 HTTP 567，用户旧日志为播放器 HTTP 403，实际播放仍需手机复测。 |
 | video/xanimu_video.js | `xanimu_video` | XAnimu | 1.0.0 | 成人动漫视频站（WordPress + kolortube 主题，中文前缀 `/zh-CN/`）：列表/分类 `?filter=latest\|most-viewed\|longest`、搜索 `?s=`、详情 `?p={数字id}`；播放是 nosofiles CDN 的两条 mp4（high/low，带站点 `verify` 令牌）；**多镜域**（xanimu.art 首选 / .one / .com 同站，按可用性自动换并记住），域名在国内常被连接重置 |
 | video/jpyy2_video.js | `jpyy2_video` | 金牌影院 | 1.0.1 | jpyy2.com（= vv3nwjk.com）：自建 JSON API + 签名头（md5→sha1，脚本内实现）。**主域挂在 reCAPTCHA v3 WAF 后面（521），手机域 `m.vv3nwjk.com` 没有**——脚本按「手机域 → 主域 → 镜域」试，全被拦才抛 `WAF_RECAPTCHA_V3` 提示配桥接；分页参数是 `pageNum` |
 | video/chaturbate_video.js | `chaturbate_video` | Chaturbate 直播 | 1.0.0 | 成人直播站（18+）：列表/搜索走站点 TS 房间接口、详情读房间页 og、播放地址取 `/get_edge_hls_url_ajax/`（**要先取房间页拿 csrftoken 再带 `X-CSRFToken`+`Cookie` POST**）；「章节」= 两条带宽线（自动/低码率）；主路径失败回落到房间页内嵌 m3u8。开发机网络连不上该站，解析逻辑用打桩行为测试跑通，导入后建议先「测试连通性」 |

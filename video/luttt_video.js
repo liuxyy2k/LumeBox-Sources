@@ -1,4 +1,4 @@
-// LumeSource: {"id":"luttt_video","name":"北觅影视","version":"1.1.0","category":"video"}
+// LumeSource: {"id":"luttt_video","name":"北觅影视","version":"1.1.1","category":"video"}
 
 // 站点：https://v.luttt.com （苹果CMS 10 + conch/hl 模板，服务端渲染 HTML）
 //
@@ -17,7 +17,7 @@
 //     `hl-dc-pic span.hl-item-thumb` 的 data-original，简介是 `meta[name=description]`，
 //     选集在 `ul#hl-plays-list li a[href="/vodplay/{id}-{line}-{n}.html"]`。
 //   · 播放：`/vodplay/{id}-{line}-{n}.html` 内联 `player_aaaa = {...}` JSON，
-//     `url` 字段就是 m3u8 直链（m3u8 实测无 Referer 也能播，这里仍带上以防防盗链）。
+//     `url` 字段就是 m3u8 直链；只使用播放数据明确声明的媒体请求头。
 //
 // 相对地址全部用 __absolute 补齐；失败抛可读中文错误。
 
@@ -27,7 +27,7 @@ var PAGE_SIZE = 36;
 var LumeSource = {
   id: 'luttt_video',
   name: '北觅影视',
-  version: '1.1.0',
+  version: '1.1.1',
   category: 'video',
 
   async categories() {
@@ -226,7 +226,8 @@ var LumeSource = {
     return {
       kind: 'video',
       url: playUrl,
-      headers: { 'Referer': BASE_URL + '/', 'User-Agent': 'Mozilla/5.0' }
+      headers: parsed.headers && typeof parsed.headers === 'object' && !Array.isArray(parsed.headers)
+        ? parsed.headers : {}
     };
   },
 

@@ -121,3 +121,12 @@ test('AACCOO keeps only the selected book chapters, deduplicates and orders them
   const rows = await s.chapters({id:'/book/1/'});
   assert.deepEqual(Array.from(rows, x => x.id), ['/book/1/10.html','/book/1/20.html']);
 });
+
+test('Bemi does not invent media Referer or generic UA and preserves declared headers', async () => {
+  for(const headers of [undefined, {'Referer':'https://media.example/player/'}]) {
+    const s=load('luttt','video',{'/vodplay/1-1-1.html':
+      '<script>var player_aaaa='+JSON.stringify({url:'https://media.example/index.m3u8',headers})+';</script>'});
+    const c=await s.content({id:'1',chapterId:'/vodplay/1-1-1.html'});
+    assert.deepEqual(JSON.parse(JSON.stringify(c.headers)),headers||{});
+  }
+});
