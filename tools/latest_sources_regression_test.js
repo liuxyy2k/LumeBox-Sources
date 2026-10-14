@@ -368,15 +368,82 @@ test('sspwk: 正文取 div#nr1 的段落，站点自己那条「最新通知」�
 
 test('sspwk: 首页给「最新小说」板块，分类 12 个', async () => {
   const source = stub(loadSource('novel/sspwk_novel.js'), [
-    { match: 'sspwk.vip/', body: snapshot('sspwk_home.html') },
+    // 具体地址排在域名兜底之前：路由按顺序匹配。
     { match: '/booksort/3/1.html', body: snapshot('sspwk_booksort.html') },
     { match: '/booksort/5/1.html', body: snapshot('sspwk_booksort.html') },
+    { match: 'sspwk.vip/', body: snapshot('sspwk_home.html') },
   ]);
   const boards = await source.home();
-  assert.ok(boards.length >= 1, '首页至少一块');
+  assert.equal(boards.length, 3, '最新小说 + 玄幻 + 言情');
   assert.equal(boards[0].title, '最新小说');
   assert.ok(boards[0].items.length >= 8, '最新小说条数: ' + boards[0].items.length);
   const categories = await source.categories();
   assert.equal(categories.length, 12);
   assert.equal(categories[0].title, '耽美');
+});
+
+// ------------------------------------------------------------------ 契约：四个源都提供 home / categories
+
+test('四个新源都满足源契约，且 home() 在真快照上跑得出板块', async () => {
+  const cases = [
+    {
+      file: 'comic/rouman5_comic.js',
+      id: 'rouman5_comic',
+      category: 'comic',
+      routes: [
+        { match: '/books', body: snapshot('rouman5_books.html') },
+      ],
+      boards: 3,
+    },
+    {
+      file: 'video/hanime_video.js',
+      id: 'hanime_video',
+      category: 'video',
+      routes: [{ match: '/', body: snapshot('hanime_home.html') }],
+      boards: 4,
+    },
+    {
+      file: 'comic/fxcomic_comic.js',
+      id: 'fxcomic_comic',
+      category: 'comic',
+      routes: [
+        { match: 'freexcomic.com', body: snapshot('fxcomic_publish.html') },
+        { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_booklist.html') },
+        { match: 'booklist', body: snapshot('fxcomic_booklist.html') },
+        { match: '/update', body: snapshot('fxcomic_update.html') },
+      ],
+      // 这块桩只覆盖「全部」与「更新」两个入口，另外两个入口的响应没派上——被
+      // home() 的逐块 try/catch 跳过；而「更新」与「全部」同源时脚本会去重，所以是 2 块。
+      boards: 2,
+    },
+    {
+      file: 'novel/sspwk_novel.js',
+      id: 'sspwk_novel',
+      category: 'novel',
+      routes: [
+        // 具体地址排在域名兜底之前：路由按顺序匹配。
+        { match: '/booksort/3/1.html', body: snapshot('sspwk_booksort.html') },
+        { match: '/booksort/5/1.html', body: snapshot('sspwk_booksort.html') },
+        { match: 'sspwk.vip/', body: snapshot('sspwk_home.html') },
+      ],
+      boards: 3,
+    },
+  ];
+  for (const item of cases) {
+    const source = stub(loadSource(item.file), item.routes);
+    assert.equal(source.id, item.id, item.file);
+    assert.equal(source.category, item.category, item.file);
+    for (const method of ['home', 'categories', 'list', 'detail', 'chapters', 'content']) {
+      assert.equal(typeof source[method], 'function', item.file + ':' + method);
+    }
+    const categories = await source.categories();
+    assert.ok(categories.length >= 3, item.file + ' 分类数: ' + categories.length);
+    assert.ok(categories.every((c) => c.id !== undefined && c.title), item.file + ' 分类项要有 id/title');
+    const boards = await source.home();
+    assert.ok(boards.length >= item.boards, item.file + ' 板块数: ' + boards.length);
+    for (const board of boards) {
+      assert.ok(board.title && Array.isArray(board.items) && board.items.length, item.file + ' 板块要带标题与条目');
+      assert.ok(board.items.every((i) => i.id && i.title), item.file + ' 条目要有 id/title');
+    }
+  }
 });
