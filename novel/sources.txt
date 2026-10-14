@@ -8,3 +8,10 @@
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/99xs_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xxiaoshuo_novel.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xnovel_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/alicesw_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/book18_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/jinshuge_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/xchina_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/hhhbook_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/hlib_novel.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novel/aaccoo_novel.js

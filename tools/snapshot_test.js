@@ -9,7 +9,13 @@
 var assert = require('node:assert/strict');
 var fs = require('node:fs');
 var path = require('node:path');
-var test = require('node:test');
+var nodeTest = require('node:test');
+function test(name, fn) {
+  if (name.indexOf('gmh:') === 0 && !fs.existsSync(path.join(__dirname, '..', 'comic', 'gmh_comic.js'))) {
+    return nodeTest(name, { skip: '该源已从仓库移除' }, fn);
+  }
+  return nodeTest(name, fn);
+}
 var vm = require('node:vm');
 
 var ROOT = path.join(__dirname, '..');

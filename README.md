@@ -74,7 +74,7 @@ tools/   快照自检脚本（Node：node --test tools/snapshot_test.js）
 | comic/gmh_comic.js | `gmh_comic` | G社漫画 | 1.0.0 | Astro 静态前端 + 自建 API（v2.apikk.top）：列表 `a[href=/manga/{slug}]`（18/页、`/manga/page/N`）；详情走作品页 `data-mid` + `/api/v2/manga/get`；**正文图片是加密串，脚本把站点自己的 `/assets/runtime/chapter-decoder.js` 取进沙箱、配最小浏览器垫片后 eval 再调它的 `r()`**（不逆向、不改写它的算法）；**站点没有搜索**，关键词如实拒绝 |
 | comic/mycomic_comic.js | `mycomic_comic` | MYCOMIC | 1.0.1 | 服务端渲染（30/页、共 1845 页）；筛选/排序就是站点自己的查询串（`filter[tag|audience|country|end|year|author]`、`sort=-update\|-views`），分组与选项从列表页实时抓；目录在页面的 Alpine `chapters:` JSON 里（站点倒序 → 脚本翻成升序）；**整站在 Cloudflare 托管校验后面**，被拦时抛 `NEED_WEBVIEW_VERIFY` 走 App 的网页视图流程 |
 | comic/jcomic_comic.js | `jcomic_comic` | JComic | 1.0.2 | 条目有 `/eps/`（多话）与 `/page/`（单页）两形态，**作品 id 存路径**；正文图是 `JCOMIC_TRAPS_` 倒序 base64，脚本内解码；**图片直链是 60 秒签名 S3 地址**（站点限制，见脚本头部） |
-| comic/bakamh_comic.js | `bakamh_comic` | 巴卡漫画 | 1.1.0 | BAKAMH（Madara 系，**多域名**）：**用真实浏览器取回真站页面存档后逐条核过**。域名按站点自己的发布页（https://bakamh.app）共 5 个：bakamh.com / bakamh.ru / baka1-3.cfd —— 脚本按顺序试，**502/404 视为该域名不通自动换下一个**，全都不通时**去读发布页**捞最新域名（换域名不用改脚本）；实测 2026-10-14 只有 baka3.cfd 可用，其余四个是 nginx 502（站点自己的后端故障）。**整站挂 Cloudflare**：App 侧遇到会抛 `NEED_WEBVIEW_VERIFY`，用「网页视图」过一次校验即可。结构：分类=站点自己的板块（/manhwa/ /bl/ /gl/ /anime/ /allages/ /en-manga/ /on-going/ /end/）、列表 `/板块/[/page/N/]` 卡片 `div.item-thumb`、搜索走 **AJAX**（`admin-ajax.php` + `wp-manga-search-manga`，服务端 HTML 里一条结果都没有）、详情 `/manga/<slug>/`、章节按**本作品路径**取（详情页底部还有别的作品的章节推荐，不卡路径实测 16 话会混成 33 条）、按 `c-<话号>` 升序、正文按 Madara 的 `page-break` 分页块逐页取图、`mkjp-ea-lock` 登录锁如实提示。验证：对着真站存档跑通 **14 项断言**（列表 24/页 ×2、搜索 68 条、详情、16 话升序、正文 30 张图、登录锁、CF 标记、502 回退、发布页发现新域名）|
+| comic/bakamh_comic.js | `bakamh_comic` | 巴卡漫画 | 2.0.0 | 以 `https://bakamh.com/` 重新实现 Madara 页面适配；分页、AJAX 搜索、当前作品的章节去重与顺序、独立图片 Referer / UA、实际登录锁识别。主域名 502/404 时尝试发布页已列出的镜像；遇到网页验证如实提示。重写版 7 项脱敏回归通过；浏览器正常首页和详情结构已核对，手机端仍需完成自己的验证。 |
 | comic/hanman18_comic.js | `hanman18_comic` | HANMAN18 | 1.0.0 | hanman18.com（禁漫天堂）：**用真实浏览器取回真站页面存档后逐条核过**，不照抄旧模板。列表 `div.story_item`（**真站有两套卡片模板**：顶部轮播 `story_name`、下方网格 `mg_name`，两套都认）；最新更新第 1 页 `/`、第 2 页起 `/latest-release/<页>`；漫画列表 `/list-manga/<页>`（20/页）；搜索 `/list-manga?search=`（**单页结果**）；详情 `/manhwa/<id>`（标题 `detail_name`、封面 `detail_avatar`、简介 `detail_reviewContent`、信息栏是英文标签 Other name/Author/Artist/Status/Categories/Views）；章节在 `chapter_box` 里按**站内 /manhwa/<作品>/<章>** 形状取（同一卡片里还挂着网盘外链，已排除），按话号升序；正文是章节页 `slides_p_path` 的 **base64 数组**（脚本内纯 JS 解码）。**实测三件事已据实调整**：`?order_by=` 排序无效（不再提供排序分类）、`/manga-list/<题材>` 302 回首页（不提供题材分类）、搜索无分页。验证：对着真站存档跑通 10 项断言（首页 42 部唯一作品 / 第2页 41 / 搜索 3 条 / 详情字段 / 56 章升序 / 正文 159 张图全 https 不混源）|
 | comic/kmh001_comic.js | `kmh001_comic` | K漫画 | 1.0.0 | kmh001.com（备用域 kmh.sex）= **Next.js App Router SSR**：数据**不在独立 JSON 接口里**，而是内嵌在 HTML 的 RSC 载荷（一连串 `self.__next_f.push([1,"…"])`）——脚本抽载荷再按站点字段取数。地址：首页 `/home`、连载按周 `/weekly/0..6`（0=周日）、完本 `/complete`、搜索 `/search?key=`、详情 `/comic/<24位id>`、正文 `/chapter/<24位id>`；章节在 `{"comicID":…,"data":[{_id,subtitle,title,ordinal}]}` 里（按 ordinal 升序，**括号配对切数组**，正则切会被带方括号的标题截断）；正文图片数组带 `sourceName`（多图源）→ **取图最多的那个源**，不混源；图片统一升 https。**/category 分类页未做**：那页的服务端响应里没有卡片数据（浏览器二次请求才有），与其猜不如不做。**验证方式：本机 curl 打不开该站，改用真实浏览器取回 6 个页面完整响应存档，解析内核对着真响应跑通 12 项断言**（列表/搜索/详情/章节升序/正文多图源）|
 | novel/99xs_novel.js | `99xs_novel` | CA情色小说 | 2.1.0 | 根路径有「继续访问」拦截页，源自带 cookie |
@@ -108,3 +108,17 @@ throw new Error('NEED_WEBVIEW_VERIFY：站点触发了 Cloudflare 人机校验�
 > 注意把 `fullUrl` 换成**作用域里真有的**请求地址。曾经的坑：文案里引用了不存在的
 > 变量，真机被 CF 拦下时抛 `ReferenceError`，用户看到的是一个没有出口的红字，
 > 而不是网页视图按钮。
+
+## 2026-10-14 新增网站适配
+
+本批新增 17 个脚本，并按 bakamh.com 重写 BAKA MH 源，已加入各板块 `sources.js` 与 `sources.txt`。有网页验证的站点需在 App 内完成验证；不会把浏览器 Cookie、订阅密码或临时播放签名写进仓库。
+
+| 板块 | 新增源 |
+| --- | --- |
+| 漫画 / 图库 | 楠楠漫画、MM-CG 漫画、三四漫画、漫蛙、Z8PT 图库、禁漫天堂（18comic.vip） |
+| 小说 | AliceSW、Book18、金书阁、XChina、HHHBook、H图书馆、AACCOO |
+| 视频 / 音频 | ASMR Honey、亚洲声色、听书网、Hanime1 |
+
+实际响应验证与限制见 [适配记录](docs/2026-10-14_JS-source-adaptation-report.md)。Hanime1 每次播放读取当时有效的地址，先按分辨率选择最高画质；漫蛙需要新版 App 的图片解码管线。
+
+BAKA MH 原实现已替换为 2.0.0，默认站点为 `https://bakamh.com/`，只在服务端故障时使用站点发布页列出的镜像。禁漫天堂为独立源，与现有「18禁漫」（18jm18.com）不同；阅读图片需要包含横条还原功能的新版 App。

@@ -5,15 +5,19 @@
 # 也可以只订阅某一个源——直接粘 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/<板块>/<脚本>.js 的 raw 地址。
 # 导入后每条记自己的地址，「更新订阅源」各更各的；新增源加一行即可。
 
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/92mh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/p5mh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/seyoumanhua_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nnhanman_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jm18_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/xman6_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jcomic_comic.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/gmh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mycomic_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/bakamh_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/hanman18_comic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/kmh001_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nnmh_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/mmcg18_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/sansi_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/manwa_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/z8pt_comic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/jmcomic_comic.js
