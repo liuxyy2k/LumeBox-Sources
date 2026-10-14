@@ -99,6 +99,28 @@ __facet(value,pattern){var text=String(value==null?'':value).split(',')[0];retur
 async detail(a){var t=H.tree(await H.get(a.id)),id=(/\/album\/(\d+)/.exec(a.id)||[])[1];var img=H.first(t,function(n){return n.tag==='img'&&new RegExp('/media/albums/'+id+'(?:_|\\.)').test(n.attrs['data-original']||n.attrs['data-src']||n.attrs.src||'');});return {id:a.id,title:H.text(H.first(t,function(n){return n.tag==='h1'&&H.cls(n,'book-name');}))||H.title(t),cover:img?H.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs.src):null,coverHeaders:H.headers()};},
 async chapters(a){var t=H.tree(await H.get(a.id));var sections=H.all(t,function(n){return H.cls(n,'btn-toolbar');});var links=[];sections.forEach(function(n){links=links.concat(H.links(n,/^\/photo\/\d+/));});if(!links.length){var id=(/\/album\/(\d+)/.exec(a.id)||[])[1];links=H.links(t,new RegExp('^/photo/'+id+'(?:\\D|$)')).slice(0,1);}var rows=H.unique(links.map(function(n,i){return {id:n.attrs.href,title:'第 '+(i+1)+' 章'};}));rows.forEach(function(n,i){n.title=rows.length===1?'正文':'第 '+(i+1)+' 章';});if(!rows.length)throw new Error('禁漫天堂：未读取到章节，请确认网页验证是否完成');return rows;},
 __strips(id,file,scramble){id=Number(id);if(id<Number(scramble)||/\.gif$/i.test(file))return 0;if(id<268850)return 10;var name=file.split('.')[0];var last=CryptoJS.MD5(String(id)+name).toString().slice(-1).charCodeAt(0);return (last%(id>=421926?8:10)+1)*2;},
-async content(a){var page=H.abs(a.chapterId||a.id),html=await H.get(page),t=H.tree(html),match=/scramble_id\s*=\s*['"]?(\d+)/.exec(html),id=(/\/photo\/(\d+)/.exec(page)||[])[1];if(!match||!id)throw new Error('禁漫天堂：未识别图片还原参数，请更新源');var headers={},images=[];H.all(t,function(n){return n.tag==='img';}).forEach(function(n){var u=H.abs(n.attrs['data-original']||n.attrs['data-src']||n.attrs.src||'');if(u.indexOf('/media/photos/'+id+'/')<0||images.indexOf(u)>=0)return;var file=(u.split('?')[0].split('/').pop()||'');var strips=LumeSource.__strips(id,file,match[1]);images.push(u);headers[u]=Object.assign(H.headers(page),{'X-Lume-Image-Strips':String(strips)});});if(!images.length)throw new Error('禁漫天堂：本章节没有公开图片，可能需要登录');return {kind:'images',images:images,imageHeaders:headers};}
+async content(a){
+  var page=H.abs(a.chapterId||a.id);
+  var html=await H.get(page);
+  var match=/scramble_id\s*=\s*['"]?(\d+)/.exec(html);
+  var id=(/\/photo\/(\d+)/.exec(page)||[])[1];
+  if(!match||!id)throw new Error('禁漫天堂：未识别图片还原参数，请更新源');
+  // **逐张用正则取，不建整棵 DOM**：禁漫天堂的阅读页动辄几百张图（还有长条整
+  // 页图），整页建树在沙箱里会把内存吃满——真机日志里的「内存超限: out of
+  // memory」就是这里，而正文其实只需要每个 <img> 标签上的地址属性。
+  var headers={},images=[],seen={};
+  var tag=/<img\b[^>]*>/gi,m;
+  while((m=tag.exec(html))!==null){
+    var u=H.abs(H.attr(m[0],'data-original')||H.attr(m[0],'data-src')||H.attr(m[0],'src'),page);
+    if(u.indexOf('/media/photos/'+id+'/')<0||seen[u])continue;
+    seen[u]=true;
+    var file=(u.split('?')[0].split('/').pop()||'');
+    var strips=LumeSource.__strips(id,file,match[1]);
+    images.push(u);
+    headers[u]=Object.assign(H.headers(page),{'X-Lume-Image-Strips':String(strips)});
+  }
+  if(!images.length)throw new Error('禁漫天堂：本章节没有公开图片，可能需要登录');
+  return {kind:'images',images:images,imageHeaders:headers};
+}
 
 };

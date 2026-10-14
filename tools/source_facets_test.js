@@ -127,8 +127,110 @@ async function jmcomicCheck() {
   console.log('comic/jmcomic_comic.js：分类给全 + 更新/排序/分流三组改写通过');
 }
 
+/// 漫蛙 / 漫小肆（同一套 manga-list-2 模板的兄弟站）：分类 + 五组/三组筛选 +
+/// 卡片解析。两个站都在 2026-10-15 换过模板，这一份把「新卡片结构」钉住。
+async function manwaCheck() {
+  const source = load('comic/manwa_comic.js');
+  const card = '<ul class="manga-list-2"><li><div class="manga-list-2-cover">' +
+    '<a href="/book/543350" title="示例作品"><img class="manga-list-2-cover-img" ' +
+    'src="https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png"></a></div>' +
+    '<p class="manga-list-2-title"><a href="/book/543350">示例作品</a></p></li></ul>' +
+    '<ul class="pagination2"><li><a>1</a></li><li><a data-page="2">2</a></li></ul>';
+  const urls = stubGet(source, card);
+
+  const groups = (await source.filters()).groups;
+  const ids = (list) => JSON.stringify(Array.from(list));
+  assert.equal(ids(groups.map((g) => g.id)), ids(['gender', 'area', 'end', 'sort', 'tag']), 'manwa 五组');
+  assert.equal(groups[0].options[0].id, '-1', '分类的「全部」是站点自己的 -1');
+  assert.equal(groups[2].options[1].id, '2', '状态沿用站点自己的值');
+  assert.equal(groups[4].options.length, 16, '标签排给全');
+  assert.ok((await source.categories()).length >= 5, '站点入口（推荐/全部/更新/排行/完结榜）');
+
+  await source.list({ categoryId: '/booklist', page: 2,
+    filters: { gender: '1', area: '2', end: '2', sort: '1', tag: '巨乳' } });
+  assert.match(urls[urls.length - 1], /\/booklist\?tag=%E5%B7%A8%E4%B9%B3&gender=1&area=2&end=2&sort=1&page=2$/,
+    `筛选拼进书库地址: ${urls[urls.length - 1]}`);
+  // App 会把空 id 的「全部」换成标题再送回来：必须当作没选，不能拼成 tag=全部。
+  await source.list({ categoryId: '/rank?type=end', page: 1,
+    filters: { gender: '', area: '全部', end: '', sort: '', tag: '全部' } });
+  assert.match(urls[urls.length - 1], /\/rank\?type=end$/, '「全部」不下发');
+  // 认不出的值不拼进地址。
+  await source.list({ categoryId: '/booklist', page: 1, filters: { gender: 'BAD', area: '99' } });
+  assert.match(urls[urls.length - 1], /\/booklist$/, '白名单兜底');
+
+  const page = await source.list({ categoryId: '/booklist', page: 1 });
+  assert.equal(page.items[0].id, '/book/543350');
+  assert.equal(page.items[0].title, '示例作品');
+  assert.equal(page.items[0].cover,
+    'https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png');
+  assert.equal(page.hasMore, true, '分页器是 data-page（没有 href），也要认出来');
+
+  // 详情封面只认站点图床：页头的 logo（new_logo.svg）不能当封面（真机日志里
+  // 一串「图片解码失败: new_logo.svg」的根因）。
+  const detailSource = load('comic/manwa_comic.js');
+  stubGet(detailSource, '<div class="normal-top"><a href="/"><img src="https://mwappimgs.cc/static/images/new_logo.svg?v=2"></a></div>' +
+    '<div class="detail-main"><h1 class="detail-main-info-title">示例作品</h1>' +
+    '<div class="detail-main-cover"><img class="lazy" data-original="https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png?v=2" src="https://mwappimgs.cc/static/images/imagecover_s.png"></div></div>');
+  const detail = await detailSource.detail({ id: '/book/543350' });
+  assert.equal(detail.title, '示例作品');
+  assert.equal(detail.cover, 'https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png?v=2');
+  console.log('comic/manwa_comic.js：分类/五组筛选/卡片与 data-page 分页/详情封面通过');
+}
+
+async function fxcomicCheck() {
+  const source = load('comic/fxcomic_comic.js');
+  const card = '<ul class="manga-list-2"><li><div class="manga-list-2-cover">' +
+    '<a href="/book/1248"><img class="manga-list-2-cover-img" ' +
+    'data-original="https://www.jjmhw9.top/static/upload/book/1248/cover.jpg"></a></div>' +
+    '<p class="manga-list-2-title"><a href="/book/1248" title="示例作品">示例作品</a></p>' +
+    '<p class="manga-list-2-tip">简介</p></li></ul>' +
+    '<div class="pagination"><a href="/booklist/?page=2">下一页</a></div>';
+  const urls = stubGet(source, card);
+
+  const groups = (await source.filters()).groups;
+  const ids = (list) => JSON.stringify(Array.from(list));
+  assert.equal(ids(groups.map((g) => g.id)), ids(['end', 'area', 'tag']), '漫小肆三组');
+  assert.equal(groups[2].options.length, 23, '分类（标签）给全');
+  assert.ok((await source.categories()).length >= 6, '站点入口给全');
+
+  await source.list({ categoryId: '/booklist', page: 2,
+    filters: { tag: '巨乳', area: '1', end: '0' } });
+  assert.match(urls[urls.length - 1], /\/booklist\?tag=%E5%B7%A8%E4%B9%B3&area=1&end=0&page=2$/,
+    `筛选拼进书库地址: ${urls[urls.length - 1]}`);
+  await source.list({ categoryId: '/booklist?end=1', page: 1,
+    filters: { tag: '全部', area: '-1', end: '-1' } });
+  assert.match(urls[urls.length - 1], /\/booklist\?end=1$/, '「全部」不下发');
+  await source.list({ categoryId: '/update', page: 3 });
+  assert.match(urls[urls.length - 1], /\/update\?page=3$/, '站点自己的入口原样进');
+
+  const page = await source.list({ categoryId: '/booklist', page: 1 });
+  assert.equal(page.items[0].id, '/book/1248');
+  assert.equal(page.items[0].title, '示例作品');
+  assert.equal(page.items[0].cover,
+    'https://www.jjmhw9.top/static/upload/book/1248/cover.jpg');
+  assert.equal(page.hasMore, true, '下一页链接要认出来');
+
+  // 详情页 2026-10-15 已换模板：标题/封面/简介/标签都要取到，不能只回落到 <title>。
+  const detailSource = load('comic/fxcomic_comic.js');
+  stubGet(detailSource, '<div class="detail-main">' +
+    '<div class="detail-main-cover"><img class="lazy" data-original="https://www.jjmhw9.top/static/upload/book/1248/cover.jpg"></div>' +
+    '<div class="detail-main-info"><p class="detail-main-info-title">一家有多妻</p>' +
+    '<p class="detail-main-info-author">作者：<a href="#">CHILLDAE</a></p>' +
+    '<p class="detail-main-info-class"><span><a href="/booklist/?tag=都市">都市</a></span></p></div></div>' +
+    '<p class="detail-desc">坐擁龐大資產的房地產富豪，身邊同時有三個美女妻子</p>');
+  const detail = await detailSource.detail({ id: '/book/1248' });
+  assert.equal(detail.title, '一家有多妻');
+  assert.equal(detail.cover, 'https://www.jjmhw9.top/static/upload/book/1248/cover.jpg');
+  assert.match(detail.subtitle || '', /作者/);
+  assert.equal(detail.description, '坐擁龐大資產的房地產富豪，身邊同時有三個美女妻子');
+  assert.equal(JSON.stringify(Array.from(detail.tags)), JSON.stringify(['都市']));
+  console.log('comic/fxcomic_comic.js：分类/三组筛选/新卡片与新详情模板通过');
+}
+
 async function main() {
   await jmcomicCheck();
+  await manwaCheck();
+  await fxcomicCheck();
   await qTcmsCheck('comic/xman6_comic.js', '韩漫', '更新中');
   await qTcmsCheck('comic/jm18_comic.js', 'all', '连载中');
   await qTcmsCheck('comic/nnhanman_comic.js', 'all', '连载中');

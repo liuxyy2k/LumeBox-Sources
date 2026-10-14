@@ -30,9 +30,150 @@ H.base="https://manwa.me";H.name="漫蛙";
 var LumeSource={id:"manwa_comic",name:"漫蛙",version:"1.0.0",category:"comic",
 async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
-async categories(){return [{id:'/',title:'推荐'},{id:'/booklist',title:'全部'},{id:'/rank?type=end',title:'完结'}];},
-async list(a){a=a||{};var p=Number(a.page)||1,u=a.categoryId||'/';if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/^\/book\/\d+$/).map(function(n){var scope=n;for(var i=0;i<2&&scope.parent;i++)scope=scope.parent;var title=H.text(n)||H.text(H.first(scope,function(x){return H.cls(x,'manga-list-2-title');}));return {id:n.attrs.href,title:title,cover:H.image(scope),coverHeaders:H.headers()};}));if(a.keyword)items=items.filter(function(i){return i.title.indexOf(a.keyword)>=0;});return {items:items,hasMore:H.next(t,p)};},
-async detail(a){var t=H.tree(await H.get(a.id));var title=H.first(t,function(n){return H.cls(n,'detail-main-info-title');});var scope=title&&title.parent&&title.parent.parent;return {id:a.id,title:H.text(title)||H.title(t),cover:H.image(scope||t),coverHeaders:H.headers()};},
+// 分类（用户口径：分类筛选要按网页给全）：站点自己的入口 + 筛选条上的五组。
+//   分类分类 gender：-1 全部 / 2 一般向 / 0 BL向 / 1 禁漫 / 3 TL向 / 4 GL向
+//   地区 area：'' 全部 / 2 韩国 / 3 日漫 / 4 国漫 / 5 台漫 / 6 其他 / 1 未分类
+//   状态 end：'' 全部 / 2 连载中 / 1 完结
+//   排序 sort：-1 最新 / 0 最旧 / 1 收藏 / 2 新漫
+//   标签 tag：站点 booklist 页 tags 那一排（下面按站点自己的值列全）
+// 这些 id 就是站点 `/booklist?...` 查询串里的值，list() 原样拼回去。
+async categories(){
+  return [
+    {id:'/',title:'推荐'},
+    {id:'/booklist',title:'全部'},
+    {id:'/update',title:'最近更新'},
+    {id:'/rank',title:'排行榜'},
+    {id:'/rank?type=end',title:'完结榜'}
+  ];
+},
+async filters(){
+  return {groups:[
+    {id:'gender',title:'分类',options:[
+      {id:'-1',title:'全部'},{id:'2',title:'一般向'},{id:'0',title:'BL向'},
+      {id:'1',title:'禁漫'},{id:'3',title:'TL向'},{id:'4',title:'GL向'}
+    ]},
+    {id:'area',title:'地区',options:[
+      {id:'',title:'全部'},{id:'2',title:'韩国'},{id:'3',title:'日漫'},
+      {id:'4',title:'国漫'},{id:'5',title:'台漫'},{id:'6',title:'其他'},
+      {id:'1',title:'未分类'}
+    ]},
+    {id:'end',title:'状态',options:[
+      {id:'',title:'全部'},{id:'2',title:'连载中'},{id:'1',title:'完结'}
+    ]},
+    {id:'sort',title:'排序',options:[
+      {id:'-1',title:'最新'},{id:'0',title:'最旧'},{id:'1',title:'收藏'},{id:'2',title:'新漫'}
+    ]},
+    {id:'tag',title:'标签',options:[
+      {id:'',title:'全部'},{id:'中文',title:'中文'},{id:'巨乳',title:'巨乳'},
+      {id:'中出',title:'中出'},{id:'口交',title:'口交'},{id:'19R',title:'19R'},
+      {id:'透视',title:'透视'},{id:'全彩',title:'全彩'},{id:'日漫',title:'日漫'},
+      {id:'群交',title:'群交'},{id:'校服',title:'校服'},{id:'日文',title:'日文'},
+      {id:'女性向',title:'女性向'},{id:'乳交',title:'乳交'},{id:'韩漫',title:'韩漫'},
+      {id:'肛交',title:'肛交'}
+    ]}
+  ]};
+},
+
+/// 把筛选选择拼进书库地址（站点自己的查询串参数）。
+///
+/// 值走白名单：认不出的（含 App 把空 id 换成标题的「全部」）一律当作没选，
+/// 不把任意串拼进地址。筛选是书库页的功能，选了筛选就落到 `/booklist`。
+__withFacets: function (url, filters) {
+  var base = String(url == null ? '' : url).trim() || '/booklist';
+  var wanted = {
+    gender: this.__facetValue(filters && filters.gender, ['-1', '0', '1', '2', '3', '4']),
+    area: this.__facetValue(filters && filters.area, ['1', '2', '3', '4', '5', '6']),
+    end: this.__facetValue(filters && filters.end, ['1', '2']),
+    sort: this.__facetValue(filters && filters.sort, ['-1', '0', '1', '2'])
+  };
+  var tag = this.__facetText(filters && filters.tag);
+  var picked = false;
+  for (var key in wanted) {
+    if (wanted[key]) picked = true;
+  }
+  if (tag) picked = true;
+  if (!picked) return base;
+  if (base.indexOf('/booklist') !== 0) base = '/booklist';
+  var parts = base.split('?');
+  var params = {};
+  var order = [];
+  var query = parts.length > 1 ? parts[1] : '';
+  query.split('&').forEach(function (pair) {
+    if (!pair) return;
+    var i = pair.indexOf('=');
+    var name = i < 0 ? pair : pair.slice(0, i);
+    var value = i < 0 ? '' : pair.slice(i + 1);
+    if (!name || order.indexOf(name) >= 0) return;
+    order.push(name);
+    params[name] = value;
+  });
+  for (var name2 in wanted) {
+    if (wanted[name2]) params[name2] = wanted[name2];
+  }
+  if (tag) params.tag = tag;
+  var out = [];
+  order.forEach(function (name) {
+    if (params[name] !== undefined) out.push(name + '=' + params[name]);
+  });
+  ['tag', 'gender', 'area', 'end', 'sort'].forEach(function (name) {
+    if (params[name] === undefined || order.indexOf(name) >= 0) return;
+    out.push(name + '=' + params[name]);
+  });
+  return parts[0] + (out.length ? '?' + out.join('&') : '');
+},
+
+__facetValue: function (value, allowed) {
+  var text = String(value == null ? '' : value).split(',')[0];
+  return allowed.indexOf(text) >= 0 ? text : '';
+},
+
+__facetText: function (value) {
+  var text = String(value == null ? '' : value).split(',')[0].trim();
+  if (!text || text === '全部') return '';
+  if (!/^[^&#?\/]+$/.test(text)) return '';
+  return encodeURIComponent(text);
+},
+
+/// 分页：站点自己的分页器是 `<a data-page="N">`（**没有 href**），
+/// 只看链接会永远判成「没有下一页」，书库就翻不动。
+__hasMore: function (html, page) {
+  var next = page + 1;
+  var text = String(html);
+  if (text.indexOf('data-page="' + next + '"') >= 0) return true;
+  if (text.indexOf("data-page='" + next + "'") >= 0) return true;
+  if (new RegExp('[?&]page=' + next + '(\\D|$)').test(text)) return true;
+  return false;
+},
+async list(a){
+  a=a||{};
+  var p=Number(a.page)||1;
+  if(p<1)p=1;
+  var u=this.__withFacets(a.categoryId||'/',a.filters);
+  if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;
+  var html=await H.get(u);
+  var t=H.tree(html);
+  var items=H.unique(H.links(t,/^\/book\/\d+$/).map(function(n){var scope=n;for(var i=0;i<2&&scope.parent;i++)scope=scope.parent;var title=H.text(n)||H.text(H.first(scope,function(x){return H.cls(x,'manga-list-2-title');}));return {id:n.attrs.href,title:title,cover:H.image(scope),coverHeaders:H.headers()};}));
+  if(a.keyword)items=items.filter(function(i){return i.title.indexOf(a.keyword)>=0;});
+  var more=this.__hasMore(html,p);
+  if(!items.length)console.warn('[manwa] 列表没解析出条目：'+u+'（'+html.length+' 字符）');
+  return {items:items,hasMore:more};
+},
+/// 详情：标题 `h1.detail-main-info-title`、封面 `div.detail-main-cover` 里的 img。
+///
+/// **封面必须只认站点图床**（`/static/upload…`）：之前是「从标题往上找第一个 img」，
+/// 结果抓到页头的站点 logo（`/static/images/new_logo.svg`）——SVG 解不了码，
+/// 真机日志里一串「图片解码失败: new_logo.svg」就是这么来的。
+async detail(a){
+  var t=H.tree(await H.get(a.id));
+  var title=H.first(t,function(n){return H.cls(n,'detail-main-info-title');});
+  var box=H.first(t,function(n){return H.cls(n,'detail-main-cover');});
+  var cover=H.first(box||t,function(n){
+    return n.tag==='img'&&/\/static\/upload/.test(n.attrs['data-original']||n.attrs['data-src']||n.attrs.src||'');
+  });
+  var url=cover?(cover.attrs['data-original']||cover.attrs['data-src']||cover.attrs.src):'';
+  if(!url&&box)url=H.image(box)||'';
+  return {id:a.id,title:H.text(title)||H.title(t),cover:url?H.abs(url,H.base+'/'):null,coverHeaders:H.headers()};
+},
 async chapters(a){var t=H.tree(await H.get(a.id));return H.unique(H.links(t,/^\/chapter\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};}));},
 async content(a){var page=H.abs(a.chapterId),t=H.tree(await H.get(page));var images=H.all(t,function(n){return n.tag==='img'&&H.cls(n,'content-img');}).map(function(n){return H.abs(n.attrs['data-r-src']||'');}).filter(Boolean);var result=H.imageContent(images,page);images.forEach(function(u){result.imageHeaders[u]['X-Lume-Image-Encoding']='aes-cbc-pkcs7';result.imageHeaders[u]['X-Lume-Image-Key']='my2ecret782ecret';result.imageHeaders[u]['X-Lume-Image-IV']='my2ecret782ecret';});return result;}
 

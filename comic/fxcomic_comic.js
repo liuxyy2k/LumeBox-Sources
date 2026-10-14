@@ -122,7 +122,11 @@ async __pickHost() {
   throw new Error('漫小肆：站点暂时不可用（已知域名与发布页都没通）');
 },
 
-/// 列表卡片：div.mh-item（封面是 p.mh-cover 的 background-image，**不是 img**）。
+/// 列表卡片（**2026-10-15 实测站点已换模板**，两套都认）：
+///   新：`ul.manga-list-2 > li`，封面 `img.manga-list-2-cover-img`（src 或 data-original）、
+///       标题 `p.manga-list-2-title > a`、副标题 `p.manga-list-2-tip`；
+///   旧：`div.mh-item`（封面是 p.mh-cover 的 background-image，**不是 img**）。
+/// 只认「卡片里挂着 /book/<数字id> 链接」的节点，广告位与分页器自然被排除。
 __cover: function (node) {
   var box = H.first(node, function (n) {
     return /background-image/i.test(n.attrs.style || '') && /url\(/i.test(n.attrs.style || '');
@@ -136,26 +140,42 @@ __cover: function (node) {
 
 __items: function (tree) {
   var self = this;
-  return H.unique(
+  var cards = H.all(tree, function (n) {
+    return n.tag === 'li' && !!H.first(n, function (x) {
+      return x.tag === 'a' && /^\/book\/\d+/.test(x.attrs.href || '');
+    });
+  }).concat(
     H.all(tree, function (n) {
       return H.cls(n, 'mh-item');
-    }).map(function (n) {
-      var link = H.first(n, function (x) {
+    })
+  );
+  return H.unique(
+    cards.map(function (n) {
+      var links = H.all(n, function (x) {
         return x.tag === 'a' && /^\/book\/\d+/.test(x.attrs.href || '');
       });
-      var head = H.first(n, function (x) {
-        return x.tag === 'h2' && H.cls(x, 'title');
-      });
-      var headLink = head ? H.first(head, function (x) {
-        return x.tag === 'a';
-      }) : null;
+      var link = links[0];
+      if (!link) return { id: '', title: '' };
+      var title = '';
+      for (var i = 0; i < links.length; i++) {
+        var text = H.clean(links[i].attrs.title || H.text(links[i]));
+        if (text && text.length > title.length) title = text;
+      }
+      // 老模板的标题在 h2.title 里，新模板与链接标题同源。
+      if (!title) {
+        var head = H.first(n, function (x) {
+          return x.tag === 'h2' && H.cls(x, 'title');
+        });
+        var headLink = head ? H.first(head, function (x) {
+          return x.tag === 'a';
+        }) : null;
+        title = headLink ? H.clean(headLink.attrs.title || H.text(headLink)) : '';
+      }
       var note = H.first(n, function (x) {
-        return x.tag === 'p' && H.cls(x, 'chapter');
+        return (x.tag === 'p' && (H.cls(x, 'chapter') || H.cls(x, 'manga-list-2-tip')));
       });
-      var title = headLink ? H.clean(headLink.attrs.title || H.text(headLink)) : '';
-      if (!title && link) title = H.clean(link.attrs.title || '');
       return {
-        id: self.__path(link ? link.attrs.href : ''),
+        id: self.__path(link.attrs.href),
         title: title,
         cover: self.__cover(n),
         coverHeaders: H.headers(H.base + '/'),
@@ -167,7 +187,7 @@ __items: function (tree) {
 
 /// 首页：四块（最近更新 / 连载 / 完结 / 更新）。
 async home() {
-  var defs = [['all', '最近更新'], ['update', '最近更新章节'], ['ongoing', '連載中'], ['completed', '已完結']];
+  var defs = [['/booklist', '最近更新'], ['/update', '最近更新章节'], ['/booklist?end=0', '連載中'], ['/booklist?end=1', '已完結']];
   var boards = [];
   var seen = {};
   for (var i = 0; i < defs.length; i++) {
@@ -186,14 +206,90 @@ async home() {
   return boards;
 },
 
-/// 分类 = 站点自己的书库入口（导航里逐条核对过）。
+/// 分类（用户口径：按网页给全）。站点自己的入口都在这儿：
+///   /booklist 全部 ｜ /booklist?end=0 连载中 ｜ /booklist?end=1 已完结
+///   /update 最近更新 ｜ /rank 排行 ｜ /rank?end=0 完结排行
+/// 筛选（状态 / 地区 / 标签）在 filters() 里，值是站点 `/booklist?...` 查询串自己的值。
 async categories() {
   return [
-    { id: 'all', title: '全部' },
-    { id: 'ongoing', title: '連載中' },
-    { id: 'completed', title: '已完結' },
-    { id: 'update', title: '最近更新' }
+    { id: '/booklist', title: '全部' },
+    { id: '/booklist?end=0', title: '連載中' },
+    { id: '/booklist?end=1', title: '已完結' },
+    { id: '/update', title: '最近更新' },
+    { id: '/rank', title: '排行' },
+    { id: '/rank?end=0', title: '完結排行' }
   ];
+},
+
+/// 筛选：站点书库页筛选条（状态 / 地区）与 `/tag` 页的全部分类。
+async filters() {
+  return {groups:[
+    {id:'end',title:'状态',options:[
+      {id:'-1',title:'全部'},{id:'0',title:'連載中'},{id:'1',title:'已完結'}
+    ]},
+    {id:'area',title:'地区',options:[
+      {id:'-1',title:'全部'},{id:'1',title:'韩国'},{id:'2',title:'日本'},{id:'3',title:'台湾'}
+    ]},
+    {id:'tag',title:'分类',options:[
+      {id:'',title:'全部'},{id:'青春',title:'青春'},{id:'性感',title:'性感'},
+      {id:'长腿',title:'长腿'},{id:'多人',title:'多人'},{id:'御姐',title:'御姐'},
+      {id:'巨乳',title:'巨乳'},{id:'新婚',title:'新婚'},{id:'媳妇',title:'媳妇'},
+      {id:'暧昧',title:'暧昧'},{id:'清纯',title:'清纯'},{id:'调教',title:'调教'},
+      {id:'少妇',title:'少妇'},{id:'风骚',title:'风骚'},{id:'同居',title:'同居'},
+      {id:'淫乱',title:'淫乱'},{id:'好友',title:'好友'},{id:'女神',title:'女神'},
+      {id:'诱惑',title:'诱惑'},{id:'偷情',title:'偷情'},{id:'出轨',title:'出轨'},
+      {id:'正妹',title:'正妹'},{id:'家教',title:'家教'}
+    ]}
+  ]};
+},
+
+/// 把筛选选择拼进书库地址（站点自己的查询串：tag / area / end）。
+///
+/// 值走白名单；App 会把空 id 的「全部」换成标题再送回来，这里一并当作没选。
+/// 站点书库页是 `/booklist/`（带尾斜杠也认），选了筛选就落到它上面。
+__withFacets: function (url, filters) {
+  var base = String(url == null ? '' : url).trim() || '/booklist/';
+  var end = this.__facetValue(filters && filters.end, ['0', '1']);
+  var area = this.__facetValue(filters && filters.area, ['1', '2', '3']);
+  var tag = this.__facetText(filters && filters.tag);
+  if (!end && !area && !tag) return base;
+  if (base.indexOf('/booklist') !== 0) base = '/booklist/';
+  var parts = base.split('?');
+  var params = {};
+  var order = [];
+  (parts.length > 1 ? parts[1] : '').split('&').forEach(function (pair) {
+    if (!pair) return;
+    var i = pair.indexOf('=');
+    var name = i < 0 ? pair : pair.slice(0, i);
+    var value = i < 0 ? '' : pair.slice(i + 1);
+    if (!name || order.indexOf(name) >= 0) return;
+    order.push(name);
+    params[name] = value;
+  });
+  if (tag) params.tag = tag;
+  if (area) params.area = area;
+  if (end) params.end = end;
+  var out = [];
+  order.forEach(function (name) {
+    if (params[name] !== undefined) out.push(name + '=' + params[name]);
+  });
+  ['tag', 'area', 'end'].forEach(function (name) {
+    if (params[name] === undefined || order.indexOf(name) >= 0) return;
+    out.push(name + '=' + params[name]);
+  });
+  return parts[0] + (out.length ? '?' + out.join('&') : '');
+},
+
+__facetValue: function (value, allowed) {
+  var text = String(value == null ? '' : value).split(',')[0];
+  return allowed.indexOf(text) >= 0 ? text : '';
+},
+
+__facetText: function (value) {
+  var text = String(value == null ? '' : value).split(',')[0].trim();
+  if (!text || text === '全部' || text === '-1') return '';
+  if (!/^[^&#?\\/]+$/.test(text)) return '';
+  return encodeURIComponent(text);
 },
 
 /// 列表 / 搜索：搜索是 `/search?keyword=`（服务端渲染，实测有结果）。
@@ -204,71 +300,69 @@ async list(argument) {
   if (page < 1) page = 1;
   var keyword = H.clean(args.keyword || '').trim();
   var category = String(args.categoryId == null ? '' : args.categoryId).trim();
-  var url;
-  if (keyword) {
-    url = '/search?keyword=' + encodeURIComponent(keyword);
-  } else if (category === 'ongoing' || category === 'completed') {
-    url = '/booklist?end=' + (category === 'ongoing' ? '0' : '1');
-  } else if (category === 'update') {
-    url = '/update';
-  } else {
-    url = '/booklist';
-  }
+  var url = keyword
+    ? '/search?keyword=' + encodeURIComponent(keyword)
+    : this.__withFacets(category || '/booklist/', args.filters);
   if (page > 1) url += (url.indexOf('?') >= 0 ? '&' : '?') + 'page=' + page;
-  var tree = H.tree(await H.get(url));
-  return { items: this.__items(tree), hasMore: H.next(tree, page) };
+  var html = await H.get(url);
+  var tree = H.tree(html);
+  var items = this.__items(tree);
+  if (!items.length) {
+    console.warn('[fxcomic] 列表没解析出条目：' + url + '（' + html.length + ' 字符）');
+  }
+  return { items: items, hasMore: H.next(tree, page) };
 },
 
-/// 详情：h1 标题、banner 封面、p.subtitle / p.tip（别名 / 作者 / 状态 / 地区 / 标签）、p.content 简介。
+/// 详情：`p.detail-main-info-title` 标题、`div.detail-main-cover` 封面、
+/// `p.detail-main-info-author`（别名 / 作者 / 地区）、`p.detail-main-info-class` 标签、
+/// `p.detail-desc` 简介。老模板（banner_detail_form）里的那一套仍然兜底。
 async detail(argument) {
   await this.__pickHost();
   var id = this.__path(argument && argument.id);
   if (!id || id.indexOf('/book/') !== 0) return null;
   var tree = H.tree(await H.get(id));
-  var title = H.title(tree);
+  var head = H.first(tree, function (n) {
+    return n.tag === 'p' && H.cls(n, 'detail-main-info-title');
+  });
+  var title = head ? H.clean(H.text(head)) : '';
+  if (!title) title = H.title(tree);
   if (!title) return null;
   var banner = H.first(tree, function (n) {
     return H.cls(n, 'banner_detail_form');
   });
-  var cover = H.first(banner || tree, function (n) {
-    return n.tag === 'img' && /\/static\/upload\//.test(n.attrs.src || '');
+  var main = H.first(tree, function (n) {
+    return H.cls(n, 'detail-main');
   });
-  var info = banner ? H.first(banner, function (n) {
-    return H.cls(n, 'info');
-  }) : null;
-  var scope = info || banner || tree;
+  var coverNode = H.first(main || banner || tree, function (n) {
+    return n.tag === 'img' && /\/static\/upload\//.test(n.attrs['data-original'] || n.attrs['data-src'] || n.attrs.src || '');
+  });
+  var cover = coverNode
+    ? H.abs(coverNode.attrs['data-original'] || coverNode.attrs['data-src'] || coverNode.attrs.src, H.base + '/')
+    : null;
+  var scope = main || banner || tree;
   var bits = [];
   H.all(scope, function (n) {
-    return n.tag === 'p' && H.cls(n, 'subtitle');
+    return n.tag === 'p' && (H.cls(n, 'detail-main-info-author') || H.cls(n, 'subtitle'));
   }).forEach(function (n) {
     var text = H.clean(H.text(n));
-    if (text && bits.indexOf(text) < 0) bits.push(text);
+    if (text && bits.indexOf(text) < 0 && text.length < 80) bits.push(text);
   });
-  H.all(scope, function (n) {
-    return n.tag === 'p' && H.cls(n, 'tip');
-  }).forEach(function (n) {
-    var spans = H.all(n, function (x) {
-      return x.tag === 'span' && H.cls(x, 'block');
-    });
-    for (var i = 0; i < spans.length; i++) {
-      var text = H.clean(H.text(spans[i]));
-      if (text && bits.indexOf(text) < 0 && text.length < 60) bits.push(text);
-    }
+  // 简介与标签在 `div.detail-main` **外面**（`p.detail-desc` 是它的兄弟），
+  // 因此这两个从整棵树里找，别的信息仍在 detail-main 里找。
+  var desc = H.first(tree, function (n) {
+    return n.tag === 'p' && (H.cls(n, 'detail-desc') || H.cls(n, 'content')) && H.text(n).length > 12;
   });
-  var desc = H.first(scope, function (n) {
-    return n.tag === 'p' && H.cls(n, 'content') && H.text(n).length > 12;
-  });
-  var tags = H.all(scope, function (n) {
+  var tags = [];
+  H.all(tree, function (n) {
     return n.tag === 'a' && /\/booklist\/?\?tag=/.test(n.attrs.href || '');
-  }).map(function (n) {
-    return H.clean(H.text(n));
-  }).filter(function (text) {
-    return !!text;
+  }).forEach(function (n) {
+    var text = H.clean(n.attrs.title || H.text(n));
+    if (text && text !== '全部' && tags.indexOf(text) < 0) tags.push(text);
   });
   return {
     id: id,
     title: title,
-    cover: cover ? H.abs(cover.attrs.src, H.base + '/') : null,
+    cover: cover,
     coverHeaders: H.headers(H.base + '/'),
     subtitle: bits.length ? bits.join(' · ').slice(0, 160) : null,
     description: desc ? H.clean(H.text(desc)) : null,
