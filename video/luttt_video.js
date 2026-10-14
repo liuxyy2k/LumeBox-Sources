@@ -372,12 +372,13 @@ var LumeSource = {
           /just a moment|__cf_chl|cf-chl|challenge-platform|cf-mitigated|checking your browser/i.test(body)) {
         throw new Error('NEED_WEBVIEW_VERIFY：站点触发了 Cloudflare 人机校验（HTTP ' + status + ' ' + url + '）');
       }
-      // 567：站点/CDN 的「访问被拒」拦截页（实测**按 IP 地区**拦：国内直连 200，
-      // 走境外代理出口就返回 567 + 一张纯 HTML 拦截页，没有 JS 挑战可过）。
-      // 这不是网页视图能救回来的那种 WAF，如实说明原因，别把用户引到验证窗。
-      if (status === 567) {
-        throw new Error('北觅影视拒绝了当前网络的访问（HTTP 567，站点按 IP 地区拦截）：'
-          + url + '——请直连或换一个该站可用的网络出口。');
+      // 567 / 403：站点（腾讯 EdgeOne）与它的播放 CDN 都会**按 IP 地区**拦：
+      // 实测同一地址国内直连 200，走境外代理出口就是 567（站点）或 403（m3u8 CDN），
+      // 两者都没有 JS 挑战可过——网页视图救不回来，如实说明原因，别把用户引到验证窗。
+      if (status === 567 || status === 403) {
+        throw new Error('北觅影视拒绝了当前网络的访问（HTTP ' + status
+          + '，站点按 IP 地区拦截）：' + url
+          + '——请直连或换一个该站可用的网络出口（用境外代理/VPN 会被拦）。');
       }
       throw new Error('拉取失败：HTTP ' + status + ' ' + url);
     }

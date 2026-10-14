@@ -33,10 +33,69 @@ var H = {
 H.base="https://18comic.vip";H.name="禁漫天堂";
 var LumeSource={id:"jmcomic_comic",name:"禁漫天堂",version:"1.0.0",category:"comic",
 
-async categories(){var t=H.tree(await H.get('/'));return H.unique([{id:'/albums?o=mr',title:'最新'},{id:'/albums?o=mv',title:'热门'}].concat(H.links(t,/^\/albums\/?\?/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
+// 分类（用户口径：网页里分类筛选很多，脚本要给全）：
+//   站点自己的书库 worlds（/albums、/albums/doujin、/albums/single、/albums/short、
+//   /albums/hanman、/albums/meiman、/albums/another 与它们的 /sub/xxx 子类）、
+//   排行榜（/albums?t=…&o=…）、以及站内标签（走站点自己的搜索页
+//   /search/photos?search_query=…）。
+// id 就是**站点自己的地址**（与在网页上点出来的链接同形），list() 原样认，
+// 再按 filters() 补 t/o/shunt 三个查询参数。
+async categories(){
+  var worlds=[
+    {id:'/albums?o=mr',title:'最新上架'},
+    {id:'/albums?o=mv',title:'总排行'},
+    {id:'/albums?o=mv&t=m',title:'月排行'},
+    {id:'/albums?o=mv&t=w',title:'周排行'},
+    {id:'/albums?o=mv&t=t',title:'天排行'},
+    {id:'/albums/doujin',title:'同人'},
+    {id:'/albums/single',title:'单本'},
+    {id:'/albums/short',title:'短篇'},
+    {id:'/albums/hanman',title:'韩漫'},
+    {id:'/albums/meiman',title:'美漫'},
+    {id:'/albums/another',title:'其他'},
+    {id:'/albums/doujin/sub/chinese',title:'同人·汉化'},
+    {id:'/albums/doujin/sub/japanese',title:'同人·日语'},
+    {id:'/albums/doujin/sub/cg',title:'同人·CG图集'},
+    {id:'/albums/single/sub/chinese',title:'单本·汉化'},
+    {id:'/albums/single/sub/japanese',title:'单本·日语'},
+    {id:'/albums/single/sub/youth',title:'单本·青年漫'},
+    {id:'/albums/short/sub/chinese',title:'短篇·汉化'},
+    {id:'/albums/short/sub/japanese',title:'短篇·日语'},
+    {id:'/albums/another/sub/3d',title:'3D'},
+    {id:'/albums/another/sub/cosplay',title:'Cosplay'},
+    {id:'/albums/another/sub/other',title:'其他类'}
+  ];
+  var tags=['無修正','全彩','純愛','劇情向','人妻','教師','百合','NTR','女裝','癡女',
+    '巨乳','御姐','熟女','女僕','護士','泳裝','眼鏡','連褲襪','兔女郎','校服',
+    '調教','催眠','觸手','獵奇','非H','青年漫','扶他','群交'];
+  return worlds.concat(tags.map(function(t){
+    return {id:'/search/photos?search_query='+encodeURIComponent(t),title:t};
+  }));
+},
+// 筛选（站点列表页自带的那几排，值就是它 URL 里的查询参数）：
+//   t=（更新：全部/今天/本周/本月）、o=（排序：最新/点击/图片/评分/评论/收藏）、
+//   shunt=（分流一/二/三）。list() 按选择改写这三段；不选就不带（回到站点默认）。
+async filters(){
+  return {groups:[
+    {id:'time',title:'更新',options:[
+      {id:'a',title:'全部'},{id:'t',title:'今天'},{id:'w',title:'本周'},{id:'m',title:'本月'}
+    ]},
+    {id:'sort',title:'排序',options:[
+      {id:'mr',title:'最新'},{id:'mv',title:'点击'},{id:'mp',title:'图片'},
+      {id:'tr',title:'评分'},{id:'md',title:'评论'},{id:'tf',title:'收藏'}
+    ]},
+    {id:'shunt',title:'分流',options:[
+      {id:'1',title:'分流一'},{id:'2',title:'分流二'},{id:'3',title:'分流三'}
+    ]}
+  ]};
+},
 async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
 __items(html){var t=H.tree(html);return H.unique(H.all(t,function(n){return H.cls(n,'thumb-overlay-albums');}).map(function(n){var a=H.first(n,function(x){return x.tag==='a'&&/\/album\/\d+/.test(x.attrs.href||'');}),img=H.first(n,function(x){return x.tag==='img';});return {id:a?a.attrs.href:'',title:img?(img.attrs.title||img.attrs.alt||''):'',cover:H.image(n),coverHeaders:H.headers()};}));},
-async list(a){a=a||{};var p=Number(a.page)||1,u=a.keyword?'/search/photos?search_query='+encodeURIComponent(a.keyword):(a.categoryId||'/albums?o=mr');u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var html=await H.get(u);return {items:this.__items(html),hasMore:H.next(H.tree(html),p)};},
+async list(a){a=a||{};var p=Number(a.page)||1,u=a.keyword?'/search/photos?search_query='+encodeURIComponent(a.keyword):(a.categoryId||'/albums?o=mr');u=this.__withFacets(u,a.filters);u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var html=await H.get(u);if(!this.__items(html).length){console.warn('[jmcomic] 列表没解析出条目：'+u+'（'+html.length+' 字符）');}return {items:this.__items(html),hasMore:H.next(H.tree(html),p)};},
+__withFacets(url,filters){if(!filters)return url;var map={t:this.__facet(filters.time,/^(a|t|w|m)$/),o:this.__facet(filters.sort,/^(mr|mv|mp|tr|md|tf)$/),shunt:this.__facet(filters.shunt,/^[123]$/)};var parts=String(url).split('?'),base=parts[0],query=parts.length>1?parts[1]:'';var order=[],values={};query.split('&').forEach(function(pair){if(!pair)return;var i=pair.indexOf('=');var key=i<0?pair:pair.slice(0,i);var value=i<0?'':pair.slice(i+1);if(!key||order.indexOf(key)>=0)return;order.push(key);values[key]=value;});var keys=Object.keys(map);// 只在用户真的选了值时改写：没选的组不进 filters，此时**保留分类地址自己带的
+// 那一段**（「月排行」这类分类的 o=/t= 就在地址里，删掉就退化成默认排序了）。
+keys.forEach(function(key){if(map[key])values[key]=map[key];});var out=[];order.forEach(function(key){if(values[key]!==undefined)out.push(key+'='+values[key]);});keys.forEach(function(key){if(values[key]===undefined||order.indexOf(key)>=0)return;out.push(key+'='+values[key]);});return base+(out.length?'?'+out.join('&'):'');},
+__facet(value,pattern){var text=String(value==null?'':value).split(',')[0];return pattern.test(text)?text:'';},
 async detail(a){var t=H.tree(await H.get(a.id)),id=(/\/album\/(\d+)/.exec(a.id)||[])[1];var img=H.first(t,function(n){return n.tag==='img'&&new RegExp('/media/albums/'+id+'(?:_|\\.)').test(n.attrs['data-original']||n.attrs['data-src']||n.attrs.src||'');});return {id:a.id,title:H.text(H.first(t,function(n){return n.tag==='h1'&&H.cls(n,'book-name');}))||H.title(t),cover:img?H.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs.src):null,coverHeaders:H.headers()};},
 async chapters(a){var t=H.tree(await H.get(a.id));var sections=H.all(t,function(n){return H.cls(n,'btn-toolbar');});var links=[];sections.forEach(function(n){links=links.concat(H.links(n,/^\/photo\/\d+/));});if(!links.length){var id=(/\/album\/(\d+)/.exec(a.id)||[])[1];links=H.links(t,new RegExp('^/photo/'+id+'(?:\\D|$)')).slice(0,1);}var rows=H.unique(links.map(function(n,i){return {id:n.attrs.href,title:'第 '+(i+1)+' 章'};}));rows.forEach(function(n,i){n.title=rows.length===1?'正文':'第 '+(i+1)+' 章';});if(!rows.length)throw new Error('禁漫天堂：未读取到章节，请确认网页验证是否完成');return rows;},
 __strips(id,file,scramble){id=Number(id);if(id<Number(scramble)||/\.gif$/i.test(file))return 0;if(id<268850)return 10;var name=file.split('.')[0];var last=CryptoJS.MD5(String(id)+name).toString().slice(-1).charCodeAt(0);return (last%(id>=421926?8:10)+1)*2;},

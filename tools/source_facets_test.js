@@ -89,7 +89,46 @@ async function lutttCheck() {
   console.log('video/luttt_video.js：苹果CMS 筛选条解析 + 段位回填通过');
 }
 
+/// 禁漫天堂（18comic）：分类来自站点自己的书库/排行/标签地址，筛选是 URL 里的
+/// t=（更新）/o=（排序）/shunt=（分流）。检查两组契约：
+///   1. 筛选组与白名单改写；2. 分类数量与「分类地址自己带的 o=/t= 不被抹掉」。
+async function jmcomicCheck() {
+  const source = load('comic/jmcomic_comic.js');
+  const urls = stubGet(source, '<div class="thumb-overlay-albums">' +
+    '<a href="/album/1"><img title="T" data-src="https://cdn.example/1.jpg"></a></div>');
+
+  const groups = (await source.filters()).groups;
+  const ids = (list) => JSON.stringify(Array.from(list));
+  assert.equal(ids(groups.map((g) => g.id)), ids(['time', 'sort', 'shunt']), 'jmcomic 分组');
+  assert.equal(ids(groups[1].options.map((o) => o.id)),
+    ids(['mr', 'mv', 'mp', 'tr', 'md', 'tf']), '排序六个值来自站点自己的 o=');
+  assert.equal(ids(groups[0].options.map((o) => o.id)), ids(['a', 't', 'w', 'm']));
+
+  const categories = await source.categories();
+  assert.ok(categories.length >= 40, `分类要给全（当前 ${categories.length} 条）`);
+  for (const need of ['/albums/doujin', '/albums/single', '/albums/short', '/albums/hanman',
+    '/albums/meiman', '/albums/another', '/albums/another/sub/cosplay']) {
+    assert.ok(categories.some((c) => c.id === need), `缺分类 ${need}`);
+  }
+  assert.ok(categories.some((c) => c.id.indexOf('/search/photos?search_query=') === 0),
+    '标签类分类走站点自己的搜索页');
+
+  // 筛选写进地址；认不出的值不拼进去。
+  await source.list({ categoryId: '/albums/doujin', page: 2,
+    filters: { time: 'w', sort: 'mv', shunt: '2' } });
+  assert.match(urls[urls.length - 1], /\/albums\/doujin\?t=w&o=mv&shunt=2&page=2$/,
+    `筛选拼进地址: ${urls[urls.length - 1]}`);
+  await source.list({ categoryId: '/albums/doujin', page: 1,
+    filters: { time: 'BAD', sort: 'BAD', shunt: '9' } });
+  assert.match(urls[urls.length - 1], /\/albums\/doujin\?page=1$/, '白名单兜底');
+  // 排行分类自带的 o=/t= 不能被「没选排序」抹掉（否则月排行退化成默认）。
+  await source.list({ categoryId: '/albums?o=mv&t=m', page: 1, filters: { time: 'a' } });
+  assert.match(urls[urls.length - 1], /\/albums\?o=mv&t=a&page=1$/, '分类自带的排序保留');
+  console.log('comic/jmcomic_comic.js：分类给全 + 更新/排序/分流三组改写通过');
+}
+
 async function main() {
+  await jmcomicCheck();
   await qTcmsCheck('comic/xman6_comic.js', '韩漫', '更新中');
   await qTcmsCheck('comic/jm18_comic.js', 'all', '连载中');
   await qTcmsCheck('comic/nnhanman_comic.js', 'all', '连载中');
