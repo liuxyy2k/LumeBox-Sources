@@ -213,7 +213,7 @@ test('漫小肆: 从发布页读出当前站址再解析列表（封面取 backg
     { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_booklist.html') },
     { match: 'booklist', body: snapshot('fxcomic_booklist.html') },
   ]);
-  const result = await source.list({ categoryId: 'all', page: 1 });
+  const result = await source.list({ categoryId: '/booklist', page: 1 });
   assert.ok(source.__urls[0][1].indexOf('freexcomic.com') >= 0, '先读发布页: ' + source.__urls[0][1]);
   assert.equal(result.items.length, 28);
   assert.equal(result.items[0].id, '/book/1248');
@@ -231,9 +231,13 @@ test('漫小肆: 连载/完结/更新三个入口与搜索', async () => {
     { match: '/update', body: snapshot('fxcomic_update.html') },
     { match: '/search?keyword=', body: snapshot('fxcomic_search.html') },
   ]);
-  await source.list({ categoryId: 'ongoing', page: 1 });
-  await source.list({ categoryId: 'completed', page: 1 });
-  const updated = await source.list({ categoryId: 'update', page: 1 });
+  const ids = (await source.categories()).map((row) => row.id);
+  ['/booklist', '/booklist?end=0', '/booklist?end=1', '/update'].forEach((wanted) => {
+    assert.ok(ids.indexOf(wanted) >= 0, '分类入口缺失: ' + wanted + '（现有: ' + ids.join(' | ') + '）');
+  });
+  await source.list({ categoryId: '/booklist?end=0', page: 1 });
+  await source.list({ categoryId: '/booklist?end=1', page: 1 });
+  const updated = await source.list({ categoryId: '/update', page: 1 });
   assert.equal(updated.items.length, 22);
   const search = await source.list({ keyword: '秘密', page: 1 });
   assert.equal(search.items.length, 20);
