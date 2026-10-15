@@ -1,4 +1,5 @@
 // LumeSource: {"id":"gztv5_video","name":"瓜子影视","version":"3.1.0","category":"video"}
+// 兼容地址镜像：正式文件位于 movie/瓜子影视.js，保留此地址供已保存订阅更新。
 
 // 站点：https://gztv5.com （Nuxt SPA + 独立 API 域名）
 //

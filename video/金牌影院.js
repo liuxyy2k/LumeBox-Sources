@@ -1,4 +1,5 @@
 // LumeSource: {"id":"jpyy2_video","name":"金牌影院","version":"1.0.1","category":"video"}
+// 兼容地址镜像：正式文件位于 movie/金牌影院.js，保留此地址供已保存订阅更新。
 
 // 站点：https://jpyy2.com（Next.js 前端 + 自建 JSON API）
 //

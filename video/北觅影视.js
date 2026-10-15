@@ -1,4 +1,5 @@
 // LumeSource: {"id":"luttt_video","name":"北觅影视","version":"1.1.1","category":"video"}
+// 兼容地址镜像：正式文件位于 movie/北觅影视.js，保留此地址供已保存订阅更新。
 
 // 站点：https://v.luttt.com （苹果CMS 10 + conch/hl 模板，服务端渲染 HTML）
 //
