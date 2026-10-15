@@ -1,15 +1,13 @@
-// LumeSource: {"id":"mmcg18_comic","name":"梦梦漫画","version":"1.0.1","category":"comic"}
-// Site-specific adapter. Live requests checked 2026-10-14; membership restrictions remain enforced.
-
+// LumeSource: {"id":"aaccoo_novel","name":"中文成人小说网","version":"1.0.1","category":"novel"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
-  base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
+  base: '', name: '中文成人小说网', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
   clean: function (s) { return this.entity(String(s || '').replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<\/(?:p|div|section|li|h\d)>|<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'' )).replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim(); },
   entity: function(s) {return String(s||'').replace(/&(?:amp|quot|apos|lt|gt|nbsp);|&#(?:x[0-9a-f]+|\d+);/gi,function(v){var map={'&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>','&nbsp;':' '};if(map[v])return map[v];var code=v.charAt(2)==='x'?parseInt(v.slice(3),16):parseInt(v.slice(2),10);return Number.isFinite(code)?String.fromCodePoint(code):v;});},
   attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
   abs: function(u,from) {u=this.entity(u).trim();if(!u)return '';if(/^https?:\/\//i.test(u))return u;if(u.indexOf('//')===0)return 'https:'+u;var b=from||this.base;if(u.charAt(0)==='/')return /^https?:\/\/[^/]+/.exec(b)[0]+u;return b.replace(/[^/]*$/,'')+u;},
   headers: function(page) {return {'User-Agent':this.ua,'Referer':page||this.base+'/'};},
-  response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
+  response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile|<title>\s*人机校验/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
   get: async function(u) {return this.response(await LumeSource.http.get(this.abs(u,this.base+'/'),{headers:this.headers()}));},
   post: async function(u,data) {var h=this.headers();h['Content-Type']='application/x-www-form-urlencoded';h['X-Requested-With']='XMLHttpRequest';return this.response(await LumeSource.http.post(this.abs(u,this.base+'/'),data,{headers:h}));},
   json: async function(u) {try{return JSON.parse(await this.get(u));}catch(e){if(/NEED_WEBVIEW_VERIFY|HTTP/.test(String(e)))throw e;throw new Error(this.name+'：数据格式已变化');}},
@@ -28,14 +26,14 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://18h.mm-cg.com";H.name="梦梦漫画";
-var LumeSource={id:"mmcg18_comic",name:"梦梦漫画",version:"1.0.1",category:"comic",
-async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
+H.base="https://www.aaccoo.com";H.name="中文成人小说网";
+var LumeSource={id:"aaccoo_novel",name:"中文成人小说网",version:"1.0.1",category:"novel",
+async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
-async categories(){return [{id:'/zh/',title:'最新'},{id:'/zh/18H_random/all/index.html',title:'随机'},{id:'/zh/doujin_random/all/index.html',title:'同人'}];},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/zh/';if(a.keyword)u='/zh/?op=search&search_type=18H&search_keyword='+encodeURIComponent(a.keyword);if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/\/zh\/(?:18H|doujin)_content\/\d+\//).map(function(n){var image=H.first(n,function(x){return x.tag==='img';});return {id:n.attrs.href,title:n.attrs.title||(image&&image.attrs.alt)||H.text(n)||H.text(n.parent),cover:H.image(n),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
-async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
-async chapters(a){return [{id:a.id,title:'正文'}];},
-async content(a){var page=H.abs(a.chapterId),html=await H.get(page),re=/Large_cgurl\[(\d+)\]\s*=\s*["']([^"']+)["']/g,m,images=[];while((m=re.exec(html)))images.push({n:Number(m[1]),u:H.abs(m[2])});images.sort(function(a,b){return a.n-b.n;});return H.imageContent(images.map(function(x){return x.u;}),page);}
+async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/^\/category\/\d+\/?$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
+async list(a){a=a||{};var p=Number(a.page)||1,u=a.keyword?'/e/search/?keyboard='+encodeURIComponent(a.keyword):(a.categoryId||'/');if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/^\/book\/\d+\/$/).map(function(n){var parent=n.parent||n;return {id:n.attrs.href,title:H.text(n)||((H.first(n,function(x){return x.tag==='img';})||{attrs:{}}).attrs.alt||''),cover:H.image(parent),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
+async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t)||H.image(t),coverHeaders:H.headers()};},
+async chapters(a){var t=H.tree(await H.get(a.id));var book=/\/book\/(\d+)\//.exec(a.id);if(!book)throw new Error('AACCOO：无效作品地址');return H.unique(H.links(t,new RegExp('^/book/'+book[1]+'/\\d+\\.html$')).map(function(n){return {id:n.attrs.href,title:H.text(n)};})).sort(function(a,b){return Number(/\/(\d+)\.html/.exec(a.id)[1])-Number(/\/(\d+)\.html/.exec(b.id)[1]);});},
+async content(a){var t=H.tree(await H.get(a.chapterId));return H.textContent(H.text(H.first(t,function(n){return n.attrs.id==='content'&&H.cls(n,'content');})));}
 
 };

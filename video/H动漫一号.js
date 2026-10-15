@@ -1,7 +1,7 @@
 // LumeSource: {"id":"hanime1_video","name":"H动漫一号","version":"1.0.2","category":"video"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
-  base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
+  base: '', name: 'H动漫一号', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
   clean: function (s) { return this.entity(String(s || '').replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<\/(?:p|div|section|li|h\d)>|<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'' )).replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim(); },
   entity: function(s) {return String(s||'').replace(/&(?:amp|quot|apos|lt|gt|nbsp);|&#(?:x[0-9a-f]+|\d+);/gi,function(v){var map={'&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>','&nbsp;':' '};if(map[v])return map[v];var code=v.charAt(2)==='x'?parseInt(v.slice(3),16):parseInt(v.slice(2),10);return Number.isFinite(code)?String.fromCodePoint(code):v;});},
   attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
@@ -27,7 +27,7 @@ var H = {
 };
 
 H.base="https://hanime1.me";H.name="H动漫一号";
-var LumeSource={id:"hanime1_video",name:"H动漫一号",version:"1.0.1",category:"video",
+var LumeSource={id:"hanime1_video",name:"H动漫一号",version:"1.0.2",category:"video",
 async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
 async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'全部'}].concat(H.unique(H.links(t,/\/search\?genre=/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},

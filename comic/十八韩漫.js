@@ -41,7 +41,7 @@ var MAX_IMAGES = 200;
 
 var LumeSource = {
   id: 'hanman18_comic',
-  name: 'HANMAN18',
+  name: '十八韩漫',
   version: '1.0.1',
   category: 'comic',
 

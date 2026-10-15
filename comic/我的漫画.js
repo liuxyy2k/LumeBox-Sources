@@ -46,7 +46,7 @@ var MAX_FILTER_OPTIONS = 60; // 单个筛选组最多收多少选项
 
 var LumeSource = {
   id: 'mycomic_comic',
-  name: 'MYCOMIC',
+  name: '我的漫画',
   version: '1.0.2',
   category: 'comic',
 

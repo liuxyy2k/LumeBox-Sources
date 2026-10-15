@@ -14,7 +14,7 @@ var HEADERS = { 'Cookie': 'x-index-auth=authed' };
 
 var LumeSource = {
   id: '99xs_novel',
-  name: 'CA情色小说',
+  name: 'CA小说',
   version: '2.1.1',
   category: 'novel',
 

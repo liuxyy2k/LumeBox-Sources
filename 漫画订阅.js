@@ -9,7 +9,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八韩漫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/巴卡漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/我的漫画.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/梦梦漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/18H漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/楠楠漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫小肆.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫蛙.js

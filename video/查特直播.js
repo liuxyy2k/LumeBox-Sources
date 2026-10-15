@@ -153,7 +153,7 @@ function __item(entry) {
 
 var LumeSource = {
   id: 'chaturbate-live',
-  name: 'Live Cams（chaturbate）',
+  name: '查特直播',
   version: '1.0.1',
   category: 'video',
 

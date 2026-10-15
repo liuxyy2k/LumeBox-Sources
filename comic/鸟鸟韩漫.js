@@ -113,7 +113,7 @@ var IMAGE_ATTRS = ['src', 'data-src', 'data-original', 'data-echo', 'data-lazy-s
 
 var LumeSource = {
   id: 'nnhanman_comic',
-  name: 'NN韩漫',
+  name: '鸟鸟韩漫',
   version: '1.3.1',
   category: 'comic',
 

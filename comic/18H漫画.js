@@ -1,9 +1,9 @@
-// LumeSource: {"id":"book18_novel","name":"十八书屋","version":"1.0.1","category":"novel","icon":"https://www.book18.org/logo.png"}
+// LumeSource: {"id":"mmcg18_comic","name":"18H漫画","version":"1.0.1","category":"comic"}
 // Site-specific adapter. Live requests checked 2026-10-14; membership restrictions remain enforced.
 
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
-  base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
+  base: '', name: '18H漫画', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
   clean: function (s) { return this.entity(String(s || '').replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<\/(?:p|div|section|li|h\d)>|<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'' )).replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim(); },
   entity: function(s) {return String(s||'').replace(/&(?:amp|quot|apos|lt|gt|nbsp);|&#(?:x[0-9a-f]+|\d+);/gi,function(v){var map={'&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>','&nbsp;':' '};if(map[v])return map[v];var code=v.charAt(2)==='x'?parseInt(v.slice(3),16):parseInt(v.slice(2),10);return Number.isFinite(code)?String.fromCodePoint(code):v;});},
   attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
@@ -28,14 +28,14 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://www.book18.org";H.name="十八书屋";
-var LumeSource={id:"book18_novel",name:"十八书屋",version:"1.0.1",category:"novel",
+H.base="https://18h.mm-cg.com";H.name="18H漫画";
+var LumeSource={id:"mmcg18_comic",name:"18H漫画",version:"1.0.1",category:"comic",
 async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
 
-async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/^\/category\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/';u+=(u.indexOf('?')>=0?'&':'?')+'page='+p+(a.keyword?'&q='+encodeURIComponent(a.keyword):'');var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/^\/chapters\//).map(function(n){return {id:n.attrs.href,title:H.text(n),cover:H.image(n),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
+async categories(){return [{id:'/zh/',title:'最新'},{id:'/zh/18H_random/all/index.html',title:'随机'},{id:'/zh/doujin_random/all/index.html',title:'同人'}];},
+async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/zh/';if(a.keyword)u='/zh/?op=search&search_type=18H&search_keyword='+encodeURIComponent(a.keyword);if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/\/zh\/(?:18H|doujin)_content\/\d+\//).map(function(n){var image=H.first(n,function(x){return x.tag==='img';});return {id:n.attrs.href,title:n.attrs.title||(image&&image.attrs.alt)||H.text(n)||H.text(n.parent),cover:H.image(n),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
 async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
-async chapters(a){var t=H.tree(await H.get(a.id));var scope=H.first(t,function(n){return n.tag==='ul'&&H.cls(n,'list-group');})||t;return H.unique(H.links(scope,/^\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};}));},
-async content(a){var t=H.tree(await H.get(a.chapterId));return H.textContent(H.text(H.first(t,function(n){return n.attrs.id==='content'&&H.cls(n,'reader');})));}
+async chapters(a){return [{id:a.id,title:'正文'}];},
+async content(a){var page=H.abs(a.chapterId),html=await H.get(page),re=/Large_cgurl\[(\d+)\]\s*=\s*["']([^"']+)["']/g,m,images=[];while((m=re.exec(html)))images.push({n:Number(m[1]),u:H.abs(m[2])});images.sort(function(a,b){return a.n-b.n;});return H.imageContent(images.map(function(x){return x.u;}),page);}
 
 };

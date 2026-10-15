@@ -26,7 +26,7 @@ var MAX_CHAPTER_PAGES = 20;
 
 var LumeSource = {
   id: 'p5mh_comic',
-  name: 'P5漫画',
+  name: 'P5韩漫',
   version: '1.0.2',
   category: 'comic',
 

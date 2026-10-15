@@ -71,7 +71,7 @@ var SORTS = [
 
 var LumeSource = {
   id: 'xanimu_video',
-  name: 'XAnimu',
+  name: '成人动漫',
   version: '1.0.1',
   category: 'video',
 
