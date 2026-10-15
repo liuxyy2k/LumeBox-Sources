@@ -1,0 +1,21 @@
+# 漫画订阅
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/18禁漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/K漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/P5韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/X漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/Z8PT图库.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/三四漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/巴卡漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/我的漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/梦梦漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/楠楠漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫小肆.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫蛙.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/熱辣漫畫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/禁漫天堂.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/肉漫屋.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色友漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色漫網.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/鸟鸟韩漫.js

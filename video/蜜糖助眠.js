@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mmcg18_comic","name":"MM-CG 漫画","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"asmrhoney_video","name":"蜜糖助眠","version":"1.0.1","category":"video"}
 // Site-specific adapter. Live requests checked 2026-10-14; membership restrictions remain enforced.
 
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
@@ -28,14 +28,15 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://18h.mm-cg.com";H.name="MM-CG 漫画";
-var LumeSource={id:"mmcg18_comic",name:"MM-CG 漫画",version:"1.0.0",category:"comic",
+H.base="https://asmrhoney.com";H.name="蜜糖助眠";
+var LumeSource={id:"asmrhoney_video",name:"蜜糖助眠",version:"1.0.1",category:"video",
 async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
 
-async categories(){return [{id:'/zh/',title:'最新'},{id:'/zh/18H_random/all/index.html',title:'随机'},{id:'/zh/doujin_random/all/index.html',title:'同人'}];},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/zh/';if(a.keyword)u='/zh/?op=search&search_type=18H&search_keyword='+encodeURIComponent(a.keyword);if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/\/zh\/(?:18H|doujin)_content\/\d+\//).map(function(n){var image=H.first(n,function(x){return x.tag==='img';});return {id:n.attrs.href,title:n.attrs.title||(image&&image.attrs.alt)||H.text(n)||H.text(n.parent),cover:H.image(n),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
-async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
-async chapters(a){return [{id:a.id,title:'正文'}];},
-async content(a){var page=H.abs(a.chapterId),html=await H.get(page),re=/Large_cgurl\[(\d+)\]\s*=\s*["']([^"']+)["']/g,m,images=[];while((m=re.exec(html)))images.push({n:Number(m[1]),u:H.abs(m[2])});images.sort(function(a,b){return a.n-b.n;});return H.imageContent(images.map(function(x){return x.u;}),page);}
+async categories(){return [{id:'video',title:'视频'},{id:'audio',title:'音频'}];},
+async list(a){a=a||{};var p=Number(a.page)||1;var audio=a.categoryId==='audio',d=await H.json(audio?'/data/audio.json':a.keyword?'/data/clips-search.json':'/data/clips-page-'+p+'.json');var rows=audio?d.tracks:d.clips;if(a.keyword){var q=String(a.keyword).toLowerCase();rows=rows.filter(function(x){return [x.title,x.title_en,x.creator,(x.tags||[]).join(' ')].join(' ').toLowerCase().indexOf(q)>=0;});}var more=false;if(audio||a.keyword){more=rows.length>p*48;rows=rows.slice((p-1)*48,p*48);}else{var meta=await H.json('/data/clips-meta.json');more=p<meta.pages;}this.__rows=this.__rows||{};var self=this;var items=rows.filter(function(x){return (x.status||'published')==='published';}).map(function(x){var id=(audio?'audio:':'video:')+x.slug;self.__rows[id]=x;return {id:id,title:x.title,cover:x.coverWebpUrl||x.coverUrl,coverHeaders:H.headers(),subtitle:x.creator||''};});return {items:items,hasMore:more};},
+async __item(id){if(id.indexOf('audio:')===0){var rows=(await H.json('/data/audio.json')).tracks;var item=rows.find(function(x){return 'audio:'+x.slug===id;});if(!item)throw new Error('ASMR Honey：音频已下架');return item;}var d=await H.json('/data/clips/'+encodeURIComponent(id.slice(6))+'.json');return d.clip;},
+async detail(a){var x=await this.__item(a.id);return {id:a.id,title:x.title,cover:x.coverWebpUrl||x.coverUrl,coverHeaders:H.headers(),description:x.description||'',subtitle:x.creator};},
+async chapters(a){return [{id:a.id,title:'播放'}];},
+async content(a){var x=await this.__item(a.chapterId||a.id);var u=x.videoUrl||x.audioUrl;if(!u)throw new Error('ASMR Honey：该条目没有公开播放地址');var qualities=[];if(x.videoUrl)qualities.push({label:'原画',url:x.videoUrl});if(x.video480Url)qualities.push({label:'480P',url:x.video480Url});return {kind:'video',url:u,headers:H.headers(),qualities:qualities};}
 
 };

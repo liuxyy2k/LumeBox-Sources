@@ -56,7 +56,7 @@ function stub(source, routes) {
 // ------------------------------------------------------------------ 肉漫屋（rouman5.com）
 
 test('rouman5: 列表快照 24 条，封面/标题/最新章节都取到；分页有下一页', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books', body: snapshot('rouman5_books.html') },
   ]);
   const result = await source.list({ categoryId: 'all', page: 1 });
@@ -70,7 +70,7 @@ test('rouman5: 列表快照 24 条，封面/标题/最新章节都取到；分�
 });
 
 test('rouman5: 第 2 页用 0 基页号（?page=1），内容与第 1 页不同', async () => {
-  const page2 = stub(loadSource('comic/rouman5_comic.js'), [
+  const page2 = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books', body: snapshot('rouman5_books_p2.html') },
   ]);
   await page2.list({ categoryId: 'all', page: 2 });
@@ -78,7 +78,7 @@ test('rouman5: 第 2 页用 0 基页号（?page=1），内容与第 1 页不同'
     page2.__urls.some((row) => row[1].indexOf('/books?page=1') >= 0),
     '第 2 页请求应带 ?page=1（站点页号 0 基）: ' + JSON.stringify(page2.__urls)
   );
-  const page1 = stub(loadSource('comic/rouman5_comic.js'), [
+  const page1 = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books', body: snapshot('rouman5_books.html') },
   ]);
   const first = await page1.list({ categoryId: 'all', page: 1 });
@@ -87,7 +87,7 @@ test('rouman5: 第 2 页用 0 基页号（?page=1），内容与第 1 页不同'
 });
 
 test('rouman5: 连载/完结分类带 continued 参数', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books', body: snapshot('rouman5_books.html') },
   ]);
   await source.list({ categoryId: 'ongoing', page: 1 });
@@ -98,7 +98,7 @@ test('rouman5: 连载/完结分类带 continued 参数', async () => {
 });
 
 test('rouman5: 搜索走 /search?term=（?q= 之类无效），结果来自真响应', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/search?term=', body: snapshot('rouman5_search.html') },
   ]);
   const result = await source.list({ keyword: '爱情', page: 1 });
@@ -109,7 +109,7 @@ test('rouman5: 搜索走 /search?term=（?q= 之类无效），结果来自真�
 });
 
 test('rouman5: 详情快照的标题/封面/简介/信息栏', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books/cmjlosnvg', body: snapshot('rouman5_detail.html') },
   ]);
   const detail = await source.detail({ id: '/books/cmjlosnvg001ys66bcnpnqmgi' });
@@ -121,7 +121,7 @@ test('rouman5: 详情快照的标题/封面/简介/信息栏', async () => {
 });
 
 test('rouman5: 剧集按 0 基序号升序（第一话在最前）', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books/cmjlosnvg', body: snapshot('rouman5_detail.html') },
   ]);
   const chapters = await source.chapters({ id: '/books/cmjlosnvg001ys66bcnpnqmgi' });
@@ -133,7 +133,7 @@ test('rouman5: 剧集按 0 基序号升序（第一话在最前）', async () =>
 });
 
 test('rouman5: 正文从 SSR 载荷的 imagePaths 取图，广告图被 base64 路径过滤掉', async () => {
-  const source = stub(loadSource('comic/rouman5_comic.js'), [
+  const source = stub(loadSource('comic/肉漫屋.js'), [
     { match: '/books/cmjlosnvg', body: snapshot('rouman5_read.html') },
   ]);
   const content = await source.content({ id: '/books/cmjlosnvg001ys66bcnpnqmgi', chapterId: '/books/cmjlosnvg001ys66bcnpnqmgi/0' });
@@ -157,7 +157,7 @@ test('rouman5: 正文从 SSR 载荷的 imagePaths 取图，广告图被 base64 �
 // ------------------------------------------------------------------ H動漫網（hanime.xyz）
 
 test('hanime: 首页快照 24 条（标题/封面/播放量），有下一页', async () => {
-  const source = stub(loadSource('video/hanime_video.js'), [
+  const source = stub(loadSource('video/H動漫網.js'), [
     { match: '/', body: snapshot('hanime_home.html') },
   ]);
   const result = await source.list({ categoryId: '/', page: 1 });
@@ -170,7 +170,7 @@ test('hanime: 首页快照 24 条（标题/封面/播放量），有下一页', 
 });
 
 test('hanime: 排序分类带 sort 参数，搜索走 ?q=', async () => {
-  const source = stub(loadSource('video/hanime_video.js'), [
+  const source = stub(loadSource('video/H動漫網.js'), [
     { match: 'sort=hits', body: snapshot('hanime_hits.html') },
     { match: 'q=', body: snapshot('hanime_search.html') },
   ]);
@@ -185,7 +185,7 @@ test('hanime: 排序分类带 sort 参数，搜索走 ?q=', async () => {
 });
 
 test('hanime: 详细页的标题/封面（video poster）与 m3u8 播放地址', async () => {
-  const source = stub(loadSource('video/hanime_video.js'), [
+  const source = stub(loadSource('video/H動漫網.js'), [
     { match: '/9434719.html', body: snapshot('hanime_detail.html') },
   ]);
   const detail = await source.detail({ id: '/9434719.html' });
@@ -208,7 +208,7 @@ test('hanime: 详细页的标题/封面（video poster）与 m3u8 播放地址',
 // ------------------------------------------------------------------ 漫小肆（freexcomic 发布页 → jjmhw9.top）
 
 test('漫小肆: 从发布页读出当前站址再解析列表（封面取 background-image）', async () => {
-  const source = stub(loadSource('comic/fxcomic_comic.js'), [
+  const source = stub(loadSource('comic/漫小肆.js'), [
     { match: 'freexcomic.com', body: snapshot('fxcomic_publish.html') },
     { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_booklist.html') },
     { match: 'booklist', body: snapshot('fxcomic_booklist.html') },
@@ -223,7 +223,7 @@ test('漫小肆: 从发布页读出当前站址再解析列表（封面取 backg
 });
 
 test('漫小肆: 连载/完结/更新三个入口与搜索', async () => {
-  const source = stub(loadSource('comic/fxcomic_comic.js'), [
+  const source = stub(loadSource('comic/漫小肆.js'), [
     { match: 'freexcomic.com', body: snapshot('fxcomic_publish.html') },
     { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_booklist.html') },
     { match: 'end=0', body: snapshot('fxcomic_booklist.html') },
@@ -249,7 +249,7 @@ test('漫小肆: 连载/完结/更新三个入口与搜索', async () => {
 });
 
 test('漫小肆: 详情快照的标题/封面/简介/标签，剧集按章节号升序', async () => {
-  const source = stub(loadSource('comic/fxcomic_comic.js'), [
+  const source = stub(loadSource('comic/漫小肆.js'), [
     { match: 'freexcomic.com', body: snapshot('fxcomic_publish.html') },
     { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_detail.html') },
     { match: '/book/1236', body: snapshot('fxcomic_detail.html') },
@@ -270,7 +270,7 @@ test('漫小肆: 详情快照的标题/封面/简介/标签，剧集按章节号
 });
 
 test('漫小肆: 正文快照只收本站图床（二维码那张不算），并带 Referer', async () => {
-  const source = stub(loadSource('comic/fxcomic_comic.js'), [
+  const source = stub(loadSource('comic/漫小肆.js'), [
     { match: 'freexcomic.com', body: snapshot('fxcomic_publish.html') },
     { match: /jjmhw9\.top\/$/, body: snapshot('fxcomic_read.html') },
     { match: '/chapter/57983', body: snapshot('fxcomic_read.html') },
@@ -286,7 +286,7 @@ test('漫小肆: 正文快照只收本站图床（二维码那张不算），并
 // ------------------------------------------------------------------ 少数派文库（sspwk.vip）
 
 test('sspwk: 分类页快照 12 条（书名/作者/时间），有下一页', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/booksort/6/1.html', body: snapshot('sspwk_booksort.html') },
   ]);
   const result = await source.list({ categoryId: '6', page: 1 });
@@ -299,7 +299,7 @@ test('sspwk: 分类页快照 12 条（书名/作者/时间），有下一页', a
 });
 
 test('sspwk: 搜索是 POST /search/（searchkey），GET 参数无效', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/search/', body: snapshot('sspwk_search.html') },
   ]);
   const result = await source.list({ keyword: '秘密', page: 1 });
@@ -315,7 +315,7 @@ test('sspwk: 搜索是 POST /search/（searchkey），GET 参数无效', async (
 });
 
 test('sspwk: 详情快照的书名（《书名》简介）、信息栏与简介', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/novel/161813.html', body: snapshot('sspwk_detail.html') },
   ]);
   const detail = await source.detail({ id: '/novel/161813.html' });
@@ -327,7 +327,7 @@ test('sspwk: 详情快照的书名（《书名》简介）、信息栏与简介'
 });
 
 test('sspwk: 目录逐页收齐，遇到整页重复就停（站点给的页数上限可能偏大）', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/indexlist/161813/', body: snapshot('sspwk_indexlist.html') },
   ]);
   const chapters = await source.chapters({ id: '/novel/161813.html' });
@@ -348,7 +348,7 @@ test('sspwk: 目录跨页累积（第 2 页是新章节时接着收）', async (
     '<ul class="list_li" id="jsList1">' +
     links.map((n) => `<li class="two"><a href="/novel/1/${n}.html">书名_分节阅读_${n}</a></li>`).join('') +
     '</ul></body></html>';
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/indexlist/1/1/', body: page('a', [1001, 1003]) },
     { match: '/indexlist/1/2/', body: page('b', [1005, 1007]) },
   ]);
@@ -359,7 +359,7 @@ test('sspwk: 目录跨页累积（第 2 页是新章节时接着收）', async (
 });
 
 test('sspwk: 正文取 div#nr1 的段落，站点自己那条「最新通知」要剔掉', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     { match: '/novel/161813/19167169.html', body: snapshot('sspwk_chapter.html') },
   ]);
   const content = await source.content({ id: '/novel/161813.html', chapterId: '/novel/161813/19167169.html' });
@@ -371,7 +371,7 @@ test('sspwk: 正文取 div#nr1 的段落，站点自己那条「最新通知」�
 });
 
 test('sspwk: 首页给「最新小说」板块，分类 12 个', async () => {
-  const source = stub(loadSource('novel/sspwk_novel.js'), [
+  const source = stub(loadSource('novel/少数派文库.js'), [
     // 具体地址排在域名兜底之前：路由按顺序匹配。
     { match: '/booksort/3/1.html', body: snapshot('sspwk_booksort.html') },
     { match: '/booksort/5/1.html', body: snapshot('sspwk_booksort.html') },
@@ -391,7 +391,7 @@ test('sspwk: 首页给「最新小说」板块，分类 12 个', async () => {
 test('四个新源都满足源契约，且 home() 在真快照上跑得出板块', async () => {
   const cases = [
     {
-      file: 'comic/rouman5_comic.js',
+      file: 'comic/肉漫屋.js',
       id: 'rouman5_comic',
       category: 'comic',
       routes: [
@@ -400,14 +400,14 @@ test('四个新源都满足源契约，且 home() 在真快照上跑得出板块
       boards: 3,
     },
     {
-      file: 'video/hanime_video.js',
+      file: 'video/H動漫網.js',
       id: 'hanime_video',
       category: 'video',
       routes: [{ match: '/', body: snapshot('hanime_home.html') }],
       boards: 4,
     },
     {
-      file: 'comic/fxcomic_comic.js',
+      file: 'comic/漫小肆.js',
       id: 'fxcomic_comic',
       category: 'comic',
       routes: [
@@ -421,7 +421,7 @@ test('四个新源都满足源契约，且 home() 在真快照上跑得出板块
       boards: 2,
     },
     {
-      file: 'novel/sspwk_novel.js',
+      file: 'novel/少数派文库.js',
       id: 'sspwk_novel',
       category: 'novel',
       routes: [

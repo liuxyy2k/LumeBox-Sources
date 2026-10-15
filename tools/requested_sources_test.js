@@ -8,7 +8,7 @@ const crypto = require('node:crypto');
 function load(id, category, pages) {
   const context = {};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', category,
-    id + '_' + category + '.js'), 'utf8'), context, {timeout: 5000});
+    require('./source_files.json')[id + '_' + category + '.js']), 'utf8'), context, {timeout: 5000});
   context.LumeSource.http = {get: async url => {
     const p = new URL(url).pathname;
     assert.ok(p in pages, 'unexpected route: ' + p);
@@ -130,4 +130,17 @@ test('Bemi does not invent media Referer or generic UA and preserves declared he
     const c=await s.content({id:'1',chapterId:'/vodplay/1-1-1.html'});
     assert.deepEqual(JSON.parse(JSON.stringify(c.headers)),headers||{});
   }
+});
+
+
+test('Hanime media resolves relative URLs and retains quality metadata without duplicate routes', async () => {
+  const s = load('hanime1', 'video', {'/watch': '<video id="player" src="//media.example/720.mp4">' +
+    '<source size="720" src="//media.example/720.mp4">' +
+    '<source data-quality="1080p" data-src="/media/1080.mp4">' +
+    '<source src="javascript:void(0)"></video>'});
+  const c = await s.content({chapterId:'/watch?v=123'});
+  assert.equal(c.url, 'https://hanime1.me/media/1080.mp4');
+  assert.equal(c.qualities[0].height, 1080);
+  assert.equal(c.qualities.length, 2);
+  assert.equal(c.headers.Referer, 'https://hanime1.me/watch?v=123');
 });

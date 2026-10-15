@@ -1,4 +1,4 @@
-// LumeSource: {"id":"aaccoo_novel","name":"AACCOO","version":"1.0.0","category":"novel"}
+// LumeSource: {"id":"aaccoo_novel","name":"成人小说网","version":"1.0.1","category":"novel"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
   base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
@@ -26,8 +26,8 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://www.aaccoo.com";H.name="AACCOO";
-var LumeSource={id:"aaccoo_novel",name:"AACCOO",version:"1.0.0",category:"novel",
+H.base="https://www.aaccoo.com";H.name="成人小说网";
+var LumeSource={id:"aaccoo_novel",name:"成人小说网",version:"1.0.1",category:"novel",
 async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
 async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/^\/category\/\d+\/?$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},

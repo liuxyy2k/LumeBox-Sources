@@ -89,7 +89,7 @@ function stubStore(source) {
 // ------------------------------------------------------------------ X漫（xman6）
 
 test('xman6: 分类页快照解析出 24 条（封面只在 data-original 里）', async function () {
-  var source = stubBody(loadSource('xman6_comic.js'), snapshot('xman6_cat.html'));
+  var source = stubBody(loadSource('X漫.js'), snapshot('xman6_cat.html'));
 
   var result = await source.list({ categoryId: '韩漫', page: 1 });
   assert.equal(result.items.length, 24);
@@ -105,7 +105,7 @@ test('xman6: 分类页快照解析出 24 条（封面只在 data-original 里）
 
 test('xman6: 末页快照 hasMore=false；搜索页同样认出 24 条', async function () {
   // xman6_cat.html 的分页器写着「共有 61 页」——第 61 页不该再说还有下一页。
-  var source = stubBody(loadSource('xman6_comic.js'), snapshot('xman6_cat.html'));
+  var source = stubBody(loadSource('X漫.js'), snapshot('xman6_cat.html'));
   var last = await source.list({ categoryId: '韩漫', page: 61 });
   assert.equal(last.hasMore, false);
   assert.equal(last.items.length, 24);
@@ -117,7 +117,7 @@ test('xman6: 末页快照 hasMore=false；搜索页同样认出 24 条', async f
 });
 
 test('xman6: 详情快照的封面取自 content_thumb（不是推荐位的第一张）', async function () {
-  var source = stubBody(loadSource('xman6_comic.js'), snapshot('xman6_detail.html'));
+  var source = stubBody(loadSource('X漫.js'), snapshot('xman6_detail.html'));
   var detail = await source.detail({ id: '368107' });
   assert.equal(detail.title, '恶次人生');
   assert.equal(detail.cover, 'https://thumb.niaopic.com/upload_s/202502/20250208012437509.webp');
@@ -131,7 +131,7 @@ test('xman6: 详情快照的封面取自 content_thumb（不是推荐位的第�
 });
 
 test('xman6: 正文快照收 154 张 data-src 图（yandex 统计像素只带 src，不算）', async function () {
-  var source = stubBody(loadSource('xman6_comic.js'), snapshot('xman6_read.html'));
+  var source = stubBody(loadSource('X漫.js'), snapshot('xman6_read.html'));
   var content = await source.content({ id: '368107', chapterId: 'OVGuHKcFwzFMwDKQlHQZ' });
   assert.equal(content.kind, 'images');
   assert.equal(content.images.length, 154);
@@ -140,7 +140,7 @@ test('xman6: 正文快照收 154 张 data-src 图（yandex 统计像素只带 sr
 });
 
 test('xman6: 排行榜快照（ranklist_item 另一套标记）解析出条目', async function () {
-  var source = stubBody(loadSource('xman6_comic.js'), snapshot('xman6_rank.html'));
+  var source = stubBody(loadSource('X漫.js'), snapshot('xman6_rank.html'));
   var result = await source.list({ categoryId: 'rank', page: 1 });
   assert.ok(result.items.length >= 20, 'rank 条目应 >= 20，实际 ' + result.items.length);
   assert.equal(result.hasMore, false);
@@ -230,7 +230,7 @@ test('jcomic: 正文快照 392 张图全部解出（JCOMIC_TRAPS_ 倒序 base64�
 // ------------------------------------------------------------------ 夜读小说（x-novel.com）
 
 test('xnovel: 分类 + 列表（24 条，条目信息齐全）+ 末页 hasMore=false', async function () {
-  var source = loadSource('xnovel_novel.js');
+  var source = loadSource('夜读小说.js');
 
   stubBody(source, snapshot('xnovel_home.html'));
   var categories = await source.categories();
@@ -252,7 +252,7 @@ test('xnovel: 分类 + 列表（24 条，条目信息齐全）+ 末页 hasMore=f
 });
 
 test('xnovel: 搜索页（?q=）解析出条目', async function () {
-  var source = stubBody(loadSource('xnovel_novel.js'), snapshot('xnovel_search.html'));
+  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_search.html'));
   var result = await source.list({ keyword: '老师', page: 1 });
   assert.equal(result.items.length, 24);
   assert.equal(result.hasMore, true);
@@ -260,7 +260,7 @@ test('xnovel: 搜索页（?q=）解析出条目', async function () {
 });
 
 test('xnovel: 目录第 1 章不被底部工具条（「阅读」/「开始阅读」）污染', async function () {
-  var source = stubBody(loadSource('xnovel_novel.js'), snapshot('xnovel_detail_short.html'));
+  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_detail_short.html'));
   var chapters = await source.chapters({ id: 'hi1ezanput' });
   assert.equal(chapters.length, 3);
   assert.equal(JSON.stringify(chapters.map(function (c) { return c.title; })), JSON.stringify(['上', '下', '后记']));
@@ -268,7 +268,7 @@ test('xnovel: 目录第 1 章不被底部工具条（「阅读」/「开始阅�
 });
 
 test('xnovel: 详情（简介 / 作者 / 本作标签）+ 正文段落', async function () {
-  var source = stubBody(loadSource('xnovel_novel.js'), snapshot('xnovel_detail.html'));
+  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_detail.html'));
   var detail = await source.detail({ id: 'j9rf1t4t4i' });
   assert.equal(detail.title, '老婆陪我换配偶');
   assert.equal(detail.cover, 'https://x-novel.com/assets/cover/6093f3730b02c.webp');
@@ -295,7 +295,7 @@ test('xnovel: 详情（简介 / 作者 / 本作标签）+ 正文段落', async f
 test('xnovel: 命中反诈/运营商拦截页（200 + 「国家反诈中心」）要抛出可读原因', async function () {
   // 国内直连该域名会拿到 200 + 拦截页（3KB）——不识别的话解析出来是空列表，
   // 用户只会看到「暂无内容」，以为是源坏了。
-  var source = stubBody(loadSource('xnovel_novel.js'), snapshot('xnovel_blocked.html'));
+  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_blocked.html'));
   await assert.rejects(
     function () { return source.list({ categoryId: 'all', page: 1 }); },
     function (error) {
@@ -309,7 +309,7 @@ test('xnovel: 命中反诈/运营商拦截页（200 + 「国家反诈中心」�
 // ------------------------------------------------------------------ XAnimu（xanimu.one / xanimu.art）
 
 test('xanimu: 首页/分类快照解析出 47 条（封面首张 src、其余 data-src 都要认）', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
 
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_cat.html') });
   var page = await source.list({ categoryId: '36900-2d', page: 1 });
@@ -328,7 +328,7 @@ test('xanimu: 首页/分类快照解析出 47 条（封面首张 src、其余 da
 });
 
 test('xanimu: 分类末页（没有 a.next）hasMore=false；翻页地址是 /page/N/', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_cat_last.html') });
   var last = await source.list({ categoryId: '36900-2d', page: 51 });
   assert.equal(last.hasMore, false);
@@ -337,7 +337,7 @@ test('xanimu: 分类末页（没有 a.next）hasMore=false；翻页地址是 /pa
 });
 
 test('xanimu: 搜索（?s=）与搜索翻页（/page/N/?s=）', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, {
     '/page/2/': snapshot('xanimu_search_p2.html'),
     '/zh-CN/': snapshot('xanimu_search.html')
@@ -353,7 +353,7 @@ test('xanimu: 搜索（?s=）与搜索翻页（/page/N/?s=）', async function (
 });
 
 test('xanimu: 排序开关（filters.sort）拼成站点的 ?filter=', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_filter_latest.html') });
 
   var groups = await source.filters();
@@ -372,7 +372,7 @@ test('xanimu: 排序开关（filters.sort）拼成站点的 ?filter=', async fun
 });
 
 test('xanimu: 分类从导航实时读（id 是 /zh-CN/ 后的路径，标题用中文展示名）', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_home.html') });
   var categories = await source.categories();
   assert.equal(categories[0].id, 'all');
@@ -385,7 +385,7 @@ test('xanimu: 分类从导航实时读（id 是 /zh-CN/ 后的路径，标题用
 });
 
 test('xanimu: 详情（标题/封面/简介/分类/标签/时长）与单集目录', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_post.html') });
 
   var detail = await source.detail({ id: '212' });
@@ -408,7 +408,7 @@ test('xanimu: 详情（标题/封面/简介/分类/标签/时长）与单集目�
 });
 
 test('xanimu: 播放地址是两条 mp4（high/low），verify 令牌原样保留', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   stubRoutes(source, { '/zh-CN/': snapshot('xanimu_post.html') });
   var content = await source.content({ id: '212', chapterId: '1' });
   assert.equal(content.kind, 'video');
@@ -422,7 +422,7 @@ test('xanimu: 播放地址是两条 mp4（high/low），verify 令牌原样保�
 });
 
 test('xanimu: 域名链（.art 首选）；首选连不上就换下一个并记住可用的那个', async function () {
-  var source = stubStore(loadSource('xanimu_video.js'));
+  var source = stubStore(loadSource('成人动漫.js'));
   var attempts = [];
   source.http = {
     get: async function (url) {
@@ -543,7 +543,7 @@ test('gmh: 正文走「站点自己的解码器」（快照里解码器原样跑
 // ------------------------------------------------------------------ MYCOMIC（mycomic.com/cn）
 
 test('mycomic: 列表 30 条/页（标题取 alt、副标题取「最新话」）', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/comics': snapshot('mycomic_list.html') });
   var page = await source.list({ categoryId: 'all', page: 1 });
   assert.equal(page.items.length, 30);
@@ -555,7 +555,7 @@ test('mycomic: 列表 30 条/页（标题取 alt、副标题取「最新话」�
 });
 
 test('mycomic: 中间页 hasMore=true、真站末页（第 1845 页）hasMore=false', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/comics': snapshot('mycomic_list_p3.html') });
   var mid = await source.list({ categoryId: 'all', page: 3 });
   assert.equal(mid.hasMore, true, '第 3 页后面还有（快照里能看到 page=1845）');
@@ -568,7 +568,7 @@ test('mycomic: 中间页 hasMore=true、真站末页（第 1845 页）hasMore=fa
 });
 
 test('mycomic: 搜索与筛选拼成站点自己的查询串（keyword / filter[key] / sort）', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/comics': snapshot('mycomic_search.html') });
   await source.list({ keyword: '海贼', page: 1 });
   assert.match(source.__urls[0], /keyword=%E6%B5%B7%E8%B4%BC/);
@@ -586,7 +586,7 @@ test('mycomic: 搜索与筛选拼成站点自己的查询串（keyword / filter[
 });
 
 test('mycomic: 筛选分组从列表页实时抓（含中文标题与选项）', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/comics': snapshot('mycomic_list.html') });
   var filters = await source.filters();
   var titles = filters.groups.map(function (g) { return g.title; });
@@ -599,7 +599,7 @@ test('mycomic: 筛选分组从列表页实时抓（含中文标题与选项）',
 });
 
 test('mycomic: 详情（标题/封面/作者/状态/简介/标签）+ 目录升序（站点默认倒序）', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/comics/': snapshot('mycomic_detail.html') });
   var detail = await source.detail({ id: '1128' });
   assert.equal(detail.title, 'ONE PIECE航海王');
@@ -617,7 +617,7 @@ test('mycomic: 详情（标题/封面/作者/状态/简介/标签）+ 目录升�
 });
 
 test('mycomic: 正文图片是明文（img.page → biccam.com/chapters/…）', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   stubRoutes(source, { '/chapters/': snapshot('mycomic_chapter.html') });
   var content = await source.content({ id: '1128', chapterId: '817597' });
   assert.equal(content.kind, 'images');
@@ -626,7 +626,7 @@ test('mycomic: 正文图片是明文（img.page → biccam.com/chapters/…）',
 });
 
 test('mycomic: Cloudflare 挑战页（403）抛 NEED_WEBVIEW_VERIFY 让 App 拉起网页视图', async function () {
-  var source = stubStore(loadSource('mycomic_comic.js'));
+  var source = stubStore(loadSource('我的漫画.js'));
   source.http = {
     get: async function () {
       return {
@@ -647,7 +647,7 @@ test('mycomic: Cloudflare 挑战页（403）抛 NEED_WEBVIEW_VERIFY 让 App 拉�
 // ------------------------------------------------------------------ 金牌影院（jpyy2.com / vv3nwjk.com）
 
 test('jpyy2: 首页 / 列表 / 详情 / 选集 / 播放地址（按快照 JSON 解析）', async function () {
-  var source = stubStore(loadSource('jpyy2_video.js'));
+  var source = stubStore(loadSource('金牌影院.js'));
 
   // 首页：一次请求拿四块（快照里是新电影 / 新剧集 / 综艺 / 动漫、每块 12 条）。
   stubRoutes(source, {
@@ -699,7 +699,7 @@ test('jpyy2: 首页 / 列表 / 详情 / 选集 / 播放地址（按快照 JSON �
 });
 
 test('jpyy2: 分页参数用 pageNum（只传 page 时接口会忽略它、永远返回第 1 页）', async function () {
-  var source = stubStore(loadSource('jpyy2_video.js'));
+  var source = stubStore(loadSource('金牌影院.js'));
   stubRoutes(source, {
     '/anonymous/video/list': snapshot('jpyy2_list.json')
   });
@@ -713,7 +713,7 @@ test('jpyy2: 分页参数用 pageNum（只传 page 时接口会忽略它、永�
 });
 
 test('jpyy2: 主域被 WAF 拦下（521）时换下一个域，全挂才抛 WAF_RECAPTCHA_V3', async function () {
-  var source = stubStore(loadSource('jpyy2_video.js'));
+  var source = stubStore(loadSource('金牌影院.js'));
   var attempts = [];
   source.http = {
     get: async function (url) {
@@ -739,7 +739,7 @@ test('jpyy2: 主域被 WAF 拦下（521）时换下一个域，全挂才抛 WAF_
 });
 
 test('jpyy2: 手机域可用后记住它（下一次请求不再重复试错）', async function () {
-  var source = stubStore(loadSource('jpyy2_video.js'));
+  var source = stubStore(loadSource('金牌影院.js'));
   var attempts = [];
   source.http = {
     get: async function (url) {
@@ -757,7 +757,7 @@ test('jpyy2: 手机域可用后记住它（下一次请求不再重复试错）'
 
 
 test('mycomic: WebKit序列化后的章节JSON与封面/正文请求头', async function () {
-  var source = loadSource('mycomic_comic.js');
+  var source = loadSource('我的漫画.js');
   var raw = source.__chapters(snapshot('mycomic_detail.html'));
   var rendered = snapshot('mycomic_detail.html').replace(/"/g, '&quot;');
   assert.equal(source.__chapters(rendered).length, raw.length);

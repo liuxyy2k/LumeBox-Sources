@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mycomic_comic","name":"MYCOMIC","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"mycomic_comic","name":"我的漫画","version":"1.0.2","category":"comic"}
 
 // 站点：https://mycomic.com/cn （简体中文站；同一站另有繁体版 mycomic.com）
 //
@@ -47,7 +47,7 @@ var MAX_FILTER_OPTIONS = 60; // 单个筛选组最多收多少选项
 var LumeSource = {
   id: 'mycomic_comic',
   name: 'MYCOMIC',
-  version: '1.0.1',
+  version: '1.0.2',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法

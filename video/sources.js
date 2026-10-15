@@ -1,17 +1,10 @@
-# LumeBox 视频 源订阅清单
-# 用法：App「导入图源 → 订阅地址」粘贴本文件的 raw 地址，一次拉全这一板块。
-# 说明：本文件是**地址清单**（下面一行一个脚本地址），不是可执行的 JS 代码；
-# 也可以只订阅某一个源——直接粘 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/<板块>/<脚本>.js 的 raw 地址。
-# 导入后每条记自己的地址，「更新订阅源」各更各的；新增源加一行即可。
-
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/gztv5_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/dage_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/luttt_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/jpyy2_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xanimu_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/chaturbate_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/asmrhoney_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/yazhouse_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ting13_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hanime1_video.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hanime_video.js
+# 视频订阅
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H动漫一号.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H動漫網.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/北觅影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/大哥视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/成人动漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/查特直播.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/瓜子影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜糖助眠.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/金牌影院.js

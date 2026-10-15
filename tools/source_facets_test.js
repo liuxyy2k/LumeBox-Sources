@@ -62,7 +62,7 @@ async function qTcmsCheck(file, param, expectStatus) {
 }
 
 async function lutttCheck() {
-  const source = load('video/luttt_video.js');
+  const source = load('video/北觅影视.js');
   const snapshot = fs.readFileSync(path.join(root, 'snapshots', 'luttt_filters.html'), 'utf8');
   const urls = stubGet(source, snapshot);
 
@@ -86,14 +86,14 @@ async function lutttCheck() {
   // 越界段位不写（白名单 1..11，且不允许覆盖页码段）。
   await source.list({ categoryId: '1', page: 1, filters: { bad: '8|9' } });
   assert.match(urls[urls.length - 1], /\/vodshow\/1-----------.html$/, '第 8 段不被筛选覆盖');
-  console.log('video/luttt_video.js：苹果CMS 筛选条解析 + 段位回填通过');
+  console.log('video/北觅影视.js：苹果CMS 筛选条解析 + 段位回填通过');
 }
 
 /// 禁漫天堂（18comic）：分类来自站点自己的书库/排行/标签地址，筛选是 URL 里的
 /// t=（更新）/o=（排序）/shunt=（分流）。检查两组契约：
 ///   1. 筛选组与白名单改写；2. 分类数量与「分类地址自己带的 o=/t= 不被抹掉」。
 async function jmcomicCheck() {
-  const source = load('comic/jmcomic_comic.js');
+  const source = load('comic/禁漫天堂.js');
   const urls = stubGet(source, '<div class="thumb-overlay-albums">' +
     '<a href="/album/1"><img title="T" data-src="https://cdn.example/1.jpg"></a></div>');
 
@@ -124,13 +124,13 @@ async function jmcomicCheck() {
   // 排行分类自带的 o=/t= 不能被「没选排序」抹掉（否则月排行退化成默认）。
   await source.list({ categoryId: '/albums?o=mv&t=m', page: 1, filters: { time: 'a' } });
   assert.match(urls[urls.length - 1], /\/albums\?o=mv&t=a&page=1$/, '分类自带的排序保留');
-  console.log('comic/jmcomic_comic.js：分类给全 + 更新/排序/分流三组改写通过');
+  console.log('comic/禁漫天堂.js：分类给全 + 更新/排序/分流三组改写通过');
 }
 
 /// 漫蛙 / 漫小肆（同一套 manga-list-2 模板的兄弟站）：分类 + 五组/三组筛选 +
 /// 卡片解析。两个站都在 2026-10-15 换过模板，这一份把「新卡片结构」钉住。
 async function manwaCheck() {
-  const source = load('comic/manwa_comic.js');
+  const source = load('comic/漫蛙.js');
   const card = '<ul class="manga-list-2"><li><div class="manga-list-2-cover">' +
     '<a href="/book/543350" title="示例作品"><img class="manga-list-2-cover-img" ' +
     'src="https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png"></a></div>' +
@@ -167,18 +167,18 @@ async function manwaCheck() {
 
   // 详情封面只认站点图床：页头的 logo（new_logo.svg）不能当封面（真机日志里
   // 一串「图片解码失败: new_logo.svg」的根因）。
-  const detailSource = load('comic/manwa_comic.js');
+  const detailSource = load('comic/漫蛙.js');
   stubGet(detailSource, '<div class="normal-top"><a href="/"><img src="https://mwappimgs.cc/static/images/new_logo.svg?v=2"></a></div>' +
     '<div class="detail-main"><h1 class="detail-main-info-title">示例作品</h1>' +
     '<div class="detail-main-cover"><img class="lazy" data-original="https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png?v=2" src="https://mwappimgs.cc/static/images/imagecover_s.png"></div></div>');
   const detail = await detailSource.detail({ id: '/book/543350' });
   assert.equal(detail.title, '示例作品');
   assert.equal(detail.cover, 'https://mwappimgs.cc/static/upload3/book/id/543350/cover_1.png?v=2');
-  console.log('comic/manwa_comic.js：分类/五组筛选/卡片与 data-page 分页/详情封面通过');
+  console.log('comic/漫蛙.js：分类/五组筛选/卡片与 data-page 分页/详情封面通过');
 }
 
 async function fxcomicCheck() {
-  const source = load('comic/fxcomic_comic.js');
+  const source = load('comic/漫小肆.js');
   const card = '<ul class="manga-list-2"><li><div class="manga-list-2-cover">' +
     '<a href="/book/1248"><img class="manga-list-2-cover-img" ' +
     'data-original="https://www.jjmhw9.top/static/upload/book/1248/cover.jpg"></a></div>' +
@@ -211,7 +211,7 @@ async function fxcomicCheck() {
   assert.equal(page.hasMore, true, '下一页链接要认出来');
 
   // 详情页 2026-10-15 已换模板：标题/封面/简介/标签都要取到，不能只回落到 <title>。
-  const detailSource = load('comic/fxcomic_comic.js');
+  const detailSource = load('comic/漫小肆.js');
   stubGet(detailSource, '<div class="detail-main">' +
     '<div class="detail-main-cover"><img class="lazy" data-original="https://www.jjmhw9.top/static/upload/book/1248/cover.jpg"></div>' +
     '<div class="detail-main-info"><p class="detail-main-info-title">一家有多妻</p>' +
@@ -224,16 +224,16 @@ async function fxcomicCheck() {
   assert.match(detail.subtitle || '', /作者/);
   assert.equal(detail.description, '坐擁龐大資產的房地產富豪，身邊同時有三個美女妻子');
   assert.equal(JSON.stringify(Array.from(detail.tags)), JSON.stringify(['都市']));
-  console.log('comic/fxcomic_comic.js：分类/三组筛选/新卡片与新详情模板通过');
+  console.log('comic/漫小肆.js：分类/三组筛选/新卡片与新详情模板通过');
 }
 
 async function main() {
   await jmcomicCheck();
   await manwaCheck();
   await fxcomicCheck();
-  await qTcmsCheck('comic/xman6_comic.js', '韩漫', '更新中');
-  await qTcmsCheck('comic/jm18_comic.js', 'all', '连载中');
-  await qTcmsCheck('comic/nnhanman_comic.js', 'all', '连载中');
+  await qTcmsCheck('comic/X漫.js', '韩漫', '更新中');
+  await qTcmsCheck('comic/18禁漫.js', 'all', '连载中');
+  await qTcmsCheck('comic/鸟鸟韩漫.js', 'all', '连载中');
   await lutttCheck();
   console.log('筛选回归全部通过');
 }

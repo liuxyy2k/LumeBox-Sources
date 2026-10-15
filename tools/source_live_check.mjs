@@ -1,5 +1,5 @@
 // 单个源的端到端真站检查：分类 → 列表 → 详情 → 章节 → 正文。
-// 用法：node tools/source_live_check.mjs comic/mh18_comic.js [categoryId] [itemId]
+// 用法：node tools/source_live_check.mjs comic/十八漫画.js [categoryId] [itemId]
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';

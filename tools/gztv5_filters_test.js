@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 async function main(){
  const context=vm.createContext({setTimeout});
- vm.runInContext(fs.readFileSync(path.join(__dirname,'../video/gztv5_video.js'),'utf8'),context);
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'../video/瓜子影视.js'),'utf8'),context);
  const source=vm.runInContext('LumeSource',context);
  const fixture=JSON.parse(fs.readFileSync(path.join(__dirname,'../snapshots/gztv5_filters.json'),'utf8'));
  let sent;

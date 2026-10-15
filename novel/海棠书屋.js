@@ -1,6 +1,4 @@
-// LumeSource: {"id":"book18_novel","name":"Book18","version":"1.0.0","category":"novel","icon":"https://www.book18.org/logo.png"}
-// Site-specific adapter. Live requests checked 2026-10-14; membership restrictions remain enforced.
-
+// LumeSource: {"id":"hhhbook_novel","name":"海棠书屋","version":"1.0.1","category":"novel"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
   base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
@@ -9,7 +7,7 @@ var H = {
   attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
   abs: function(u,from) {u=this.entity(u).trim();if(!u)return '';if(/^https?:\/\//i.test(u))return u;if(u.indexOf('//')===0)return 'https:'+u;var b=from||this.base;if(u.charAt(0)==='/')return /^https?:\/\/[^/]+/.exec(b)[0]+u;return b.replace(/[^/]*$/,'')+u;},
   headers: function(page) {return {'User-Agent':this.ua,'Referer':page||this.base+'/'};},
-  response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
+  response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile|<title>\s*人机校验/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
   get: async function(u) {return this.response(await LumeSource.http.get(this.abs(u,this.base+'/'),{headers:this.headers()}));},
   post: async function(u,data) {var h=this.headers();h['Content-Type']='application/x-www-form-urlencoded';h['X-Requested-With']='XMLHttpRequest';return this.response(await LumeSource.http.post(this.abs(u,this.base+'/'),data,{headers:h}));},
   json: async function(u) {try{return JSON.parse(await this.get(u));}catch(e){if(/NEED_WEBVIEW_VERIFY|HTTP/.test(String(e)))throw e;throw new Error(this.name+'：数据格式已变化');}},
@@ -28,14 +26,14 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://www.book18.org";H.name="Book18";
-var LumeSource={id:"book18_novel",name:"Book18",version:"1.0.0",category:"novel",
-async home(){var r=await this.list({page:1});return [{title:'最新',items:r.items.slice(0,12)}];},
+H.base="https://hhhbook.com";H.name="海棠书屋";
+var LumeSource={id:"hhhbook_novel",name:"海棠书屋",version:"1.0.1",category:"novel",
+async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
-async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/^\/category\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.categoryId||'/';u+=(u.indexOf('?')>=0?'&':'?')+'page='+p+(a.keyword?'&q='+encodeURIComponent(a.keyword):'');var t=H.tree(await H.get(u));var items=H.unique(H.links(t,/^\/chapters\//).map(function(n){return {id:n.attrs.href,title:H.text(n),cover:H.image(n),coverHeaders:H.headers()};}));return {items:items,hasMore:H.next(t,p)};},
-async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
-async chapters(a){var t=H.tree(await H.get(a.id));var scope=H.first(t,function(n){return n.tag==='ul'&&H.cls(n,'list-group');})||t;return H.unique(H.links(scope,/^\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};}));},
-async content(a){var t=H.tree(await H.get(a.chapterId));return H.textContent(H.text(H.first(t,function(n){return n.attrs.id==='content'&&H.cls(n,'reader');})));}
+async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/\/category\//).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
+async list(a){a=a||{};var p=Number(a.page)||1;var u=a.keyword?'/?s='+encodeURIComponent(a.keyword)+(p>1?'&paged='+p:''):(a.categoryId||'/').replace(/\/$/,'/')+(p>1?'page/'+p+'/':'');var t=H.tree(await H.get(u));var rows=H.all(t,function(n){return n.tag==='article'&&H.cls(n,'post');});return {items:H.unique(rows.map(function(n){var h=H.first(n,function(x){return H.cls(x,'entry-title');});var link=h&&H.first(h,function(x){return x.tag==='a';});return {id:link?link.attrs.href:'',title:H.text(h),cover:H.image(n),coverHeaders:H.headers()};})),hasMore:H.links(t,/\/page\//).some(function(n){return new RegExp('/page/'+(p+1)+'/').test(n.attrs.href);})};},
+async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.text(H.first(t,function(n){return H.cls(n,'entry-title');}))||H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
+async chapters(a){return [{id:a.id,title:'正文'}];},
+async content(a){var page=a.chapterId||a.id,t=H.tree(await H.get(page));return H.textContent(H.text(H.first(t,function(n){return H.cls(n,'entry-content');})));}
 
 };

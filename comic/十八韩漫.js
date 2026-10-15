@@ -1,4 +1,4 @@
-// LumeSource: {"id":"hanman18_comic","name":"HANMAN18","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"hanman18_comic","name":"十八韩漫","version":"1.0.1","category":"comic"}
 //
 // HANMAN18（hanman18.com，韩漫站）—— 站点用的是 **Manga18 模板**（一套专门的漫画站
 // 主题，韩漫站大量在用它），本文件的地址与选择器**逐条对齐 Tachiyomi/Keiyoushi 的
@@ -42,7 +42,7 @@ var MAX_IMAGES = 200;
 var LumeSource = {
   id: 'hanman18_comic',
   name: 'HANMAN18',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'comic',
 
   /// 分类：只列**真站上实测能用**的入口（见文件头的三条实测结论）。

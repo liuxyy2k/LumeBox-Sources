@@ -36,10 +36,10 @@ const TEST_CONFIG = {
  * 测试小说源
  */
 function testNovelSource() {
-    console.log("\n========== 测试小说源: 99xs_novel.js ==========\n");
+    console.log("\n========== 测试小说源: CA小说.js ==========\n");
     
     // 这里需要实际加载源文件
-    // const source = require('./99xs_novel.js');
+    // const source = require('./CA小说.js');
     
     if (TEST_CONFIG.testList) {
         console.log(">>> 测试列表功能");
@@ -184,8 +184,8 @@ function runAllTests() {
     
     testNovelSource();
     testComicSource();
-    testVideoSource("gztv5_video.js");
-    testVideoSource("dage_video.js");
+    testVideoSource("瓜子影视.js");
+    testVideoSource("大哥视频.js");
     
     console.log("\n========================================");
     console.log("          测试完成");
@@ -202,10 +202,10 @@ function testSingleSource(sourceType) {
             testComicSource();
             break;
         case 'gztv5':
-            testVideoSource("gztv5_video.js");
+            testVideoSource("瓜子影视.js");
             break;
         case 'dage':
-            testVideoSource("dage_video.js");
+            testVideoSource("大哥视频.js");
             break;
         default:
             console.log("未知的源类型，可用: novel, comic, gztv5, dage");

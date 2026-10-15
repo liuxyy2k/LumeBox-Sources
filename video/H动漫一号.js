@@ -1,4 +1,4 @@
-// LumeSource: {"id":"hhhbook_novel","name":"HHHBook","version":"1.0.0","category":"novel"}
+// LumeSource: {"id":"hanime1_video","name":"H动漫一号","version":"1.0.2","category":"video"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
   base: '', name: '', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
@@ -26,14 +26,32 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://hhhbook.com";H.name="HHHBook";
-var LumeSource={id:"hhhbook_novel",name:"HHHBook",version:"1.0.0",category:"novel",
+H.base="https://hanime1.me";H.name="H动漫一号";
+var LumeSource={id:"hanime1_video",name:"H动漫一号",version:"1.0.1",category:"video",
 async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
-async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'最新'}].concat(H.unique(H.links(t,/\/category\//).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
-async list(a){a=a||{};var p=Number(a.page)||1;var u=a.keyword?'/?s='+encodeURIComponent(a.keyword)+(p>1?'&paged='+p:''):(a.categoryId||'/').replace(/\/$/,'/')+(p>1?'page/'+p+'/':'');var t=H.tree(await H.get(u));var rows=H.all(t,function(n){return n.tag==='article'&&H.cls(n,'post');});return {items:H.unique(rows.map(function(n){var h=H.first(n,function(x){return H.cls(x,'entry-title');});var link=h&&H.first(h,function(x){return x.tag==='a';});return {id:link?link.attrs.href:'',title:H.text(h),cover:H.image(n),coverHeaders:H.headers()};})),hasMore:H.links(t,/\/page\//).some(function(n){return new RegExp('/page/'+(p+1)+'/').test(n.attrs.href);})};},
-async detail(a){var t=H.tree(await H.get(a.id));return {id:a.id,title:H.text(H.first(t,function(n){return H.cls(n,'entry-title');}))||H.title(t),cover:H.cover(t),coverHeaders:H.headers()};},
-async chapters(a){return [{id:a.id,title:'正文'}];},
-async content(a){var page=a.chapterId||a.id,t=H.tree(await H.get(page));return H.textContent(H.text(H.first(t,function(n){return H.cls(n,'entry-content');})));}
+async categories(){var t=H.tree(await H.get('/'));return [{id:'/',title:'全部'}].concat(H.unique(H.links(t,/\/search\?genre=/).map(function(n){return {id:n.attrs.href,title:H.text(n)};})));},
+async list(a){a=a||{};var p=Number(a.page)||1,u=a.categoryId||'/';if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;var t=H.tree(await H.get(u));var rows=H.all(t,function(n){return H.cls(n,'horizontal-card');});var items=H.unique(rows.map(function(n){var link=H.first(n,function(x){return x.tag==='a'&&/\/watch\?v=\d+/.test(x.attrs.href||'');}),title=H.first(n,function(x){return H.cls(x,'title');});return {id:link?link.attrs.href:'',title:H.text(title)||H.text(link),cover:H.image(n),coverHeaders:H.headers(),subtitle:''};}));if(a.keyword)items=items.filter(function(i){return i.title.toLowerCase().indexOf(a.keyword.toLowerCase())>=0;});return {items:items,hasMore:H.next(t,p)};},
+async detail(a){var t=H.tree(await H.get(a.id));var v=H.first(t,function(n){return n.tag==='video'&&n.attrs.id==='player';});return {id:a.id,title:H.title(t),cover:v?H.abs(v.attrs.poster):H.cover(t),coverHeaders:H.headers()};},
+async chapters(a){return [{id:a.id,title:'播放'}];},
+async content(a){
+  var page=H.abs(a.chapterId||a.id),t=H.tree(await H.get(page));
+  var v=H.first(t,function(n){return n.tag==='video'&&n.attrs.id==='player';});
+  var candidates=v?H.all(v,function(n){return n.tag==='source';}):[];
+  if(v&&v.attrs.src)candidates.push(v);
+  var seen={};
+  var q=candidates.map(function(n){
+    var raw=n.attrs.src||n.attrs['data-src']||'';
+    var url=/^[a-z][a-z0-9+.-]*:/i.test(raw)&&!/^https?:/i.test(raw)?'':H.abs(raw,page);
+    var height=parseInt(n.attrs.size||n.attrs['data-quality']||n.attrs.label,10)||0;
+    return {label:height?height+'p':'原画',url:url,height:height};
+  }).filter(function(x){
+    if(!/^https?:\/\//i.test(x.url)||seen[x.url])return false;
+    seen[x.url]=true;return true;
+  }).sort(function(a,b){return b.height-a.height;});
+  if(!q.length)throw new Error('H动漫一号：播放页没有可播放地址，请先完成网页验证');
+  return {kind:'video',url:q[0].url,qualities:q,headers:H.headers(page)};
+},
+async refreshImage(a){var page=a.headers&&a.headers['X-Lume-Image-Page'];if(!page)return {url:a.url,headers:a.headers||{}};var d=await this.detail({id:page});return {url:d.cover||a.url,headers:d.coverHeaders};}
 
 };

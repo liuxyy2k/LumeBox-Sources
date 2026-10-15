@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xanimu_video","name":"XAnimu","version":"1.0.0","category":"video"}
+// LumeSource: {"id":"xanimu_video","name":"成人动漫","version":"1.0.1","category":"video"}
 
 // 站点：https://xanimu.one/zh-CN/（WordPress + kolortube 主题；中文站前缀 /zh-CN/）
 //
@@ -72,7 +72,7 @@ var SORTS = [
 var LumeSource = {
   id: 'xanimu_video',
   name: 'XAnimu',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'video',
 
   // ---------------------------------------------------------------- 契约方法

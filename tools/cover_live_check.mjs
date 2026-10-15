@@ -9,10 +9,10 @@ const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/6
 
 const targets = process.argv.slice(2).length
   ? process.argv.slice(2)
-  : ['novel/alicesw_novel.js', 'novel/aaccoo_novel.js', 'novel/jinshuge_novel.js',
-     'novel/xchina_novel.js', 'novel/xnovel_novel.js', 'novel/xxiaoshuo_novel.js',
-     'novel/sspwk_novel.js', 'novel/book18_novel.js', 'novel/hlib_novel.js',
-     'novel/hhhbook_novel.js', 'comic/sansi_comic.js'];
+  : ['novel/爱丽丝书屋.js', 'novel/成人小说网.js', 'novel/禁书阁.js',
+     'novel/小黄书小说.js', 'novel/夜读小说.js', 'novel/X小说.js',
+     'novel/少数派文库.js', 'novel/十八书屋.js', 'novel/H图书馆.js',
+     'novel/海棠书屋.js', 'comic/三四漫画.js'];
 
 for (const relative of targets) {
   const source = (() => {

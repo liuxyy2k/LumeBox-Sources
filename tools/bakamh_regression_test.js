@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 function source() {
   const ctx = {};
-  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../comic/bakamh_comic.js'), 'utf8'), ctx);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../comic/巴卡漫画.js'), 'utf8'), ctx);
   return ctx.LumeSource;
 }
 // Small representative Madara markup, not a claim of a live website response.

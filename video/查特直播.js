@@ -1,4 +1,4 @@
-// LumeSource: {"id":"chaturbate_video","name":"Chaturbate 直播","version":"1.0.0","category":"video"}
+// LumeSource: {"id":"chaturbate_video","name":"查特直播","version":"1.0.1","category":"video"}
 //
 // 成人直播站（18+）：房间列表 / 搜索 / 房间详情 / 直播地址（HLS）。
 //
@@ -154,7 +154,7 @@ function __item(entry) {
 var LumeSource = {
   id: 'chaturbate-live',
   name: 'Live Cams（chaturbate）',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'video',
 
   /// 分类：站点的性别档（它的「分类」就是这些）。返回空表也能用，

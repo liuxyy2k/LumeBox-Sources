@@ -1,4 +1,4 @@
-// LumeSource: {"id":"p5mh_comic","name":"P5漫画","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"p5mh_comic","name":"P5韩漫","version":"1.0.2","category":"comic"}
 
 // 站点：https://www3.6p5mh3.click （P5韩漫，服务端渲染 HTML，站点简称 p5mh）
 //
@@ -27,7 +27,7 @@ var MAX_CHAPTER_PAGES = 20;
 var LumeSource = {
   id: 'p5mh_comic',
   name: 'P5漫画',
-  version: '1.0.1',
+  version: '1.0.2',
   category: 'comic',
 
   async categories() {

@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mh18_comic","name":"18mh漫畫","version":"1.0.0","category":"comic"}
+// LumeSource: {"id":"mh18_comic","name":"十八漫画","version":"1.0.1","category":"comic"}
 
 // 站点：18mh（禁漫天堂系，本站为 18mh.net / 18mh.org 一家的镜像域名）。
 //
@@ -42,8 +42,8 @@ var H = {
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
-H.base="https://18mh.net";H.name="18mh漫畫";
-var LumeSource={id:"mh18_comic",name:"18mh漫畫",version:"1.0.0",category:"comic",
+H.base="https://18mh.net";H.name="十八漫画";
+var LumeSource={id:"mh18_comic",name:"十八漫画",version:"1.0.1",category:"comic",
 
 /// 镜像域名（一家人的两个域名互为备用）：net 无校验先用，org 需要网页验证时再兜底。
 __hosts: ['https://18mh.net','https://www.18mh.net','https://18mh.org','https://www.18mh.org'],
