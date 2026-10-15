@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mh18_comic","name":"十八漫画","version":"1.0.1","category":"comic"}
+// LumeSource: {"id":"mh18_comic","name":"十八漫画","version":"1.0.2","category":"comic"}
 
 // 站点：18mh（禁漫天堂系，本站为 18mh.net / 18mh.org 一家的镜像域名）。
 //
@@ -12,7 +12,7 @@
 //   详情      GET /comic/detail/<数字id>：标题在 <title>、封面 img[data-src]、简介 meta
 //   章节      GET /comic/detail/<id> 里的 /comic/chapter/<id>/<n>（单页列全）
 //   正文      GET /comic/chapter/<id>/<n>：img[data-src] 就是页面图（图床同域外链，
-//             **不需要 Referer**，实测带与不带都 200）
+//             图床返回整文件 AES-CBC/NoPadding 密文，由 App 按图片元信息本地还原）
 //
 // 换域名：两家镜像（net / org）互为备用，脚本按顺序探活；.org 有 Cloudflare 校验，
 // 没在 App 内过验证时会 403 —— 那时会自动落到 net。
@@ -23,6 +23,7 @@ var H = {
   attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
   abs: function(u,from) {u=this.entity(u).trim();if(!u)return '';if(/^https?:\/\//i.test(u))return u;if(u.indexOf('//')===0)return 'https:'+u;var b=from||this.base;if(u.charAt(0)==='/')return /^https?:\/\/[^/]+/.exec(b)[0]+u;return b.replace(/[^/]*$/,'')+u;},
   headers: function(page) {return {'User-Agent':this.ua,'Referer':page||this.base+'/'};},
+  imageHeaders: function(page) {return Object.assign(this.headers(page),{'X-Lume-Image-Encoding':'aes-cbc-nopadding','X-Lume-Image-Key':'f5d965df75336270','X-Lume-Image-IV':'97b60394abc2fbe1'});},
   response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile|<title>\s*人机校验/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
   get: async function(u) {return this.response(await LumeSource.http.get(this.abs(u,this.base+'/'),{headers:this.headers()}));},
   post: async function(u,data) {var h=this.headers();h['Content-Type']='application/x-www-form-urlencoded';h['X-Requested-With']='XMLHttpRequest';return this.response(await LumeSource.http.post(this.abs(u,this.base+'/'),data,{headers:h}));},
@@ -38,12 +39,12 @@ var H = {
   cover: function(tree) {var n=this.first(tree,function(n){return n.tag==='meta'&&n.attrs.property==='og:image';});return n?this.abs(n.attrs.content):null;},
   unique: function(items) {var seen={};return items.filter(function(i){if(!i.id||seen[i.id]||!i.title)return false;seen[i.id]=true;return true;});},
   next: function(tree,page) {return this.links(tree,new RegExp('(?:[?&]page=|/page/|/page-)(?:'+(page+1)+')(?:\\D|$)')).length>0;},
-  imageContent: function(images,page) {if(!images.length)throw new Error(this.name+'：没有读取到正文图片');var headers={};images.forEach(function(u){headers[u]=H.headers(page);});return {kind:'images',images:images,imageHeaders:headers};},
+  imageContent: function(images,page) {if(!images.length)throw new Error(this.name+'：没有读取到正文图片');var headers={};images.forEach(function(u){headers[u]=H.imageHeaders(page);});return {kind:'images',images:images,imageHeaders:headers};},
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
 };
 
 H.base="https://18mh.net";H.name="十八漫画";
-var LumeSource={id:"mh18_comic",name:"十八漫画",version:"1.0.1",category:"comic",
+var LumeSource={id:"mh18_comic",name:"十八漫画",version:"1.0.2",category:"comic",
 
 /// 镜像域名（一家人的两个域名互为备用）：net 无校验先用，org 需要网页验证时再兜底。
 __hosts: ['https://18mh.net','https://www.18mh.net','https://18mh.org','https://www.18mh.org'],
@@ -91,7 +92,7 @@ __items: function (tree) {
         id: a.attrs.href,
         title: title,
         cover: img ? H.image(a) : null,
-        coverHeaders: H.headers(self.__host + '/')
+        coverHeaders: H.imageHeaders(self.__host + '/')
       };
     })
   );
@@ -207,7 +208,7 @@ async detail(argument) {
     id: id,
     title: title,
     cover: cover || null,
-    coverHeaders: H.headers(this.__host + '/'),
+    coverHeaders: H.imageHeaders(this.__host + '/'),
     description: desc ? H.clean(desc.attrs.content || '') : (meta && meta.description ? H.clean(meta.description) : null),
     tags: tags.length ? tags : undefined
   };
@@ -256,6 +257,7 @@ async chapters(argument) {
   return rows;
 },
 
+/// 图片解码参数来自站点公开 plugins/lazyload.js；X-Lume-Image-* 仅供 App 本地使用。
 /// 正文：章节页里的 `img[data-src]`（只留图床外链，页面图标/广告不计）。
 async content(argument) {
   await this.__pick();
