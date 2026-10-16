@@ -85,6 +85,15 @@
     },
     "litu100_comic": {
       "rating": "18+"
+    },
+    "po18vip_novel": {
+      "rating": "18+"
+    },
+    "powenwu11_novel": {
+      "rating": "18+"
+    },
+    "czbooks_novel": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -95,6 +104,9 @@
     "xchina_photo": "小黄书套图（成人写真图库）",
     "xchina_amateur": "小黄书业余自拍（成人自拍图库）",
     "huangguo_video": "黄果剧场（AI 成人短剧，尺度分级标注在卡片上）",
-    "litu100_comic": "丽图·污漫画（成人漫画）"
+    "litu100_comic": "丽图·污漫画（成人漫画）",
+    "po18vip_novel": "PO18（成人文学站，全站 18+）",
+    "powenwu11_novel": "PO文屋（成人文学站，全站 18+）",
+    "czbooks_novel": "小說狂人（成人向小说分区，站点自带分级标注）"
   }
 }
