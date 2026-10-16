@@ -18,6 +18,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/肉漫�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色友漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色漫網.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/鸟鸟韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/丽图漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/Z8PT图库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书套图.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书自拍.js
