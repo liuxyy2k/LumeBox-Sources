@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "unlisted": "unknown",
+  "sources": {
+    "99xs_novel": {
+      "rating": "18+"
+    },
+    "xxiaoshuo_novel": {
+      "rating": "18+"
+    },
+    "xnovel_novel": {
+      "rating": "18+"
+    },
+    "hhhbook_novel": {
+      "rating": "18+"
+    },
+    "hlib_novel": {
+      "rating": "18+"
+    },
+    "aaccoo_novel": {
+      "rating": "18+"
+    },
+    "xchina_novel": {
+      "rating": "18+"
+    },
+    "alicesw_novel": {
+      "rating": "18+"
+    },
+    "jinshuge_novel": {
+      "rating": "18+"
+    },
+    "book18_novel": {
+      "rating": "18+"
+    },
+    "mmcg18_comic": {
+      "rating": "18+"
+    },
+    "jm18_comic": {
+      "rating": "18+"
+    },
+    "mh18_comic": {
+      "rating": "18+"
+    },
+    "hanman18_comic": {
+      "rating": "18+"
+    },
+    "manwa_comic": {
+      "rating": "18+"
+    },
+    "jmcomic_comic": {
+      "rating": "18+"
+    },
+    "rouman5_comic": {
+      "rating": "18+"
+    },
+    "seyoumanhua_comic": {
+      "rating": "18+"
+    },
+    "cartoon18_comic": {
+      "rating": "18+"
+    },
+    "hanime1_video": {
+      "rating": "18+"
+    },
+    "hanime_video": {
+      "rating": "18+"
+    },
+    "xanimu_video": {
+      "rating": "18+"
+    },
+    "chaturbate_video": {
+      "rating": "18+"
+    }
+  },
+  "evidence": {
+    "99xs_novel": "源脚本列表与详情 subtitle 明确写有 CA 情色小说",
+    "xxiaoshuo_novel": "源脚本分类明确包含短篇情色和长篇情色",
+    "xnovel_novel": "源脚本标题清理规则包含成人小说阅读"
+  }
+}
