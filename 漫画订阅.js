@@ -3,7 +3,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/18禁漫
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/K漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/P5韩漫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/X漫.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/Z8PT图库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/三四漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/十八韩漫.js
@@ -19,3 +18,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/肉漫�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色友漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色漫網.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/鸟鸟韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/Z8PT图库.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书套图.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书自拍.js

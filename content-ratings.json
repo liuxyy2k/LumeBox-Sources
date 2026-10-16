@@ -70,11 +70,31 @@
     },
     "chaturbate_video": {
       "rating": "18+"
+    },
+    "xchina_audiobook": {
+      "rating": "18+"
+    },
+    "xchina_photo": {
+      "rating": "18+"
+    },
+    "xchina_amateur": {
+      "rating": "18+"
+    },
+    "huangguo_video": {
+      "rating": "18+"
+    },
+    "litu100_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
     "99xs_novel": "源脚本列表与详情 subtitle 明确写有 CA 情色小说",
     "xxiaoshuo_novel": "源脚本分类明确包含短篇情色和长篇情色",
-    "xnovel_novel": "源脚本标题清理规则包含成人小说阅读"
+    "xnovel_novel": "源脚本标题清理规则包含成人小说阅读",
+    "xchina_audiobook": "小黄书的听书板块（成人有声小说，章节页语音版）",
+    "xchina_photo": "小黄书套图（成人写真图库）",
+    "xchina_amateur": "小黄书业余自拍（成人自拍图库）",
+    "huangguo_video": "黄果剧场（AI 成人短剧，尺度分级标注在卡片上）",
+    "litu100_comic": "丽图·污漫画（成人漫画）"
   }
 }
