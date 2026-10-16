@@ -111,6 +111,7 @@ test('xchina 小说：搜索走 /search?q=&type=fiction', async () => {
   const result = await source.list({ keyword: '秘密', page: 1 });
   assert.ok(lastUrl(source).indexOf('/search?q=' + encodeURIComponent('秘密') + '&type=fiction') >= 0, lastUrl(source));
   assert.ok(result.items.length >= 18, '搜索结果: ' + result.items.length);
+  assert.equal(result.items[0].cover, null, '站点默认占位图不算封面（应为 null）');
 });
 
 test('xchina 小说：详情（标题/封面/作者/题材）与分章（LD+JSON hasPart）', async () => {

@@ -108,7 +108,8 @@ __items: function (tree) {
       return {
         id: self.__path(n.attrs.href),
         title: title ? H.text(title) : H.clean(img ? img.attrs.alt : ''),
-        cover: img ? H.abs(img.attrs.src, H.base + '/') : null,
+        // 站点自带占位图（/default/fiction.jpg）不是封面：交 null，让 App 显示「暂无封面」而不是同一张通用图。
+        cover: img && !/\/default\//.test(img.attrs.src || '') ? H.abs(img.attrs.src, H.base + '/') : null,
         coverHeaders: H.headers(H.base + '/'),
         subtitle: bits.length ? bits.join(' · ') : (intro ? H.text(intro).slice(0, 60) : null)
       };
