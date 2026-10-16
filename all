@@ -1,0 +1,15 @@
+{
+  "format": "lume.total-subscription",
+  "version": 1,
+  "sections": {
+    "novel": [
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novels"
+    ],
+    "comic": [
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics"
+    ],
+    "video": [
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos"
+    ]
+  }
+}

@@ -1,15 +1,16 @@
-[小说订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novels)
+# LumeBox 订阅源
 
-[听书订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobooks)
+JS 文件仍按小说、听书、漫画、美图、影视、视频分别放在原有目录，不合并脚本。
+对外订阅入口合并为三个：
 
-[漫画订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics)
+- [novels：小说 / 听书](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novels)
+- [comics：漫画 / 美图](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics)
+- [videos：视频 / 影视](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos)
 
-[美图订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photos)
+[总订阅 all](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all) 包含以上三个版块的订阅地址，使用 App「全局设置 → 总订阅导入导出」导入，自动分配到对应版块。
+总订阅是 JSON 地址清单，不是打包后的 JS 文件；导出文件保留订阅地址和启用状态。猫源订阅仍单独管理。
 
-[影视订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movies)
-
-[视频订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos)
-
+原 audiobooks、photos、movies 入口仅用于旧版兼容，不再作为独立推荐订阅。旧中文订阅清单及脚本兼容地址继续保留。小说入口沿用小写 novels，避免旧地址失效。
 
 ## 成人内容标识
 

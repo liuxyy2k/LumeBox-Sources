@@ -8,7 +8,7 @@ const root = path.join(__dirname, '..');
 test('Canonical manifests point to existing Chinese filenames with matching runtime names and versions', () => {
   let count = 0;
   const ids = new Set();
-  for (const entry of ['novels','audiobooks','comics','photos','movies','videos']) {
+  for (const entry of ['novels','comics','videos']) {
     const manifest = fs.readFileSync(path.join(root, entry), 'utf8');
     assert.ok(fs.readFileSync(path.join(root,'README.md'),'utf8').includes('/main/'+entry+')'));
     for (const line of manifest.split(/\r?\n/).filter(x => x.startsWith('https://'))) {
@@ -28,14 +28,25 @@ test('Canonical manifests point to existing Chinese filenames with matching runt
   assert.equal(count, 40);
 });
 
-test('six subscriptions are disjoint and old links retain all forty sources', () => {
+test('three subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
   const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
   assert.equal(lines('audiobooks').length,0);
   assert.equal(lines('photos').length,1);
   assert.equal(lines('movies').length,3);
-  const current=['novels','audiobooks','comics','photos','movies','videos'].flatMap(lines);
+  const current=['novels','comics','videos'].flatMap(lines);
   const legacy=['小说订阅.js','漫画订阅.js','视频订阅.js'].flatMap(lines);
   assert.deepEqual(new Set(current),new Set(legacy));
+  assert.equal(new Set(current).size,current.length);
+  const total=JSON.parse(fs.readFileSync(path.join(root,'all'),'utf8'));
+  assert.equal(total.format,'lume.total-subscription');
+  assert.equal(total.version,1);
+  assert.deepEqual(total.sections, {
+    novel:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novels'],
+    comic:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics'],
+    video:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos'],
+  });
+  assert.ok(lines('comics').some(line=>line.includes('/photo/')));
+  assert.ok(lines('videos').some(line=>line.includes('/movie/')));
 });
 
 test('six content directories exist and legacy script URLs mirror canonical files', () => {
