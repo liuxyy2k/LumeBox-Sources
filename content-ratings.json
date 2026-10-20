@@ -109,6 +109,15 @@
     },
     "gmh_comic": {
       "rating": "18+"
+    },
+    "yasetube_video": {
+      "rating": "18+"
+    },
+    "ptt2_video": {
+      "rating": "18+"
+    },
+    "twixive_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -127,6 +136,9 @@
     "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）",
     "hstv_video": "好色TV（hstv.fun，成人视频站，全站 18+）",
     "porn91_video": "91Porn（91porn.com，成人自拍视频站，全站 18+）",
-    "gmh_comic": "G社漫画（g-mh.org，成人向漫画站，全站 18+）"
+    "gmh_comic": "G社漫画（g-mh.org，成人向漫画站，全站 18+）",
+    "yasetube_video": "亚色影库（yasetube.com，偷拍自拍成人视频站，全站 18+）",
+    "ptt2_video": "PTT线上看（ptt2.my，含成人影片分区，全站 18+）",
+    "twixive_video": "TwiXive（twixive.net，X/Twitter 成人视频排行，全站 18+）"
   }
 }

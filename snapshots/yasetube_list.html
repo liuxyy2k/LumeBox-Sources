@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="icon" href="
+">
+
+<!-- Meta social networks -->
+
+<!-- Temp Style -->
+<style>
+	.post-thumbnail {
+		aspect-ratio: 16/9;
+	}
+	.post-thumbnail video,
+	.post-thumbnail img {
+		object-fit: contain;
+	}
+
+	.video-debounce-bar {
+		background: #FF3565!important;
+	}
+
+			@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+			
+			button,
+		.button,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"],
+		.label,
+		.label:visited,
+		.pagination ul li a,
+		.widget_categories ul li a,
+		.comment-reply-link,
+		a.tag-cloud-link,
+		.template-actors li a {
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a62b2b2b', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+			-moz-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+			-webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+			-o-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+			box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+		}
+		input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		input[type="number"],
+		input[type="tel"],
+		input[type="range"],
+		input[type="date"],
+		input[type="month"],
+		input[type="week"],
+		input[type="time"],
+		input[type="datetime"],
+		input[type="datetime-local"],
+		input[type="color"],
+		select,
+		textarea,
+		.wp-editor-container {
+			-moz-box-shadow: 0 0 1px rgba(255, 255, 255, 0.3), 0 0 5px black inset;
+			-webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.3), 0 0 5px black inset;
+			-o-box-shadow: 0 0 1px rgba(255, 255, 255, 0.3), 0 0 5px black inset;
+			box-shadow: 0 0 1px rgba(255, 255, 255, 0.3), 0 0 5px black inset;
+		}
+		#site-navigation {
+			background: #222222;
+			background: -moz-linear-gradient(top, #222222 0%, #333333 50%, #222222 51%, #151515 100%);
+			background: -webkit-linear-gradient(top, #222222 0%,#333333 50%,#222222 51%,#151515 100%);
+			background: linear-gradient(to bottom, #222222 0%,#333333 50%,#222222 51%,#151515 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#151515',GradientType=0 );
+			-moz-box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.12);
+			-webkit-box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.12);
+			-o-box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.12);
+			box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.12);
+		}
+		#site-navigation > ul > li:hover > a,
+		#site-navigation ul li.current-menu-item a {
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%);
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%);
+			background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a62b2b2b', endColorstr='#00000000',GradientType=0 );
+			-moz-box-shadow: inset 0px 0px 2px 0px #000000;
+			-webkit-box-shadow: inset 0px 0px 2px 0px #000000;
+			-o-box-shadow: inset 0px 0px 2px 0px #000000;
+			box-shadow: inset 0px 0px 2px 0px #000000;
+			filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+		}
+		.rating-bar,
+		.categories-list .thumb-block .entry-header,
+		.actors-list .thumb-block .entry-header,
+		#filters .filters-select,
+		#filters .filters-options {
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			-moz-box-shadow: inset 0px 0px 2px 0px #000000;
+			-webkit-box-shadow: inset 0px 0px 2px 0px #000000;
+			-o-box-shadow: inset 0px 0px 2px 0px #000000;
+			box-shadow: inset 0px 0px 2px 0px #000000;
+			filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+		}
+		.breadcrumbs-area {
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		}
+	
+	.site-title a {
+		font-family: Open Sans;
+		font-size: 32px;
+	}
+	.site-branding .logo img {
+		max-width: 0px;
+		max-height: 0px;
+		margin-top: 0px;
+		margin-left: 0px;
+	}
+	a,
+	.site-title a i,
+	.thumb-block:hover .rating-bar i,
+	.categories-list .thumb-block:hover .entry-header .cat-title:before,
+	.required,
+	.like #more:hover i,
+	.dislike #less:hover i,
+	.top-bar i:hover,
+	.main-navigation .menu-item-has-children > a:after,
+	.menu-toggle i,
+	.main-navigation.toggled li:hover > a,
+	.main-navigation.toggled li.focus > a,
+	.main-navigation.toggled li.current_page_item > a,
+	.main-navigation.toggled li.current-menu-item > a,
+	#filters .filters-select:after,
+	.morelink i,
+	.top-bar .membership a i,
+	.thumb-block:hover .photos-count i {
+		color: #FF3565;
+	}
+	button,
+	.button,
+	input[type="button"],
+	input[type="reset"],
+	input[type="submit"],
+	.label,
+	.pagination ul li a.current,
+	.pagination ul li a:hover,
+	body #filters .label.secondary.active,
+	.label.secondary:hover,
+	.main-navigation li:hover > a,
+	.main-navigation li.focus > a,
+	.main-navigation li.current_page_item > a,
+	.main-navigation li.current-menu-item > a,
+	.widget_categories ul li a:hover,
+	.comment-reply-link,
+	a.tag-cloud-link:hover,
+	.template-actors li a:hover {
+		border-color: #FF3565!important;
+		background-color: #FF3565!important;
+	}
+	.rating-bar-meter,
+	.vjs-play-progress,
+	#filters .filters-options span:hover,
+	.bx-wrapper .bx-controls-direction a,
+	.top-bar .social-share a:hover,
+	.thumb-block:hover span.hd-video,
+	.featured-carousel .slide a:hover span.hd-video,
+	.appContainer .ctaButton {
+		background-color: #FF3565!important;
+	}
+	#video-tabs button.tab-link.active,
+	.title-block,
+	.widget-title,
+	.page-title,
+	.page .entry-title,
+	.comments-title,
+	.comment-reply-title,
+	.morelink:hover {
+		border-color: #FF3565!important;
+	}
+
+	/* Small desktops ----------- */
+	@media only screen  and (min-width : 64.001em) and (max-width : 84em) {
+		#main .thumb-block {
+			width: 25%!important;
+		}
+	}
+
+	/* Desktops and laptops ----------- */
+	@media only screen  and (min-width : 84.001em) {
+		#main .thumb-block {
+			width: 25%!important;
+		}
+	}
+
+</style>
+
+<!-- Google Analytics -->
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//bcxcgezafa.cfd/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+<!-- Meta Verification -->
+<meta name="google-site-verification" content="Phx1bmGQXR9IGgZwQXWeaKyQ8jncYKnCvfzr2FPG35I"/>
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.3 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>亚色影库 - 偷拍自拍网</title>
+	<meta name="description" content="亚色影库涵盖全网全部精品视频,裸贷全集,女厕偷拍, 麻豆全集, 真实乱伦,偷拍自拍,FC2,人妻熟女,更多绝版视频,免费色情电影" />
+	<link rel="canonical" href="https://www.yasetube.com/" />
+	<link rel="next" href="https://www.yasetube.com/page/2" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"CollectionPage","@id":"https:\/\/www.yasetube.com\/","url":"https:\/\/www.yasetube.com\/","name":"亚色影库 - 偷拍自拍网","isPartOf":{"@id":"https:\/\/www.yasetube.com\/#website"},"about":{"@id":"https:\/\/www.yasetube.com\/#\/schema\/person\/7ab77d2c8bdf876e45f843b30e6102bd"},"description":"亚色影库涵盖全网全部精品视频,裸贷全集,女厕偷拍, 麻豆全集, 真实乱伦,偷拍自拍,FC2,人妻熟女,更多绝版视频,免费色情电影","breadcrumb":{"@id":"https:\/\/www.yasetube.com\/#breadcrumb"},"inLanguage":"zh-TW"},{"@type":"BreadcrumbList","@id":"https:\/\/www.yasetube.com\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https:\/\/www.yasetube.com\/#website","url":"https:\/\/www.yasetube.com\/","name":"亚色影库","description":"偷拍自拍网","publisher":{"@id":"https:\/\/www.yasetube.com\/#\/schema\/person\/7ab77d2c8bdf876e45f843b30e6102bd"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.yasetube.com\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"zh-TW"},{"@type":["Person","Organization"],"@id":"https:\/\/www.yasetube.com\/#\/schema\/person\/7ab77d2c8bdf876e45f843b30e6102bd","name":"1960hide","image":{"@type":"ImageObject","inLanguage":"zh-TW","@id":"https:\/\/secure.gravatar.com\/avatar\/599e10c322059c95b02db548e983a9310b1fcc6022304de6c1487d7958fbd0c8?s=96&d=wavatar&r=g","url":"https:\/\/secure.gravatar.com\/avatar\/599e10c322059c95b02db548e983a9310b1fcc6022304de6c1487d7958fbd0c8?s=96&d=wavatar&r=g","contentUrl":"https:\/\/secure.gravatar.com\/avatar\/599e10c322059c95b02db548e983a9310b1fcc6022304de6c1487d7958fbd0c8?s=96&d=wavatar&r=g","caption":"1960hide"},"logo":{"@id":"https:\/\/secure.gravatar.com\/avatar\/599e10c322059c95b02db548e983a9310b1fcc6022304de6c1487d7958fbd0c8?s=96&d=wavatar&r=g"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.yasetube.com' />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+/**
+ * Colors
+ */
+/**
+ * Typography
+ */
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+*  Converts a hex value into the rgb equivalent.
+*
+* @param {string} hex - the hexadecimal value to convert
+* @return {string} comma separated rgb values
+*/
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Focus styles.
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Styles that are reused verbatim in a few places
+ */
+/**
+ * Allows users to opt-out of animations via OS-level preferences.
+ */
+/**
+ * Reset default styles for JavaScript UI based pages.
+ * This is a WP-admin agnostic reset
+ */
+/**
+ * Reset the WP Admin page styles for Gutenberg-like pages.
+ */
+/**
+ * Creates a checkerboard pattern background to indicate transparency.
+ * @param {String} $size - The size of the squares in the checkerboard pattern. Default is 12px.
+ */
+:root {
+  --wp-block-synced-color: #7a00df;
+  --wp-block-synced-color--rgb: 122, 0, 223;
+  --wp-bound-block-color: var(--wp-block-synced-color);
+  --wp-editor-canvas-background: #ddd;
+  --wp-admin-theme-color: #007cba;
+  --wp-admin-theme-color--rgb: 0, 124, 186;
+  --wp-admin-theme-color-darker-10: rgb(0, 107, 160.5);
+  --wp-admin-theme-color-darker-10--rgb: 0, 107, 160.5;
+  --wp-admin-theme-color-darker-20: #005a87;
+  --wp-admin-theme-color-darker-20--rgb: 0, 90, 135;
+  --wp-admin-border-width-focus: 2px;
+}
+@media (min-resolution: 192dpi) {
+  :root {
+    --wp-admin-border-width-focus: 1.5px;
+  }
+}
+
+/**
+ * Element styles.
+ */
+.wp-element-button {
+  cursor: pointer;
+}
+
+:root .has-very-light-gray-background-color {
+  background-color: #eee;
+}
+:root .has-very-dark-gray-background-color {
+  background-color: #313131;
+}
+:root .has-very-light-gray-color {
+  color: #eee;
+}
+:root .has-very-dark-gray-color {
+  color: #313131;
+}
+:root {
+  /* stylelint-disable @stylistic/function-comma-space-after -- We can not use spacing because of WP multi site kses rule. */
+}
+:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background {
+  background: linear-gradient(135deg, rgb(0, 208, 132) 0%, rgb(6, 147, 227) 100%);
+}
+:root .has-purple-crush-gradient-background {
+  background: linear-gradient(135deg, rgb(52, 226, 228) 0%, rgb(71, 33, 251) 50%, rgb(171, 29, 254) 100%);
+}
+:root .has-hazy-dawn-gradient-background {
+  background: linear-gradient(135deg, rgb(250, 172, 168) 0%, rgb(218, 208, 236) 100%);
+}
+:root .has-subdued-olive-gradient-background {
+  background: linear-gradient(135deg, rgb(250, 250, 225) 0%, rgb(103, 166, 113) 100%);
+}
+:root .has-atomic-cream-gradient-background {
+  background: linear-gradient(135deg, rgb(253, 215, 154) 0%, rgb(0, 74, 89) 100%);
+}
+:root .has-nightshade-gradient-background {
+  background: linear-gradient(135deg, rgb(51, 9, 104) 0%, rgb(49, 205, 207) 100%);
+}
+:root .has-midnight-gradient-background {
+  background: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+}
+:root {
+  /* stylelint-enable @stylistic/function-comma-space-after */
+  --wp--preset--font-size--normal: 16px;
+  --wp--preset--font-size--huge: 42px;
+}
+
+.has-regular-font-size {
+  font-size: 1em;
+}
+
+.has-larger-font-size {
+  font-size: 2.625em;
+}
+
+.has-normal-font-size {
+  font-size: var(--wp--preset--font-size--normal);
+}
+
+.has-huge-font-size {
+  font-size: var(--wp--preset--font-size--huge);
+}
+
+:root .has-text-align-center {
+  text-align: center;
+}
+
+:root .has-text-align-left {
+  /*rtl:ignore*/
+  text-align: left;
+}
+
+:root .has-text-align-right {
+  /*rtl:ignore*/
+  text-align: right;
+}
+
+.has-fit-text {
+  white-space: nowrap !important;
+}
+
+#end-resizable-editor-section {
+  display: none;
+}
+
+.aligncenter {
+  clear: both;
+}
+
+.items-justified-left {
+  justify-content: flex-start;
+}
+
+.items-justified-center {
+  justify-content: center;
+}
+
+.items-justified-right {
+  justify-content: flex-end;
+}
+
+.items-justified-space-between {
+  justify-content: space-between;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+  background-color: #ddd;
+  clip-path: none;
+  color: #444;
+  display: block;
+  font-size: 1em;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+}
+
+/**
+ * The following provide a simple means of applying a default border style when
+ * a user first makes a selection in the border block support panel.
+ * This prevents issues such as where the user could set a border width
+ * and see no border due there being no border style set.
+ *
+ * This is intended to be removed once intelligent defaults can be set while
+ * making border selections via the block support.
+ *
+ * See: https://github.com/WordPress/gutenberg/pull/33743
+ */
+html :where(.has-border-color) {
+  border-style: solid;
+}
+
+html :where([style*=border-color]) {
+  border-style: solid;
+}
+
+html :where([style*=border-top-color]) {
+  border-top-style: solid;
+}
+
+html :where([style*=border-right-color]) {
+  /*rtl:ignore*/
+  border-right-style: solid;
+}
+
+html :where([style*=border-bottom-color]) {
+  border-bottom-style: solid;
+}
+
+html :where([style*=border-left-color]) {
+  /*rtl:ignore*/
+  border-left-style: solid;
+}
+
+html :where([style*=border-width]) {
+  border-style: solid;
+}
+
+html :where([style*=border-top-width]) {
+  border-top-style: solid;
+}
+
+html :where([style*=border-right-width]) {
+  /*rtl:ignore*/
+  border-right-style: solid;
+}
+
+html :where([style*=border-bottom-width]) {
+  border-bottom-style: solid;
+}
+
+html :where([style*=border-left-width]) {
+  /*rtl:ignore*/
+  border-left-style: solid;
+}
+
+/**
+ * Provide baseline responsiveness for images.
+ */
+html :where(img[class*=wp-image-]) {
+  height: auto;
+  max-width: 100%;
+}
+
+/**
+ * Reset user agent styles for figure element margins.
+ */
+:where(figure) {
+  margin: 0 0 1em 0;
+}
+
+html :where(.is-position-sticky) {
+  /* stylelint-disable length-zero-no-unit -- 0px is set explicitly so that it can be used in a calc value. */
+  --wp-admin--admin-bar--position-offset: var(--wp-admin--admin-bar--height, 0px);
+  /* stylelint-enable length-zero-no-unit */
+}
+
+@media screen and (max-width: 600px) {
+  html :where(.is-position-sticky) {
+    /* stylelint-disable length-zero-no-unit -- 0px is set explicitly so that it can be used in a calc value. */
+    --wp-admin--admin-bar--position-offset: 0px;
+    /* stylelint-enable length-zero-no-unit */
+  }
+}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/**
+ * These rules are needed for backwards compatibility.
+ * They should match the button element rules in the base theme.json file.
+ */
+.wp-block-button__link {
+	color: #ffffff;
+	background-color: #32373c;
+	border-radius: 9999px; /* 100% causes an oval, but any explicit but really high value retains the pill shape. */
+
+	/* This needs a low specificity so it won't override the rules from the button element if defined in theme.json. */
+	box-shadow: none;
+	text-decoration: none;
+
+	/* The extra 2px are added to size solids the same as the outline versions.*/
+	padding: calc(0.667em + 2px) calc(1.333em + 2px);
+
+	font-size: 1.125em;
+}
+
+.wp-block-file__button {
+	background: #32373c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/*# sourceURL=/wp-includes/css/classic-themes.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='wpst-font-awesome-css' href='https://www.yasetube.com/wp-content/themes/retrotube/assets/stylesheets/font-awesome/css/font-awesome.min.css?ver=4.7.0' media='all' />
+<link rel='stylesheet' id='wpst-style-css' href='https://www.yasetube.com/wp-content/themes/retrotube/style.css?ver=1.15.0.1787909529' media='all' />
+<script id="jquery-core-js" src="https://www.yasetube.com/wp-includes/js/jquery/jquery.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://www.yasetube.com/wp-includes/js/jquery/jquery-migrate.js?ver=3.4.1"></script>
+<style id="wp-custom-css">
+.friend-link {
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 5px;
+    text-decoration: none;
+    margin: 6px 5px; 
+    display: inline-block; 
+}
+.friend-link:hover {
+    background-color: darkred;
+}
+</style>
+<style id="core-block-supports-inline-css">
+/**
+ * Core styles: block-supports
+ */
+
+/*# sourceURL=core-block-supports-inline-css */
+</style>
+
+</head>
+
+<body
+class="home blog wp-embed-responsive wp-theme-retrotube group-blog hfeed">
+<!-- POPUNDER -->
+    <script>
+    const univresalP = function() {
+        const puURLstrpcht = 'https://go.mayzaent.com/smartpop/10f513dd56ab41a8e8df971f120ca60d0f72119c525dafbb7b4713c4775587dc?userId=0c741147cbc98b415ad5e3e5387f5661250e539fc954b6cb6f1b172d01eb82af';
+        const interval = 300;
+        const maxPopunders = 2; // maximum number of times to show the popunder within the interval
+        const delayBetweenPopunders = 10; // delay between popunders in seconds
+
+        // Initialize the timestamps and counter if they don't exist
+        if (typeof localStorage.puTSstrpcht === 'undefined') {
+        localStorage.puTSstrpcht = Math.round(+new Date() / 1000);
+        }
+        if (typeof localStorage.puCountstrpcht === 'undefined') {
+        localStorage.puCountstrpcht = 0;
+        }
+        if (typeof localStorage.lastPopunderTS === 'undefined') {
+        localStorage.lastPopunderTS = 0;
+        }
+
+        const checkInterval = function() {
+        const currentTS = Math.round(+new Date() / 1000);
+        if (parseInt(localStorage.puTSstrpcht) <= currentTS - interval) {
+            localStorage.puCountstrpcht = 0;
+            localStorage.puTSstrpcht = currentTS;
+        }
+        };
+
+        const handlePopunder = function(e) {
+        const currentTS = Math.round(+new Date() / 1000);
+
+        if (parseInt(localStorage.puCountstrpcht) >= maxPopunders) {
+            checkInterval();
+        }
+
+        if (parseInt(localStorage.puCountstrpcht) < maxPopunders && currentTS - parseInt(localStorage.lastPopunderTS) >= delayBetweenPopunders) {
+            e.preventDefault();
+            window.open(window.location.href);
+            window.location.href = puURLstrpcht;
+            localStorage.puTSstrpcht = currentTS;
+            localStorage.lastPopunderTS = currentTS;
+            localStorage.puCountstrpcht = parseInt(localStorage.puCountstrpcht) + 1;
+        }
+        };
+
+        document.addEventListener('click', function(e) {
+        if (e.target.closest('iframe')) {
+            return; // Ignore clicks inside iframes
+        }
+
+        handlePopunder(e);
+        });
+
+        const focusListener = function() {
+        window.addEventListener('blur', function onBlur() {
+            if (document.activeElement.tagName === 'IFRAME') {
+            handlePopunder({ preventDefault: () => {} });
+            }
+            window.removeEventListener('blur', onBlur);
+            setTimeout(() => {
+            window.addEventListener('blur', onBlur);
+            }, 100);
+        });
+        };
+
+        focusListener();
+    };
+
+    window.onload = univresalP;
+    </script>
+<div id="page">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		
+		<div class="site-branding row">
+			<div class="logo">
+															<h1 class="site-title"><a href="https://www.yasetube.com/" rel="home">
+																								<i class="fa fa-play-circle"></i>																					亚色影库								</a></h1>
+										
+							</div>
+							<div class="header-search ">
+	<form method="get" id="searchform" action="https://www.yasetube.com/">        
+					<input class="input-group-field" value="Search..." name="s" id="s" onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" type="text" />
+				
+		<input class="button fa-input" type="submit" id="searchsubmit" value="&#xf002;" />        
+	</form>
+</div>								</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation
+		" role="navigation">
+			<div id="head-mobile"></div>
+			<div class="button-nav"></div>
+			<ul id="menu-main-menu" class="row"><li id="menu-item-479" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-479"><a href="/">主页</a></li>
+<li id="menu-item-565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-565"><a href="https://www.yasetube.com/categories">分类</a></li>
+<li id="menu-item-570" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="https://www.yasetube.com/tags">标签</a></li>
+</ul>		</nav><!-- #site-navigation -->
+
+		<div class="clear"></div>
+
+		        <div>
+<a href="https://06py.landh52.org/bf71lj" class="friend-link" target="_blank">蓝导航</a>
+<a href="https://xn-cdwys11.diwddagg85.cc/gg/" class="friend-link" target="_blank">帝王会所</a>
+<br>
+<a href="https://蔑义昷读.01heiliaomimi.com/漓稽讎嬭/a379-dk3a.html" class="friend-link" rel="nofollow" target="_blank">星空入口</a>
+<a href="https://xn-taaa1.tabbkknm51.cc/gg/" class="friend-link" target="_blank">B站入口</a>
+<a href="https://亰rj丹j.aqddhuy1b8h.cc/遵p愴h丽" class="friend-link" target="_blank">千度导航</a>
+<a href="https://xn-avys68.haokkaag15.cc/aa/" class="friend-link" target="_blank">AV研究所</a>
+</div>
+	</header><!-- #masthead -->
+
+	
+	
+	<div id="content" class="site-content row">
+
+	<div id="primary" class="content-area with-sidebar-right">
+		<main id="main" class="site-main with-sidebar-right" role="main">
+
+		
+				<header class="page-header">
+					<h2 class="widget-title">Latest videos</h2>
+						<div id="filters">        
+		<div class="filters-select">
+					<i class="fa fa-filter"></i>			<div class="filters-options">
+									
+					<span><a class="active" href="/?filter=latest">Latest videos</a></span>
+											<span><a class="" href="/?filter=most-viewed">Most viewed videos</a></span>											<span><a class="" href="/?filter=longest">Longest videos</a></span>			
+											<span><a class="" href="/?filter=popular">Popular videos</a></span>			
+					<span><a class="" href="/?filter=random">Random videos</a></span>	
+							</div>
+		</div>
+	</div>
+				</header><!-- .page-header -->
+
+				<div class="videos-list">
+					
+<article data-video-id="video_1" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/903/7.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/903/preview.mp4" class="loop-video thumb-block video-preview-item post-129730 post type-post status-publish format-standard hentry category-dalu" data-post-id="129730">
+	<a href="https://www.yasetube.com/video/%e9%ab%98%e8%b4%a8%e7%ba%a6%e7%82%ae%e5%a4%a7%e7%a5%9e%e3%80%90x%e5%85%88%e7%94%9f%e3%80%91%e6%9c%80%e6%96%b0vip%e7%a6%8f%e5%88%a9%e2%91%b6%ef%bc%8c%e9%9c%b2%e8%84%b8%e7%88%86%e6%93%8d%e5%a4%9a" title="高质约炮大神【X先生】最新VIP福利⑶，露脸爆操多位高颜值小母狗，高潮脸欲仙欲死">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/903/7.jpg" alt="高质约炮大神【X先生】最新VIP福利⑶，露脸爆操多位高颜值小母狗，高潮脸欲仙欲死"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 37</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>高质约炮大神【X先生】最新VIP福利⑶，露脸爆操多位高颜值小母狗，高潮脸欲仙欲死</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_2" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/905/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/905/preview.mp4" class="loop-video thumb-block video-preview-item post-129729 post type-post status-publish format-standard hentry category-dalu" data-post-id="129729">
+	<a href="https://www.yasetube.com/video/%e5%8e%9f%e6%a1%a3%e6%b3%84%e5%af%86%e6%b5%81%e5%87%ba%e7%bb%bf%e5%b8%bd%e7%94%b7%e9%85%92%e5%ba%97%e5%bc%80%e6%88%bf%e5%92%8c%e8%80%81%e9%93%81%e4%b8%80%e5%9d%97%e5%88%86%e4%ba%ab3p%e6%bc%82%e4%ba%ae" title="原档泄密流出绿帽男酒店开房和老铁一块分享3P漂亮女友">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/905/1.jpg" alt="原档泄密流出绿帽男酒店开房和老铁一块分享3P漂亮女友"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 19</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>原档泄密流出绿帽男酒店开房和老铁一块分享3P漂亮女友</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_3" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/904/6.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/904/preview.mp4" class="loop-video thumb-block video-preview-item post-129728 post type-post status-publish format-standard hentry category-dalu" data-post-id="129728">
+	<a href="https://www.yasetube.com/video/%e7%be%a4%e4%ba%a4%e6%b7%ab%e5%95%aa%e3%80%90edmosaic%e3%80%91%e6%9e%81%e8%87%b4%e7%bb%bf%e5%b8%bd%e4%b9%8b%e5%bd%93%e7%9d%80%e4%b8%88%e5%a4%ab%e7%9a%84%e9%9d%a23p" title="群交淫啪【EdMosaic】极致绿帽之当着丈夫的面3P">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/904/6.jpg" alt="群交淫啪【EdMosaic】极致绿帽之当着丈夫的面3P"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 25</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>群交淫啪【EdMosaic】极致绿帽之当着丈夫的面3P</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_4" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/907/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/907/preview.mp4" class="loop-video thumb-block video-preview-item post-129727 post type-post status-publish format-standard hentry category-dalu" data-post-id="129727">
+	<a href="https://www.yasetube.com/video/%e6%9e%81%e5%93%81%e7%99%bd%e8%99%8e%e7%be%8e%e5%b0%91%e5%a5%b3%e3%80%90bunnyuna%e5%84%aa%e5%a8%9c%e3%80%91%e4%b8%8e%e8%8b%b1%e8%af%ad%e5%ae%b6%e6%95%99%e7%9a%84%e5%8d%95%e7%8b%ac%e6%8e%88%e8%af%be" title="极品白虎美少女【BunnyUna優娜】与英语家教的单独授课">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/907/2.jpg" alt="极品白虎美少女【BunnyUna優娜】与英语家教的单独授课"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 22</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>极品白虎美少女【BunnyUna優娜】与英语家教的单独授课</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_5" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/908/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/908/preview.mp4" class="loop-video thumb-block video-preview-item post-129726 post type-post status-publish format-standard hentry category-dalu" data-post-id="129726">
+	<a href="https://www.yasetube.com/video/%e6%bc%82%e4%ba%ae%e5%a4%a7%e5%a5%b6%e7%be%8e%e7%9c%89miuzxc-%e4%ba%9a%e6%b4%b2%e7%94%9c%e5%bf%83%e5%9c%a8%e7%ba%a6%e4%bc%9a%e7%bd%91%e7%ab%99%e9%82%82%e9%80%85%e9%99%8c%e7%94%9f%e5%b0%8f%e5%93%a5" title="漂亮大奶美眉Miuzxc 亚洲甜心在约会网站邂逅陌生小哥 被狠狠蹂躏先插小穴再爆菊花操的翻白眼抽搐尿尿狂喷射一脸精液">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/908/2.jpg" alt="漂亮大奶美眉Miuzxc 亚洲甜心在约会网站邂逅陌生小哥 被狠狠蹂躏先插小穴再爆菊花操的翻白眼抽搐尿尿狂喷射一脸精液"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 10</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>漂亮大奶美眉Miuzxc 亚洲甜心在约会网站邂逅陌生小哥 被狠狠蹂躏先插小穴再爆菊花操的翻白眼抽搐尿尿狂喷射一脸精液</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_6" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/910/3.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/910/preview.mp4" class="loop-video thumb-block video-preview-item post-129725 post type-post status-publish format-standard hentry category-dalu" data-post-id="129725">
+	<a href="https://www.yasetube.com/video/%e5%a4%a9%e7%94%9f%e8%90%9d%e8%8e%89%e4%bd%93%e5%8f%af%e7%88%b1%e9%82%bb%e5%ae%b6%e5%a6%b9%e3%80%90yurinslittlepeach%e3%80%91%e6%9c%80%e6%96%b0%e4%bd%9c%e5%93%81%ef%bc%8c%e8%ae%a9%e5%a5%b9%e5%ae%a0" title="天生萝莉体可爱邻家妹【yurinslittlepeach】最新作品，让她宠爱我的小弟弟，一大早来场撒娇式性爱">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/910/3.jpg" alt="天生萝莉体可爱邻家妹【yurinslittlepeach】最新作品，让她宠爱我的小弟弟，一大早来场撒娇式性爱"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 10</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>天生萝莉体可爱邻家妹【yurinslittlepeach】最新作品，让她宠爱我的小弟弟，一大早来场撒娇式性爱</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_7" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/913/4.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/913/preview.mp4" class="loop-video thumb-block video-preview-item post-129724 post type-post status-publish format-standard hentry category-dalu" data-post-id="129724">
+	<a href="https://www.yasetube.com/video/%e9%a3%8e%e9%9f%b5%e7%8a%b9%e5%ad%98%e7%9a%84%e4%ba%8b%e4%b8%9a%e5%8d%95%e4%bd%8d%e7%99%bd%e9%a2%86%e5%b0%91%e5%a6%87%e8%80%81%e5%85%ac%e5%87%ba%e5%b7%ae%e5%81%b7%e6%83%85%e5%b9%b4%e8%bd%bb%e5%b0%8f" title="风韵犹存的事业单位白领少妇老公出差偷情年轻小伙穿着情趣网衣高跟鞋啪啪呻吟刺激">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/913/4.jpg" alt="风韵犹存的事业单位白领少妇老公出差偷情年轻小伙穿着情趣网衣高跟鞋啪啪呻吟刺激"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 23</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>风韵犹存的事业单位白领少妇老公出差偷情年轻小伙穿着情趣网衣高跟鞋啪啪呻吟刺激</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_8" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/911/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/911/preview.mp4" class="loop-video thumb-block video-preview-item post-129723 post type-post status-publish format-standard hentry category-dalu" data-post-id="129723">
+	<a href="https://www.yasetube.com/video/%e5%a4%a7%e5%a5%b6%e5%b0%91%e5%a6%87%e5%80%9f%e9%ab%98%e5%88%a9%e8%b4%b7%e9%80%be%e6%9c%9f%e7%81%ab%e7%88%86%e7%9a%84%e8%ba%ab%e6%9d%90%e5%92%8c%e8%82%a5%e7%be%8e%e7%9a%84%e5%a4%a7%e9%b2%8d%e9%b1%bc" title="大奶少妇借高利贷逾期火爆的身材和肥美的大鲍鱼被债主曝光">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/911/1.jpg" alt="大奶少妇借高利贷逾期火爆的身材和肥美的大鲍鱼被债主曝光"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 37</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>大奶少妇借高利贷逾期火爆的身材和肥美的大鲍鱼被债主曝光</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_9" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/902/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/902/preview.mp4" class="loop-video thumb-block video-preview-item post-129722 post type-post status-publish format-standard hentry category-nvce" data-post-id="129722">
+	<a href="https://www.yasetube.com/video/%e5%95%86%e5%9c%ba%e5%8e%95%e6%8b%8d%e5%a5%b3%e5%8e%95%e5%81%b7%e6%8b%8d%e4%b8%a4%e4%bd%8d%e7%be%8e%e5%a5%b3%e7%ac%ac%e4%b8%80%e4%bd%8d%e6%9e%81%e5%93%81%e4%b8%80%e7%ba%bf%e5%ab%a9%e9%b2%8d%e9%b1%bc" title="商场厕拍女厕偷拍两位美女第一位极品一线嫩鲍鱼">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/902/2.jpg" alt="商场厕拍女厕偷拍两位美女第一位极品一线嫩鲍鱼"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 187</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>商场厕拍女厕偷拍两位美女第一位极品一线嫩鲍鱼</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_10" data-main-thumb="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/906/8.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/906/preview.mp4" class="loop-video thumb-block video-preview-item post-129721 post type-post status-publish format-standard hentry category-nvce" data-post-id="129721">
+	<a href="https://www.yasetube.com/video/%e5%a4%a7%e5%ad%a6%e6%a0%a1%e5%9b%ad%e5%a5%b3%e5%8e%95%e5%9b%ba%e5%ae%9a%e6%91%84%e5%83%8f%e5%a4%b4%e5%81%b7%e6%8b%8d%e6%bc%82%e4%ba%ae%e5%ad%a6%e5%a6%b9%e4%bb%ac%e5%90%84%e7%a7%8d%e6%9e%81%e5%93%81" title="大学校园女厕固定摄像头偷拍漂亮学妹们各种极品鲍鱼">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/pic/media/videos/tmb/000/002/906/8.jpg" alt="大学校园女厕固定摄像头偷拍漂亮学妹们各种极品鲍鱼"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 245</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>大学校园女厕固定摄像头偷拍漂亮学妹们各种极品鲍鱼</span>
+		</header>
+	</a>
+</article>
+				</div>
+
+				<div class="pagination"><ul><li><a class="current">1</a></li><li><a href="https://www.yasetube.com/page/2?filter=latest" class="inactive">2</a></li><li><a href="https://www.yasetube.com/page/3?filter=latest" class="inactive">3</a></li><li><a href="https://www.yasetube.com/page/4?filter=latest" class="inactive">4</a></li><li><a href="https://www.yasetube.com/page/5?filter=latest" class="inactive">5</a></li><li><a href="https://www.yasetube.com/page/2?filter=latest">Next</a></li><li><a href="https://www.yasetube.com/page/1690?filter=latest">Last</a></li></ul></div>
+		<div class="clear"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<aside id="sidebar" class="widget-area with-sidebar-right" role="complementary">
+				<section id="widget_videos_block-6" class="widget widget_videos_block"><h2 class="widget-title">fc2</h2>				<a class="more-videos label" href="https://www.yasetube.com/?filter=random														&amp;cat=3746"><i class="fa fa-plus"></i> <span>More videos</span></a>
+	<div class="videos-list">
+			
+<article data-video-id="video_11" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/277/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/277/preview.mp4" class="loop-video thumb-block video-preview-item post-68593 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-3788 tag-3749 tag-491 tag-168 tag-30 tag-3773" data-post-id="68593">
+	<a href="https://www.yasetube.com/video/fc2ppv3192850-hao-m-ben-xing-quan-shen-ai-ye-bao-fa-zhong-chu" title="FC2-PPV-3192850きれないチンポ好きドMな本性。キモおやじに全身まさぐられ愛液タラタラパイパンマンコに暴発中出しキメられる">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/277/1.jpg" alt="FC2-PPV-3192850きれないチンポ好きドMな本性。キモおやじに全身まさぐられ愛液タラタラパイパンマンコに暴発中出しキメられる"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 3K</span>			<span class="duration"><i class="fa fa-clock-o"></i>52:57</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3192850きれないチンポ好きドMな本性。キモおやじに全身まさぐられ愛液タラタラパイパンマンコに暴発中出しキメられる</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_12" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/481/6.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/481/preview.mp4" class="loop-video thumb-block video-preview-item post-68623 post type-post status-publish format-standard hentry category-fc2-ppv tag-3753 tag-67 tag-4098 tag-3749 tag-491 tag-3806 tag-3773 tag-3802 tag-3807" data-post-id="68623">
+	<a href="https://www.yasetube.com/video/fc2ppv3017740-xian-li-pu-tong-ke-shou-yan-mian-qiang-xi-ba-shu-gui-cuo-te-dian-mu-wu" title="FC2-PPV-3017740県立普通科③受験勉強の息抜きで・・こっそり塾帰りにハメ撮り特典で目モザ無し。">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/481/6.jpg" alt="FC2-PPV-3017740県立普通科③受験勉強の息抜きで・・こっそり塾帰りにハメ撮り特典で目モザ無し。"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 9K</span>			<span class="duration"><i class="fa fa-clock-o"></i>24:25</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:83%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>83%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3017740県立普通科③受験勉強の息抜きで・・こっそり塾帰りにハメ撮り特典で目モザ無し。</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_13" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/009/393/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/009/393/preview.mp4" class="loop-video thumb-block video-preview-item post-68491 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-3749 tag-491" data-post-id="68491">
+	<a href="https://www.yasetube.com/video/fc2ppv3274967-xin-hun-you-qi-jue-si-cuo-ru-sa-san-chao-chao-chao-yi-ba-zhong-chu" title="FC2-PPV-3274967ホヤ新婚幼妻を決死のハメ撮り、-乳撒き散らし、潮・潮・潮、一か八かで中出しかましました。">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/009/393/1.jpg" alt="FC2-PPV-3274967ホヤ新婚幼妻を決死のハメ撮り、-乳撒き散らし、潮・潮・潮、一か八かで中出しかましました。"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 8K</span>			<span class="duration"><i class="fa fa-clock-o"></i>01:07:18</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3274967ホヤ新婚幼妻を決死のハメ撮り、-乳撒き散らし、潮・潮・潮、一か八かで中出しかましました。</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_14" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/211/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/211/preview.mp4" class="loop-video thumb-block video-preview-item post-68598 post type-post status-publish format-standard hentry category-fc2-ppv tag-fc2 tag-17698 tag-17697 tag-17699 tag-168" data-post-id="68598">
+	<a href="https://www.yasetube.com/video/fc2ppv3231090-nv-zi-qiu-tian-she-shang-jing-mei-ru-feng" title="FC2-PPV-3231090こんな女の子を求めてました！田舎から上京したての美乳の楓ちゃんにごっくんさせてやりました">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/211/2.jpg" alt="FC2-PPV-3231090こんな女の子を求めてました！田舎から上京したての美乳の楓ちゃんにごっくんさせてやりました"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 5K</span>			<span class="duration"><i class="fa fa-clock-o"></i>45:41</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3231090こんな女の子を求めてました！田舎から上京したての美乳の楓ちゃんにごっくんさせてやりました</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_15" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/460/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/460/preview.mp4" class="loop-video thumb-block video-preview-item post-68738 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-3754 tag-3771 tag-3749 tag-491 tag-30 tag-3768 tag-3772" data-post-id="68738">
+	<a href="https://www.yasetube.com/video/fc2ppv3074048-ecup-ju-ru-xian-nv-zi-da-sheng-se-bai-mei-ji-xi-shai-mei-ti-sheng-zhong-chu-kou-nei-she-jing" title="FC2-PPV-3074048ジュアルでEcup巨乳現女子大生・・・色白美肌を惜しげもなく晒しピッチピチな美体に生中出し＆口内射精！！">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/460/1.jpg" alt="FC2-PPV-3074048ジュアルでEcup巨乳現女子大生・・・色白美肌を惜しげもなく晒しピッチピチな美体に生中出し＆口内射精！！"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 2K</span>			<span class="duration"><i class="fa fa-clock-o"></i>50:44</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:50%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>50%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3074048ジュアルでEcup巨乳現女子大生・・・色白美肌を惜しげもなく晒しピッチピチな美体に生中出し＆口内射精！！</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_16" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/504/5.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/504/preview.mp4" class="loop-video thumb-block video-preview-item post-68578 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-4082 tag-3821 tag-491 tag-3772 tag-4083" data-post-id="68578">
+	<a href="https://www.yasetube.com/video/fc2ppv2916903-wei-jian-mu-li-fu-jian-dan-gu-kai-p-huo-se-bai-xian-mei-ru-shou-lou-niang-19-sui-da-liang-fa-she-ge-ren-cuo-ying" title="FC2-PPV-2916903味な見た目とは裏腹に、簡単に股を開いてP活する色白陥没乳首のお漏らし娘19歳に大量発射♪【個人撮影】">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/504/5.jpg" alt="FC2-PPV-2916903味な見た目とは裏腹に、簡単に股を開いてP活する色白陥没乳首のお漏らし娘19歳に大量発射♪【個人撮影】"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 4K</span>			<span class="duration"><i class="fa fa-clock-o"></i>01:02:50</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-2916903味な見た目とは裏腹に、簡単に股を開いてP活する色白陥没乳首のお漏らし娘19歳に大量発射♪【個人撮影】</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_17" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/240/10.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/240/preview.mp4" class="loop-video thumb-block video-preview-item post-68807 post type-post status-publish format-standard hentry category-fc2-ppv tag-3753 tag-3754 tag-363 tag-3749 tag-491 tag-3772" data-post-id="68807">
+	<a href="https://www.yasetube.com/video/fc2ppv3204699sex-qu-tuo-wu-xiao-yan-wu-xie-qi-fa-yu-liang-hui-chang-re-qi-dai-sheng-du" title="FC2-PPV-3204699SEXパーティー！ 屈託の無い笑顔でハメられていく無邪気さと発育の良いボディに会場も熱気を帯びる！ 生で２度ハメ">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/240/10.jpg" alt="FC2-PPV-3204699SEXパーティー！ 屈託の無い笑顔でハメられていく無邪気さと発育の良いボディに会場も熱気を帯びる！ 生で２度ハメ"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 8K</span>			<span class="duration"><i class="fa fa-clock-o"></i>45:58</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:75%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>75%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3204699SEXパーティー！ 屈託の無い笑顔でハメられていく無邪気さと発育の良いボディに会場も熱気を帯びる！ 生で２度ハメ</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_18" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/540/3.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/540/preview.mp4" class="loop-video thumb-block video-preview-item post-68768 post type-post status-publish format-standard hentry category-fc2-ppv tag-4113 tag-3753 tag-4114 tag-3899 tag-363 tag-3749 tag-37 tag-4115" data-post-id="68768">
+	<a href="https://www.yasetube.com/video/fc2ppv2905259-ren-nv-jiang-xuan-yun-yong-dong-hua-cuo-ying-chi-gua-guo-wu-shi-lu-bao-ru-ru-lun-ke-yang-wei-pu-chu" title="FC2-PPV-2905259人女将がヘルプ！宣伝用の動画を撮影すると持ち掛けて、エロ過ぎる五十路爆乳デカ乳輪をお客様の為に曝け出して…">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/540/3.jpg" alt="FC2-PPV-2905259人女将がヘルプ！宣伝用の動画を撮影すると持ち掛けて、エロ過ぎる五十路爆乳デカ乳輪をお客様の為に曝け出して…"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 4K</span>			<span class="duration"><i class="fa fa-clock-o"></i>01:01:03</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-2905259人女将がヘルプ！宣伝用の動画を撮影すると持ち掛けて、エロ過ぎる五十路爆乳デカ乳輪をお客様の為に曝け出して…</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_19" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/002/617/3.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/002/617/preview.mp4" class="loop-video thumb-block video-preview-item post-68898 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-67 tag-3749 tag-491 tag-3773" data-post-id="68898">
+	<a href="https://www.yasetube.com/video/fc2ppv3145577-nv-zi-sheng-tu-you-wei-xian-gan-kuai-le-qiu-wei-nian-wu-zhi-nei-she-jing" title="FC2-PPV-3145577女子生徒・この誘いは危険なのだろうか？リスクを感じながらも快楽を求める未年にゴム無し膣内射精＆">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/002/617/3.jpg" alt="FC2-PPV-3145577女子生徒・この誘いは危険なのだろうか？リスクを感じながらも快楽を求める未年にゴム無し膣内射精＆"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 4K</span>			<span class="duration"><i class="fa fa-clock-o"></i>57:17</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3145577女子生徒・この誘いは危険なのだろうか？リスクを感じながらも快楽を求める未年にゴム無し膣内射精＆</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_20" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/315/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/315/preview.mp4" class="loop-video thumb-block video-preview-item post-68516 post type-post status-publish format-standard hentry category-fc2-ppv tag-3748 tag-3753 tag-67 tag-3749 tag-3812 tag-491 tag-3813" data-post-id="68516">
+	<a href="https://www.yasetube.com/video/fc2ppv3182412-er-du-nv-zi-zhi-ao-zhong-chu" title="FC2-PPV-3182412もう二度とハメれなくなってしまったアイドル女子にしっかり膣奥へ中出し！！">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/315/1.jpg" alt="FC2-PPV-3182412もう二度とハメれなくなってしまったアイドル女子にしっかり膣奥へ中出し！！"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 4K</span>			<span class="duration"><i class="fa fa-clock-o"></i>50:28</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>FC2-PPV-3182412もう二度とハメれなくなってしまったアイドル女子にしっかり膣奥へ中出し！！</span>
+		</header>
+	</a>
+</article>
+	</div>
+	<div class="clear"></div>
+			</section><section id="widget_videos_block-7" class="widget widget_videos_block"><h2 class="widget-title">品牌传媒</h2>				<a class="more-videos label" href="https://www.yasetube.com/?filter=random														&amp;cat=16"><i class="fa fa-plus"></i> <span>More videos</span></a>
+	<div class="videos-list">
+			
+<article data-video-id="video_21" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/975/8.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/975/preview.mp4" class="loop-video thumb-block video-preview-item post-52082 post type-post status-publish format-standard hentry category-madou tag-14 tag-16025 tag-7432 tag-8519 tag-440" data-post-id="52082">
+	<a href="https://www.yasetube.com/video/chinese-porn-tian-mei-chuan-mei-tmw125-xiao-qu-guan-li-yuan-tou-pai-wei-xie-zuo-ai-fou-ze-wai-liu-ying-pian-li-er" title="chinese porn(天美传媒)(tmw-125)小区管理员偷拍威胁做爱否则外流影片-黎儿">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/975/8.jpg" alt="chinese porn(天美传媒)(tmw-125)小区管理员偷拍威胁做爱否则外流影片-黎儿"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 2K</span>			<span class="duration"><i class="fa fa-clock-o"></i>32:19</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(天美传媒)(tmw-125)小区管理员偷拍威胁做爱否则外流影片-黎儿</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_22" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/439/4.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/439/preview.mp4" class="loop-video thumb-block video-preview-item post-51796 post type-post status-publish format-standard hentry category-madou tag-6323 tag-19070 tag-5010 tag-440 tag-485" data-post-id="51796">
+	<a href="https://www.yasetube.com/video/chinese-porn-ma-dou-chuan-mei-md0256-rou-bian-qi-yang-cheng-ji-hua-bai-si-yin" title="chinese porn(麻豆传媒)(md-0256)肉便器养成计划-白思吟">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/439/4.jpg" alt="chinese porn(麻豆传媒)(md-0256)肉便器养成计划-白思吟"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 1K</span>			<span class="duration"><i class="fa fa-clock-o"></i>24:48</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(麻豆传媒)(md-0256)肉便器养成计划-白思吟</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_23" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/308/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/308/preview.mp4" class="loop-video thumb-block video-preview-item post-51923 post type-post status-publish format-standard hentry category-madou tag-6323 tag-539 tag-18932 tag-17482 tag-440" data-post-id="51923">
+	<a href="https://www.yasetube.com/video/chinese-porn-ai-dou-chuan-mei-id5202-ling-ru-xia-shu-mei-ren-qi-yan-xi" title="chinese porn(爱豆传媒)(id-5202)凌辱下属美人妻-妍希">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/308/2.jpg" alt="chinese porn(爱豆传媒)(id-5202)凌辱下属美人妻-妍希"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 2K</span>			<span class="duration"><i class="fa fa-clock-o"></i>31:45</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:80%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>80%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(爱豆传媒)(id-5202)凌辱下属美人妻-妍希</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_24" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/367/9.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/367/preview.mp4" class="loop-video thumb-block video-preview-item post-51865 post type-post status-publish format-standard hentry category-madou tag-qq tag-4828 tag-18557 tag-241 tag-105" data-post-id="51865">
+	<a href="https://www.yasetube.com/video/chinese-porn-kou-kou-chuan-mei-qqog030-nen-xue-mei-mei-de-nei-she-zhong-chu-te-wu-tu" title="chinese porn(扣扣传媒)(qqog-030)嫩穴妹妹的内射中出-特汙兔">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/367/9.jpg" alt="chinese porn(扣扣传媒)(qqog-030)嫩穴妹妹的内射中出-特汙兔"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 936</span>			<span class="duration"><i class="fa fa-clock-o"></i>38:57</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(扣扣传媒)(qqog-030)嫩穴妹妹的内射中出-特汙兔</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_25" data-main-thumb="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1106/4.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1106/video.mp4" class="loop-video thumb-block video-preview-item post-1799 post type-post status-publish format-standard hentry category-madou tag-100 tag-66 tag-8 tag-86 tag-485" data-post-id="1799">
+	<a href="https://www.yasetube.com/video/md0135-yin-dang-ren-qi-de-tou-qing-zhuo-mi-cang-yu-qiu-bu-man-gou-yin-shang-men-nian-qing-lin-ju-xian-er-yuan" title="MD0135 淫荡人妻的偷情捉迷藏欲求不满勾引上门年轻邻居仙儿媛.">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1106/4.jpg" alt="MD0135 淫荡人妻的偷情捉迷藏欲求不满勾引上门年轻邻居仙儿媛."></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 6K</span>			<span class="duration"><i class="fa fa-clock-o"></i>30:29</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>MD0135 淫荡人妻的偷情捉迷藏欲求不满勾引上门年轻邻居仙儿媛.</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_26" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/500/1.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/500/preview.mp4" class="loop-video thumb-block video-preview-item post-51733 post type-post status-publish format-standard hentry category-madou tag-4266 tag-18921 tag-19131 tag-7275 tag-18654" data-post-id="51733">
+	<a href="https://www.yasetube.com/video/chinese-porn-huang-jia-hua-ren-ras146-rou-yu-su-ren-zha-gan-xing-nan-si-chu-li-na" title="chinese porn(皇家华人)(ras-146)肉欲素人榨干型男私厨-黎娜">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/500/1.jpg" alt="chinese porn(皇家华人)(ras-146)肉欲素人榨干型男私厨-黎娜"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 957</span>			<span class="duration"><i class="fa fa-clock-o"></i>36:09</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(皇家华人)(ras-146)肉欲素人榨干型男私厨-黎娜</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_27" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/689/7.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/689/preview.mp4" class="loop-video thumb-block video-preview-item post-52204 post type-post status-publish format-standard hentry category-madou tag-18564 tag-18592 tag-284 tag-18593 tag-167" data-post-id="52204">
+	<a href="https://www.yasetube.com/video/chinese-porn-tian-mei-chuan-mei-tmw120-qing-lv-kao-yan-sai-zai-nan-you-mian-qian-bei-gan-dao-gao-chao-yu-rui" title="chinese porn(天美传媒)(tmw-120)情侣考验赛 在男友面前被干到高潮-羽芮">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/007/689/7.jpg" alt="chinese porn(天美传媒)(tmw-120)情侣考验赛 在男友面前被干到高潮-羽芮"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 2K</span>			<span class="duration"><i class="fa fa-clock-o"></i>34:26</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(天美传媒)(tmw-120)情侣考验赛 在男友面前被干到高潮-羽芮</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_28" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/024/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/024/preview.mp4" class="loop-video thumb-block video-preview-item post-52063 post type-post status-publish format-standard hentry category-madou tag-6323 tag-4325 tag-9911 tag-440 tag-5851" data-post-id="52063">
+	<a href="https://www.yasetube.com/video/chinese-porn-guo-dong-chuan-mei-91tcm004-nv-ban-nan-zhuang-de-yun-dong-la-mei-bei-nan-qiu-yuan-qin-fan-jin-bao-na" title="chinese porn(果冻传媒)(91tcm-004)女扮男装的运动辣妹被男球员侵犯-金宝娜">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/024/2.jpg" alt="chinese porn(果冻传媒)(91tcm-004)女扮男装的运动辣妹被男球员侵犯-金宝娜"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 992</span>			<span class="duration"><i class="fa fa-clock-o"></i></span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(果冻传媒)(91tcm-004)女扮男装的运动辣妹被男球员侵犯-金宝娜</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_29" data-main-thumb="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/486/2.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/486/preview.mp4" class="loop-video thumb-block video-preview-item post-51748 post type-post status-publish format-standard hentry category-madou tag-ntr tag-15682 tag-493 tag-10511 tag-18911" data-post-id="51748">
+	<a href="https://www.yasetube.com/video/chinese-porn-qi-dian-chuan-mei-xsj060-xin-li-yi-sheng-cui-mian-ntr-li-na" title="chinese porn(起点传媒)(XSJ-060)心理医生催眠NTR-莉娜">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/hd/media/videos/tmb/000/008/486/2.jpg" alt="chinese porn(起点传媒)(XSJ-060)心理医生催眠NTR-莉娜"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 1K</span>			<span class="duration"><i class="fa fa-clock-o"></i>38:27</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:0%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>0%</span></div>
+		<header class="entry-header">
+			<span>chinese porn(起点传媒)(XSJ-060)心理医生催眠NTR-莉娜</span>
+		</header>
+	</a>
+</article>
+
+<article data-video-id="video_30" data-main-thumb="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1019/3.jpg" data-trailer="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1019/video.mp4" class="loop-video thumb-block video-preview-item post-1868 post type-post status-publish format-standard hentry category-madou tag-88 tag-485" data-post-id="1868">
+	<a href="https://www.yasetube.com/video/md0059-qin-ke-xin-ju-jia-ge-li-shi-de-hao-huo-ban-zhuan-men-zhi-liao-xing-ji-ke-ma-dou-chuan-mei-ying-hua-yuan-chuang-zhong-wen-shou-cang-ban" title="MD0059秦可欣.居家隔离时的好伙伴.专门治疗性饥渴.麻豆传媒映画原创中文收藏版">
+		<div class="post-thumbnail">
+			
+			<div class="post-thumbnail-container"><img class="video-main-thumb" width="300" height="168.75" src="https://img.jhyfcdcjugdell.cfd/sp/media/videos/tmb/1019/3.jpg" alt="MD0059秦可欣.居家隔离时的好伙伴.专门治疗性饥渴.麻豆传媒映画原创中文收藏版"></div>			<div class="video-overlay"></div>
+
+			<span class="hd-video">HD</span>			<span class="views"><i class="fa fa-eye"></i> 6K</span>			<span class="duration"><i class="fa fa-clock-o"></i>29:38</span>		</div>
+
+		<div class="rating-bar"><div class="rating-bar-meter" style="width:100%"></div><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>100%</span></div>
+		<header class="entry-header">
+			<span>MD0059秦可欣.居家隔离时的好伙伴.专门治疗性饥渴.麻豆传媒映画原创中文收藏版</span>
+		</header>
+	</a>
+</article>
+	</div>
+	<div class="clear"></div>
+			</section>	</aside><!-- #sidebar -->
+
+</div><!-- #content -->
+
+<footer id="colophon" class="site-footer
+" role="contentinfo">
+	<div class="row">
+						
+		<div class="clear"></div>
+
+		
+					<div class="footer-menu-container">
+				<div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu"><li id="menu-item-69580" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-69580"><a href="https://www.yasetube.com/advertising%e5%b9%bf%e5%91%8a%e6%8a%95%e6%94%be">advertising广告投放</a></li>
+<li id="menu-item-39784" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39784"><a href="https://www.yasetube.com/dmca">Content removal</a></li>
+<li id="menu-item-39783" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39783"><a href="https://www.yasetube.com/18-u-s-c-2257">18 U.S.C 2257</a></li>
+<li id="menu-item-39785" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39785"><a href="https://www.yasetube.com/terms-of-use">Terms of Use</a></li>
+</ul></div>			</div>
+		
+			</div>
+</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<a class="button" href="#" id="back-to-top" title="Back to top"><i class="fa fa-chevron-up"></i></a>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/retrotube/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+		<div class="modal fade wpst-user-modal" id="wpst-user-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" data-active-tab="">
+				<div class="modal-content">
+					<div class="modal-body">
+					<a href="#" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-remove"></i></a>
+						<!-- Register form -->
+						<div class="wpst-register">	
+															<div class="alert alert-danger">Registration is disabled.</div>
+													</div>
+
+						<!-- Login form -->
+						<div class="wpst-login">							 
+							<h3>Login to 亚色影库</h3>
+						
+							<form id="wpst_login_form" action="https://www.yasetube.com/" method="post">
+
+								<div class="form-field">
+									<label>Username</label>
+									<input class="form-control input-lg required" name="wpst_user_login" type="text"/>
+								</div>
+								<div class="form-field">
+									<label for="wpst_user_pass">Password</label>
+									<input class="form-control input-lg required" name="wpst_user_pass" id="wpst_user_pass" type="password"/>
+								</div>
+								<div class="form-field lost-password">
+									<input type="hidden" name="action" value="wpst_login_member"/>
+									<button class="btn btn-theme btn-lg" data-loading-text="Loading..." type="submit">Login</button> <a class="alignright" href="#wpst-reset-password">Lost Password?</a>
+								</div>
+								<input type="hidden" id="login-security" name="login-security" value="c2e0296539" /><input type="hidden" name="_wp_http_referer" value="/?filter=latest" />							</form>
+							<div class="wpst-errors"></div>
+						</div>
+
+						<!-- Lost Password form -->
+						<div class="wpst-reset-password">							 
+							<h3>Reset Password</h3>
+							<p>Enter the username or e-mail you used in your profile. A password reset link will be sent to you by email.</p>
+						
+							<form id="wpst_reset_password_form" action="https://www.yasetube.com/" method="post">
+								<div class="form-field">
+									<label for="wpst_user_or_email">Username or E-mail</label>
+									<input class="form-control input-lg required" name="wpst_user_or_email" id="wpst_user_or_email" type="text"/>
+								</div>
+								<div class="form-field">
+									<input type="hidden" name="action" value="wpst_reset_password"/>
+									<button class="btn btn-theme btn-lg" data-loading-text="Loading..." type="submit">Get new password</button>
+								</div>
+								<input type="hidden" id="password-security" name="password-security" value="c2e0296539" /><input type="hidden" name="_wp_http_referer" value="/?filter=latest" />							</form>
+							<div class="wpst-errors"></div>
+						</div>
+
+						<div class="wpst-loading">
+							<p><i class="fa fa-refresh fa-spin"></i><br>Loading...</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<span class="wpst-register-footer">Don&#039;t have an account? <a href="#wpst-register">Sign up</a></span>
+						<span class="wpst-login-footer">Already have an account? <a href="#wpst-login">Login</a></span>
+					</div>				
+				</div>
+			</div>
+		</div>
+		<script id="wpst-navigation-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/navigation.js?ver=1.0.0"></script>
+<script id="wpst-carousel-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/jquery.bxslider.min.js?ver=4.2.15"></script>
+<script id="wpst-touchswipe-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/jquery.touchSwipe.min.js?ver=1.6.18"></script>
+<script id="wpst-lazyload-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/lazyload.js?ver=1.0.0"></script>
+<script id="wpst-main-js-extra">
+var wpst_ajax_var = {"url":"https://www.yasetube.com/wp-admin/admin-ajax.php","nonce":"1309b35084","ctpl_installed":"1","is_mobile":"1"};
+var objectL10nMain = {"readmore":"Read more","close":"Close"};
+var options = {"thumbnails_ratio":"16/9","enable_views_system":"on","enable_rating_system":"on"};
+//# sourceURL=wpst-main-js-extra
+</script>
+<script id="wpst-main-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/main.js?ver=1.15.0.1787909529"></script>
+<script id="wpst-skip-link-focus-fix-js" src="https://www.yasetube.com/wp-content/themes/retrotube/assets/js/skip-link-focus-fix.js?ver=1.0.0"></script>
+
+<!-- Other scripts -->
+
+<!-- Mobile scripts -->
+<script  ="" id="SCSpotScript" type="text/javascript" src="https://go.tscprts.com/smartpop/311f4770ceae2d65f4ededdbd9b67624aa54836e62f1981cb455da39fb1f15e3?userId=0c741147cbc98b415ad5e3e5387f5661250e539fc954b6cb6f1b172d01eb82af"  =""></script>
+</body>
+</html>
+
+<!-- Dynamic page generated in 0.088 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2026-10-20 21:21:52 -->

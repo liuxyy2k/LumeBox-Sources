@@ -13,3 +13,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/九色91Porny.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好色TV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色影库.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线上看.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js

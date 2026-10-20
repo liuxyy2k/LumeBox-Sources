@@ -199,3 +199,8 @@ hstv_detail_enc.json
 porn91_list.html
 porn91_detail.html
 porn91_search.html
+# 亚色影库（yasetube.com；WordPress + RetroTube，播放地址在 clean-tube-player 的 base64 iframe 里）
+# PTT线上看（ptt2.my；根路径 500、内容都在 /index.php 与 /p/、/<id> 下；分集 /<id>/<集>/<线路>，播放 m3u8）
+# TwiXive（twixive.net；Next.js RSC 负载，条目 JSON 在 initialData.items，播放是 video.twimg.com 直链 mp4）
+yasetube_detail.html
+ptt2_detail.html
