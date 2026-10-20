@@ -195,3 +195,7 @@ novel_zonbo_home.html
 # 好色TV（hstv.fun / hstv.pro；Angular SPA + 加密 JSON 接口，下面两份是接口**原始响应**密文夹具）
 hstv_list_enc.json
 hstv_detail_enc.json
+# 91Porn（91porn.com / www.91porn.com；老式 PHP SSR 站，播放地址是 strencode2=unescape 解出的签名 mp4）
+porn91_list.html
+porn91_detail.html
+porn91_search.html
