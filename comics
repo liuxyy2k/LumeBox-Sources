@@ -23,3 +23,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/Z8PT图�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书套图.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书自拍.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/JComic漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/G社漫画.js

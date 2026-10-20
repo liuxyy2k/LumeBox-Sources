@@ -20,3 +20,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色友�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/色漫網.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/鸟鸟韩漫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/JComic漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/G社漫画.js

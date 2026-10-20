@@ -12,7 +12,7 @@ var path = require('node:path');
 var nodeTest = require('node:test');
 // 用例名前缀 → 脚本文件：脚本从仓库移除后，它的用例自动跳过（而不是整片红掉、
 // 把真正的回归埋住）。删源时记得把对应快照一并清理。
-var REMOVED = { 'gmh:': 'comic/gmh_comic.js', 'jcomic:': 'comic/JComic漫画.js', '92mh:': 'comic/92mh_comic.js' };
+var REMOVED = { 'gmh:': 'comic/G社漫画.js', 'jcomic:': 'comic/JComic漫画.js', '92mh:': 'comic/92mh_comic.js' };
 function test(name, fn) {
   for (var prefix in REMOVED) {
     if (name.indexOf(prefix) === 0 && !fs.existsSync(path.join(__dirname, '..', REMOVED[prefix]))) {
@@ -447,7 +447,7 @@ test('xanimu: 域名链（.art 首选）；首选连不上就换下一个并记�
 // ------------------------------------------------------------------ G社漫画（g-mh.org）
 
 test('gmh: 列表快照解析出 18 条（slug 作 id、封面 img.card、标题 h3.cardtitle）', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   stubRoutes(source, { '/manga': snapshot('gmh_list.html') });
   var page = await source.list({ categoryId: 'all', page: 1 });
   assert.equal(page.items.length, 18);
@@ -459,7 +459,7 @@ test('gmh: 列表快照解析出 18 条（slug 作 id、封面 img.card、标题
 });
 
 test('gmh: 搜索如实拒绝（站点没有搜索，不返回假的空结果）', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   var attempts = [];
   source.http = { get: async function (url) { attempts.push(url); return { status: 200, body: '' }; } };
   await assert.rejects(
@@ -473,7 +473,7 @@ test('gmh: 搜索如实拒绝（站点没有搜索，不返回假的空结果）
 });
 
 test('gmh: 分类 = 四个栏目 + 站点自己的题材/标签（实时抓）', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   stubRoutes(source, { '/manga': snapshot('gmh_list.html') });
   var categories = await source.categories();
   assert.equal(JSON.stringify(categories.slice(0, 4).map(function (c) { return c.id; })),
@@ -485,7 +485,7 @@ test('gmh: 分类 = 四个栏目 + 站点自己的题材/标签（实时抓）',
 });
 
 test('gmh: 详情（作品页 data-mid + 页面元信息）与目录（接口 chapters 升序）', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   stubRoutes(source, {
     '/api/v2/manga/get': snapshot('gmh_manga_api.json'),
     '/manga/': snapshot('gmh_manga.html')
@@ -507,7 +507,7 @@ test('gmh: 详情（作品页 data-mid + 页面元信息）与目录（接口 ch
 });
 
 test('gmh: 被站点防护拦下（403）时换域，全被拦才抛 NEED_WEBVIEW_VERIFY', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   var attempts = [];
   source.http = {
     get: async function (url) {
@@ -523,11 +523,13 @@ test('gmh: 被站点防护拦下（403）时换域，全被拦才抛 NEED_WEBVIE
       return true;
     }
   );
-  assert.equal(attempts.length, 2, '两个候选域都要试过');
+  // 镜域清单现在有三个（g-mh.org / m.g-mh.org / godamanga.com，2026-10 实测同站）：
+  // 「全被拦才抛」的语义不变，逐个都要试过。
+  assert.equal(attempts.length, 3, '三个候选域都要试过');
 });
 
 test('gmh: 正文走「站点自己的解码器」（快照里解码器原样跑，出 38 张图）', async function () {
-  var source = stubStore(loadSource('gmh_comic.js'));
+  var source = stubStore(loadSource('G社漫画.js'));
   stubRoutes(source, {
     '/api/v2/chapter/getinfo': snapshot('gmh_chapter_api.json'),
     '/chapter-decoder.js': snapshot('gmh_decoder.txt'),

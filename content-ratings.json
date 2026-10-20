@@ -106,6 +106,9 @@
     },
     "porn91_video": {
       "rating": "18+"
+    },
+    "gmh_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -123,6 +126,7 @@
     "jiuse91_video": "九色91Porny（91自拍 / 国产自拍成人视频站）",
     "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）",
     "hstv_video": "好色TV（hstv.fun，成人视频站，全站 18+）",
-    "porn91_video": "91Porn（91porn.com，成人自拍视频站，全站 18+）"
+    "porn91_video": "91Porn（91porn.com，成人自拍视频站，全站 18+）",
+    "gmh_comic": "G社漫画（g-mh.org，成人向漫画站，全站 18+）"
   }
 }
