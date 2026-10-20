@@ -9,3 +9,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/瓜子�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜糖助眠.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/金牌影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/九色91Porny.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好色TV.js

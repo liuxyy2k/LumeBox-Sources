@@ -192,3 +192,6 @@ novel_zonbo_home.html
 91porny_detail.html
 91porny_search.html
 91porny_tags.html
+# 好色TV（hstv.fun / hstv.pro；Angular SPA + 加密 JSON 接口，下面两份是接口**原始响应**密文夹具）
+hstv_list_enc.json
+hstv_detail_enc.json

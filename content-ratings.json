@@ -100,6 +100,9 @@
     },
     "jcomic_comic": {
       "rating": "18+"
+    },
+    "hstv_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -115,6 +118,7 @@
     "powenwu11_novel": "PO文屋（成人文学站，全站 18+）",
     "czbooks_novel": "小說狂人（成人向小说分区，站点自带分级标注）",
     "jiuse91_video": "九色91Porny（91自拍 / 国产自拍成人视频站）",
-    "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）"
+    "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）",
+    "hstv_video": "好色TV（hstv.fun，成人视频站，全站 18+）"
   }
 }
