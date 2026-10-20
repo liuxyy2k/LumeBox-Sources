@@ -185,3 +185,10 @@ novel_dingdian666_home.html
 novel_dingdian666_list.html
 # ZonboApp 后端（api.zonboapp.com 是封闭 App 后端，没有可解析的 HTML；只留一份首页快照作证据，**没有建源**）
 novel_zonbo_home.html
+# 91porny（九色 91PORNY，91porny.com / www.91porny.com；SSR HTML，播放是带签名的 m3u8）
+91porny_home.html
+91porny_list.html
+91porny_list_p2.html
+91porny_detail.html
+91porny_search.html
+91porny_tags.html

@@ -12,7 +12,7 @@ var path = require('node:path');
 var nodeTest = require('node:test');
 // 用例名前缀 → 脚本文件：脚本从仓库移除后，它的用例自动跳过（而不是整片红掉、
 // 把真正的回归埋住）。删源时记得把对应快照一并清理。
-var REMOVED = { 'gmh:': 'comic/gmh_comic.js', 'jcomic:': 'comic/jcomic_comic.js', '92mh:': 'comic/92mh_comic.js' };
+var REMOVED = { 'gmh:': 'comic/gmh_comic.js', 'jcomic:': 'comic/JComic漫画.js', '92mh:': 'comic/92mh_comic.js' };
 function test(name, fn) {
   for (var prefix in REMOVED) {
     if (name.indexOf(prefix) === 0 && !fs.existsSync(path.join(__dirname, '..', REMOVED[prefix]))) {
@@ -151,7 +151,7 @@ test('xman6: 排行榜快照（ranklist_item 另一套标记）解析出条目',
 // ------------------------------------------------------------------ JComic（jcomic.net）
 
 test('jcomic: 列表快照里 /eps 与 /page 两种形态都被收下（各带形态路径）', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_cat.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_cat.html'));
   var result = await source.list({ categoryId: '最近更新', page: 1 });
   assert.equal(result.items.length, 30);
   assert.equal(result.hasMore, true);
@@ -162,7 +162,7 @@ test('jcomic: 列表快照里 /eps 与 /page 两种形态都被收下（各带�
 });
 
 test('jcomic: 中间页 hasMore=true、真站末页（没有 &raquo; 那条）hasMore=false', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_cat_p2.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_cat_p2.html'));
   var middle = await source.list({ categoryId: '最近更新', page: 2 });
   assert.equal(middle.hasMore, true);
 
@@ -174,7 +174,7 @@ test('jcomic: 中间页 hasMore=true、真站末页（没有 &raquo; 那条）ha
 });
 
 test('jcomic: 详情 + 目录（/eps 形态）', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_eps.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_eps.html'));
   var id = '/eps/[Pixiv] Misoya (25058255) part.4（AI）';
   var detail = await source.detail({ id: id });
   assert.equal(detail.title, '[Pixiv] Misoya (25058255) part.4（AI）');
@@ -190,7 +190,7 @@ test('jcomic: 详情 + 目录（/eps 形态）', async function () {
 });
 
 test('jcomic: 标题里带 |A 记号的目录（120 话）认得出', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_eps_marked.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_eps_marked.html'));
   var id = '/eps/星期一的丰满|A月曜日のたわわ その1-608';
   var chapters = await source.chapters({ id: id });
   assert.equal(chapters.length, 120);
@@ -199,7 +199,7 @@ test('jcomic: 标题里带 |A 记号的目录（120 话）认得出', async func
 });
 
 test('jcomic: 单页作品（/page 形态）给一条「正文」，正文图能解出来', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_page_single.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_page_single.html'));
   var id = '/page/侵入者';
   var detail = await source.detail({ id: id });
   assert.equal(detail.title, '侵入者');
@@ -214,7 +214,7 @@ test('jcomic: 单页作品（/page 形态）给一条「正文」，正文图能
 });
 
 test('jcomic: 正文快照 392 张图全部解出（JCOMIC_TRAPS_ 倒序 base64）', async function () {
-  var source = stubBody(loadSource('jcomic_comic.js'), snapshot('jcomic_page1.html'));
+  var source = stubBody(loadSource('JComic漫画.js'), snapshot('jcomic_page1.html'));
   var content = await source.content({
     id: '/eps/[Pixiv] Misoya (25058255) part.4（AI）',
     chapterId: '1'
@@ -771,7 +771,7 @@ test('mycomic: WebKit序列化后的章节JSON与封面/正文请求头', async 
 });
 
 test('jcomic:签名刷新重读来源页并匹配原图片，不给图床发来源页元数据', async function () {
-  var source = loadSource('jcomic_comic.js');
+  var source = loadSource('JComic漫画.js');
   var html = snapshot('jcomic_cat.html');
   var item = source.__listItems(html)[0];
   var calls = 0;
@@ -784,4 +784,58 @@ test('jcomic:签名刷新重读来源页并匹配原图片，不给图床发来�
   stubBody(source, snapshot('jcomic_page_single.html'));
   var content = await source.content({id:'/page/test',chapterId:'1'});
   assert.equal(Object.keys(content.imageHeaders).length, content.images.length);
+});
+
+// ------------------------------------------------------------------ 九色 91Porny
+
+test('91porny: 列表 24 条、广告位滤掉、封面取背景图、hasMore 走分页器', async function () {
+  var source = stubBody(loadSource('九色91Porny.js'), snapshot('91porny_list.html'));
+  var r = await source.list({ categoryId: 'latest', page: 1 });
+  assert.equal(r.items.length, 24);
+  assert.equal(r.hasMore, true);
+  assert.match(r.items[0].id, /^[0-9a-f]+$/);
+  assert.match(r.items[0].cover, /^https:\/\//);
+  assert.ok(r.items[0].title.length > 0);
+  // 列表里混着广告位（外链 *.html?cid= / 裸 IP:端口）：只认 /video/view/<id>，
+  // 一条广告都不许漏进条目。
+  for (var i = 0; i < r.items.length; i++) {
+    assert.ok(r.items[i].id.indexOf('/') < 0, '广告位混进条目: ' + r.items[i].id);
+    assert.ok(r.items[i].id.indexOf(':') < 0, '广告位混进条目: ' + r.items[i].id);
+  }
+});
+
+test('91porny: 第 2 页与第 1 页不同；搜索页同样出 24 条', async function () {
+  var s1 = stubBody(loadSource('九色91Porny.js'), snapshot('91porny_list.html'));
+  var p1 = await s1.list({ categoryId: 'latest', page: 1 });
+  var s2 = stubBody(loadSource('九色91Porny.js'), snapshot('91porny_list_p2.html'));
+  var p2 = await s2.list({ categoryId: 'latest', page: 2 });
+  assert.notEqual(p1.items[0].id, p2.items[0].id);
+
+  var s3 = stubBody(loadSource('九色91Porny.js'), snapshot('91porny_search.html'));
+  var q = await s3.list({ keyword: '麻豆', page: 1 });
+  assert.equal(q.items.length, 24);
+  assert.equal(q.hasMore, true);
+});
+
+test('91porny: 详情标题/封面 + 正文给出 m3u8 与 Referer', async function () {
+  var source = stubBody(loadSource('九色91Porny.js'), snapshot('91porny_detail.html'));
+  var d = await source.detail({ id: '1ec987f6350aa442ea3c' });
+  assert.equal(d.title, '[原创] 老公在干嘛，嗯啊嗯啊，睡了吗？');
+  assert.match(d.cover, /^https:\/\/int\.ucloud165\.xyz\/thumb\//);
+
+  var c = await source.content({ id: '1ec987f6350aa442ea3c', chapterId: 'play' });
+  assert.equal(c.kind, 'video');
+  assert.match(c.url, /\.m3u8/);
+  assert.equal(c.headers.Referer, 'https://91porny.com/');
+});
+
+test('91porny: 分类＝最近更新 + 热搜标签（标签落到搜索）', async function () {
+  var source = stubRoutes(loadSource('九色91Porny.js'), {
+    '/tags': snapshot('91porny_tags.html'),
+  });
+  var cats = await source.categories();
+  assert.equal(cats[0].id, 'latest');
+  assert.ok(cats.length > 20, '热搜标签要给全（实测第一页 493 个，取前 60）');
+  assert.equal(cats[1].id.indexOf('tag:'), 0);
+  assert.equal(cats[1].title.charAt(0), '#');
 });

@@ -22,3 +22,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/丽图�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/Z8PT图库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书套图.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书自拍.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/JComic漫画.js
