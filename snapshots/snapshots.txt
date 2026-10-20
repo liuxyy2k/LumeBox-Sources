@@ -204,3 +204,8 @@ porn91_search.html
 # TwiXive（twixive.net；Next.js RSC 负载，条目 JSON 在 initialData.items，播放是 video.twimg.com 直链 mp4）
 yasetube_detail.html
 ptt2_detail.html
+# Iwara（iwara.tv；公开 JSON API：列表/详情/清晰度变体，缩略图在 i.iwara.tv；接口会出 Cloudflare 挑战）
+iwara_list.json
+iwara_tags.json
+iwara_detail.json
+iwara_files.json

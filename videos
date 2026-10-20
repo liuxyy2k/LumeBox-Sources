@@ -16,3 +16,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色影库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线上看.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js

@@ -25,7 +25,7 @@ test('Canonical manifests point to existing Chinese filenames with matching runt
       count++;
     }
   }
-  assert.equal(count, 65);
+  assert.equal(count, 66);
 });
 
 test('three subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
