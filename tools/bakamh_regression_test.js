@@ -54,3 +54,35 @@ test('baka: unreachable primary moves to an available mirror', async () => {
  const s=source();const requests=[];s.http={get:async url=>{requests.push(url);return {status:requests.length===1?502:200,body:card};}};
  const host=await s.__pickHost();assert.notEqual(host + '/', requests[0]);assert.equal(host + '/', requests[1]);assert.ok(requests.length>=2);
 });
+
+const locked = '<div class="mkjp-ea-lock"></div>';
+const form = '<form><input name="log"><input name="pwd"></form>';
+test('baka: configured account logs in only after a locked chapter and retries content', async () => {
+ const s=source();s.config={account:'a+b@example.com',password:'secret &'};const posts=[];let logged=false;
+ s.http={get:async url=>({status:200,body:url.endsWith('/wp-login.php')?form:logged?reading:locked}),
+ post:async(url,body,options)=>{posts.push({url,body,options});logged=true;return {status:200,body:'<body class="logged-in">'};}};
+ const result=await s.content({chapterId:'/manga/sample/c-1/'});
+ assert.equal(result.images.length,2);assert.equal(posts.length,1);
+ assert.equal(posts[0].url,'https://bakamh.com/wp-login.php');
+ const data=new URLSearchParams(posts[0].body);assert.equal(data.get('log'),'a+b@example.com');assert.equal(data.get('pwd'),'secret &');
+ assert.equal(data.get('redirect_to'),'https://bakamh.com/');
+});
+test('baka: bad account fails clearly, repeated loads do not repeatedly send passwords', async () => {
+ const s=source();s.config={account:'name',password:'secret'};let posts=0;
+ s.http={get:async url=>({status:200,body:url.endsWith('/wp-login.php')?form:locked}),post:async()=>{posts++;return {status:200,body:'<div id="login_error">bad</div>'};}};
+ await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/账号登录失败/);
+ await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/上次账号登录未成功/);assert.equal(posts,1);
+});
+test('baka: public chapter does not log in and an already logged-in user still needs purchased access', async () => {
+ const s=source();s.config={account:'name',password:'secret'};let posts=0;
+ s.http={get:async()=>({status:200,body:reading}),post:async()=>{posts++;throw Error('unexpected');}};
+ await s.content({chapterId:'/manga/sample/c-1/'});assert.equal(posts,0);
+ s.http.get=async url=>({status:200,body:url.endsWith('/wp-login.php')?form:locked});
+ s.http.post=async()=>{posts++;return {status:200,body:'<body class="logged-in">'};};
+ await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/购买权限/);assert.equal(posts,1);
+});
+test('baka: account is never automatically submitted to a custom unrecognized host', async () => {
+ const s=source();s.__host='https://example.org';s.config={account:'name',password:'secret'};let posts=0;
+ s.http={get:async()=>({status:200,body:locked}),post:async()=>{posts++;return {status:200,body:''};}};
+ await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/网页登录确认/);assert.equal(posts,0);
+});

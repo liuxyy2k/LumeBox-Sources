@@ -1,4 +1,4 @@
-// LumeSource: {"id":"bakamh_comic","name":"巴卡漫画","version":"2.0.0","category":"comic"}
+// LumeSource: {"id":"bakamh_comic","name":"巴卡漫画","version":"2.1.0","category":"comic"}
 // Reimplemented from bakamh.com public Madara pages; mirrors match bakamh.app publisher.
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
@@ -28,7 +28,7 @@ var H = {
 };
 
 H.base="https://bakamh.com";H.name="巴卡漫画";
-var LumeSource={id:"bakamh_comic",name:"巴卡漫画",version:"2.0.0",category:"comic",
+var LumeSource={id:"bakamh_comic",name:"巴卡漫画",version:"2.1.0",category:"comic",
 
 __host:'',
 async __pickHost(){var hosts=['https://bakamh.com','https://bakamh.ru','https://baka3.cfd','https://baka1.cfd','https://baka2.cfd'];for(var i=0;i<hosts.length;i++){var r=await this.http.get(hosts[i]+'/',{headers:H.headers(hosts[i]+'/')});if(r.status===200){H.response(r);this.__host=hosts[i];H.base=hosts[i];return hosts[i];}if(r.status===403||r.status===503||r.status===521)H.response(r);}throw new Error('巴卡漫画：站点暂时不可用，请稍后重试');},
@@ -40,6 +40,21 @@ async list(a){a=a||{};var p=Number(a.page)||1;if(a.keyword){if(p>1)return {items
 async detail(a){var t=H.tree(await this.__get(a.id));var scope=H.first(t,function(n){return H.cls(n,'summary_image');});return {id:a.id,title:H.title(t),cover:H.image(scope||t),coverHeaders:H.headers(H.base+'/')};},
 __chapters(html,id){var base=String(id).replace(/^https?:\/\/[^/]+/,'').replace(/\/?$/,'/');var t=H.tree(html),seen={};H.links(t,/\/manga\/[^/]+\/c-[^/]+\/?$/).forEach(function(n){var path=n.attrs.href.replace(/^https?:\/\/[^/]+/,'');if(path.indexOf(base)!==0)return;var title=H.text(n);if(!seen[path]||(/最新|观看|阅读/.test(seen[path].title)&&! /最新|观看|阅读/.test(title)))seen[path]={id:path,title:title};});return Object.keys(seen).map(function(k){return seen[k];}).sort(function(a,b){return parseFloat((/\/c-([\d.]+)/.exec(a.id)||[])[1]||0)-parseFloat((/\/c-([\d.]+)/.exec(b.id)||[])[1]||0);});},
 async chapters(a){var rows=this.__chapters(await this.__get(a.id),a.id);if(!rows.length)throw new Error('巴卡漫画：详情页未提供章节，请先完成网页验证');return rows;},
-async content(a){var id=a.chapterId||a.id,html=await this.__get(id);var t=H.tree(html);if(H.first(t,function(n){return H.cls(n,'mkjp-ea-lock');}))throw new Error('巴卡漫画：本章节需要登录或购买');var scope=H.first(t,function(n){return H.cls(n,'reading-content');});var images=scope?H.all(scope,function(n){return n.tag==='img';}).map(function(n){return H.abs(n.attrs['data-src']||n.attrs['data-lazy-src']||n.attrs.src||'').replace(/^http:/,'https:');}).filter(function(u){return /^https?:/.test(u);}):[];return H.imageContent(Array.from(new Set(images)),H.abs(id));}
+
+async __loginIfConfigured(){
+ var c=this.config||{}, account=String(c.account||'').trim(), password=String(c.password||'');
+ if(!account||!password)return false;
+ var key=account+'\u0000'+password;if(this.__loginAttempted===key)throw new Error('巴卡漫画：上次账号登录未成功，请检查账号密码或使用网页登录');
+ this.__loginAttempted=key;
+ var base=this.__host||'https://bakamh.com';
+ if(!/^https:\/\/(?:bakamh\.(?:com|ru)|baka[123]\.cfd)$/.test(base))throw new Error('巴卡漫画：请使用网页登录确认当前站点');
+ var form=await this.__get('/wp-login.php');
+ if(!/name=["']log["']/.test(form)||! /name=["']pwd["']/.test(form))throw new Error('巴卡漫画：站点登录表单已变化，请使用网页登录');
+ var data='log='+encodeURIComponent(account)+'&pwd='+encodeURIComponent(password)+'&wp-submit=Log+In&redirect_to='+encodeURIComponent(base+'/')+'&testcookie=1';
+ var response=H.response(await this.http.post(base+'/wp-login.php',data,{headers:Object.assign(H.headers(base+'/wp-login.php'),{'Content-Type':'application/x-www-form-urlencoded'})}));
+ if(/id=["']login_error["']|class=["'][^"']*login-error/.test(response))throw new Error('巴卡漫画：账号登录失败，请核对账号密码或完成网页验证');
+ return true;
+},
+async content(a){var id=a.chapterId||a.id,html=await this.__get(id);var t=H.tree(html);if(H.first(t,function(n){return H.cls(n,'mkjp-ea-lock');})&&await this.__loginIfConfigured()){html=await this.__get(id);t=H.tree(html);}if(H.first(t,function(n){return H.cls(n,'mkjp-ea-lock');}))throw new Error('巴卡漫画：本章节需要登录或购买；可在源设置中登录，已登录仍锁定时请核对该章购买权限');var scope=H.first(t,function(n){return H.cls(n,'reading-content');});var images=scope?H.all(scope,function(n){return n.tag==='img';}).map(function(n){return H.abs(n.attrs['data-src']||n.attrs['data-lazy-src']||n.attrs.src||'').replace(/^http:/,'https:');}).filter(function(u){return /^https?:/.test(u);}):[];return H.imageContent(Array.from(new Set(images)),H.abs(id));}
 
 };
