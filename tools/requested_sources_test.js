@@ -21,7 +21,6 @@ test('all requested adapters expose the source contract without remote imports',
   for (const [category, ids] of Object.entries({
     comic: ['nnmh', 'mmcg18', 'sansi', 'manwa', 'z8pt', 'jmcomic', 'bakamh',
       'fxcomic', 'rouman5', 'cartoon18', 'relamanhua', 'mh18'],
-    novel: ['alicesw', 'book18', 'jinshuge', 'xchina', 'hhhbook', 'hlib', 'aaccoo'],
     video: ['asmrhoney', 'hanime1'],
   })) for (const id of ids) {
     const s = load(id, category, {});
@@ -73,28 +72,8 @@ test('Hanime resolves the highest quality before playback, regardless of DOM ord
   assert.equal(c.headers.Referer, 'https://hanime1.me/watch?v=123');
 });
 
-test('Hlib custom HTTP-200 human verification is not mistaken for empty content', async () => {
-  const s = load('hlib', 'novel', {'/n/example': '<title>人机校验</title><pre>challenge</pre>'});
-  await assert.rejects(s.content({chapterId:'/n/example'}), /NEED_WEBVIEW_VERIFY/);
-});
 
-test('Hlib reads the verified pre content and ignores ads and modal headings', async () => {
-  const s = load('hlib', 'novel', {'/n/example': '<title>测试文 - H图书馆</title>' +
-    '<h1 class="modal-title">弹窗</h1><pre id="content"><p>这是用于验证源解析的普通测试段落，不包含站点原文。</p></pre><aside>广告</aside>'});
-  const d = await s.detail({id:'/n/example'});
-  assert.equal(d.title, '测试文');
-  const c = await s.content({chapterId:'/n/example'});
-  assert.equal(c.kind, 'text');
-  assert.ok(!c.text.includes('广告'));
-});
 
-test('HHHBook reads the article body rather than the homepage excerpt', async () => {
-  const s = load('hhhbook', 'novel', {'/2026/10/14/example/':
-    '<h1 class="entry-title">测试文章</h1><div class="entry-content"><p>这是一段用于测试正文提取的普通文本，详情页面内容应当被完整保留。</p></div><footer>其他内容</footer>'});
-  const c = await s.content({chapterId:'/2026/10/14/example/'});
-  assert.ok(c.text.includes('完整保留'));
-  assert.ok(!c.text.includes('其他内容'));
-});
 
 test('Manwa emits ordered real reader URLs and local decoding metadata', async () => {
   const s = load('manwa', 'comic', {'/chapter/1':
@@ -115,13 +94,6 @@ test('Z8PT decodes public image addresses and excludes unrelated images', async 
   assert.deepEqual(Array.from(c.images), [url]);
 });
 
-test('AACCOO keeps only the selected book chapters, deduplicates and orders them', async () => {
-  const s = load('aaccoo', 'novel', {'/book/1/':
-    '<a href="/book/1/20.html">最新章</a><a href="/book/1/10.html">第一章</a>' +
-    '<a href="/book/1/20.html">第二章</a><a href="/book/2/5.html">其他作品</a>'});
-  const rows = await s.chapters({id:'/book/1/'});
-  assert.deepEqual(Array.from(rows, x => x.id), ['/book/1/10.html','/book/1/20.html']);
-});
 
 test('Bemi does not invent media Referer or generic UA and preserves declared headers', async () => {
   for(const headers of [undefined, {'Referer':'https://media.example/player/'}]) {

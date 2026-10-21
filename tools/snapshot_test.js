@@ -229,81 +229,10 @@ test('jcomic: 正文快照 392 张图全部解出（JCOMIC_TRAPS_ 倒序 base64�
 
 // ------------------------------------------------------------------ 夜读小说（x-novel.com）
 
-test('xnovel: 分类 + 列表（24 条，条目信息齐全）+ 末页 hasMore=false', async function () {
-  var source = loadSource('夜读小说.js');
 
-  stubBody(source, snapshot('xnovel_home.html'));
-  var categories = await source.categories();
-  assert.equal(categories[0].id, 'all');
-  assert.ok(categories.some(function (item) { return item.id === 'wife' && item.title === '人妻女友'; }));
 
-  stubBody(source, snapshot('xnovel_list.html'));
-  var list = await source.list({ categoryId: 'all', page: 1 });
-  assert.equal(list.items.length, 24);
-  assert.equal(list.hasMore, true);
-  assert.equal(list.items[0].id, 'hi1ezanput');
-  assert.equal(list.items[0].title, '疯狂交合与温泉露出');
-  assert.equal(list.items[0].cover, 'https://x-novel.com/assets/cover/6acbfdc50f5fb.webp');
 
-  stubBody(source, snapshot('xnovel_list_last.html'));
-  var last = await source.list({ categoryId: 'all', page: 100 });
-  assert.equal(last.items.length, 24);
-  assert.equal(last.hasMore, false, '第 100 页（末页）没有「下一页」锚点');
-});
 
-test('xnovel: 搜索页（?q=）解析出条目', async function () {
-  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_search.html'));
-  var result = await source.list({ keyword: '老师', page: 1 });
-  assert.equal(result.items.length, 24);
-  assert.equal(result.hasMore, true);
-  assert.equal(result.items[0].id, 'hi2bb8ww4z');
-});
-
-test('xnovel: 目录第 1 章不被底部工具条（「阅读」/「开始阅读」）污染', async function () {
-  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_detail_short.html'));
-  var chapters = await source.chapters({ id: 'hi1ezanput' });
-  assert.equal(chapters.length, 3);
-  assert.equal(JSON.stringify(chapters.map(function (c) { return c.title; })), JSON.stringify(['上', '下', '后记']));
-  assert.equal(JSON.stringify(chapters.map(function (c) { return c.id; })), JSON.stringify(['1', '2', '3']));
-});
-
-test('xnovel: 详情（简介 / 作者 / 本作标签）+ 正文段落', async function () {
-  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_detail.html'));
-  var detail = await source.detail({ id: 'j9rf1t4t4i' });
-  assert.equal(detail.title, '老婆陪我换配偶');
-  assert.equal(detail.cover, 'https://x-novel.com/assets/cover/6093f3730b02c.webp');
-  assert.equal(detail.extra.author, 'jiandan000');
-  assert.match(detail.subtitle, /8 章/);
-  assert.match(detail.description, /^这时的我，上身仅穿着一件T恤/);
-  // 详情页上半部分是「按标签逛」的宫格导航——不能被当成这一部的标签
-  // （快照里那套导航有 13 项；本作自己的药丸行在尾部）。
-  assert.ok(detail.tags.length <= 8, '标签数应受 MAX_TAGS 约束');
-
-  var chapters = await source.chapters({ id: 'j9rf1t4t4i' });
-  assert.equal(chapters.length, 8);
-  assert.equal(chapters[0].title, '前篇');
-  assert.equal(chapters[1].title, '第一章 捉奸在床');
-
-  stubBody(source, snapshot('xnovel_chapter.html'));
-  var content = await source.content({ id: 'j9rf1t4t4i', chapterId: '1' });
-  assert.equal(content.kind, 'text');
-  assert.ok(content.text.length > 500, '正文应超过 500 字，实际 ' + content.text.length);
-  assert.ok(content.text.indexOf('\n\n') > 0, '段落之间应以空行分隔');
-  assert.ok(content.text.indexOf('换配偶') > 0);
-});
-
-test('xnovel: 命中反诈/运营商拦截页（200 + 「国家反诈中心」）要抛出可读原因', async function () {
-  // 国内直连该域名会拿到 200 + 拦截页（3KB）——不识别的话解析出来是空列表，
-  // 用户只会看到「暂无内容」，以为是源坏了。
-  var source = stubBody(loadSource('夜读小说.js'), snapshot('xnovel_blocked.html'));
-  await assert.rejects(
-    function () { return source.list({ categoryId: 'all', page: 1 }); },
-    function (error) {
-      assert.match(String(error.message), /国家反诈中心|反诈\/拦截页/);
-      return true;
-    }
-  );
-});
 
 
 // ------------------------------------------------------------------ XAnimu（xanimu.one / xanimu.art）
@@ -777,7 +706,12 @@ test('jcomic:签名刷新重读来源页并匹配原图片，不给图床发来�
   var html = snapshot('jcomic_cat.html');
   var item = source.__listItems(html)[0];
   var calls = 0;
-  source.http = {get: async function(url) { calls++; assert.ok(url.includes('_lume_refresh=')); return {status:200,body:html}; }};
+  source.http = {get: async function(url, options) {
+    calls++;
+    assert.equal(url, 'https://jcomic.net/cat/test/1');
+    assert.equal(options.headers['Cache-Control'], 'no-cache');
+    return {status:200,body:html};
+  }};
   var argument = {url:item.cover.split('?')[0]+'?expired=1',page:'https://jcomic.net/cat/test/1'};
   assert.equal(await source.refreshImage(argument), item.cover);
   assert.equal(await source.refreshImage(argument), item.cover);
@@ -786,6 +720,18 @@ test('jcomic:签名刷新重读来源页并匹配原图片，不给图床发来�
   stubBody(source, snapshot('jcomic_page_single.html'));
   var content = await source.content({id:'/page/test',chapterId:'1'});
   assert.equal(Object.keys(content.imageHeaders).length, content.images.length);
+});
+
+test('jcomic: single-page reader retains exact URL; episodic reader appends chapter only once', async function () {
+  var source = loadSource('JComic漫画.js');
+  var requested = [];
+  source.http = {get: async function(url) {
+    requested.push(url);
+    return {status:200,body:snapshot('jcomic_page_single.html')};
+  }};
+  await source.content({id:'/page/test',chapterId:'1'});
+  await source.content({id:'/eps/test',chapterId:'2'});
+  assert.deepEqual(requested, ['https://jcomic.net/page/test', 'https://jcomic.net/page/test/2']);
 });
 
 // ------------------------------------------------------------------ 九色 91Porny

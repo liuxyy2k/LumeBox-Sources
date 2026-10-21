@@ -2,36 +2,6 @@
   "version": 1,
   "unlisted": "unknown",
   "sources": {
-    "99xs_novel": {
-      "rating": "18+"
-    },
-    "xxiaoshuo_novel": {
-      "rating": "18+"
-    },
-    "xnovel_novel": {
-      "rating": "18+"
-    },
-    "hhhbook_novel": {
-      "rating": "18+"
-    },
-    "hlib_novel": {
-      "rating": "18+"
-    },
-    "aaccoo_novel": {
-      "rating": "18+"
-    },
-    "xchina_novel": {
-      "rating": "18+"
-    },
-    "alicesw_novel": {
-      "rating": "18+"
-    },
-    "jinshuge_novel": {
-      "rating": "18+"
-    },
-    "book18_novel": {
-      "rating": "18+"
-    },
     "mmcg18_comic": {
       "rating": "18+"
     },
@@ -86,15 +56,6 @@
     "litu100_comic": {
       "rating": "18+"
     },
-    "po18vip_novel": {
-      "rating": "18+"
-    },
-    "powenwu11_novel": {
-      "rating": "18+"
-    },
-    "czbooks_novel": {
-      "rating": "18+"
-    },
     "jiuse91_video": {
       "rating": "18+"
     },
@@ -124,17 +85,11 @@
     }
   },
   "evidence": {
-    "99xs_novel": "源脚本列表与详情 subtitle 明确写有 CA 情色小说",
-    "xxiaoshuo_novel": "源脚本分类明确包含短篇情色和长篇情色",
-    "xnovel_novel": "源脚本标题清理规则包含成人小说阅读",
     "xchina_audiobook": "小黄书的听书板块（成人有声小说，章节页语音版）",
     "xchina_photo": "小黄书套图（成人写真图库）",
     "xchina_amateur": "小黄书业余自拍（成人自拍图库）",
     "huangguo_video": "黄果剧场（AI 成人短剧，尺度分级标注在卡片上）",
     "litu100_comic": "丽图·污漫画（成人漫画）",
-    "po18vip_novel": "PO18（成人文学站，全站 18+）",
-    "powenwu11_novel": "PO文屋（成人文学站，全站 18+）",
-    "czbooks_novel": "小說狂人（成人向小说分区，站点自带分级标注）",
     "jiuse91_video": "九色91Porny（91自拍 / 国产自拍成人视频站）",
     "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）",
     "hstv_video": "好色TV（hstv.fun，成人视频站，全站 18+）",

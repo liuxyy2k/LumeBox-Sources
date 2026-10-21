@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.1.0","category":"comic","mirrors":["https://jcomic.net","https://www.jcomic.net"]}
+// LumeSource: {"id":"jcomic_comic","name":"JComic","version":"1.2.0","category":"comic","mirrors":["https://jcomic.net","https://www.jcomic.net"]}
 
 // 站点：https://jcomic.net（Bootstrap 站 + ccat 结构；桌面/移动同一套标记）
 //
@@ -48,8 +48,8 @@
 //   这个限制来自站点本身（浏览器里同样是 60 秒内加载完），脚本无法绕开——
 //   不要试图去掉查询串：实测裸地址 403。
 //
-// 站点没有 Cloudflare 挑战（快照与实时页都没有 __cf_chl / challenge-platform
-// 痕迹）；被拦时的标记路径照留（见 __get）。
+// 主站和图片域名分别校验：主站可访问不代表 images.jcomic.net 已放行。
+// 图片域名被 Cloudflare 拦截时需在 App 中完成该域名的网页验证。
 
 var BASE_URL = 'https://jcomic.net';
 
@@ -77,7 +77,7 @@ function syncBase() {
 var LumeSource = {
   id: 'jcomic_comic',
   name: 'JComic',
-  version: '1.1.0',
+  version: '1.2.0',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -208,7 +208,7 @@ var LumeSource = {
     var chapterId = argument && argument.chapterId ? String(argument.chapterId).trim() : '1';
     if (!/^\d+$/.test(chapterId)) chapterId = '1';
     var pagePath = id.indexOf('/page/') === 0
-      ? id + '/' + chapterId
+      ? id
       : '/page/' + id.slice('/eps/'.length) + '/' + chapterId;
     var html = await this.__get(this.__encPath(pagePath));
     var images = this.__images(html);
@@ -223,6 +223,7 @@ var LumeSource = {
 
   // Signed image URLs expire after 60 seconds; refresh the originating page.
   async refreshImage(argument) {
+    syncBase();
     var page = String(argument && argument.page || '');
     if (page.indexOf(BASE_URL + '/') !== 0) throw new Error('图片来源页不属于当前站点');
     var now = Date.now();
@@ -231,7 +232,9 @@ var LumeSource = {
     for (var k = 0; k < keys.length; k++) if (now - this.__freshImages[keys[k]].at > 20000) delete this.__freshImages[keys[k]];
     var cached = this.__freshImages[page];
     if (!cached || now - cached.at > 20000) {
-      cached = { at: now, pending: this.__get(page + (page.indexOf('?') >= 0 ? '&' : '?') + '_lume_refresh=' + now) };
+      // Arbitrary cache-buster query parameters trigger a 403 on this site.
+      // Reload the original document with cache-control instead.
+      cached = { at: now, pending: this.__get(page, true) };
       this.__freshImages[page] = cached;
     }
     var html;
@@ -481,10 +484,12 @@ var LumeSource = {
   },
 
   /// 所有请求的唯一出口：补全地址、发请求、被 WAF 拦下时抛固定标记。
-  async __get(path) {
+  async __get(path, fresh) {
     var url = path.indexOf('http') === 0 ? path : BASE_URL + path;
     var response = await LumeSource.http.get(url, {
-      headers: { 'Referer': BASE_URL + '/' }
+      headers: fresh
+        ? { 'Referer': BASE_URL + '/', 'Cache-Control': 'no-cache' }
+        : { 'Referer': BASE_URL + '/' }
     });
     var status = response ? Number(response.status) : 0;
     var body = response && response.body ? String(response.body) : '';

@@ -1,10 +1,5 @@
 # 站点快照（脚本自检 / 原生用例用；文件名与源脚本前缀一致）
 #
-99xs.html
-99xs_category.html
-99xs_detail.html
-99xs_enter.html
-99xs_search.html
 dage.html
 dage_enter.html
 daniao5.html
@@ -27,8 +22,6 @@ p5mh_list.html
 seyoumanhua_chapter.html
 seyoumanhua_comic.html
 seyoumanhua_list.html
-xchina_chapter.html
-xchina_list.html
 xchina_series.html
 xxs_book.html
 xxs_list.html
@@ -72,16 +65,6 @@ jcomic_eps_marked.html
 jcomic_page1.html
 jcomic_page_single.html
 # xnovel（夜读小说，x-novel.com）
-xnovel_home.html
-xnovel_list.html
-xnovel_list_p2.html
-xnovel_list_last.html
-xnovel_tag.html
-xnovel_search.html
-xnovel_detail.html
-xnovel_detail_short.html
-xnovel_chapter.html
-xnovel_blocked.html
 # jpyy2（金牌影院，jpyy2.com → vv3nwjk.com；JSON API，签名头）
 jpyy2_types.json
 jpyy2_home.json
@@ -123,68 +106,18 @@ mycomic_search.html
 mycomic_detail.html
 mycomic_chapter.html
 # 追书神器吧（www.zssq8.cc；apex zssq8.cc 同模板，PC/移动同一套标记）
-novel_zssq8_chapter.html
-novel_zssq8_detail.html
-novel_zssq8_home.html
-novel_zssq8_list.html
 # 完本神站（www.wanben2.com 301 → www.xwbsz.com；www.xwbbook.com 同模板；m.* 是另一套模板）
-novel_wanben2_chapter.html
-novel_wanben2_detail.html
-novel_wanben2_home.html
-novel_wanben2_list.html
 # 精品小说网（jpxs123.top / www / m 三域名同模板）
-novel_jpxs123_chapter.html
-novel_jpxs123_detail.html
-novel_jpxs123_home.html
-novel_jpxs123_list.html
 # 无忧小说网（m.51eshu.com；apex 301 → 手机版。桌面版 www.51eshu.com 是另一套模板，未收）
-novel_51eshu_chapter.html
-novel_51eshu_detail.html
-novel_51eshu_home.html
-novel_51eshu_list.html
 # 随看书（m.suixkan.com；m.yueyouxs.com 同模板）
-novel_suixkan_chapter.html
-novel_suixkan_detail.html
-novel_suixkan_home.html
-novel_suixkan_list.html
 # 万相书城（www.wxscs.com；apex 同模板。分类页每页 10 条，页名 _p<N>.html）
-novel_wxscs_chapter.html
-novel_wxscs_detail.html
-novel_wxscs_home.html
-novel_wxscs_list.html
-novel_wxscs_list_p2.html
 # 101小说（www / sg / hk / tw.101minc.com 四域名同模板）
-novel_101minc_chapter.html
-novel_101minc_detail.html
-novel_101minc_home.html
-novel_101minc_list.html
 # PO文屋（www.powenwu11.com；apex 同模板）
-novel_powenwu11_chapter.html
-novel_powenwu11_detail.html
-novel_powenwu11_home.html
-novel_powenwu11_list.html
 # 小說狂人（czbooks.net；www / m 都不解析）
-novel_czbooks_chapter.html
-novel_czbooks_detail.html
-novel_czbooks_home.html
-novel_czbooks_list.html
 # 采墨阁（**只有明文 http**：www.caimoge8.net / www.caimoge.net / apex；443 证书对不上域名且回 403）
-novel_caimoge8_chapter.html
-novel_caimoge8_detail.html
-novel_caimoge8_home.html
-novel_caimoge8_list.html
 # PO18（wap.po18vip.com；www / apex 是桌面模板，未收）
-novel_po18vip_chapter.html
-novel_po18vip_detail.html
-novel_po18vip_home.html
-novel_po18vip_list.html
 # 顶点小说（m.dingdian666.com；www / apex 是桌面模板，未收）
-novel_dingdian666_chapter.html
-novel_dingdian666_detail.html
-novel_dingdian666_home.html
-novel_dingdian666_list.html
 # ZonboApp 后端（api.zonboapp.com 是封闭 App 后端，没有可解析的 HTML；只留一份首页快照作证据，**没有建源**）
-novel_zonbo_home.html
 # 91porny（九色 91PORNY，91porny.com / www.91porny.com；SSR HTML，播放是带签名的 m3u8）
 91porny_home.html
 91porny_list.html

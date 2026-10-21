@@ -5,10 +5,21 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.join(__dirname, '..');
 
+test('retired novel adapters, manifests and ratings are absent', () => {
+  for (const name of ['novel', 'novels', '小说订阅.js']) {
+    assert.equal(fs.existsSync(path.join(root, name)), false, name);
+  }
+  assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'all'), 'utf8')).sections.novel, undefined);
+  for (const manifest of ['comics', 'videos', '漫画订阅.js', '视频订阅.js']) {
+    assert.doesNotMatch(fs.readFileSync(path.join(root, manifest), 'utf8'), /\/novel\//);
+  }
+  assert.doesNotMatch(fs.readFileSync(path.join(root, 'content-ratings.json'), 'utf8'), /"[^"\n]*_novel"/);
+});
+
 test('Canonical manifests point to existing Chinese filenames with matching runtime names and versions', () => {
   let count = 0;
   const ids = new Set();
-  for (const entry of ['novels','comics','videos']) {
+  for (const entry of ['comics','videos']) {
     const manifest = fs.readFileSync(path.join(root, entry), 'utf8');
     assert.ok(fs.readFileSync(path.join(root,'README.md'),'utf8').includes('/main/'+entry+')'));
     for (const line of manifest.split(/\r?\n/).filter(x => x.startsWith('https://'))) {
@@ -25,23 +36,22 @@ test('Canonical manifests point to existing Chinese filenames with matching runt
       count++;
     }
   }
-  assert.equal(count, 66);
+  assert.equal(count, 43);
 });
 
-test('three subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
+test('two subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
   const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
   assert.equal(lines('audiobooks').length,0);
   assert.equal(lines('photos').length,1);
   assert.equal(lines('movies').length,3);
-  const current=['novels','comics','videos'].flatMap(lines);
-  const legacy=['小说订阅.js','漫画订阅.js','视频订阅.js'].flatMap(lines);
+  const current=['comics','videos'].flatMap(lines);
+  const legacy=['漫画订阅.js','视频订阅.js'].flatMap(lines);
   assert.deepEqual(new Set(current),new Set(legacy));
   assert.equal(new Set(current).size,current.length);
   const total=JSON.parse(fs.readFileSync(path.join(root,'all'),'utf8'));
   assert.equal(total.format,'lume.total-subscription');
   assert.equal(total.version,1);
   assert.deepEqual(total.sections, {
-    novel:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/novels'],
     comic:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics'],
     video:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos'],
   });
@@ -49,8 +59,8 @@ test('three subscriptions are disjoint, total routes by section, legacy links re
   assert.ok(lines('videos').some(line=>line.includes('/movie/')));
 });
 
-test('six content directories exist and legacy script URLs mirror canonical files', () => {
-  for (const dir of ['novel','audiobook','comic','photo','movie','video']) {
+test('active content directories exist and legacy script URLs mirror canonical files', () => {
+  for (const dir of ['audiobook','comic','photo','movie','video']) {
     assert.ok(fs.statSync(path.join(root,dir)).isDirectory());
   }
   for (const [oldDir,newDir,name] of [

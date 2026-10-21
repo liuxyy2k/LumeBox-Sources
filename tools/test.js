@@ -32,61 +32,6 @@ const TEST_CONFIG = {
     testContent: true,   // 测试内容/图片/播放功能
 };
 
-/**
- * 测试小说源
- */
-function testNovelSource() {
-    console.log("\n========== 测试小说源: CA小说.js ==========\n");
-    
-    // 这里需要实际加载源文件
-    // const source = require('./CA小说.js');
-    
-    if (TEST_CONFIG.testList) {
-        console.log(">>> 测试列表功能");
-        try {
-            // const result = source.list(1);
-            // console.log(`获取到 ${result.list.length} 个小说`);
-            // console.log("第一个小说:", result.list[0]);
-            console.log("✓ 列表功能测试通过");
-        } catch (e) {
-            console.error("✗ 列表功能测试失败:", e.message);
-        }
-    }
-    
-    if (TEST_CONFIG.testSearch) {
-        console.log("\n>>> 测试搜索功能");
-        try {
-            // const result = source.search("测试", 1);
-            // console.log(`搜索到 ${result.list.length} 个结果`);
-            console.log("✓ 搜索功能测试通过");
-        } catch (e) {
-            console.error("✗ 搜索功能测试失败:", e.message);
-        }
-    }
-    
-    if (TEST_CONFIG.testDetail) {
-        console.log("\n>>> 测试详情功能");
-        try {
-            // const detail = source.detail("123", "https://99xs.sbs/article/123");
-            // console.log("标题:", detail.title);
-            // console.log("章节数:", detail.chapters.length);
-            console.log("✓ 详情功能测试通过");
-        } catch (e) {
-            console.error("✗ 详情功能测试失败:", e.message);
-        }
-    }
-    
-    if (TEST_CONFIG.testContent) {
-        console.log("\n>>> 测试内容功能");
-        try {
-            // const content = source.content("https://99xs.sbs/article/123");
-            // console.log("内容长度:", content.length);
-            console.log("✓ 内容功能测试通过");
-        } catch (e) {
-            console.error("✗ 内容功能测试失败:", e.message);
-        }
-    }
-}
 
 /**
  * 测试漫画源
@@ -182,7 +127,6 @@ function runAllTests() {
     console.log("    LumeBox 扩展源测试工具");
     console.log("========================================");
     
-    testNovelSource();
     testComicSource();
     testVideoSource("瓜子影视.js");
     testVideoSource("大哥视频.js");
@@ -195,9 +139,6 @@ function runAllTests() {
 // 单独测试某个源
 function testSingleSource(sourceType) {
     switch(sourceType) {
-        case 'novel':
-            testNovelSource();
-            break;
         case 'comic':
             testComicSource();
             break;
@@ -208,7 +149,7 @@ function testSingleSource(sourceType) {
             testVideoSource("大哥视频.js");
             break;
         default:
-            console.log("未知的源类型，可用: novel, comic, gztv5, dage");
+            console.log("未知的源类型，可用: comic, gztv5, dage");
     }
 }
 
@@ -217,7 +158,6 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         runAllTests,
         testSingleSource,
-        testNovelSource,
         testComicSource,
         testVideoSource
     };

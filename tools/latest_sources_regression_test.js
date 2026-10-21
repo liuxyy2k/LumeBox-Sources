@@ -285,106 +285,12 @@ test('漫小肆: 正文快照只收本站图床（二维码那张不算），并
 
 // ------------------------------------------------------------------ 少数派文库（sspwk.vip）
 
-test('sspwk: 分类页快照 12 条（书名/作者/时间），有下一页', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/booksort/6/1.html', body: snapshot('sspwk_booksort.html') },
-  ]);
-  const result = await source.list({ categoryId: '6', page: 1 });
-  assert.equal(result.items.length, 12);
-  assert.ok(/^\/novel\/\d+\.html$/.test(result.items[0].id), result.items[0].id);
-  assert.ok(result.items[0].title.length > 1, result.items[0].title);
-  assert.ok(/^作者：/.test(result.items[0].subtitle || ''), result.items[0].subtitle);
-  assert.equal(result.items[0].cover, null, '小说站没有封面，如实为 null');
-  assert.equal(result.hasMore, true);
-});
 
-test('sspwk: 搜索是 POST /search/（searchkey），GET 参数无效', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/search/', body: snapshot('sspwk_search.html') },
-  ]);
-  const result = await source.list({ keyword: '秘密', page: 1 });
-  const post = source.__urls.find((row) => row[0] === 'POST');
-  assert.ok(post, '应发 POST: ' + JSON.stringify(source.__urls));
-  assert.ok(post[1].indexOf('/search/') >= 0, post[1]);
-  assert.ok(post[2].indexOf('searchkey=' + encodeURIComponent('秘密')) >= 0, post[2]);
-  assert.ok(post[2].indexOf('searchtype=all') >= 0, post[2]);
-  assert.ok(result.items.length >= 6, '结果条数: ' + result.items.length);
-  assert.equal(result.items[0].title, '怀孕女星的秘密');
-  assert.ok(/^\/novel\/\d+\.html$/.test(result.items[0].id), result.items[0].id);
-  assert.equal(result.hasMore, false);
-});
 
-test('sspwk: 详情快照的书名（《书名》简介）、信息栏与简介', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/novel/161813.html', body: snapshot('sspwk_detail.html') },
-  ]);
-  const detail = await source.detail({ id: '/novel/161813.html' });
-  assert.equal(detail.title, '某平行世界的男神[综]');
-  assert.ok(detail.subtitle && detail.subtitle.indexOf('作者：璎珞姒玉') >= 0, detail.subtitle);
-  assert.ok(detail.subtitle.indexOf('类别：耽美小说') >= 0, detail.subtitle);
-  assert.ok(detail.description && detail.description.indexOf('独立的世界') >= 0, '简介应取到: ' + detail.description);
-  assert.equal(detail.cover, null);
-});
 
-test('sspwk: 目录逐页收齐，遇到整页重复就停（站点给的页数上限可能偏大）', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/indexlist/161813/', body: snapshot('sspwk_indexlist.html') },
-  ]);
-  const chapters = await source.chapters({ id: '/novel/161813.html' });
-  assert.equal(chapters.length, 30, '第 1 页 30 章');
-  assert.equal(chapters[0].id, '/novel/161813/19167169.html');
-  assert.equal(chapters[0].title, '分节阅读_1', '书名前缀应去掉: ' + chapters[0].title);
-  assert.equal(chapters[29].title, '分节阅读_30');
-  const urls = source.__urls.map((row) => row[1]);
-  assert.ok(urls.some((u) => u.indexOf('/indexlist/161813/1/') >= 0), urls.join(' | '));
-  assert.ok(urls.some((u) => u.indexOf('/indexlist/161813/2/') >= 0), '第 2 页也要请求: ' + urls.join(' | '));
-  assert.ok(urls.length <= 5, '一整批都是重复就停，不该把 21 页全翻完: ' + urls.length);
-});
 
-test('sspwk: 目录跨页累积（第 2 页是新章节时接着收）', async () => {
-  const page = (label, links) =>
-    '<html><body><select><option value="/indexlist/1/1/">1 - 30章</option>' +
-    '<option value="/indexlist/1/2/">31 - 60章</option></select>' +
-    '<ul class="list_li" id="jsList1">' +
-    links.map((n) => `<li class="two"><a href="/novel/1/${n}.html">书名_分节阅读_${n}</a></li>`).join('') +
-    '</ul></body></html>';
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/indexlist/1/1/', body: page('a', [1001, 1003]) },
-    { match: '/indexlist/1/2/', body: page('b', [1005, 1007]) },
-  ]);
-  const chapters = await source.chapters({ id: '/novel/1.html' });
-  assert.equal(chapters.length, 4);
-  assert.equal(chapters[3].id, '/novel/1/1007.html');
-  assert.equal(chapters[3].title, '分节阅读_1007');
-});
 
-test('sspwk: 正文取 div#nr1 的段落，站点自己那条「最新通知」要剔掉', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    { match: '/novel/161813/19167169.html', body: snapshot('sspwk_chapter.html') },
-  ]);
-  const content = await source.content({ id: '/novel/161813.html', chapterId: '/novel/161813/19167169.html' });
-  assert.equal(content.kind, 'text');
-  assert.ok(content.text.length > 200, '正文长度: ' + content.text.length);
-  assert.ok(content.text.indexOf('安泽一') >= 0, '正文内容: ' + content.text.slice(0, 60));
-  assert.ok(content.text.indexOf('最新通知') < 0, '站点公告不该混进正文');
-  assert.ok(content.text.indexOf('网址已经更换') < 0);
-});
 
-test('sspwk: 首页给「最新小说」板块，分类 12 个', async () => {
-  const source = stub(loadSource('novel/少数派文库.js'), [
-    // 具体地址排在域名兜底之前：路由按顺序匹配。
-    { match: '/booksort/3/1.html', body: snapshot('sspwk_booksort.html') },
-    { match: '/booksort/5/1.html', body: snapshot('sspwk_booksort.html') },
-    { match: 'sspwk.vip/', body: snapshot('sspwk_home.html') },
-  ]);
-  const boards = await source.home();
-  assert.equal(boards.length, 3, '最新小说 + 玄幻 + 言情');
-  assert.equal(boards[0].title, '最新小说');
-  assert.ok(boards[0].items.length >= 8, '最新小说条数: ' + boards[0].items.length);
-  const categories = await source.categories();
-  assert.equal(categories.length, 12);
-  assert.equal(categories[0].title, '耽美');
-});
 
 // ------------------------------------------------------------------ 契约：四个源都提供 home / categories
 
@@ -419,18 +325,6 @@ test('四个新源都满足源契约，且 home() 在真快照上跑得出板块
       // 这块桩只覆盖「全部」与「更新」两个入口，另外两个入口的响应没派上——被
       // home() 的逐块 try/catch 跳过；而「更新」与「全部」同源时脚本会去重，所以是 2 块。
       boards: 2,
-    },
-    {
-      file: 'novel/少数派文库.js',
-      id: 'sspwk_novel',
-      category: 'novel',
-      routes: [
-        // 具体地址排在域名兜底之前：路由按顺序匹配。
-        { match: '/booksort/3/1.html', body: snapshot('sspwk_booksort.html') },
-        { match: '/booksort/5/1.html', body: snapshot('sspwk_booksort.html') },
-        { match: 'sspwk.vip/', body: snapshot('sspwk_home.html') },
-      ],
-      boards: 3,
     },
   ];
   for (const item of cases) {

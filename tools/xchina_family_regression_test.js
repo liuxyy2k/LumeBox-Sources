@@ -2,7 +2,6 @@
 
 // 小黄书家族与新点名的三个站：快照回归。
 //
-//   · novel/小黄书小说.js   —— xchina.co 成人小说（重写版：题材给全 + 排序/篇幅 + 路径页号）
 //   · video/小黄书听书.js   —— 同站「有声小说」（每章一条 mp3 直链）
 //   · photo/小黄书套图.js   —— /photos 情色套图（16 个系列 + 排序）
 //   · photo/小黄书自拍.js   —— /amateurs 业余自拍
@@ -61,87 +60,11 @@ const lastUrl = (source) => source.__urls[source.__urls.length - 1][1];
 
 // ------------------------------------------------------------------ 小黄书小说
 
-test('xchina 小说：题材分类给全（23 个题材 + 全部），筛选两组（排序 / 篇幅）', async () => {
-  const source = loadSource('novel/小黄书小说.js');
-  const categories = await source.categories();
-  assert.equal(categories.length, 24, '全部 + 23 个题材');
-  assert.equal(categories[0].id, '/fictions');
-  assert.ok(categories.some((c) => c.id === '/fiction-tag/999' && c.title === '有声小说'), '带上有声小说');
-  assert.ok(categories.some((c) => c.id === '/fiction-tag/1' && c.title === '人妻女友'));
 
-  const filters = await source.filters();
-  assert.equal(ids(filters.map((g) => g.id)), ids(['sort', 'length']));
-  assert.equal(ids(filters[0].options.map((o) => o.id)), ids(['', 'read', 'comment']));
-  assert.equal(ids(filters[1].options.map((o) => o.id)), ids(['', '1', '2', '3']));
-});
 
-test('xchina 小说：列表卡片带封面（独立图床），页号走路径 /fictions/2', async () => {
-  const source = stub(loadSource('novel/小黄书小说.js'), [
-    { match: '/fictions', body: snapshot('xchina_list.html') },
-  ]);
-  const result = await source.list({ categoryId: '/fictions', page: 1 });
-  assert.ok(result.items.length >= 20, '条数: ' + result.items.length);
-  const first = result.items[0];
-  assert.ok(/^\/fiction\/[A-Za-z0-9]+$/.test(first.id), first.id);
-  assert.equal(first.title, '操逼成首富16');
-  assert.ok(/^https:\/\/upload\.xchina\.io\/fiction\//.test(first.cover || ''), '封面要取到: ' + first.cover);
-  assert.ok(first.coverHeaders && /xchina\.co/.test(first.coverHeaders.Referer || ''), '封面请求头带站点 Referer');
-  assert.ok(first.subtitle && first.subtitle.indexOf('字') >= 0, '副标题含字数: ' + first.subtitle);
-  assert.equal(result.hasMore, true);
 
-  await source.list({ categoryId: '/fictions', page: 2 });
-  assert.match(lastUrl(source), /\/fictions\/2$/, '第 2 页是路径页号: ' + lastUrl(source));
-});
 
-test('xchina 小说：题材 / 排序 / 篇幅 拼成站点自己的地址；认不出的值退回默认', async () => {
-  const source = stub(loadSource('novel/小黄书小说.js'), [
-    { match: '/fiction-tag/999', body: snapshot('xchina_audio_tag.html') },
-    { match: '/fictions', body: snapshot('xchina_sort.html') },
-  ]);
-  await source.list({ categoryId: '/fiction-tag/999', page: 3, filters: { sort: 'read', length: '3' } });
-  assert.match(lastUrl(source), /\/fiction-tag\/999\/3\?sort=read&length=3$/, lastUrl(source));
-  await source.list({ categoryId: '/fictions', page: 1, filters: { sort: 'BAD', length: '9' } });
-  assert.match(lastUrl(source), /\/fictions$/, '白名单兜底: ' + lastUrl(source));
-});
 
-test('xchina 小说：搜索走 /search?q=&type=fiction', async () => {
-  const source = stub(loadSource('novel/小黄书小说.js'), [
-    { match: '/search?', body: snapshot('xchina_search.html') },
-  ]);
-  const result = await source.list({ keyword: '秘密', page: 1 });
-  assert.ok(lastUrl(source).indexOf('/search?q=' + encodeURIComponent('秘密') + '&type=fiction') >= 0, lastUrl(source));
-  assert.ok(result.items.length >= 18, '搜索结果: ' + result.items.length);
-  assert.equal(result.items[0].cover, null, '站点默认占位图不算封面（应为 null）');
-});
-
-test('xchina 小说：详情（标题/封面/作者/题材）与分章（LD+JSON hasPart）', async () => {
-  const source = stub(loadSource('novel/小黄书小说.js'), [
-    { match: '/fiction/6ad0ffb2e0ae6', body: snapshot('xchina_detail.html') },
-  ]);
-  const detail = await source.detail({ id: '/fiction/6ad0ffb2e0ae6' });
-  assert.equal(detail.title, '操逼成首富16');
-  assert.ok(/^https:\/\/upload\.xchina\.io\/fiction\//.test(detail.cover || ''), detail.cover);
-  assert.ok(detail.subtitle && detail.subtitle.indexOf('作者') >= 0, detail.subtitle);
-  assert.ok(detail.subtitle.indexOf('千字') >= 0, '字数: ' + detail.subtitle);
-  assert.ok(detail.subtitle.indexOf('有声小说') >= 0, '题材带上: ' + detail.subtitle);
-
-  const chapters = await source.chapters({ id: '/fiction/6ad0ffb2e0ae6' });
-  assert.equal(chapters.length, 40, '真站 40 章');
-  assert.equal(chapters[0].id, '/fiction/6ad0ffb2e0ae6/1');
-  assert.ok(chapters[0].title.indexOf('第一章') >= 0, chapters[0].title);
-});
-
-test('xchina 小说：正文取 article[data-reader] 的段落', async () => {
-  const source = stub(loadSource('novel/小黄书小说.js'), [
-    { match: '/fiction/6ad0ffb2e0ae6/1', body: snapshot('xchina_chapter.html') },
-    { match: '/fiction/6ad0ffb2e0ae6', body: snapshot('xchina_detail.html') },
-  ]);
-  const content = await source.content({ id: '/fiction/6ad0ffb2e0ae6', chapterId: '/fiction/6ad0ffb2e0ae6/1' });
-  assert.equal(content.kind, 'text');
-  assert.ok(content.text.length > 300, '正文长度: ' + content.text.length);
-  assert.ok(content.text.indexOf('秦京茹') >= 0, content.text.slice(0, 60));
-  assert.ok(content.text.indexOf('🎧') < 0, '播放提示不该混进正文');
-});
 
 // ------------------------------------------------------------------ 小黄书听书
 
