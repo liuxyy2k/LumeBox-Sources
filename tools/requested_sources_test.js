@@ -20,8 +20,8 @@ function load(id, category, pages) {
 test('all requested adapters expose the source contract without remote imports', () => {
   for (const [category, ids] of Object.entries({
     comic: ['nnmh', 'mmcg18', 'sansi', 'manwa', 'z8pt', 'jmcomic', 'bakamh',
-      'fxcomic', 'rouman5', 'cartoon18', 'relamanhua', 'mh18'],
-    video: ['asmrhoney', 'hanime1'],
+      'fxcomic', 'rouman5', 'cartoon18', 'relamanhua', 'mh18', 'smtt6'],
+    video: ['asmrhoney', 'hanime1', 'xvideos', 'xnxx', 'xhamster'],
   })) for (const id of ids) {
     const s = load(id, category, {});
     assert.equal(s.id, id + '_' + category);

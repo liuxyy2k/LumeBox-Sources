@@ -15,3 +15,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线上看.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XVideos.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XNXX.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamster.js
