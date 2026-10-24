@@ -234,19 +234,25 @@ var LumeSource = {
   },
 
   /// 取 `<script>var config = {…}, params = '<base64>'</script>` 里的 params 并解密。
+  /// ⚠️ base64 会随图片数量变长（41 张图那话就 17KB+），所以**不切窗口**：
+  /// 定位到 `params = '` 之后直接找下一个单引号，再整段解密。
   __params(html) {
     var at = html.indexOf('params');
     var guard = 0;
-    while (at >= 0 && guard < 40) {
+    while (at >= 0 && guard < 200) {
       guard++;
-      var slice = html.slice(at, Math.min(html.length, at + 16000));
-      var m = /params\s*=\s*'([A-Za-z0-9+\/=]{40,})'/.exec(slice);
+      var head = html.slice(at, Math.min(html.length, at + 40));
+      var m = /^params\s*=\s*'/.exec(head);
       if (m) {
-        try {
-          return this.__decryptParams(m[1]);
-        } catch (error) {
-          console.warn('[ihanman] params 解密失败：' + (error && error.message));
-          return null;
+        var start = at + m[0].length;
+        var end = html.indexOf("'", start);
+        if (end > start) {
+          try {
+            return this.__decryptParams(html.slice(start, end));
+          } catch (error) {
+            console.warn('[ihanman] params 解密失败：' + (error && error.message));
+            return null;
+          }
         }
       }
       at = html.indexOf('params', at + 6);
@@ -368,19 +374,28 @@ var LumeSource = {
       }
       at = area.indexOf('<a ', tagEnd);
     }
-    // 「全部漫画」放在最前面（它就是全站列表，也是分页最完整的一档）
+    // 排序：**韩国放第一档**（这就是「爱韩漫」，站点主力也是韩漫），然后「全部」，
+    // 再按站点原顺序排其余。实测 `/all`（全部）第 1 条是《一人之下》，那一部的
+    // 图片在 CDN 上整套 404（.jpg 与 .webp 都没有，站点自己缺图），放在默认页会是一片空白；
+    // 韩国档第 1 条的作品实测 .webp 都是 200，默认页才有内容。
     var ordered = [];
-    var hasAll = false;
     var i;
-    for (i = 0; i < out.length; i++) {
-      if (out[i].id === '/all') {
-        ordered.push(out[i]);
-        hasAll = true;
+    var used = {};
+    var preferred = ['/all/area/hanguo', '/all'];
+    for (i = 0; i < preferred.length; i++) {
+      for (var j = 0; j < out.length; j++) {
+        if (out[j].id === preferred[i] && !used[out[j].id]) {
+          used[out[j].id] = true;
+          ordered.push(out[j]);
+        }
       }
     }
-    if (!hasAll) ordered.push({ id: '/all', title: '全部' });
+    if (!used['/all']) ordered.push({ id: '/all', title: '全部' });
     for (i = 0; i < out.length; i++) {
-      if (out[i].id !== '/all') ordered.push(out[i]);
+      if (!used[out[i].id]) {
+        used[out[i].id] = true;
+        ordered.push(out[i]);
+      }
     }
     return ordered;
   },

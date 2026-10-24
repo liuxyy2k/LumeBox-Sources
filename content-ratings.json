@@ -175,6 +175,9 @@
     },
     "fuzhaiboylove_comic": {
       "rating": "18+"
+    },
+    "boysyo_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -222,6 +225,7 @@
     "chaturbetter_video": "Chaturbetter（chaturbetter.com，Chaturbate 搜索/过滤直播站，全站 18+）",
     "lxxlxx_video": "LXXLXX（zhs.lxxlxx.com，繁中成人短片站，全站 18+；本机出口探到播放源 404，故走 webplayer 兜底）",
     "kxmanhua1_comic": "开心看漫画（kxmanhua1.com，H 韩漫/日漫/3D 漫画站，全站 18+）",
-    "fuzhaiboylove_comic": "腐宅BoyLove（fuzhaiboylove.work / boylove.cc，BL 耽美成人漫画站，全站 18+）"
+    "fuzhaiboylove_comic": "腐宅BoyLove（fuzhaiboylove.work / boylove.cc，BL 耽美成人漫画站，全站 18+）",
+    "boysyo_comic": "啵乐（boysyo.cc，BL 耽美成人漫画站，全站 18+）"
   }
 }

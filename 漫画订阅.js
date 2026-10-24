@@ -45,3 +45,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫香�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱韩漫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/开心看漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/腐宅BoyLove.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/啵乐.js
