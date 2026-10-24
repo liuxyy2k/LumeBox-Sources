@@ -18,3 +18,8 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PornTrex.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HorrorPorn.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamsterLive.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Chaturbetter.js

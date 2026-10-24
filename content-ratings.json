@@ -136,6 +136,36 @@
     },
     "manhua127_comic": {
       "rating": "18+"
+    },
+    "manga18_comic": {
+      "rating": "18+"
+    },
+    "hentai3_comic": {
+      "rating": "18+"
+    },
+    "mkzhan_comic": {
+      "rating": "18+"
+    },
+    "mxgmh_comic": {
+      "rating": "18+"
+    },
+    "ihanman_comic": {
+      "rating": "18+"
+    },
+    "porntrex_video": {
+      "rating": "18+"
+    },
+    "horrorporn_video": {
+      "rating": "18+"
+    },
+    "av18_video": {
+      "rating": "18+"
+    },
+    "xhamsterlive_video": {
+      "rating": "18+"
+    },
+    "chaturbetter_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -170,6 +200,16 @@
     "long91_comic": "龙禁漫（long91.com，禁漫类成人漫画站，全站 18+）",
     "yaojinghanman_comic": "妖精漫画（yaojinghanman.com，韩国高清成人漫画站，全站 18+）",
     "wnacg_comic": "紳士漫畫（wnacg.com，中文汉化本子站，全站 18+）",
-    "manhua127_comic": "127漫画（127manhua.com，中文漫画站，含成人向分区，按 18+ 归档）"
+    "manhua127_comic": "127漫画（127manhua.com，中文漫画站，含成人向分区，按 18+ 归档）",
+    "manga18_comic": "Manga18（manga18.me，英文韩漫/成人漫画站，全站 18+）",
+    "hentai3_comic": "3Hentai（3hentai.club，英文同人志站，全站 18+）",
+    "mkzhan_comic": "漫客栈（m.mkzhan.com，中文漫画站，含成人向作品，按 18+ 归档）",
+    "mxgmh_comic": "漫香阁（mxgmh.com，韩漫/同人志/Cosplay 成人漫画站，全站 18+）",
+    "ihanman_comic": "爱韩漫（ihanman.com，韩漫站，含成人向作品，按 18+ 归档）",
+    "porntrex_video": "PornTrex（porntrex.com，KVS 成人视频站，全站 18+）",
+    "horrorporn_video": "HorrorPorn（horrorporn.com，恐怖题材成人片站，全站 18+；匿名只给官方样片）",
+    "av18_video": "18AV（18av.mm-cg.com，繁中 AV 在线站，全站 18+）",
+    "xhamsterlive_video": "xHamsterLive（zh.xhamsterlive.com，成人直播站，全站 18+；直连 HLS 直播流）",
+    "chaturbetter_video": "Chaturbetter（chaturbetter.com，Chaturbate 搜索/过滤直播站，全站 18+）"
   }
 }

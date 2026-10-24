@@ -38,3 +38,8 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/龙禁�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/妖精漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/紳士漫畫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/127漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/Manga18.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/3Hentai.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫客栈.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫香阁.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱韩漫.js
