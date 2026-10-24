@@ -21,7 +21,7 @@ test('all requested adapters expose the source contract without remote imports',
   for (const [category, ids] of Object.entries({
     comic: ['nnmh', 'mmcg18', 'sansi', 'manwa', 'z8pt', 'jmcomic', 'bakamh',
       'fxcomic', 'rouman5', 'cartoon18', 'relamanhua', 'mh18', 'smtt6'],
-    video: ['asmrhoney', 'hanime1', 'xvideos', 'xnxx', 'xhamster'],
+    video: ['asmrhoney', 'hanime1', 'xvideos', 'xnxx', 'xhamster', 'voyeurhit', 'youjizz', 'redtube'],
   })) for (const id of ids) {
     const s = load(id, category, {});
     assert.equal(s.id, id + '_' + category);
