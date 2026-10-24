@@ -110,20 +110,35 @@ function decode(text) {
     .trim();
 }
 
+function wait(ms) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function get(target) {
   var url = absolute(target);
-  var response = await LumeSource.http.request({
-    url: url,
-    method: 'GET',
-    headers: headers({ Referer: base() + '/' })
-  });
-  var status = response ? response.status : 0;
-  var text = String((response && response.body) || '');
-  if ((status === 403 || status === 503) && /Just a moment|cf-chl-|challenge-platform/i.test(text)) {
-    throw new Error('NEED_WEBVIEW_VERIFY：啪啪啦 被 Cloudflare 挑战页拦住（HTTP ' + status + '），请给本源配代理或走网页视图');
+  var status = 0;
+  for (var attempt = 0; attempt < 3; attempt++) {
+    var response = await LumeSource.http.request({
+      url: url,
+      method: 'GET',
+      headers: headers({ Referer: base() + '/' })
+    });
+    status = response ? response.status : 0;
+    var text = String((response && response.body) || '');
+    if ((status === 403 || status === 503) && /Just a moment|cf-chl-|challenge-platform/i.test(text)) {
+      throw new Error('NEED_WEBVIEW_VERIFY：啪啪啦 被 Cloudflare 挑战页拦住（HTTP ' + status + '），请给本源配代理或走网页视图');
+    }
+    if (status === 200) return text;
+    // 520/521/522/524：Cloudflare 说源站没正常回包，等一会儿再试
+    if (status >= 500) {
+      await wait(250 + attempt * 350);
+      continue;
+    }
+    throw new Error('啪啪啦 页面打不开：HTTP ' + status + ' ' + url);
   }
-  if (status !== 200) throw new Error('啪啪啦 页面打不开：HTTP ' + status + ' ' + url);
-  return text;
+  throw new Error('啪啪啦 页面打不开：HTTP ' + status + '（源站抖动，已重试 3 次）' + url);
 }
 
 // ------------------------------------------------------------------ 列表解析

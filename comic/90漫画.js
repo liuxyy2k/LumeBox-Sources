@@ -13,6 +13,8 @@
 // server_session_xxxx）。把那两个 cookie 回传再请求同一个地址就 200。之后同会话里
 // 大概每 5～8 次请求会再抖一次 403，同样「收 cookie → 立刻重试」即可过。
 // 所以本源所有 GET 都走 get()：收 Set-Cookie → 落本地 → 403 就再试，最多 4 次。
+// 另外 520/521/522/524 是 Cloudflare 在喊「源站没正常回包」，站点自己会抖（同一条 URL
+// 前一秒 520、十秒后 200，实测过好几次），get() 也会小幅退避重试，别把整页判死。
 // 注意别把正常页面里的 /cdn-cgi/challenge-platform/scripts/jsd 当成被拦信号
 // （首页正常带这段广告/统计脚本），只有 403/503 + "Just a moment" 才是真挑战页。
 //
@@ -48,7 +50,9 @@ var DEFAULT_BASE = 'https://www.90mh.cc';
 var API_BASE = 'https://api.90mh.cc';
 var UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
 var COOKIE_FILE = 'cookies.json';
-var MAX_RETRY = 4;
+// 实测站点会「成串」抽风：520 是随机出现的（连打 12 次中 2 次，偶尔连着几下），
+// 403 是每几次请求一次的 cookie 闸门。两种都靠重试解决，所以给到 8 次 + 递增退避。
+var MAX_RETRY = 8;
 
 // 分类兜底表（/list/ 页面解析失败时用；id 就是 /list/{id}/ 里的 slug）
 var FALLBACK_CATEGORIES = [
@@ -66,6 +70,9 @@ var FALLBACK_CATEGORIES = [
 
 var cookieHeader = '';
 var cookieLoaded = false;
+// 单页缓存：detail() → chapters() 会连着要同一个详情页，content() 也可能要详情页；
+// 站点本身就爱抽风，能少发一次请求就少一次踩 520 的机会。
+var pageCache = { url: '', html: '' };
 
 function base() {
   var domain = LumeSource.config && LumeSource.config.domain ? String(LumeSource.config.domain) : '';
@@ -178,8 +185,15 @@ async function request(url, extra) {
   });
 }
 
+function wait(ms) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function get(target, extra) {
   var url = absolute(target);
+  if (pageCache.url === url && pageCache.html) return pageCache.html;
   await loadCookies();
   var lastStatus = 0;
   for (var attempt = 0; attempt < MAX_RETRY; attempt++) {
@@ -188,7 +202,10 @@ async function get(target, extra) {
     var text = String((response && response.body) || '');
     lastStatus = status;
     if (response && response.setCookie && response.setCookie.length) await saveCookies(response.setCookie);
-    if (status === 200) return text;
+    if (status === 200) {
+      if (text.length > 4000) pageCache = { url: url, html: text };
+      return text;
+    }
     if (status === 403 || status === 503) {
       if (needsWebview(text)) {
         throw new Error('NEED_WEBVIEW_VERIFY：90漫画 被 Cloudflare 挑战页拦住（HTTP ' + status + '），请在源设置里走网页视图或给本源配代理');
@@ -196,9 +213,15 @@ async function get(target, extra) {
       // 首访闸门：cookie 已经在上面收下了，立刻重试
       continue;
     }
+    if (status >= 500) {
+      // 520/521/522/524 = Cloudflare 说「源站没正常回包」，站点自己抖一下很常见
+      // （实测随机命中，同一条 URL 隔一两秒就 200），递增退避再试，别把整页判死。
+      await wait(300 * (attempt + 1));
+      continue;
+    }
     throw new Error('90漫画 页面打不开：HTTP ' + status + ' ' + url);
   }
-  throw new Error('90漫画 页面打不开：HTTP ' + lastStatus + '（已重试 ' + MAX_RETRY + ' 次，cookie 闸门没过）' + url);
+  throw new Error('90漫画 页面打不开：HTTP ' + lastStatus + '（已重试 ' + MAX_RETRY + ' 次，cookie 闸门或源站抖动没过）' + url);
 }
 
 // ------------------------------------------------------------------ 解析
@@ -376,7 +399,13 @@ var LumeSource = {
   mirrors: ['https://www.90mh.cc'],
 
   async categories() {
+    // 首页 / 列表页 / 详情页都挂着同一套 filter-nav（按类型 / 按地区 / 按剧情 …），
+    // 手上已经有页面就直接解析，省一次请求。
     try {
+      if (pageCache.html) {
+        var cached = parseCategories(pageCache.html);
+        if (cached.length >= 4) return cached;
+      }
       await loadCookies();
       var pageHtml = await get('/list/');
       var list = parseCategories(pageHtml);
