@@ -1,0 +1,18 @@
+# 视频 / 影视综合（苹果CMS 系 · 7 站）· jsDelivr CDN 版
+#
+# 与 videos-hd 内容完全相同，只把地址换成 jsDelivr CDN：
+# 国内网络访问 raw.githubusercontent.com 常常被重置，「添加订阅」会直接失败，
+# 这份清单走 https://cdn.jsdelivr.net，通常能直连。
+#
+# 代价：jsDelivr 对 @main 有缓存（最长约 12 小时）。改了脚本要立刻生效，
+# 用上面的 videos-hd（raw）那份订阅。
+#
+# 环境提示：欧乐影院 / 华视影院 直连会被源站 WAF 拦成 403，需在「源设置 → 网络」
+# 给这两个源单配代理；华视影院的播放走 App 内置网页播放器（源站 P2P）。
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/播剧网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/A123TV.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/饭搭子影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/飞流视频.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/短剧网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/欧乐影院.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/华视影院.js

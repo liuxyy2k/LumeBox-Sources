@@ -3,7 +3,14 @@
 - [漫画 / 美图](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics)
 - [视频 / 影视](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos)
 - [视频 / 影视综合（苹果CMS 系 7 站）](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos-hd)
+- [视频 / 影视综合 · jsDelivr CDN 版](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos-hd-cdn)
 - [总订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all)
+
+> 国内网络打不开 `raw.githubusercontent.com`（「添加订阅」直接报拉取失败）时，改用 CDN 版：
+> `https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/videos-hd-cdn`
+>
+> **更新 ≠ 添加**：App 的「一键更新全部订阅」只刷新**已保存**的订阅地址，不会发现新清单。
+> 新增的清单要先在「订阅管理 → 添加订阅地址」里添加一次，之后才会自动更新。
 
 ## 视频 / 影视综合（7 站）
 
