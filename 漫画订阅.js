@@ -43,3 +43,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/3Hentai.
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫客栈.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫香阁.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/开心看漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/腐宅BoyLove.js

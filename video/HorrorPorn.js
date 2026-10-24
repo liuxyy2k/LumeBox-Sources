@@ -98,17 +98,18 @@ var LumeSource = {
     H.useDomain();
     var rows = [
       { id: 'sitemap', title: '全部影片（sitemap）' },
-      { id: '/pages/search/?q=horror', title: '搜索：horror' },
-      { id: '/pages/tags/', title: '全部标签' }
+      { id: '/pages/search/?q=horror', title: '搜索：horror' }
     ];
     var seen = {};
     rows.forEach(function (r) { seen[r.id] = 1; });
     try {
       var html = await H.get('/pages/tags/');
-      var re = /<a[^>]+href="(https?:\/\/[^"]*\/pages\/search\/\?q=[^"]+)"[^>]*>([\s\S]{0,200}?)<\/a>/gi, m;
+      var re = /<a[^>]+href="(https?:\/\/[^"]*\/pages\/search\/\?q=[^"]+)"[^>]*>([\s\S]{0,800}?)<\/a>/gi, m;
       while ((m = re.exec(html)) !== null) {
         var url = H.entity(m[1]);
-        var title = H.clean(m[2]);
+        var span = /<span[^>]*>([\s\S]{0,120}?)<\/span>/i.exec(m[2]);
+        var title = H.clean(span ? span[1] : m[2]);
+        if (!title) title = H.clean(decodeURIComponent(url.replace(/^.*[?&]q=/, '').split('&')[0]).replace(/\+/g, ' '));
         if (!title || seen[url]) continue;
         seen[url] = 1;
         rows.push({ id: url, title: '标签：' + title });
@@ -186,7 +187,7 @@ var LumeSource = {
       var path = hit[1];
       if (seen[path]) continue;
       seen[path] = 1;
-      img = /<img[^>]+alt="([^"]*)"[^>]*>/i.exec(block) || /<img[^>]+alt="([^"]*)"[^>]*>/i.exec(block);
+      img = /<img[^>]+alt="([^"]*)"[^>]*>/i.exec(block);
       alt = img ? img[1] : '';
       var src = (/<img[^>]+src="(https?:\/\/[^"]+)"/i.exec(block) || [])[1] || '';
       if (!src) src = (/data-thumbnail="([^"]+)"/i.exec(block) || [])[1] || '';

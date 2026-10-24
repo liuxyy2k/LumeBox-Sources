@@ -239,7 +239,8 @@ var LumeSource = {
       var rows = qualities(html);
       if (rows.length) {
         return rows.map(function (r) {
-          return { id: r.label, title: r.label + (/HD|4K|FHD/i.test(r.label) ? '' : '') + '（' + (r.quality ? r.quality + 'p' : 'MP4') + '）' };
+          var label = r.label || (r.quality ? r.quality + 'p' : 'MP4');
+          return { id: label, title: label };
         });
       }
     } catch (error) {
