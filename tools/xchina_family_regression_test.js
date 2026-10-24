@@ -89,17 +89,30 @@ test('xchina 听书：章节页里的 <audio src> 就是播放地址（真站直
     { match: '/fiction/5f9131520f3aa', body: snapshot('xchina_audio_detail.html') },
   ]);
   const content = await source.content({ id: '/fiction/5f9131520f3aa', chapterId: '/fiction/5f9131520f3aa/1' });
-  assert.equal(content.kind, 'video');
+  assert.equal(content.kind, 'audio');
   assert.ok(/\.mp3$/.test(content.url), content.url);
   assert.ok(content.url.indexOf('upload.xchina.io/mp3/') >= 0, content.url);
   assert.ok(content.headers && /xchina\.co/.test(content.headers.Referer || ''), JSON.stringify(content.headers));
+  assert.match(content.headers['User-Agent'], /iPhone/);
+  const detail = await source.detail({ id: '/fiction/5f9131520f3aa' });
+  assert.ok(detail.title.length > 0);
 
-  // 页面没给 audio 时按 /mp3/<书号>/<章序-1>.mp3 兜底（用一张没有 audio 的页面）
+  // 没有音频标签时明确报告无配音，不能拼接并不存在的 mp3 地址。
   const fallback = stub(loadSource('video/小黄书听书.js'), [
     { match: '/fiction/aaaa/3', body: '<html><body><div data-reader-body><p>纯文字</p></div></body></html>' },
   ]);
-  const other = await fallback.content({ id: '/fiction/aaaa', chapterId: '/fiction/aaaa/3' });
-  assert.equal(other.url, 'https://upload.xchina.io/mp3/aaaa/2.mp3');
+  await assert.rejects(fallback.content({ id: '/fiction/aaaa', chapterId: '/fiction/aaaa/3' }), /本章没有语音版/);
+});
+
+test('xchina 听书：audio/source 支持非 mp3 地址，忽略视频 source', async () => {
+  const source = stub(loadSource('video/小黄书听书.js'), [{
+    match: '/fiction/book/1',
+    body: '<video><source src="wrong.mp3"></video><audio><source src="voice?token=1&amp;part=2" type="audio/mp4"></audio>',
+  }]);
+  const content = await source.content({ chapterId: '/fiction/book/1' });
+  assert.equal(content.kind, 'audio');
+  assert.equal(content.url, 'https://xchina.co/fiction/book/voice?token=1&part=2');
+  assert.equal(content.headers.Referer, 'https://xchina.co/fiction/book/1');
 });
 
 // ------------------------------------------------------------------ 小黄书套图

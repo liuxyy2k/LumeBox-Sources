@@ -1,21 +1,18 @@
-// LumeSource: {"id":"xchina_audiobook","name":"小黄书听书","version":"1.0.0","category":"video","group":"听书","icon":"https://xchina.co/assets/img/favicon.png"}
+// LumeSource: {"id":"xchina_audiobook","name":"小黄书听书","version":"1.0.1","category":"video","group":"听书","icon":"https://xchina.co/assets/img/favicon.png"}
 //
 // 小黄书 xChina 的**有声小说（听书）**：站点把有声作品放在「有声小说」题材下
 // （/fiction-tag/999，实测 2,039 部），每一章的语音版是页面里的
 // <audio src="https://upload.xchina.io/mp3/<书号>/<章序>.mp3"> ——**直链音频**，
 // 不带加密、不签名（实测 200 audio/mpeg）。
 //
-// 为什么放在**视频板块**：App 的小说阅读器只认文本（拿到音频会提示「该章节不是文本
-// 内容」），而视频播放器拿 kind:'video' 的音频地址能直接播。所以这份源以
-// category:"video" + group:"听书" 交付：现在就能听。等 App 支持在小说板块内播音频，
-// 把 category 改成 novel、文件挪到 audiobook/ 目录即可（内容不用动）。
+// 源归属视频板块的听书分组，章节明确返回 kind:'audio'，交给 App 的独立音频播放器。
 //
 // 站点结构（2026-10-16 实测）：
 //   目录      /fiction-tag/999[/<页>][?sort=&length=]   排序 read|comment、篇幅 1|2|3
 //   详情      /fiction/<24位id>                        标题 h1、封面 og:image
 //   剧集      LD+JSON hasPart（一章一条）
 //   播放      /fiction/<id>/<章序>                      页内 <audio src=…mp3>；
-//                                                      页面没给 audio 时按 /mp3/<书号>/<章序-1>.mp3 兜底
+//                                                      页面没有音频时明确报告未配音
 //
 // 已知边界：站点只给部分作品配音（没有 audio 的章节脚本会如实报「本章没有语音版」）；
 // 搜索沿用站点自己的 /search（结果里可能混入没有配音的作品，打开时会看到上面那句提示）。
@@ -46,7 +43,7 @@ var H = {
 };
 
 H.base="https://xchina.co";H.name="小黄书听书";
-var LumeSource={id:"xchina_audiobook",name:"小黄书听书",version:"1.0.0",category:"video",group:"听书",
+var LumeSource={id:"xchina_audiobook",name:"小黄书听书",version:"1.0.1",category:"video",group:"听书",
 icon:"https://xchina.co/assets/img/favicon.png",
 
 /// 真站的「有声小说」题材（/fiction-tag/999）就是听书目录。
@@ -115,9 +112,9 @@ __data: function (html) {
   while ((m = re.exec(String(html || ''))) !== null) {
     try {
       var data = JSON.parse(m[1]);
-      var list = Array.isArray(data) ? data : [data];
+      var list = Array.isArray(data) ? data : (data['@graph'] || [data]);
       for (var i = 0; i < list.length; i++) {
-        if (list[i] && (list[i].hasPart || list[i]['@type'] === 'CreativeWork')) return list[i];
+        if (list[i] && (list[i].hasPart || list[i]['@type'] === 'CreativeWork' || list[i]['@type'] === 'Book')) return list[i];
       }
     } catch (error) {
       // 换下一个脚本块。
@@ -228,28 +225,25 @@ async chapters(argument) {
 
 /// 播放：章节页里的 `<audio src="https://upload.xchina.io/mp3/<书号>/<序号>.mp3">`。
 ///
-/// 真站每章都有语音版（同一段文字配一条 mp3）；页面没给 audio 标签时按站点自己的
-/// 命名规则兜底（`/mp3/<书号>/<章序>.mp3`，章序从 0 开始）。播放头带 Referer，
-/// mp3 宿主认站点来源。**注意**：这类站点的 mp3 在独立域名上，音频本体不走 CF 会话。
+/// 只使用页面明确提供的音频地址；没有配音的章节不能靠拼接路径生成假地址。
+/// 音频在独立域名，播放时保留章节 Referer 与源的 User-Agent。
 async content(argument) {
   var chapterPath = this.__path((argument && argument.chapterId) || (argument && argument.id));
   if (!chapterPath) throw new Error('小黄书听书：缺少章节地址');
   var html = await H.get(chapterPath);
   var tree = H.tree(html);
-  var audio = H.first(tree, function (n) {
-    return n.tag === 'audio' && /\.mp3(\?|$)/i.test(n.attrs.src || '');
-  }) || H.first(tree, function (n) {
-    return n.tag === 'source' && /\.mp3(\?|$)/i.test(n.attrs.src || '');
-  });
-  var url = audio ? H.abs(audio.attrs.src, H.base + '/') : '';
-  if (!url) {
-    var m = /\/fiction\/([A-Za-z0-9]+)\/(\d+)$/.exec(chapterPath);
-    if (m) url = 'https://upload.xchina.io/mp3/' + m[1] + '/' + (Number(m[2]) > 0 ? Number(m[2]) - 1 : 0) + '.mp3';
-  }
-  if (!url) throw new Error('小黄书听书：本章没有语音版（站点只给部分作品配音）');
   var page = H.abs(chapterPath, H.base + '/');
+  var audio = H.first(tree, function (n) {
+    return n.tag === 'audio' && !!n.attrs.src;
+  }) || H.first(tree, function (n) {
+    return n.tag === 'source' && !!n.attrs.src &&
+      (n.parent && n.parent.tag === 'audio' || /^audio\//i.test(n.attrs.type || ''));
+  });
+  var url = audio ? H.abs(audio.attrs.src, page) : '';
+  if (!url) throw new Error('小黄书听书：本章没有语音版（站点只给部分作品配音）');
+  if (!/^https?:\/\//i.test(url)) throw new Error('小黄书听书：音频地址无效');
   return {
-    kind: 'video',
+    kind: 'audio',
     url: url,
     qualities: [{ label: '语音版', url: url }],
     headers: H.headers(page)

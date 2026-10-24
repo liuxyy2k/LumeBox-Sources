@@ -1,4 +1,4 @@
-// LumeSource: {"id":"iwara_video","name":"Iwara","version":"1.0.0","category":"video","mirrors":["https://www.iwara.tv"]}
+// LumeSource: {"id":"iwara_video","name":"Iwara","version":"1.0.1","category":"video","mirrors":["https://www.iwara.tv"]}
 // 站点：https://www.iwara.tv（Iwara；前端 React SPA，**数据全在公开 JSON API 上**）
 //
 // ## 为什么这个源几乎不解析 HTML
@@ -57,7 +57,7 @@ function base() {
 var LumeSource = {
   id: 'iwara_video',
   name: 'Iwara',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'video',
   mirrors: ['https://www.iwara.tv'],
 
@@ -235,8 +235,8 @@ var LumeSource = {
     if (raw.customThumbnail) {
       var custom = raw.customThumbnail;
       var id = typeof custom === 'object' ? (custom.id || custom.name || '') : String(custom);
-      if (id) return IMG_URL + '/image/thumbnail/' + encodeURIComponent(id) + '/thumbnail-'
-        + (raw.thumbnail || 0) + '.jpg';
+      if (id) return IMG_URL + '/image/thumbnail/' + encodeURIComponent(id)
+        + '/' + encodeURIComponent(typeof custom === 'object' ? (custom.name || id + '.jpg') : id + '.jpg');
     }
     var file = raw.file || {};
     if (!file.id) return '';

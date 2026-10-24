@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xhamster_video","name":"xHamster","version":"1.0.0","category":"video","mirrors":["https://xhamster.com","https://www.xhamster.com"]}
+// LumeSource: {"id":"xhamster_video","name":"xHamster","version":"1.0.1","category":"video","mirrors":["https://xhamster.com","https://www.xhamster.com"]}
 
 // 站点：https://xhamster.com （Vue SSR + xplayer）
 //
@@ -20,13 +20,13 @@
 //             （换 h264 回 403），这类只能给 AV1——需要 MPV 内核解码，AVPlayer 在旧机型上不行。
 //             两条都带 `,<过期时间>` 签名，**每次播放重新取详情页**。
 var H = {
-  base: 'https://xhamster.com', name: 'xHamster', defaultBase: 'https://xhamster.com',
+  base: 'https://zh.xhamster.com', name: 'xHamster', defaultBase: 'https://zh.xhamster.com',
   ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
   clean: function (s) { return this.entity(String(s || '').replace(/<!--[\s\S]*?-->/g, '').replace(/<script\b[\s\S]*?<\/script>/gi, '').replace(/<style\b[\s\S]*?<\/style>/gi, '').replace(/<\/(?:p|div|section|li|h\d)>|<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')).replace(/[ \t]+/g, ' ').replace(/\n\s*\n/g, '\n').trim(); },
   entity: function (s) { return String(s || '').replace(/&(?:amp|quot|apos|lt|gt|nbsp|#39);|&#(?:x[0-9a-f]+|\d+);/gi, function (v) { var map = { '&amp;': '&', '&quot;': '"', '&apos;': "'", '&lt;': '<', '&gt;': '>', '&nbsp;': ' ', '&#39;': "'" }; if (map[v]) return map[v]; var code = v.charAt(2) === 'x' ? parseInt(v.slice(3), 16) : parseInt(v.slice(2), 10); return Number.isFinite(code) ? String.fromCodePoint(code) : v; }); },
   abs: function (u, from) { u = this.entity(u).trim(); if (!u) return ''; if (/^https?:\/\//i.test(u)) return u; if (u.indexOf('//') === 0) return 'https:' + u; var b = from || this.base; if (u.charAt(0) === '/') return /^https?:\/\/[^/]+/.exec(b)[0] + u; return b.replace(/[^/]*$/, '') + u; },
-  headers: function () { return { 'User-Agent': this.ua, 'Referer': this.base + '/' }; },
-  useDomain: function () { var c = (typeof LumeSource !== 'undefined' && LumeSource.config) || null; this.base = String((c && c.domain) || this.defaultBase).replace(/\/+$/, ''); return this.base; },
+  headers: function () { return { 'User-Agent': this.ua, 'Referer': this.base + '/', 'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.5' }; },
+  useDomain: function () { var c = (typeof LumeSource !== 'undefined' && LumeSource.config) || null; this.base = String((c && c.domain) || this.defaultBase).replace(/\/+$/, ''); if (/^https:\/\/(?:www\.)?xhamster\.com$/.test(this.base)) this.base = 'https://zh.xhamster.com'; return this.base; },
   response: function (r) { if (!r) throw new Error(this.name + '：没有网络响应'); var s = r.status; if (s === 403 || s === 503 || s === 521) throw new Error('NEED_WEBVIEW_VERIFY：' + this.name + ' 需要网页验证（HTTP ' + s + '）'); if (s === 404) throw new Error(this.name + '：页面不存在（HTTP 404）'); if (s !== 200) throw new Error(this.name + '：请求失败（HTTP ' + s + '）'); var b = String(r.body || ''); if (/cf-chl-|Just a moment|<title>\s*人机校验/i.test(b)) throw new Error('NEED_WEBVIEW_VERIFY：' + this.name + ' 需要网页验证'); return b; },
   get: async function (u) { return this.response(await LumeSource.http.get(this.abs(u, this.base + '/'), { headers: this.headers() })); }
 };
@@ -34,7 +34,7 @@ var H = {
 var LumeSource = {
   id: 'xhamster_video',
   name: 'xHamster',
-  version: '1.0.0',
+  version: '1.0.1',
   category: 'video',
   mirrors: ['https://xhamster.com', 'https://www.xhamster.com'],
 
@@ -60,7 +60,7 @@ var LumeSource = {
         var head = /<h2[^>]*>([\s\S]{0,400}?)<\/h2>/.exec(sections[i]);
         var section = head ? H.clean(head[1]) : '';
         if (/Porn in your language|All other categories|How-Tos/i.test(section)) continue;
-        var re = /href="https?:\/\/xhamster\.com\/categories\/([a-z0-9-]+)"[\s\S]{0,800}?<h3[^>]*>([\s\S]{0,160}?)<\/h3>/g, m;
+        var re = /href="https?:\/\/(?:[a-z0-9-]+\.)?xhamster\.com\/categories\/([a-z0-9-]+)"[\s\S]{0,800}?<h3[^>]*>([\s\S]{0,160}?)<\/h3>/g, m;
         while ((m = re.exec(sections[i])) !== null) {
           var id = '/categories/' + m[1];
           var title = H.clean(m[2]);
@@ -109,8 +109,8 @@ var LumeSource = {
     var seen = {};
     var blocks = String(html).split(/data-video-id="/);
     for (var i = 1; i < blocks.length; i++) {
-      var block = blocks[i].slice(0, 4000);
-      var link = /href="(https?:\/\/xhamster\.com\/videos\/[^"]+)"/.exec(block);
+      var block = blocks[i];
+      var link = /href="(https?:\/\/(?:[a-z0-9-]+\.)?xhamster\.com\/videos\/[^"]+)"/.exec(block);
       if (!link) continue;
       var path = link[1].replace(/^https?:\/\/[^/]+/, '');
       if (seen[path]) continue;
@@ -128,6 +128,36 @@ var LumeSource = {
         coverHeaders: H.headers(),
         subtitle: [duration, views].filter(function (x) { return !!x; }).join(' · ')
       });
+    }
+    // SSR contains the complete catalogue; lazy HTML can have just a handful
+    // of rendered images. Parse data, never evaluate the site's scripts.
+    var initial = /window\.initials\s*=\s*([\s\S]*?)<\/script>/i.exec(String(html));
+    if (initial) {
+      try {
+        var state = JSON.parse(initial[1].trim().replace(/;$/, ''));
+        var pending = [state], count = 0;
+        while (pending.length && count++ < 20000) {
+          var node = pending.pop();
+          if (!node || typeof node !== 'object') continue;
+          if (node.pageURL && node.title && (node.imageURL || node.thumbURL)) {
+            var url = H.abs(node.pageURL);
+            var path = url.replace(/^https?:\/\/[^/]+/, '');
+            if (/^\/videos\/[^/?]+$/.test(path)) {
+              var cover = H.abs(node.imageURL || node.thumbURL);
+              var old = out.filter(function (item) { return item.id === path; })[0];
+              if (old) { if (!old.cover) old.cover = cover; }
+              else if (!seen[path]) {
+                seen[path] = true;
+                out.push({id:path, title:H.clean(node.title), cover:cover,
+                  coverHeaders:H.headers(), subtitle:String(node.duration || '')});
+              }
+            }
+          }
+          Object.keys(node).forEach(function (key) {
+            if (node[key] && typeof node[key] === 'object') pending.push(node[key]);
+          });
+        }
+      } catch (_) { /* Keep HTML cards if a site experiment changes the data. */ }
     }
     return out;
   },
