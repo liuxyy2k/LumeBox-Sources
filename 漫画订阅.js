@@ -24,3 +24,10 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/小黄书自拍.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/JComic漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/G社漫画.js
+
+# 2026-10 批量新增（第一批）
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/肉漫天堂.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/大人漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nhentai.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/96漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/七七韩漫.js

@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.1.0","category":"comic"}
+﻿// LumeSource: {"id":"xman6_comic","name":"X漫","version":"1.2.0","category":"comic","mirrors":["https://xman6.com","https://xman92.com"]}
 
 // 站点：https://xman6.com（MacCMS + conch 主题；桌面与移动共用同一套标记）
 //
@@ -47,7 +47,14 @@
 // challenge-platform 痕迹）；被拦时的标记路径照留（见 __get）：真拦了就抛
 // NEED_WEBVIEW_VERIFY，App 拉起网页视图过一次校验。
 
-var BASE_URL = 'https://xman6.com';
+var DEFAULT_BASE = 'https://xman6.com';
+
+// 镜像：xman92.com 与 xman6.com 是同一站（同模板同路由，2026-10-25 实测 /mdetail 与 /mread 结构一致）。
+// 源设置里换域名时用 config.domain，脚本所有请求都从这里取基地址。
+function baseUrl() {
+  var domain = LumeSource.config && LumeSource.config.domain ? String(LumeSource.config.domain) : '';
+  return (domain || DEFAULT_BASE).replace(/\/+$/, '');
+}
 
 var PAGE_SIZE = 24;          // 列表/搜索每页条数（快照实测）
 var HOME_BUDGET_MS = 6000;   // 首页软截止（沙箱单次调用预算是 3–10s，见 home()）
@@ -61,7 +68,7 @@ var DETAIL_SCAN = 400000;    // 详情页最多扫多少字符（实测 ≈66KB�
 var LumeSource = {
   id: 'xman6_comic',
   name: 'X漫',
-  version: '1.1.0',
+  version: '1.2.0',
   category: 'comic',
 
   // ---------------------------------------------------------------- 契约方法
@@ -206,7 +213,7 @@ var LumeSource = {
       id: id,
       title: title,
       cover: this.__detailCover(html),
-      coverHeaders: { 'Referer': BASE_URL + '/' },
+      coverHeaders: { 'Referer': baseUrl() + '/' },
       subtitle: info.status,
       description: info.description,
       tags: info.tags,
@@ -276,7 +283,7 @@ var LumeSource = {
         id: id,
         title: this.__clean(titleMatch ? titleMatch[1] : id),
         cover: this.__absolute(coverMatch ? coverMatch[1] : ''),
-        coverHeaders: { 'Referer': BASE_URL + '/' },
+        coverHeaders: { 'Referer': baseUrl() + '/' },
         subtitle: this.__clean(this.__stripTags(subMatch ? subMatch[1] : ''))
       });
     }
@@ -307,7 +314,7 @@ var LumeSource = {
         id: id,
         title: this.__clean(title || id),
         cover: this.__absolute(coverMatch ? coverMatch[1] : ''),
-        coverHeaders: { 'Referer': BASE_URL + '/' },
+        coverHeaders: { 'Referer': baseUrl() + '/' },
         subtitle: this.__clean(subMatch ? subMatch[1] : '')
       });
     }
@@ -408,7 +415,7 @@ var LumeSource = {
     if (!value) return '';
     if (value.indexOf('http') === 0) return value;
     if (value.indexOf('//') === 0) return 'https:' + value;
-    return BASE_URL + (value.charAt(0) === '/' ? '' : '/') + value;
+    return baseUrl() + (value.charAt(0) === '/' ? '' : '/') + value;
   },
 
   __stripTags(text) {
@@ -429,9 +436,9 @@ var LumeSource = {
 
   /// 所有请求的唯一出口：补全地址、发请求、被 WAF 拦下时抛固定标记。
   async __get(path) {
-    var url = path.indexOf('http') === 0 ? path : BASE_URL + path;
+    var url = path.indexOf('http') === 0 ? path : baseUrl() + path;
     var response = await LumeSource.http.get(url, {
-      headers: { 'Referer': BASE_URL + '/' }
+      headers: { 'Referer': baseUrl() + '/' }
     });
     var status = response ? Number(response.status) : 0;
     var body = response && response.body ? String(response.body) : '';

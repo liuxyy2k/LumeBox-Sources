@@ -100,6 +100,21 @@
     },
     "xnovel_audiobook": {
       "rating": "18+"
+    },
+    "rmtt2_comic": {
+      "rating": "18+"
+    },
+    "drmh5_comic": {
+      "rating": "18+"
+    },
+    "nhentai_comic": {
+      "rating": "18+"
+    },
+    "manhua96_comic": {
+      "rating": "18+"
+    },
+    "qqhanman_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -122,6 +137,11 @@
     "aboutporno_video": "About Porno（aboutporno.net，兽交题材成人视频站，与 Zoo Sex Farm 同一套模板，全站 18+）",
     "kaotic_video": "Kaotic（kaotic.com，事故/暴力/战争类真实事件影像站，含血腥与致死画面；非成人站但内容极端，按 18+ 归档）",
     "niacg_video": "逆次元ACG（发布页 02.uno → www.niacg.com，里番/3D/同人/会员视频成人向 ACG 站，全站 18+）",
-    "xnovel_audiobook": "夜读小说（x-novel.com，成人小说站的有声小说标签页 /tag/audio，全站 18+；音频来自 upload.xchina.io）"
+    "xnovel_audiobook": "夜读小说（x-novel.com，成人小说站的有声小说标签页 /tag/audio，全站 18+；音频来自 upload.xchina.io）",
+    "rmtt2_comic": "肉漫天堂（rmtt2.com，韩漫/日漫/3D 成人漫画站，全站 18+；与 X漫/18禁漫同一套 MacCMS conch 模板）",
+    "drmh5_comic": "大人漫画（drmh5.com，禁漫色漫肉漫成人漫画站，全站 18+）",
+    "nhentai_comic": "nhentai（nhentai.net，英文同人志站，全站 18+；站方对 lolicon 类作品自行屏蔽）",
+    "manhua96_comic": "96漫画（96manhua.com，中文漫画站，含成人向分区，按 18+ 归档）",
+    "qqhanman_comic": "七七韩漫（qqhanman.com，韩漫成人漫画站，全站 18+）"
   }
 }
