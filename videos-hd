@@ -1,0 +1,22 @@
+# 视频 / 影视综合（苹果CMS 系 · 7 站）
+#
+# 播剧网（ysxq.cc）、A123TV、饭搭子影视（fdzys）、飞流视频（flixflop）、
+# 短剧网（duanju2）、欧乐影院（olehdtv）、华视影院（huavod）
+#
+# 环境提示（来自实测，不是猜的）：
+#   · 欧乐影院 / 华视影院 在国内直连会被源站 WAF 拦成 403 —— 需要在「源设置 → 网络」
+#     里给这两个源单独配代理；脚本在 403 时会抛 NEED_WEBVIEW_VERIFY，也可以走 App
+#     的网页视图过一次人机校验。
+#   · 华视影院的播放地址是源站的 P2P 频道（直连 403），所以它返回 webplayer，
+#     由 App 内置网页播放器播放；其余 6 个源都是 m3u8 直链。
+#   · 飞流视频站内搜索是 Server Action（POST），没有可脚本化的 GET 路由，故不支持搜索；
+#     分类浏览 / 详情 / 播放均正常。
+#
+# 每个文件都是单文件源脚本（`// LumeSource: {...}` 身份头），也可以单独下载导入。
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/播剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/A123TV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/饭搭子影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/飞流视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/短剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/欧乐影院.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/华视影院.js
