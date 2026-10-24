@@ -178,6 +178,15 @@
     },
     "boysyo_comic": {
       "rating": "18+"
+    },
+    "manhua90_comic": {
+      "rating": "18+"
+    },
+    "antbyw_comic": {
+      "rating": "18+"
+    },
+    "papalah_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -226,6 +235,9 @@
     "lxxlxx_video": "LXXLXX（zhs.lxxlxx.com，繁中成人短片站，全站 18+；本机出口探到播放源 404，故走 webplayer 兜底）",
     "kxmanhua1_comic": "开心看漫画（kxmanhua1.com，H 韩漫/日漫/3D 漫画站，全站 18+）",
     "fuzhaiboylove_comic": "腐宅BoyLove（fuzhaiboylove.work / boylove.cc，BL 耽美成人漫画站，全站 18+）",
-    "boysyo_comic": "啵乐（boysyo.cc，BL 耽美成人漫画站，全站 18+）"
+    "boysyo_comic": "啵乐（boysyo.cc，BL 耽美成人漫画站，全站 18+）",
+    "manhua90_comic": "90漫画（90mh.cc，日本漫画站，含成人向作品；按 18+ 归档）",
+    "antbyw_comic": "蚂蚁搬运网（antbyw.com，Discuz jameson_manhua 漫画站，含成人向作品；按 18+ 归档）",
+    "papalah_video": "啪啪啦（papalah.com，繁中成人视频站，全站 18+）"
   }
 }

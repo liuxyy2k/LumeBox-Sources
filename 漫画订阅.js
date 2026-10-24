@@ -46,3 +46,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱韩�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/开心看漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/腐宅BoyLove.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/啵乐.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/90漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/蚂蚁搬运.js
