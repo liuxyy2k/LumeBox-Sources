@@ -41,3 +41,10 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ZooSexFa
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AboutPorno.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Kaotic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/逆次元ACG.js
+
+# 2026-10 新增：夜读小说听书（x-novel.com 的有声小说标签页 /tag/audio）
+#   · 章节页 <audio src="https://upload.xchina.io/mp3/{书号}/{章序}.mp3"> 是直链音频（206 audio/mpeg，无签名），
+#     脚本返回 kind:'audio'，用视频板块的播放器听；没有配音的普通小说回落到 kind:'text' 正文。
+#   · 站内搜索 /search?q=、列表 /tag/audio[/{页}]（含 sort=hot|rating|comment|words）、全部 /novels[/{页}]。
+#   · 站点在 Cloudflare 后面，直连吃 WAF 时请给本源配代理或走一次网页视图。
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js

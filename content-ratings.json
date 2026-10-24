@@ -97,6 +97,9 @@
     },
     "niacg_video": {
       "rating": "18+"
+    },
+    "xnovel_audiobook": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -118,6 +121,7 @@
     "zoosexfarm_video": "Zoo Sex Farm（zoosexfarm.com，兽交题材成人视频站，全站 18+；站点标题/描述即自述为 zoo sex / beastiality porno）",
     "aboutporno_video": "About Porno（aboutporno.net，兽交题材成人视频站，与 Zoo Sex Farm 同一套模板，全站 18+）",
     "kaotic_video": "Kaotic（kaotic.com，事故/暴力/战争类真实事件影像站，含血腥与致死画面；非成人站但内容极端，按 18+ 归档）",
-    "niacg_video": "逆次元ACG（发布页 02.uno → www.niacg.com，里番/3D/同人/会员视频成人向 ACG 站，全站 18+）"
+    "niacg_video": "逆次元ACG（发布页 02.uno → www.niacg.com，里番/3D/同人/会员视频成人向 ACG 站，全站 18+）",
+    "xnovel_audiobook": "夜读小说（x-novel.com，成人小说站的有声小说标签页 /tag/audio，全站 18+；音频来自 upload.xchina.io）"
   }
 }
