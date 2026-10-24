@@ -31,3 +31,10 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/大人�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/nhentai.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/96漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/七七韩漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/H漫黄漫天堂.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/禁漫岛.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/禁漫大王.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/龙禁漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/妖精漫画.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/紳士漫畫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/127漫画.js

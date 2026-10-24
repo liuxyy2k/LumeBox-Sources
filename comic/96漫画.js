@@ -13,8 +13,9 @@
 // ## 抓取口径（全部对着实时页面 + 站点自己的 JS 核过，2026-10 实测）
 //
 //   首页    GET /
-//           `div.floor` 板块：`h2.title > a[href]` 是「更多」（顺带带第一个 span 当板块名），
-//           板块内 `ul > li.comic-item > a[href=DETAIL_PREFIX…]`，封面只在
+//           `div.floor` / `div.floor dj` 板块（`div.floor-view` 是板块内部容器，不是板块起点）：
+//           `h2.title > a[href]` 是「更多」（顺带带第一个 span 当板块名），板块内
+//           `ul > li.comic-item > a[href=DETAIL_PREFIX…]`，封面只在
 //           `img[data-src]`（`src` 是 base64 占位图，读了就是一张灰图），
 //           标题 `p.comic-name`、副标题 `p.comic-tip`（首页放「最新话」）。
 //           顶部轮播 `div.banner > div.swiper-slide > a > img[data-src][alt]` 也是一块
@@ -45,7 +46,7 @@
 //           作者 `作者：xxx`、状态 `og:novel:status`、分类 `p.comic-tags`。
 //   目录    就在详情页里（单页、完整、旧→新，站点没有单独的目录地址）：
 //           `li.chapter-item.id-{章节id} > a[href=/chapter/…]`。
-//           大长篇实测 1321 条链接（127 那份）在同一个页面里，不翻页。
+//           大长篇实测同一个页面里 2200+ 条链接（最长那部 2261 话），不翻页。
 //   正文    GET /chapter/{作品id}_{章节id}.html（127：/chapter/{章节id}）
 //           `ul.comic-list > li.comic-page > img[src]` 就是整话（下拉式、不翻页）。
 //           只认 li.comic-page 里的图：页面里还混着 /js/chapter1.js 之类的广告脚本块，
@@ -56,7 +57,7 @@
 // 1. **别把列表交给 HTML 分类页**：/category/finish/1 首屏只渲染 10 条，第 2 页起
 //    只有 `comic.category()` 的 AJAX（`index.php/api/data/comic?type=…&page=2`），
 //    所以 list() 一开始就打接口。HTML 只留作接口挂掉时的第 1 页兜底。
-// 2. **分类页首屏条数**跟接口不一致（首屏 10 条 + 1 条重复），别用首屏条数推分页。
+// 2. **分类页首屏条数**跟接口不一致（首屏 10–11 条、顺序也不总一样），别用首屏条数推分页。
 // 3. **封面只在 data-src**，`src` 是 `data:image/gif;base64,…` 占位图；
 //    首页「新作尝鲜」那块现在挂着站方自己的测试条目（zzqo1047m18 之类），
 //    那是站点数据，不是解析错了。
@@ -191,12 +192,18 @@ var LumeSource = {
   /// 目录：详情页里的 `li.chapter-item.id-{章节id} > a`，单页完整、旧→新。
   /// 章节 id 存**完整章节地址**（96 的形状 /chapter/{作品}_{章节}.html 只有详情页知道），
   /// content() 拿到就能直接取，不再拼一次。
+  /// 站点自己也会挂出「待浏览/待更新」的空目录（详情页有 catalog-box 但 ul 是空的，
+  /// 接口里 chapter_nums=0），这种作品返回空数组，不当成解析失败。
   async chapters(argument) {
     var url = this.__detailUrl(this.__idOf(argument));
     if (!url) throw new Error('96漫画：认不出的作品地址（id 应当来自 list()/detail()）');
     var html = await this.__get(url);
     var chapters = this.__chapterItems(html);
     if (!chapters.length) {
+      if (this.__hasEmptyCatalog(html)) {
+        console.warn('[96] 这部作品站点还没有章节（目录为空）：' + url);
+        return [];
+      }
       throw new Error('96漫画：目录没认出章节链接（' + url + '）——把运行日志发回来收敛解析规则');
     }
     console.warn('[96] 目录 ' + chapters.length + ' 话：' + url);
@@ -548,7 +555,8 @@ var LumeSource = {
     return '';
   },
 
-  /// `p.comic-tags` 里混着热度（「73.4 万」）与分类，热度靠「万/亿」尾巴剔掉。
+  /// `p.comic-tags` 里混着热度（「73.4 万」）与分类：纯数字与「万/亿/次」尾巴都剔掉，
+  /// 剩下才是分类名。
   __tagList(area) {
     var text = this.__textOfClass(area, 'comic-tags');
     if (!text) return [];
@@ -556,10 +564,18 @@ var LumeSource = {
     var tags = [];
     for (var i = 0; i < parts.length && tags.length < 8; i++) {
       var token = parts[i];
-      if (!token || /[万亿]$/.test(token)) continue;
+      if (!token) continue;
+      if (/^[\d.,]+$/.test(token)) continue;
+      if (/[万亿次]$/.test(token)) continue;
       if (tags.indexOf(token) < 0) tags.push(token);
     }
     return tags;
+  },
+
+  /// 详情页有 `catalog-box`（章节容器）但目录 ul 是空的 —— 站点自己就没排章节。
+  __hasEmptyCatalog(html) {
+    if (html.indexOf('catalog-box') < 0) return false;
+    return /class="catalog-list"[\s\S]{0,400}?<ul[^>]*>\s*<\/ul>/.test(html);
   },
 
   /// 目录：`li.chapter-item … <a href="/chapter/…">标题</a>`，旧→新，保持站点顺序
@@ -806,13 +822,23 @@ var LumeSource = {
   },
 
   /// 去标签 + 解实体 + 压空白（只给展示用的少量文本调用）。
+  /// 站点个别标题里塞的是数字实体（`&#40C107&#41Raikou`），一起解掉。
   __plain(text) {
     var value = String(text == null ? '' : text);
     if (value.indexOf('<') >= 0) value = value.replace(/<[^>]*>/g, ' ');
     value = value.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
       .replace(/&hellip;/g, '…').replace(/&mdash;/g, '—').replace(/&ldquo;/g, '“')
-      .replace(/&rdquo;/g, '”').replace(/&middot;/g, '·');
+      .replace(/&rdquo;/g, '”').replace(/&middot;/g, '·')
+      .replace(/&#[xX]([0-9a-fA-F]{1,6});?/g, function (all, hex) {
+        var code = parseInt(hex, 16);
+        return code > 0 && code < 1114112 ? String.fromCharCode(code) : all;
+      })
+      // 站点有把实体写残的（`&#40C107&#41`，没有分号），按浏览器的读法解到数字为止。
+      .replace(/&#(\d{1,6});?/g, function (all, dec) {
+        var code = Number(dec);
+        return code > 0 && code < 1114112 ? String.fromCharCode(code) : all;
+      });
     return value.replace(/\s+/g, ' ').trim();
   }
 };

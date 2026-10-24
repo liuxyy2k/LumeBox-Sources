@@ -73,10 +73,16 @@
 // 3. **懒加载属性名三套**：data-lazy-src（default2）、data-src（default7）、个别老页面
 //    data-original。三个按优先级全试，逐张校验（排除 .svg / image-failed / logo / icon）。
 //
-// 图片域 images.manhuatupian.sbs 与 /comic/media 实测**需要 Referer**（本源所有请求都带
-// `<站点>/`，content() 的 headers 也原样回给 App）。站点前面有 Cloudflare，普通 GET 没有
-// 挑战页（实时页无 __cf_chl / challenge-platform 痕迹）；真被拦时按 NEED_WEBVIEW_VERIFY
-// 抛出，让 App 拉起网页视图过一次校验。
+// 图片域 images.manhuatupian.sbs 与 /comic/media 实测**不需要 Referer**（带不带都回
+// 206 + image/jpeg，2026-10-25 两站各验过一次）；本源还是照浏览器习惯带上 `<站点>/`，
+// content() 也把同一份 headers 回给 App（多带不亏）。
+//
+// 站点前面有 Cloudflare，但普通 GET 没有挑战页：实时页里**有**
+// `/cdn-cgi/challenge-platform/scripts/jsd/main.js`（CF 的 JS 探测，正常页也有，
+// 见页尾那段 `window.__CF$cv$params`），所以**不能拿 challenge-platform 当拦截判据**
+// （照抄会 200 也误判成挑战页）。本源只在「标题是 Just a moment / cf-error-details /
+// cf-browser-verification / __cf_chl_opt」时才抛 NEED_WEBVIEW_VERIFY，让 App 拉起
+// 网页视图过一次校验。
 
 var BASE_URL = 'https://www.qqhanman.com';
 var SITE_NAME = '七七韩漫';
@@ -321,25 +327,25 @@ var LumeSource = {
   ///   default7：<button form="filter-Id-1">肉慾</button> + <form id="filter-Id-1"> 里两个 hidden
   /// 只取 Id 组（filter-Id-*，以及 chip 里带 Id= 的），状态/排序组不进分类。
   __genres(html) {
-    var area = this.__firstRow(this.__panel(html));
-    if (!area) return [];
+    var panel = this.__panel(html);
+    if (!panel) return [];
+    var row = this.__firstRow(panel);
     var found = [];
     var seen = {};
-    var i;
     // default2：带 href 的 chip
     var at = 0;
     var scanned = 0;
     while (at >= 0 && found.length < 60) {
-      at = area.indexOf('class="chip', at);
+      at = row.indexOf('class="chip', at);
       if (at < 0) break;
       if (++scanned > 80) break;
-      var open = area.indexOf('<a', at >= 12 ? at - 12 : 0);
-      var tagEnd = area.indexOf('>', at);
+      var open = row.lastIndexOf('<a', at);
+      var tagEnd = row.indexOf('>', at);
       if (open < 0 || tagEnd < 0) { at = tagEnd + 1; continue; }
-      var tag = area.slice(open, tagEnd + 1);
+      var tag = row.slice(open, tagEnd + 1);
       var href = this.__attr(tag, 'href');
-      var closeAt = area.indexOf('</a>', tagEnd);
-      var label = this.__cut(this.__text(area.slice(tagEnd + 1, closeAt > tagEnd ? closeAt : tagEnd + 60)), 16);
+      var closeAt = row.indexOf('</a>', tagEnd);
+      var label = this.__cut(this.__text(row.slice(tagEnd + 1, closeAt > tagEnd ? closeAt : tagEnd + 60)), 16);
       var path = this.__listPath(href);
       if (path && label && !seen[path]) {
         seen[path] = true;
@@ -348,45 +354,22 @@ var LumeSource = {
       at = tagEnd + 1;
     }
     if (found.length) return found;
-    // default7：button + 隐藏表单
-    var forms = {};
-    var fAt = 0;
-    var fScanned = 0;
-    while (fAt >= 0 && fScanned < 120) {
-      fAt = area.indexOf('<form', fAt);
-      if (fAt < 0) break;
-      fScanned++;
-      var fEnd = area.indexOf('</form>', fAt);
-      var formTag = area.slice(fAt, area.indexOf('>', fAt) + 1);
-      var formId = this.__attr(formTag, 'id');
-      var query = '';
-      var inputAt = fAt;
-      while (inputAt >= 0 && inputAt < (fEnd < 0 ? area.length : fEnd)) {
-        inputAt = area.indexOf('<input', inputAt);
-        if (inputAt < 0 || (fEnd >= 0 && inputAt > fEnd)) break;
-        var inputEnd = area.indexOf('>', inputAt);
-        if (inputEnd < 0) break;
-        var inputTag = area.slice(inputAt, inputEnd + 1);
-        var name = this.__attr(inputTag, 'name');
-        var value = this.__attr(inputTag, 'value');
-        if (name) query += (query ? '&' : '') + name + '=' + this.__encode(value);
-        inputAt = inputEnd + 1;
-      }
-      if (formId && query) forms[formId] = query;
-      fAt = fEnd > fAt ? fEnd + 7 : fAt + 6;
-    }
+    // default7：<button form="filter-Id-N">名称</button> + 一堆隐藏表单。
+    // 隐藏表单在 **`</section>` 之后**（不在筛选面板里，实测 panel 到 27279、第一个
+    // filter-Id-0 表单在 27320），所以表单从整页抽、按钮从第一排抽。
+    var forms = this.__forms(html);
     var bAt = 0;
     var bScanned = 0;
     while (bAt >= 0 && found.length < 60) {
-      bAt = area.indexOf('<button', bAt);
+      bAt = row.indexOf('<button', bAt);
       if (bAt < 0) break;
       if (++bScanned > 120) break;
-      var bEnd = area.indexOf('>', bAt);
+      var bEnd = row.indexOf('>', bAt);
       if (bEnd < 0) break;
-      var bTag = area.slice(bAt, bEnd + 1);
+      var bTag = row.slice(bAt, bEnd + 1);
       var target = this.__attr(bTag, 'form');
-      var close = area.indexOf('</button>', bEnd);
-      var text = this.__cut(this.__text(area.slice(bEnd + 1, close < 0 ? bEnd + 200 : close)), 16);
+      var close = row.indexOf('</button>', bEnd);
+      var text = this.__cut(this.__text(row.slice(bEnd + 1, close < 0 ? bEnd + 200 : close)), 16);
       if (target && forms[target] && text && target.indexOf('filter-Id-') === 0) {
         var built = '/category?' + forms[target];
         if (!seen[built]) {
@@ -397,6 +380,41 @@ var LumeSource = {
       bAt = bEnd + 1;
     }
     return found;
+  },
+
+  /// `id="…"` 的隐藏表单 → 查询串（`Id=20&order_by=view`）。
+  __forms(area) {
+    var forms = {};
+    var at = 0;
+    var scanned = 0;
+    while (at >= 0 && scanned < 120) {
+      at = area.indexOf('<form', at);
+      if (at < 0) break;
+      scanned++;
+      var bodyStart = area.indexOf('>', at);
+      if (bodyStart < 0) break;
+      var formId = this.__attr(area.slice(at, bodyStart + 1), 'id');
+      var end = area.indexOf('</form>', bodyStart);
+      if (end < 0) end = Math.min(area.length, bodyStart + 4000);
+      var query = '';
+      if (formId) {
+        var inputAt = bodyStart;
+        while (inputAt >= 0 && inputAt < end) {
+          inputAt = area.indexOf('<input', inputAt);
+          if (inputAt < 0 || inputAt > end) break;
+          var inputEnd = area.indexOf('>', inputAt);
+          if (inputEnd < 0) break;
+          var inputTag = area.slice(inputAt, inputEnd + 1);
+          var name = this.__attr(inputTag, 'name');
+          var value = this.__attr(inputTag, 'value');
+          if (name) query += (query ? '&' : '') + name + '=' + this.__encode(value);
+          inputAt = inputEnd + 1;
+        }
+        if (query) forms[formId] = query;
+      }
+      at = end + 7;
+    }
+    return forms;
   },
 
   /// 筛选面板本体（`<section class="filter-panel"` 到它自己的 </section>）。
@@ -833,11 +851,16 @@ var LumeSource = {
     return this.__cut(rest, 40);
   },
 
-  /// 排序：站点是新→旧。话数唯一且都有 → 按话数升序；否则整体反转站点顺序
-  /// （保证 index 0 是第 1 话）；话数有重复（第二季/重制）就退回站点顺序不动。
+  /// 排序：站点自己的顺序是**新→旧**，但并非严格按话数（实测《秘密教学》240 话的
+  /// 末尾是「…第226話、第2話、第225話、第1話」这种倒挂，另夹着 4 条
+  /// 「休刊公告 / 停刊一周公告」这类没有话数的条目）。所以：
+  ///   · 话数齐全且不重复 → 按话数升序，没有话数的公告排到末尾（读正文用不到它们）；
+  ///   · 有重复话数（第二季/重制）→ 话数不是全序，整体退回站点顺序不动；
+  ///   · 一条话数都认不出 → 反转站点顺序（让 index 0 落在最早的一话）。
   __order(rows) {
     var i;
     var numbered = [];
+    var bare = [];
     var counts = {};
     var duplicated = false;
     for (i = 0; i < rows.length; i++) {
@@ -845,15 +868,20 @@ var LumeSource = {
         if (counts[rows[i].number]) duplicated = true;
         counts[rows[i].number] = true;
         numbered.push(rows[i]);
+      } else {
+        bare.push(rows[i]);
       }
     }
-    var list = rows.slice();
-    if (!duplicated && numbered.length === rows.length && rows.length > 1) {
-      list.sort(function (a, b) {
+    var list = [];
+    if (!duplicated && numbered.length > 1 && numbered.length >= rows.length * 0.8) {
+      numbered.sort(function (a, b) {
         return a.number - b.number || a.order - b.order;
       });
+      list = numbered.concat(bare);
     } else if (!duplicated) {
-      list.reverse();
+      list = rows.slice().reverse();
+    } else {
+      list = rows.slice();
     }
     var out = [];
     for (i = 0; i < list.length; i++) out.push({ id: list[i].id, title: this.__chapterTitle(list[i]) });

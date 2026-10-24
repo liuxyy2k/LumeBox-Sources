@@ -115,6 +115,27 @@
     },
     "qqhanman_comic": {
       "rating": "18+"
+    },
+    "hman8_comic": {
+      "rating": "18+"
+    },
+    "jmd91_comic": {
+      "rating": "18+"
+    },
+    "jmdw8_comic": {
+      "rating": "18+"
+    },
+    "long91_comic": {
+      "rating": "18+"
+    },
+    "yaojinghanman_comic": {
+      "rating": "18+"
+    },
+    "wnacg_comic": {
+      "rating": "18+"
+    },
+    "manhua127_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -142,6 +163,13 @@
     "drmh5_comic": "大人漫画（drmh5.com，禁漫色漫肉漫成人漫画站，全站 18+）",
     "nhentai_comic": "nhentai（nhentai.net，英文同人志站，全站 18+；站方对 lolicon 类作品自行屏蔽）",
     "manhua96_comic": "96漫画（96manhua.com，中文漫画站，含成人向分区，按 18+ 归档）",
-    "qqhanman_comic": "七七韩漫（qqhanman.com，韩漫成人漫画站，全站 18+）"
+    "qqhanman_comic": "七七韩漫（qqhanman.com，韩漫成人漫画站，全站 18+）",
+    "hman8_comic": "H漫黄漫天堂（hman8.com，韩漫/日漫/3D 成人漫画站，全站 18+；conch 模板）",
+    "jmd91_comic": "禁漫岛（91jmd.com，韩漫日漫3D 成人漫画站，全站 18+）",
+    "jmdw8_comic": "禁漫大王（jmdw8.com，韩漫日漫3D 成人漫画站，全站 18+）",
+    "long91_comic": "龙禁漫（long91.com，禁漫类成人漫画站，全站 18+）",
+    "yaojinghanman_comic": "妖精漫画（yaojinghanman.com，韩国高清成人漫画站，全站 18+）",
+    "wnacg_comic": "紳士漫畫（wnacg.com，中文汉化本子站，全站 18+）",
+    "manhua127_comic": "127漫画（127manhua.com，中文漫画站，含成人向分区，按 18+ 归档）"
   }
 }
