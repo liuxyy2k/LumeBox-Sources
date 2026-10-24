@@ -26,3 +26,18 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/RedTube.
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Fcw.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/99jj38.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/85PO.js
+#
+# 2026-10 新增四个（全部 18+；内容自查记录见 content-ratings.json 的 evidence）：
+#   · Zoo Sex Farm（zoosexfarm.com）/ About Porno（aboutporno.net）—— 兽交题材静态站：
+#     详情页直接内嵌 mp4（302 到 st*.mediacnt.com），签名带时间戳，每次播放现取；
+#     两站都没有搜索、也没有能用的分类页（/top/ 是友链页，条目一律 410），只给「最新」翻页。
+#   · Kaotic（kaotic.com）—— 事故 / 暴力 / 战争一类**真实事件影像**（含血腥画面，不是成人站）：
+#     13 个分类 + 搜索 /mediaSearch/?search=，视频是 CDN 签名 mp4，图集条目直接出图片列表。
+#   · 逆次元ACG（发布页 02.uno → 实际站 www.niacg.com）—— 里番 / 3D / 同人 / 会员视频：
+#     DPlayer 多档 mp4（会员视频是 m3u8）。站点在 Cloudflare 后面，App 直连会被挑战，
+#     脚本会退到 App 的网页渲染，或让你在网页视图里过一次校验。
+# 四个源都要单独配代理（国内直连 TCP 不通）。
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ZooSexFarm.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AboutPorno.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Kaotic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/逆次元ACG.js
