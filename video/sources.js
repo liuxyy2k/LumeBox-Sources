@@ -21,3 +21,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamster
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/VoyeurHit.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/YouJizz.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/RedTube.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Fcw.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/99jj38.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/85PO.js
