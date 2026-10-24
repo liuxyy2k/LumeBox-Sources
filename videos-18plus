@@ -1,0 +1,17 @@
+# 视频 · 18+ / 成人向（单独一份，想看的自己加）
+#
+# 与 videos-hd 分开，是因为这份是成人内容：不想看的人不该在「影视综合」那一条里被动拿到。
+# 内容自查记录（做之前查过，不是无脑接站）：
+#   · 站方 RTA 标注 18+，题材为成人动画 / 番剧流派；
+#   · 它自带的 489 个标签（genre / theme / cast）里没有 loli / shota / child 这类
+#     未成年人形象标签；站内检索 shota、lolicon 均为 0 条，loli 只命中 1 部而其标签是
+#     OVAs / Creampie / Paizuri（即用词碰巧出现在简介里）。
+#
+# 环境提示：
+#   · Hentai2W 直连被 Cloudflare 拦，需要给这个源单独配代理（同欧乐 / 华视）。
+#   · 站点有年龄门，脚本会自动过一次（GET /age-gate → POST 带 XSRF → 拿 age_confirmed
+#     Cookie，缓存在源本地 6 小时），并把 Cookie 一起交给播放内核。
+#   · 播放地址按 episodeId 可预测：/stream/{id}/master.m3u8，实测 200 + #EXTM3U。
+#
+# 每个文件都是单文件源脚本（`// LumeSource: {...}` 身份头），也可以单独下载导入。
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js

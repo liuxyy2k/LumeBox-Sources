@@ -1,0 +1,5 @@
+# 视频 · 18+ / 成人向 · jsDelivr CDN 版（国内网络用这一份）
+#
+# 与 videos-18plus 内容相同，只把脚本地址换成 jsDelivr（raw.githubusercontent.com
+# 在国内常被重置）。代价：jsDelivr 对 @main 有缓存（最长约 12 小时）。
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Hentai2W.js
