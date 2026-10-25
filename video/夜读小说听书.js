@@ -22,7 +22,8 @@
 //   · 播放      /novel/{slug}/{n}?mode=audio → <audio id="audio-player" src="https://upload.xchina.io/mp3/{书号}/{n}.mp3">
 //               实测 206 + audio/mpeg，**带不带 Referer 都能播**、无签名无加密；
 //               路径按书号+章序可预测，但脚本仍以页面里的 <audio src> 为准（不猜）。
-//   · 没有配音的普通小说：章节页里没有 <audio>，脚本退成 kind:'text' 交正文（<article id="read-article"> 里的 <p>）。
+//   · 没有配音的普通小说：章节页里没有 <audio> → 直接报「这一章没有语音版」。App 没有文字小说阅读器，
+//     取文字过来是死数据，所以**不返回 kind:'text'**（2026-10-25 按用户口径改）。
 var BASE_URL = 'https://x-novel.com';
 var UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 

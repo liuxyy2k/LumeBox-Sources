@@ -20,7 +20,8 @@
 //       https://{随机}.db9bmbe.com:{port}/v/{hash}/m3u8/index.m3u8  （实测 200，多码率 500kb 子清单）
 //     但**主机名每次会话会变**，所以不拼地址，直接从渲染后的 DOM/脚本里取。
 //   · 小说：同一批 `/vd/{id}/` 里混着小说条目（渲染后 title 会是「小说列表 - 8x8x」），
-//     本源对这类条目返回 `kind:'text'`（站点正文在渲染后的正文容器里），图文类返回 `kind:'images'`，视频返回 `kind:'video'`。
+//     这种条目在本源里按**有声**处理：页面里找 mp3/m4a/aac/ogg → `kind:'audio'`（App 支持音频，没有文字小说阅读器，所以**绝不返回文字**）；
+//     找不到音频就退图片（>=3 张）或网页播放器。视频条目仍返回 `kind:'video'`。
 //   · 搜索：站点是 `/search/{关键词}/`（SPA 内部路由），本源不赌它的参数，keyword 走「渲染首页 + 本地过滤」。
 var DEFAULT_BASE = 'https://1azm0i.qcsw2b5yf.com';
 var MIRRORS = ['https://1azm0i.qcsw2b5yf.com', 'https://qnzu16v.u85772s4.com', 'https://97nasy.uy5qvb.com'];
