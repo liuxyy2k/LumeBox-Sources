@@ -238,6 +238,12 @@
     },
     "artofzoo_video": {
       "rating": "18+"
+    },
+    "jipian3_video": {
+      "rating": "18+"
+    },
+    "madou_club_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -246,7 +252,7 @@
     "xchina_amateur": "小黄书业余自拍（成人自拍图库）",
     "huangguo_video": "黄果剧场（AI 成人短剧，尺度分级标注在卡片上）",
     "litu100_comic": "丽图·污漫画（成人漫画）",
-    "jiuse91_video": "九色91Porny（91自拍 / 国产自拍成人视频站）",
+    "jiuse91_video": "91PORNY 九色（91porny.com，国产自拍/偷拍+麻豆/星空/天美/精东/兔子/蜜桃/SWAG 厂牌+日韩AV，全站 18+；必须带 Referer，否则回「非法请求」）",
     "jcomic_comic": "JComic（成人同人漫画站，站内分级明确）",
     "hstv_video": "好色TV（hstv.fun，成人视频站，全站 18+）",
     "porn91_video": "91Porn（91porn.com，成人自拍视频站，全站 18+）",
@@ -306,6 +312,8 @@
     "x8x8_video": "8x8x（随机跳板域，成人综合站：视频+小说+图库，全站 18+；列表由 AES-GCM 加密接口填充，源内用网页渲染，条目按形态返回 video/text/images）",
     "yunlaopo_video": "云老婆（yunlaopo.com，华人成人短视频平台，全站 18+；KVS 内核，播放串 …xxx.mp4/ 形式，Range 实测 206）",
     "hipeng_video": "嗨碰（scenicembrace 跳板域，成人短视频站，全站 18+；SSR 列表 + hlsdelivery 签名 m3u8）",
-    "artofzoo_video": "ArtOfZoo（artofzoo.com，zoo 题材成人影视品牌站/商店，全站 18+；商品+官方预告片 mp4，Range 实测 206）"
+    "artofzoo_video": "ArtOfZoo（artofzoo.com，zoo 题材成人影视品牌站/商店，全站 18+；商品+官方预告片 mp4，Range 实测 206）",
+    "jipian3_video": "三级片（3jipian.cc，港台/台湾/香港三级片+传媒原创+麻豆/糖心/果冻/天美/星空/蜜桃+网黄+日韩+欧美，全站 18+；__ARCHIVE_PLAYER__ 取 CloudFront m3u8，AES-128 密钥可取）",
+    "madou_club_video": "麻豆社（madou.club，聚合 30+ 国产厂牌：麻豆/91制片厂/果冻/天美/星空/皇家华人/兔子先生…，全站 18+；dash.madou.club 的 m3u8 用 100 秒 JWT，需现取现用）"
   }
 }
