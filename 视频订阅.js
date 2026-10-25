@@ -36,3 +36,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MyFreeCams.js
