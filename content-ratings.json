@@ -247,6 +247,15 @@
     },
     "sex8_video": {
       "rating": "18+"
+    },
+    "familyporn_video": {
+      "rating": "18+"
+    },
+    "asm_video": {
+      "rating": "18+"
+    },
+    "maturenl_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -318,6 +327,9 @@
     "artofzoo_video": "ArtOfZoo（artofzoo.com，zoo 题材成人影视品牌站/商店，全站 18+；商品+官方预告片 mp4，Range 实测 206）",
     "jipian3_video": "三级片（3jipian.cc，港台/台湾/香港三级片+传媒原创+麻豆/糖心/果冻/天美/星空/蜜桃+网黄+日韩+欧美，全站 18+；__ARCHIVE_PLAYER__ 取 CloudFront m3u8，AES-128 密钥可取）",
     "madou_club_video": "麻豆社（madou.club，聚合 30+ 国产厂牌：麻豆/91制片厂/果冻/天美/星空/皇家华人/兔子先生…，全站 18+；dash.madou.club 的 m3u8 用 100 秒 JWT，需现取现用）",
-    "sex8_video": "杏吧/性吧（sex8.cc，Discuz 华语成人社区，65 个内容专版：樱花小猫/伍貳柒捌/粉墨人生/玩偶姐姐/刘玥/原创乱倫大神…，全站 18+；游客可直接取帖子内嵌 m3u8）"
+    "sex8_video": "杏吧/性吧（sex8.cc，Discuz 华语成人社区，65 个内容专版：樱花小猫/伍貳柒捌/粉墨人生/玩偶姐姐/刘玥/原创乱倫大神…，全站 18+；游客可直接取帖子内嵌 m3u8）",
+    "familyporn_video": "Familyporn.tv（英文 taboo/step- 免费 tube，KVS；部分视频 video_url 指向付费墙、event_reporting2 是统计像素，源内用 Range 验 content-type 后才返回）",
+    "asm_video": "Asian Street Meat（asianstreetmeat.com，东南亚街头题材付费站，公开 214 个现场官方 trailer，cdn.streetmeatasia.com 直链 200 video/mp4）",
+    "maturenl_video": "Mature.nl（熟女/年长题材会员库，更新页公开 trailer_soft.mp4，CDN 签名带 validfrom/validto 时间窗）"
   }
 }

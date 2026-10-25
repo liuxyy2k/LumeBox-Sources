@@ -47,3 +47,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/三级�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91PORNY九色.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆社.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/杏吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Familyporn.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AsianStreetMeat.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureNL.js
