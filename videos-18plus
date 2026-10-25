@@ -31,6 +31,19 @@
 #     匿名设备登录就能拿 JWT（不用注册），列表/搜索/详情全通，**免费条目是整片 m3u8**；
 #     但金币/VIP 条目 `playPolicy.result=PREVIEW` —— 服务端只发 15 秒试看（这段锁在服务端，破不了）。
 #     hstv.fun 那套 Angular 壳的 `/js` RPC 被 WAF 按 IP 全挡，没接。
+# ── 第三批（2026-10-25 夜）新增四源：
+#   · 9sex（9sex.com）：ThinkPHP 站；`/index/movie/info.html?id=` 给 hls 地址，
+#     必须同时带 Accept + Accept-Language + X-Requested-With（少一个就 500/回 HTML）。
+#     VIP 片服务端回「请先登录」不给地址 → 免费片照播、VIP 片抛可读错误。**需代理**。
+#     分类「可爱萝莉」不接、列表层按标题剔除。
+#   · 快猫镜像站（mwx43zd.xyz）：快猫同族 UI 但**不同后端**（ThinkPHP + AES-128-CBC hex 密文 +
+#     md5(升序query+salt) 签名）；免费片匿名整片 m3u8；付费/VIP/搜索都是服务端 401 门禁（不伪造）。
+#     镜像 4dxzevb.xyz（同一 bundle + 官方地址接口指向它）。
+#   · 月色视频（ys.ph3ywdns.icu）：**Flutter Web 其实有 REST 接口**（dart2js 里明文常量，
+#     AES-128-CBC key=IV=LqzCOd16vnYhOHTz）；`videos/switch_line` 绕开 detail 的按 IP 游客配额，
+#     匿名拿整片 HLS（164 段/1638.9s 与 duration 吻合）。直连可用。
+#   · 海角（haijiao.com）：接口三重 Base64 解码；**播放地址只对登录态下发**（匿名 url 恒空），
+#     需在「源设置 → 账号登入」填账号密码（signin 不需验证码）。元数据/搜索全通。**需代理**。
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
@@ -38,3 +51,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好妻�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/41看片.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/SpankBang.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HSTV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/9sex.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫镜像站.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js
