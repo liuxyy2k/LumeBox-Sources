@@ -187,6 +187,18 @@
     },
     "papalah_video": {
       "rating": "18+"
+    },
+    "xtube_video": {
+      "rating": "18+"
+    },
+    "aqd_video": {
+      "rating": "18+"
+    },
+    "ikanmanhua_comic": {
+      "rating": "18+"
+    },
+    "pica177_comic": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -238,6 +250,10 @@
     "boysyo_comic": "啵乐（boysyo.cc，BL 耽美成人漫画站，全站 18+）",
     "manhua90_comic": "90漫画（90mh.cc，日本漫画站，含成人向作品；按 18+ 归档）",
     "antbyw_comic": "蚂蚁搬运网（antbyw.com，Discuz jameson_manhua 漫画站，含成人向作品；按 18+ 归档）",
-    "papalah_video": "啪啪啦（papalah.com，繁中成人视频站，全站 18+）"
+    "papalah_video": "啪啪啦（papalah.com，繁中成人视频站，全站 18+）",
+    "xtube_video": "XTUBE（zh.xtube.com，成人直播/视频站，全站 18+；doppiocdn HLS 直链）",
+    "aqd_video": "爱情岛（38.148.206.8 站群，成人视频站，全站 18+；页面是 crypt_html_js 混淆，脚本内置解码）",
+    "ikanmanhua_comic": "愛看漫畫（ikanmanhua.org，成人 H 漫画站，全站 18+）",
+    "pica177_comic": "177漫畫（177pica.com，日文/中文成人 H 漫画与全彩 CG 站，全站 18+）"
   }
 }

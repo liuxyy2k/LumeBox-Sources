@@ -48,3 +48,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/腐宅Bo
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/啵乐.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/90漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/蚂蚁搬运.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/愛看漫畫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/177漫畫.js

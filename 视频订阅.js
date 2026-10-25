@@ -25,3 +25,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamster
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Chaturbetter.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/LXXLXX.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/啪啪啦.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XTUBE.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱情岛.js
