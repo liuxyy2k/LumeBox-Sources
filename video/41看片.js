@@ -1,8 +1,12 @@
-// LumeSource: {"id":"xfdxv_video","name":"41看片","version":"1.0.0","category":"video","mirrors":["https://xfdxv.414459.lifestyle:8283"]}
+// LumeSource: {"id":"xfdxv_video","name":"41看片","version":"1.0.0","category":"video","mirrors":["https://xfdxv.414459.lifestyle:8283","https://hljhv.412426.lifestyle:8283"]}
 //
 // 站点：https://xfdxv.414459.lifestyle:8283/ （2026-10-25 逐接口实测）
 //   壳域名：https://www.543786.com:8283/ 与 https://542372.com/ 只做 atob 跳转，本身没有内容/接口，
 //   所以 mirrors 只放最终站；它们不参与拼接接口。
+//   同站镜像（2026-10-25 实测）：https://hljhv.412426.lifestyle:8283/home?channel=fb-41
+//     —— 解它的 window.CONFIG（同一把 Fernet key）得到
+//        site_name="41看片"、api_url="sm-api.wieuc.com"、site_id=6、channel_name="fb-41"
+//     与主域完全一致，只是换了个分发域名/通道号，所以并进 mirrors。
 //
 // ── 站点内核：React SPA（create-react-app + antd-mobile）
 //   · 首页 <body></body> 是空的，18KB HTML 里只有：
