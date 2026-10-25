@@ -160,6 +160,18 @@ async function getInfo(videoId) {
   return payload || {};
 }
 
+/// 封面：站点封面是 `*.webp.txt`，内容是 **AES-128-CBC 密文**（key=625222f9149e961d，iv=5efdtf6060e2o330），
+/// 站点自己的 SEXCRYPTO.decrypt 解出来是 `data:png;base64,...` 的内联图。
+/// 在 JS 沙箱里解一张要一次请求 + 一次 AES，列表 20 条会撞穿预算 ⇒ 交给 App 图片管线：
+/// 写成 `lume-enc://aes-cbc/<base64url(key)>/<base64url(iv)>/<原地址>`，由原生 AES 解。
+var S9_KEY = 'NjI1MjIyZjkxNDllOTYxZA==';
+var S9_IV = 'NWVmZHRmNjA2MGUybzMzMA==';
+function coverOf(url) {
+  var value = String(url || '');
+  if (!/\.txt(\?|$)/i.test(value)) return value;
+  return 'lume-enc://aes-cbc/' + S9_KEY + '/' + S9_IV + '/' + value;
+}
+
 /// 列表卡片解析：VIP 角标 → 排在后面并打标签（免费片优先，匿名就能播）。
 /// 标题命中 BANNED 的条目（未成年指向）**在列表层就剔除**，不靠分类来挡——
 /// 这些片子也会混进热门/最新流里，只过滤分类是不够的。
@@ -176,7 +188,9 @@ function parseItems(html) {
     seen[id] = 1;
     var block = html.slice(matched.index, matched.index + 1200);
     var vip = /class="icon-free"[^>]*>\s*VIP/i.test(block) || /class="vip-icon"/i.test(block);
-    items.push({ id: id, title: title, cover: '', vip: vip, subtitle: vip ? 'VIP（需登录）' : '' });
+    var img = /<img[^>]+(?:data-src|data-original|src)="([^"]+)"/i.exec(block);
+    var cover = img ? coverOf(abs(img[1])) : '';
+    items.push({ id: id, title: title, cover: cover, vip: vip, subtitle: vip ? 'VIP（需登录）' : '' });
   }
   // 免费优先：VIP 片匿名拿不到地址，排在后面，用户先点到的都是能直接播的。
   var free = [];
