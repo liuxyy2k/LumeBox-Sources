@@ -307,6 +307,51 @@
     },
     "cf3_video": {
       "rating": "18+"
+    },
+    "xman6_comic": {
+      "rating": "18+"
+    },
+    "bakamh_comic": {
+      "rating": "18+"
+    },
+    "relamanhua_comic": {
+      "rating": "18+"
+    },
+    "smtt6_comic": {
+      "rating": "18+"
+    },
+    "nnhanman_comic": {
+      "rating": "18+"
+    },
+    "p85_video": {
+      "rating": "18+"
+    },
+    "jj38_video": {
+      "rating": "18+"
+    },
+    "fcw_video": {
+      "rating": "18+"
+    },
+    "redtube_video": {
+      "rating": "18+"
+    },
+    "voyeurhit_video": {
+      "rating": "18+"
+    },
+    "xhamster_video": {
+      "rating": "18+"
+    },
+    "xnxx_video": {
+      "rating": "18+"
+    },
+    "xvideos_video": {
+      "rating": "18+"
+    },
+    "youjizz_video": {
+      "rating": "18+"
+    },
+    "dage_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -384,6 +429,21 @@
     "maturenl_video": "Mature.nl（熟女/年长题材会员库，更新页公开 trailer_soft.mp4，CDN 签名带 validfrom/validto 时间窗）",
     "pornhub_video": "Pornhub（pornhub.com，全品类综合大站，全站 18+；mediaDefinitions 的 HLS 需带 Platform: pc 头才不再 410，实测 1080p master.m3u8 200）",
     "fakehub_video": "FakeHub（fakehub.com，PublicAgent/FakeTaxi 等品牌合集，全站 18+；场景页官方预览 mp4 实测 206/50MB。publicagent.com 本身只是落地页无片源）",
-    "txxx_video": "TXXX 网络（txxx.com / hclips.com / upornia.com / voyeurhit.com，同一套 Vue SPA+JSON API；覆盖综合排序与偷拍/隐藏摄像头分类，全站 18+；播放址解码后 302→ahcdn，Range 实测 206）"
+    "txxx_video": "TXXX 网络（txxx.com / hclips.com / upornia.com / voyeurhit.com，同一套 Vue SPA+JSON API；覆盖综合排序与偷拍/隐藏摄像头分类，全站 18+；播放址解码后 302→ahcdn，Range 实测 206）",
+    "xman6_comic": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "bakamh_comic": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "relamanhua_comic": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "smtt6_comic": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "nnhanman_comic": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "p85_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "jj38_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "fcw_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "redtube_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "voyeurhit_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "xhamster_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "xnxx_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "xvideos_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "youjizz_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。",
+    "dage_video": "2026-10-26 分级补标：已知成人站点或项目已有成人漫画/视频源；此标记同时供 APP 隐私隐藏使用，不表示已验证图标、封面或播放可用性。"
   }
 }
