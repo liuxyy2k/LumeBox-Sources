@@ -1,4 +1,5 @@
-// LumeSource: {"id":"porntrex_video","name":"PornTrex","version":"1.0.0","category":"video","mirrors":["https://www.porntrex.com"]}
+// LumeSource: {"id":"porntrex_video","name":"PornTrex","version":"1.0.0","category":"video","mirrors":["https://www.porntrex.com","https://porntrex.com"]}
+// 镜像：porntrex.com 会 302 到 www.porntrex.com
 
 // 站点：https://www.porntrex.com （KVS 内核，kt_player；2026-10-25 逐页实测，本机直连被封，验证走本机代理出口）
 //

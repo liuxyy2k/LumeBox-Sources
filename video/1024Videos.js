@@ -1,4 +1,5 @@
-// LumeSource: {"id":"v1024_video","name":"1024Videos","version":"1.0.0","category":"video","mirrors":["https://1024videos.com"]}
+// LumeSource: {"id":"v1024_video","name":"1024Videos","version":"1.0.0","category":"video","mirrors":["https://1024videos.com","https://www.1024videos.com"]}
+// 镜像：www 与裸域同一套 SPA 壳
 
 // 站点：https://1024videos.com （2026-10-25 逐页实测；本机直连被封，走本机代理出口）
 //

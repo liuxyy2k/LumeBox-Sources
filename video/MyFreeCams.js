@@ -1,4 +1,5 @@
-// LumeSource: {"id":"mfc_video","name":"MyFreeCams","version":"1.0.0","category":"video","mirrors":["https://www.myfreecams.com"]}
+// LumeSource: {"id":"mfc_video","name":"MyFreeCams","version":"1.0.0","category":"video","mirrors":["https://www.myfreecams.com","https://myfreecams.com"]}
+// 镜像：裸域 302 到 www；主播主页在 profiles.myfreecams.com（源内已固定）
 //
 // 站点：MyFreeCams（https://www.myfreecams.com，成人直播站，全站 18+）
 //

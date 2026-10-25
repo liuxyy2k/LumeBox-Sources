@@ -1,4 +1,5 @@
-// LumeSource: {"id":"kxmanhua1_comic","name":"开心看漫画","version":"1.0.0","category":"comic","mirrors":["https://kxmanhua1.com"]}
+// LumeSource: {"id":"kxmanhua1_comic","name":"开心看漫画","version":"1.0.0","category":"comic","mirrors":["https://kxmanhua1.com","https://kxmanhua.com"]}
+// 镜像：kxmanhua.com 同标题同站；kxkmh.xyz 只是地址发布页（不含内容，别加进 mirrors）
 
 // 站点：https://kxmanhua1.com（发布页 kxkmh.xyz 只是一个「最新地址」跳转页，
 // **不是镜像**：它返回的是 kxmanhua.com / kxmanhua1.com 的线路列表，没有漫画内容，

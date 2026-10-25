@@ -1,4 +1,5 @@
-// LumeSource: {"id":"hu4_video","name":"四虎","version":"1.0.0","category":"video","mirrors":["https://www.4hu.tv"]}
+// LumeSource: {"id":"hu4_video","name":"四虎","version":"1.0.0","category":"video","mirrors":["https://www.4hu.tv","https://4hu.tv"]}
+// 镜像：裸域与 www 同一桩页/同一 /home/
 //
 // 站点：4hu.tv（页面 <title> 是「鍥涜檸 - 4hu.tv」，UTF-8 被当 GBK 显示出来的乱码，真名就是**四虎**；
 // 不是「4虎」。所以 name 按真站名写成四虎。）

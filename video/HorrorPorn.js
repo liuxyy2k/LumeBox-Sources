@@ -1,4 +1,5 @@
-// LumeSource: {"id":"horrorporn_video","name":"HorrorPorn","version":"1.0.0","category":"video","mirrors":["https://horrorporn.com"]}
+// LumeSource: {"id":"horrorporn_video","name":"HorrorPorn","version":"1.0.0","category":"video","mirrors":["https://horrorporn.com","https://www.horrorporn.com"]}
+// 镜像：www.horrorporn.com 会 302 到裸域
 
 // 站点：https://horrorporn.com （hqmediago 网络下的恐怖题材成人片站；2026-10-25 逐页实测，走本机代理出口）
 //

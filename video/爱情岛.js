@@ -1,4 +1,5 @@
-// LumeSource: {"id":"aqd_video","name":"爱情岛","version":"1.0.0","category":"video","mirrors":["https://38.148.206.8:20955"]}
+// LumeSource: {"id":"aqd_video","name":"爱情岛","version":"1.0.0","category":"video","mirrors":["https://38.148.206.8:20955","http://38.148.206.8:30018"]}
+// 镜像：30018 端口所有路径 302 到 20955（同一台 nginx）
 //
 // 站点：爱情岛论坛 / AQDLT（aqd1.vip … 视频站本体「亚洲品质自拍视频网站」）
 //

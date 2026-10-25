@@ -1,4 +1,5 @@
-// LumeSource: {"id":"wnacg_comic","name":"紳士漫畫","version":"1.0.0","category":"comic","mirrors":["https://wnacg.com"]}
+// LumeSource: {"id":"wnacg_comic","name":"紳士漫畫","version":"1.0.0","category":"comic","mirrors":["https://wnacg.com","https://www.wnacg.com","https://m.wnacg.com"]}
+// 镜像：www 与 m 子域同站（m 会 302 到 www）
 
 // 站点：https://wnacg.com（移动版主题 themes/mo；UTF-8）
 //

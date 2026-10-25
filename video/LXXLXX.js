@@ -1,4 +1,5 @@
-// LumeSource: {"id":"lxxlxx_video","name":"LXXLXX","version":"1.0.0","category":"video","mirrors":["https://zhs.lxxlxx.com"]}
+// LumeSource: {"id":"lxxlxx_video","name":"LXXLXX","version":"1.0.0","category":"video","mirrors":["https://zhs.lxxlxx.com","https://www.lxxlxx.com"]}
+// 镜像：www.lxxlxx.com 是英文主站入口（繁中在 zhs 子域）
 
 // 站点：https://zhs.lxxlxx.com （繁中成人短片站，2026-10-25 逐页实测，走本机代理出口）
 //
