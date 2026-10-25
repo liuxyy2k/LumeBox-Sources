@@ -2,7 +2,14 @@
 //
 // 站点：https://spankbang.com （综合大 tube 站，全站 18+）
 //
-// ⚠️ 本脚本是「拿到内容就能用」的形态，但**内容抓取这一层在本机无法实测**，原因写清楚：
+// ⚠️ 纯 HTTP 客户端（宿主 LumeSource.http / Node fetch / curl）仍会 403，必须靠 App 网页视图过校验；
+//    但**解析规则不是猜的**：2026-10-25 用本机 Chrome（真实指纹 + 代理）过完 CF 后，
+//    用 CDP 抓了首页 `/`、列表页 `/trending_videos/`、详情页 `/a5d50/video/porn` 三份真实 HTML
+//    （878KB 详情页），列表 / 详情 / 播放三段规则都对着这三页写，并离线喂 HTML 跑通：
+//      列表 82 条、`hasMore=true`、标题/封面/时长/清晰度齐；
+//      详情 `og:title` / `og:image` / `og:video:duration`（7245 秒）；
+//      播放 `var stream_data = {…}` 里 `m3u8` → master（240p/480p/720p 三条），
+//           实测直连 200 + `application/vnd.apple.mpegurl`；`…-720p.mp4` 206 + video/mp4。
 //
 // ── 403 实测结论（2026-10-25，多组合验证过）
 //   · 直连（不带代理）：DNS 被劫持到 173.252.248.244，TCP 连不上，curl 回 000；
@@ -53,11 +60,12 @@ var DEFAULT_BASE = 'https://spankbang.com';
 var UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
 
-// 兜底分类：spankbang 的导航路径（/new_videos/ 等）。⚠️ 未实测，过完校验后应改成实时抓到的路径。
+// 分类：2026-10-25 用真 Chrome 过 CF 后抓到的首页导航，实测存在的频道只有这三条。
+// （旧写法里的 /trending/ 与 /most_popular/ 是错的，站内实际路径是 /trending_videos/）
 var FALLBACK_CATEGORIES = [
   { id: '/new_videos/', title: '最新' },
-  { id: '/trending/', title: '正在流行' },
-  { id: '/most_popular/', title: '最多观看' }
+  { id: '/trending_videos/', title: '正在流行' },
+  { id: '/upcoming/', title: '即将上线' }
 ];
 
 function base() {
@@ -138,56 +146,120 @@ function responseOf(reply, path) {
 
 async function getText(path, referer) {
   var url = /^https?:\/\//i.test(path) ? path : base() + (String(path).charAt(0) === '/' ? path : '/' + path);
-  var reply = await LumeSource.http.get(url, { headers: headers(referer) });
+  var reply;
+  try {
+    reply = await LumeSource.http.get(url, { headers: headers(referer) });
+  } catch (error) {
+    // 连 TCP 都没握上（DNS 被污染 / 直连被墙 / 代理没配）：给能行动的一句话，别把 TypeError 丢给用户
+    throw new Error(
+      'SpankBang：连不上站点（' + String((error && error.message) || error) + '）——' +
+        '请在「源设置 → 网络」里给本源配好代理，或先在「网页视图」里打开 https://spankbang.com 确认能访问'
+    );
+  }
   return responseOf(reply, url);
 }
 
-/// 列表页 → Item[]。不绑定具体 DOM：以 `/<vid>/video/<slug>` 锚点切块，再在块内找封面与时长。
+/// 列表页 → Item[]。**按 2026-10-25 用真实浏览器过 CF 后抓到的 HTML 写的**：
+///   卡片  <div data-testid="video-item" data-id="17046468" class=" js-video-item …">
+///   链接  <a href="/a5d50/video/porn" …>            ← short id + slug，slug 里可能有 `+` 或 `%xx`
+///   标题  <a href="/a5d50/video/porn" title="Image video"><span>…</span></a>   ← title 属性即标题
+///   封面  <img src="https://tbi.sb-cd.com/t/17046468/…/w:300/t6-enh/porn.jpg">
+///   时长  <div data-testid="video-item-length"> 120m </div>
+///   分页  <li class="next"><a href="/trending_videos/2/" data-page="2">
 function parseItems(html) {
+  var text = String(html);
   var items = [];
   var seen = {};
-  var text = String(html);
-  var anchor = /<a\b[^>]*href="(?:\/|https?:\/\/[^"]*?\/)([a-z0-9]{5,10})\/video\/([a-z0-9-]{2,120})"[^>]*>([\s\S]{0,400}?)<\/a>/gi;
-  var matched;
-  while ((matched = anchor.exec(text)) !== null) {
-    var videoId = matched[1];
-    if (seen[videoId]) continue;
-    var block = text.slice(matched.index, Math.min(text.length, matched.index + 1600));
-    var title = clean(matched[3]);
+  var marker = 'data-testid="video-item"';
+  var starts = [];
+  var cursor = text.indexOf(marker);
+  while (cursor >= 0) {
+    starts.push(cursor);
+    cursor = text.indexOf(marker, cursor + marker.length);
+  }
+  for (var i = 0; i < starts.length; i++) {
+    var block = text.slice(starts[i], i + 1 < starts.length ? starts[i + 1] : text.length);
+    var idMatch = /data-id="(\d+)"/i.exec(block);
+    var hrefMatch = /<a[^>]+href="(\/[^"]*?\/video\/[^"]*?)"[^>]*title="([^"]*)"/i.exec(block) ||
+      /<a[^>]+href="(\/[^"]*?\/video\/[^"]*?)"/i.exec(block);
+    if (!idMatch || !hrefMatch) continue;
+    var path = hrefMatch[1].replace(/^\/+|\/+$/g, '');
+    if (seen[path]) continue;
+    seen[path] = 1;
+    var title = hrefMatch[2] ? clean(hrefMatch[2]) : '';
     if (!title) {
-      var alt = /(?:alt|title)="([^"]{3,200})"/.exec(block);
+      var alt = /<img[^>]+alt="([^"]{2,200})"/i.exec(block);
       title = alt ? clean(alt[1]) : '';
     }
-    if (!title) title = matched[2].replace(/-/g, ' ');
-    var cover =
-      (/<img[^>]+(?:data-src|data-original|src)="([^"]+\.(?:jpe?g|png|webp)[^"]*)"/i.exec(block) || [])[1] || '';
-    var duration = (/<span[^>]*class="[^"]*(?:l-?time|duration|length)[^"]*"[^>]*>([^<]{2,12})</i.exec(block) || [])[1] || '';
-    seen[videoId] = 1;
+    if (!title) {
+      var slug = path.split('/video/')[1] || path;
+      title = decodeURIComponent(slug.replace(/\+/g, ' ')).replace(/-/g, ' ');
+    }
+    var cover = (/<img[^>]+src="([^"]+\.(?:jpe?g|png|webp)[^"]*)"/i.exec(block) || [])[1] || '';
+    var lengthMatch = /data-testid="video-item-length"[^>]*>\s*([^<]{1,12}?)\s*</i.exec(block);
+    var resMatch = /data-testid="video-item-resolution"[^>]*>\s*([^<]{1,8}?)\s*</i.exec(block);
+    var parts = [];
+    if (lengthMatch) parts.push(lengthMatch[1]);
+    if (resMatch) parts.push(resMatch[1]);
     items.push({
-      id: String(videoId) + '/video/' + matched[2],
+      id: path,
       title: title,
       cover: cover ? absolute(cover) : null,
-      subtitle: clean(duration)
+      subtitle: parts.join(' · ')
     });
   }
   return items;
 }
 
-/// 页面里找媒体地址：m3u8 优先，其次 mp4；覆盖 videoUrl / source src / og:video 三种内联形态
-function mediaOf(html) {
-  var text = String(html || '').replace(/\\\//g, '/');
-  var found = [];
-  var m3u8 = /(?:https?:)?\/\/[^"'\s<>\\]+\.m3u8[^"'\s<>\\]*/gi;
+/// 分页：`li.next` 存在即有下一页
+function hasNextPage(html) {
+  return /<li[^>]+class="[^"]*next[^"]*"[^>]*>\s*<a[^>]+href="/i.test(String(html));
+}
+
+/// 页面里找媒体地址。**2026-10-25 用真 Chrome 过 CF 抓到的详情页实测**：
+///   详情页内联  `var ana_video_id = '17046468'; var stream_data = {'240p': ['https://vdownload-49.sb-cd.com/…-240p.mp4?secure=…'],
+///                '320p': [], '480p': […], '720p': […], '1080p': [], '4k': [], 'mpd': [],
+///                'm3u8': ['https://hls-uranus.sb-cd.com/hls/1/7/17046468-,240p,480p,720p,.mp4.urlset/master.m3u8?secure=…'],
+///                'm3u8_240p': […], 'm3u8_480p': […], 'm3u8_720p': […] }`
+///   实测 `master.m3u8` 直连 200 + `application/vnd.apple.mpegurl`；`…-720p.mp4` 206 + video/mp4。
+///   地址带 `secure=` 签名（内含过期时间戳），所以每次播放都现取详情页。
+function streamFields(html) {
+  var out = {};
+  var re = /'(240p|320p|480p|720p|1080p|4k|mpd|m3u8|m3u8_\d+p)'\s*:\s*\[([^\]]*)\]/g;
   var matched;
-  while ((matched = m3u8.exec(text)) !== null) found.push({ kind: 'hls', url: entity(matched[0]) });
-  if (!found.length) {
-    var mp4 = /(?:https?:)?\/\/[^"'\s<>\\]+\.mp4[^"'\s<>\\]*/gi;
-    while ((matched = mp4.exec(text)) !== null) found.push({ kind: 'mp4', url: entity(matched[0]) });
+  while ((matched = re.exec(String(html))) !== null) {
+    var url = /'(https?:[^']+)'/.exec(matched[2]);
+    if (url) out[matched[1]] = url[1];
   }
-  for (var i = 0; i < found.length; i++) {
-    found[i].url = absolute(found[i].url);
-    if (/\.(m3u8|mp4)/i.test(found[i].url)) return found[i];
+  return out;
+}
+
+function mediaOf(html) {
+  var text = String(html || '');
+  var fields = streamFields(text);
+
+  // 1) 多码率 HLS（首选）：master 里已经含 240p/480p/720p 三条
+  if (fields.m3u8) {
+    var hlsQualities = [];
+    ['m3u8_1080p', 'm3u8_720p', 'm3u8_480p', 'm3u8_240p'].forEach(function (key) {
+      if (fields[key]) hlsQualities.push({ label: key.replace('m3u8_', '').toUpperCase(), url: fields[key] });
+    });
+    return { kind: 'hls', url: fields.m3u8, qualities: hlsQualities };
   }
+
+  // 2) 渐进 mp4（HLS 缺失时）
+  var mp4Qualities = [];
+  ['4k', '1080p', '720p', '480p', '320p', '240p'].forEach(function (key) {
+    if (fields[key]) mp4Qualities.push({ label: key.toUpperCase(), url: fields[key] });
+  });
+  if (mp4Qualities.length) return { kind: 'mp4', url: mp4Qualities[0].url, qualities: mp4Qualities };
+
+  // 3) 兜底：页面里扫一遍（老模板 / 变体页）
+  var plain = text.replace(/\\\//g, '/');
+  var m3u8 = /https?:[^"'\s<>\\]+\.m3u8[^"'\s<>\\]*/i.exec(plain);
+  if (m3u8) return { kind: 'hls', url: entity(m3u8[0]), qualities: [] };
+  var mp4 = /https?:[^"'\s<>\\]+\.mp4[^"'\s<>\\]*/i.exec(plain);
+  if (mp4) return { kind: 'mp4', url: entity(mp4[0]), qualities: [] };
   return null;
 }
 
@@ -221,7 +293,6 @@ var LumeSource = {
     if (!rows.length) {
       for (var i = 0; i < FALLBACK_CATEGORIES.length; i++) rows.push(FALLBACK_CATEGORIES[i]);
     }
-    rows.push({ id: 'search:' + encodeURIComponent('new'), title: '搜索' });
     return rows;
   },
 
@@ -252,8 +323,8 @@ var LumeSource = {
     }
     var html = await getText(path);
     var items = parseItems(html);
-    if (!items.length) console.warn('[spankbang] 列表没解析出条目：' + path + '（规则未实测，需校对锚点形状）');
-    return { items: items, hasMore: items.length >= 20 };
+    if (!items.length) console.warn('[spankbang] 列表没解析出条目：' + path + '（站点可能又改版了）');
+    return { items: items, hasMore: hasNextPage(html) };
   },
 
   async detail(argument) {
@@ -267,8 +338,13 @@ var LumeSource = {
       '';
     if (!title) {
       var titleTag = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html);
-      title = titleTag ? clean(titleTag[1]).replace(/\s*[-|]\s*SpankBang.*$/i, '') : '';
+      title = titleTag ? clean(titleTag[1]) : '';
     }
+    // 站内 <title> 形如 `Image video: 日本人 & イメージビデオ Porn - SpankBang`，去掉尾部噪音
+    title = String(title || '')
+      .replace(/\s*[-|]\s*SpankBang\s*$/i, '')
+      .replace(/\s+Porn\s*$/i, '')
+      .trim();
     if (!title) title = clean(id);
     var cover =
       (/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']*)["']/i.exec(html) || [])[1] ||
@@ -313,19 +389,21 @@ var LumeSource = {
       throw new Error(
         'SpankBang：详情页里没找到可播地址（页面 ' +
           html.length +
-          ' 字节）——可能是站点结构改了，或页面还不是真实内容（CF 校验未通过时本应抛 NEED_WEBVIEW_VERIFY，' +
-          '若你看到这句，说明拿到了非挑战页但这套解析规则还没校对过，请把这一页的 HTML 贴回给源作者）'
+          ' 字节）——要么站点改版换了 stream_data 的结构，要么拿到的不是真实内容页'
       );
     }
-    return {
-      kind: 'video',
-      url: media.url,
-      headers: {
-        'User-Agent': UA,
-        Referer: pageUrl,
-        Accept: '*/*'
-      }
+    var playHeaders = {
+      'User-Agent': UA,
+      Referer: pageUrl,
+      Accept: '*/*'
     };
+    var result = { kind: 'video', url: media.url, headers: playHeaders };
+    if (media.qualities && media.qualities.length > 1) {
+      result.qualities = media.qualities.map(function (row) {
+        return { label: row.label, url: row.url, headers: playHeaders };
+      });
+    }
+    return result;
   }
 };
 
