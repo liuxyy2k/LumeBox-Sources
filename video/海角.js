@@ -1,4 +1,4 @@
-// LumeSource: {"id":"haijiao_video","name":"海角","version":"1.0.0","category":"video","mirrors":["https://haijiao.com"]}
+// LumeSource: {"id":"haijiao_video","name":"海角 18+","version":"1.0.0","category":"video","mirrors":["https://haijiao.com"]}
 //
 // 站点：海角社区（https://haijiao.com，Vue2 SPA，2026-10-25 实测）
 //
@@ -11,7 +11,7 @@
 //                &top_category_id={分组 id}&category_id={子类 id}&keyword={搜索词}
 //            → {results:[…], page:{page,limit,total}}（实测 keyword 直接可用，total 会跟着变）
 //   详情    GET  /api/video-center/video/detail?id={视频 id}
-//   线路    GET  /api/topic/att/{attachment_id}         → [{name:'普通1',url,VipLimit},…]
+//   线路    GET  /api/topic/att/{attachment_id}         → [{name:'普通1 18+',url,VipLimit},…]
 //   登录    POST /api/login/signin  {username, password}（实测不需要图形验证码：/api/captcha/isNeed → false）
 //
 // ── ⚠ 响应是「三重 Base64」，不是 AES

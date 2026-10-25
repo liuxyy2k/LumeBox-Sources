@@ -1,4 +1,4 @@
-// LumeSource: {"id":"mwx43zd_video","name":"快猫镜像站","version":"1.0.0","category":"video","mirrors":["https://www.mwx43zd.xyz","https://4dxzevb.xyz"]}
+// LumeSource: {"id":"mwx43zd_video","name":"快猫镜像站 18+","version":"1.0.0","category":"video","mirrors":["https://www.mwx43zd.xyz","https://4dxzevb.xyz"]}
 //
 // 站点：mwx43zd.xyz/pc/index.html（Vue2 + hash 路由 SPA）。品牌是「快猫」——
 //   播放页水印文案写死「未经快猫授权 禁止转载」，/api/domain/address 里的官方 APK 叫
@@ -697,7 +697,7 @@ async function inspectPlaylist(url) {
 /* ========================== 图源契约 ========================== */
 var LumeSource = {
   id: 'mwx43zd_video',
-  name: '快猫镜像站',
+  name: '快猫镜像站 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://www.mwx43zd.xyz', 'https://4dxzevb.xyz'],

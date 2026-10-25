@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xfdxv_video","name":"41看片","version":"1.0.0","category":"video","mirrors":["https://xfdxv.414459.lifestyle:8283","https://hljhv.412426.lifestyle:8283"]}
+// LumeSource: {"id":"xfdxv_video","name":"41看片 18+","version":"1.0.0","category":"video","mirrors":["https://xfdxv.414459.lifestyle:8283","https://hljhv.412426.lifestyle:8283"]}
 //
 // 站点：https://xfdxv.414459.lifestyle:8283/ （2026-10-25 逐接口实测）
 //   壳域名：https://www.543786.com:8283/ 与 https://542372.com/ 只做 atob 跳转，本身没有内容/接口，
@@ -507,7 +507,7 @@ function groupAllowed(group) {
 /* ========================== 图源契约 ========================== */
 var LumeSource = {
   id: 'xfdxv_video',
-  name: '41看片',
+  name: '41看片 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://xfdxv.414459.lifestyle:8283'],

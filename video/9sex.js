@@ -1,4 +1,4 @@
-// LumeSource: {"id":"jiuxse_video","name":"9sex","version":"1.0.0","category":"video","mirrors":["https://9sex.com"]}
+// LumeSource: {"id":"jiuxse_video","name":"9sex 18+","version":"1.0.0","category":"video","mirrors":["https://9sex.com"]}
 //
 // 站点：9sex（https://9sex.com，ThinkPHP 站，2026-10-25 逐页实测）
 //
@@ -216,7 +216,7 @@ function pageUrl(kind, page, categoryId, keyword) {
 
 var LumeSource = {
   id: 'jiuxse_video',
-  name: '9sex',
+  name: '9sex 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://9sex.com'],

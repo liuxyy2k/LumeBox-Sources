@@ -1,4 +1,4 @@
-// LumeSource: {"id":"thepornjoy_video","name":"ThePornJoy","version":"1.0.0","category":"video","mirrors":["https://thepornjoy.org","https://www.thepornjoy.org"]}
+// LumeSource: {"id":"thepornjoy_video","name":"ThePornJoy 18+","version":"1.0.0","category":"video","mirrors":["https://thepornjoy.org","https://www.thepornjoy.org"]}
 //
 // 站点：https://thepornjoy.org/ （KVS 内核 / kt_player 模板，2026-10-25 逐页实测，**直连可用**）
 // 镜像：www.thepornjoy.org 实测 302 回主域（同一套内容，首页首条 id 一致）；thepornjoy.com 是
@@ -25,7 +25,7 @@
 //   直接在未登录的详情页 HTML 里，实测直接 GET 就是 206。所以本源不伪造任何 VIP 身份，
 //   也不把登录态当门槛：拿到详情页就能播。
 var H = {
-  name: 'ThePornJoy',
+  name: 'ThePornJoy 18+',
   defaultBase: 'https://thepornjoy.org',
   ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
   base: function () {

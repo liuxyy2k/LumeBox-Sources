@@ -1,4 +1,4 @@
-// LumeSource: {"id":"aido8_video","name":"爱豆","version":"1.0.0","category":"video","mirrors":["https://ww15.aido8.icu","https://ww1.aido8.icu","https://ww5.aido8.icu"]}
+// LumeSource: {"id":"aido8_video","name":"爱豆 18+","version":"1.0.0","category":"video","mirrors":["https://ww15.aido8.icu","https://ww1.aido8.icu","https://ww5.aido8.icu"]}
 //
 // 站点：爱豆（页面 <title> 就是「爱豆」）——苹果CMS 风格模板 + jQuery + Element，2026-10-25 实测。
 //
@@ -643,7 +643,7 @@ var CATEGORY_CACHE = null;
 
 var LumeSource = {
   id: 'aido8_video',
-  name: '爱豆',
+  name: '爱豆 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://ww15.aido8.icu', 'https://ww1.aido8.icu', 'https://ww5.aido8.icu'],

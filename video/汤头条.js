@@ -1,4 +1,4 @@
-// LumeSource: {"id":"tangtoutiao_video","name":"汤头条","version":"1.0.0","category":"video","mirrors":["https://p1.wgbqoiqv.com","https://p2.wgbqoiqv.com","https://p3.wgbqoiqv.com"]}
+// LumeSource: {"id":"tangtoutiao_video","name":"汤头条 18+","version":"1.0.0","category":"video","mirrors":["https://p1.wgbqoiqv.com","https://p2.wgbqoiqv.com","https://p3.wgbqoiqv.com"]}
 //
 // 站点：汤头条（<title> 就是「汤头条」）——Nuxt 3 PWA（SSR 关掉：`<script id="__NUXT_DATA__">` 里
 // `serverRendered:false`，页面 HTML 只有一个 loading 骨架），数据全走自己的接口。2026-10-25 实测。
@@ -632,7 +632,7 @@ async function tabOf(categoryId) {
 
 var LumeSource = {
   id: 'tangtoutiao_video',
-  name: '汤头条',
+  name: '汤头条 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://p1.wgbqoiqv.com', 'https://p2.wgbqoiqv.com', 'https://p3.wgbqoiqv.com'],

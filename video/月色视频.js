@@ -1,4 +1,4 @@
-// LumeSource: {"id":"yuese_video","name":"月色视频","version":"1.0.0","category":"video","mirrors":["https://ys.ph3ywdns.icu"]}
+// LumeSource: {"id":"yuese_video","name":"月色视频 18+","version":"1.0.0","category":"video","mirrors":["https://ys.ph3ywdns.icu"]}
 //
 // 站点：https://ys.ph3ywdns.icu （<title>月色视频</title>）
 // 2026-10-25 实测；**本站直连 200，不需要代理**（本机 7890 代理也能用，脚本不硬编码任何代理）。
@@ -603,7 +603,7 @@ async function fetchTags(limit) {
 
 var LumeSource = {
   id: 'yuese_video',
-  name: '月色视频',
+  name: '月色视频 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://ys.ph3ywdns.icu'],

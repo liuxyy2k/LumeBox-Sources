@@ -1,4 +1,4 @@
-// LumeSource: {"id":"h4dh3_video","name":"hxc","version":"1.0.0","category":"video","mirrors":["https://www.h4dh3.com","https://a84i.ux51l.com","https://a96u.t3nwc.com"]}
+// LumeSource: {"id":"h4dh3_video","name":"hxc 18+","version":"1.0.0","category":"video","mirrors":["https://www.h4dh3.com","https://a84i.ux51l.com","https://a96u.t3nwc.com"]}
 //
 // ════════════════════════════════════════════════════════════════════════════
 // 一、站点与前端（2026-10-25 实测）
@@ -497,7 +497,7 @@ async function fetchSearch(keyword, page) {
 
 var LumeSource = {
   id: 'h4dh3_video',
-  name: 'hxc',
+  name: 'hxc 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://www.h4dh3.com', 'https://a84i.ux51l.com', 'https://a96u.t3nwc.com'],

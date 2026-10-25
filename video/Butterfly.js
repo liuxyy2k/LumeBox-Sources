@@ -1,4 +1,4 @@
-// LumeSource: {"id":"cf2_video","name":"Butterfly","version":"1.0.0","category":"video","mirrors":["https://d1q6v0m0fmxvl0.cloudfront.net","https://d2m0k739byzwun.cloudfront.net","https://d1w3p997s8acw6.cloudfront.net"]}
+// LumeSource: {"id":"cf2_video","name":"Butterfly 18+","version":"1.0.0","category":"video","mirrors":["https://d1q6v0m0fmxvl0.cloudfront.net","https://d2m0k739byzwun.cloudfront.net","https://d1w3p997s8acw6.cloudfront.net"]}
 //
 // ════════════════════════════════════════════════════════════════════════════
 // 一、先回答「d1q6v0m0fmxvl0.cloudfront.net 是不是就是 hstv.js 那套」
@@ -737,7 +737,7 @@ async function fetchTags() {
 
 var LumeSource = {
   id: 'cf2_video',
-  name: 'Butterfly',
+  name: 'Butterfly 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://d1q6v0m0fmxvl0.cloudfront.net', 'https://d2m0k739byzwun.cloudfront.net', 'https://d1w3p997s8acw6.cloudfront.net'],

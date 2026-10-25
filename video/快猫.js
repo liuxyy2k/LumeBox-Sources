@@ -1,4 +1,4 @@
-// LumeSource: {"id":"yue5xi5_video","name":"快猫","version":"1.0.0","category":"video","mirrors":["https://yue5xi5.xyz"]}
+// LumeSource: {"id":"yue5xi5_video","name":"快猫 18+","version":"1.0.0","category":"video","mirrors":["https://yue5xi5.xyz"]}
 //
 // 站点：yue5xi5.xyz/pc/（Vue2 SPA，路由 hash 模式）。品牌是「快猫」——
 //   前端 /api/domain/index 自己回的推广信息就是 pop.im/channel/kuaimao、t.me/kuaimaoav，
@@ -582,7 +582,7 @@ async function resolvePlay(mvId) {
 /* ========================== 图源契约 ========================== */
 var LumeSource = {
   id: 'yue5xi5_video',
-  name: '快猫',
+  name: '快猫 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://yue5xi5.xyz'],

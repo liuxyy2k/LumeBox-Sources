@@ -1,4 +1,4 @@
-// LumeSource: {"id":"spankbang_video","name":"SpankBang","version":"1.0.0","category":"video","mirrors":["https://spankbang.com"]}
+// LumeSource: {"id":"spankbang_video","name":"SpankBang 18+","version":"1.0.0","category":"video","mirrors":["https://spankbang.com"]}
 //
 // 站点：https://spankbang.com （综合大 tube 站，全站 18+）
 //
@@ -265,7 +265,7 @@ function mediaOf(html) {
 
 var LumeSource = {
   id: 'spankbang_video',
-  name: 'SpankBang',
+  name: 'SpankBang 18+',
   version: '1.0.0',
   category: 'video',
   mirrors: ['https://spankbang.com'],
