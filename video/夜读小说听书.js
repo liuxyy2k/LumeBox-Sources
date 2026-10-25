@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xnovel_audiobook","name":"夜读小说听书","version":"1.0.0","category":"video","group":"听书","mirrors":["https://x-novel.com"]}
+﻿// LumeSource: {"id":"xnovel_audiobook","name":"夜读小说听书","version":"1.0.0","category":"video","group":"听书","mirrors":["https://x-novel.com"]}
 //
 // 站点：夜读小说（https://x-novel.com，成人小说站，全站 18+；与 xChina 共用 upload.xchina.io 音频 CDN）
 // 本源专门做**有声小说**那一路（就是 https://x-novel.com/tag/audio 这个标签页）。
@@ -319,9 +319,8 @@ var LumeSource = {
     if (audioMatch) {
       return { kind: 'audio', url: absolute(decode(audioMatch[1])), headers: mediaHeaders() };
     }
-    // 这本书没有配音：把正文交出去（App 的文本阅读视图能直接看）。
-    var text = textOf(page.html);
-    if (text) return { kind: 'text', text: text };
-    throw new Error('这一章既没有配音也没有正文：' + slug + ' / ' + number);
+    // 没有配音的章节：App 没有文字小说阅读器（用户口径：文字小说取来没用），所以不返回 kind:'text'，
+    // 直接给出可诊断的错误；列表里这类作品仍然能看到，只是点开会提示「没有语音版」。
+    throw new Error('这一章没有语音版（本站该作品是文字章节，App 不支持文字小说）：' + slug + ' / ' + number);
   }
 };

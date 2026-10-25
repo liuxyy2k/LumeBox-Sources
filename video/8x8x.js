@@ -1,4 +1,4 @@
-// LumeSource: {"id":"x8x8_video","name":"8x8x","version":"1.0.0","category":"video","mirrors":["https://1azm0i.qcsw2b5yf.com","https://qnzu16v.u85772s4.com","https://97nasy.uy5qvb.com"]}
+﻿// LumeSource: {"id":"x8x8_video","name":"8x8x","version":"1.0.0","category":"video","mirrors":["https://1azm0i.qcsw2b5yf.com","https://qnzu16v.u85772s4.com","https://97nasy.uy5qvb.com"]}
 //
 // 站点：8x8x（成人综合站：**视频 + 小说 + 图库**，全站 18+）
 // 域名：`www.8x8x.com` 只是地址发布页；真站是一条条随机子域（跳板），实测可用：
@@ -122,18 +122,6 @@ function parseCards(html) {
   return items;
 }
 
-function parseText(html) {
-  // 小说正文字段：页面里最长的那段连续 <p> 文本
-  var parts = [];
-  var pattern = /<p[^>]*>([\s\S]{0,800}?)<\/p>/g;
-  var matched;
-  while ((matched = pattern.exec(html)) !== null) {
-    var line = decode(matched[1]);
-    if (line.length > 12) parts.push(line);
-  }
-  return parts.join('\n\n');
-}
-
 function parseImages(html) {
   var images = [];
   var seen = {};
@@ -227,8 +215,15 @@ var LumeSource = {
         headers: { Referer: base() + '/', 'User-Agent': UA, Accept: '*/*' }
       };
     }
-    var text = parseText(html);
-    if (text.length > 200) return { kind: 'text', text: text };
+    // 有声小说：站内的“小说”条目其实是**有声**（App 支持 kind:'audio'；文字小说 App 没阅读器，取来没用）
+    var audio = /(https?:\/\/[^"'\s<>]+\.(?:mp3|m4a|aac|ogg)(?:\?[^"'\s<>]*)?)/i.exec(html);
+    if (audio) {
+      return {
+        kind: 'audio',
+        url: audio[1].replace(/&amp;/g, '&'),
+        headers: { Referer: base() + '/', 'User-Agent': UA, Accept: '*/*' }
+      };
+    }
     var images = parseImages(html);
     if (images.length >= 3) {
       return { kind: 'images', images: images, headers: { Referer: base() + '/', 'User-Agent': UA } };
