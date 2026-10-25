@@ -1,15 +1,15 @@
-# 旧地址兼容 · video
+# videos
 # 自动生成；修改脚本后运行 python tools/build_catalog.py
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/A123TV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/A123TV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/北觅影视.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/华视影院.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/播剧网.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/欧乐影院.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/华视影院.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/播剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/欧乐影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/瓜子影视.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/短剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/短剧网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌影院.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/飞流视频.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/饭搭子影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/飞流视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/饭搭子影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/1024Videos.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小视频.js
@@ -84,7 +84,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/小黄书听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/夜读小说听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/小黄书听书.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js

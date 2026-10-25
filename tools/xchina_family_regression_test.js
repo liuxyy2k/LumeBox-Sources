@@ -2,7 +2,7 @@
 
 // 小黄书家族与新点名的三个站：快照回归。
 //
-//   · video/小黄书听书.js   —— 同站「有声小说」（每章一条 mp3 直链）
+//   · audiobook/小黄书听书.js   —— 同站「有声小说」（每章一条 mp3 直链）
 //   · photo/小黄书套图.js   —— /photos 情色套图（16 个系列 + 排序）
 //   · photo/小黄书自拍.js   —— /amateurs 业余自拍
 //   · video/黄果剧场.js     —— huangguo.video（分类 + 尺度 + 16 个情节标签，标签可多选）
@@ -69,7 +69,7 @@ const lastUrl = (source) => source.__urls[source.__urls.length - 1][1];
 // ------------------------------------------------------------------ 小黄书听书
 
 test('xchina 听书：分类三档 + 列表卡片（🎧 标注）', async () => {
-  const source = stub(loadSource('video/小黄书听书.js'), [
+  const source = stub(loadSource('audiobook/小黄书听书.js'), [
     { match: '/fiction-tag/999', body: snapshot('xchina_audio_tag.html') },
   ]);
   const categories = await source.categories();
@@ -84,7 +84,7 @@ test('xchina 听书：分类三档 + 列表卡片（🎧 标注）', async () =>
 });
 
 test('xchina 听书：章节页里的 <audio src> 就是播放地址（真站直链 mp3）', async () => {
-  const source = stub(loadSource('video/小黄书听书.js'), [
+  const source = stub(loadSource('audiobook/小黄书听书.js'), [
     { match: '/fiction/5f9131520f3aa/1', body: snapshot('xchina_audio_detail.html') },
     { match: '/fiction/5f9131520f3aa', body: snapshot('xchina_audio_detail.html') },
   ]);
@@ -98,14 +98,14 @@ test('xchina 听书：章节页里的 <audio src> 就是播放地址（真站直
   assert.ok(detail.title.length > 0);
 
   // 没有音频标签时明确报告无配音，不能拼接并不存在的 mp3 地址。
-  const fallback = stub(loadSource('video/小黄书听书.js'), [
+  const fallback = stub(loadSource('audiobook/小黄书听书.js'), [
     { match: '/fiction/aaaa/3', body: '<html><body><div data-reader-body><p>纯文字</p></div></body></html>' },
   ]);
   await assert.rejects(fallback.content({ id: '/fiction/aaaa', chapterId: '/fiction/aaaa/3' }), /本章没有语音版/);
 });
 
 test('xchina 听书：audio/source 支持非 mp3 地址，忽略视频 source', async () => {
-  const source = stub(loadSource('video/小黄书听书.js'), [{
+  const source = stub(loadSource('audiobook/小黄书听书.js'), [{
     match: '/fiction/book/1',
     body: '<video><source src="wrong.mp3"></video><audio><source src="voice?token=1&amp;part=2" type="audio/mp4"></audio>',
   }]);

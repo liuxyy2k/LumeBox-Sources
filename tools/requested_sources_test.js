@@ -7,7 +7,7 @@ const crypto = require('node:crypto');
 
 function load(id, category, pages) {
   const context = {};
-  const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, '../catalog.json'), 'utf8'));
+  const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, '../metadata/catalog.json'), 'utf8'));
   const entry = catalog.sources.find(row => row.id === id + '_' + category);
   assert.ok(entry, 'missing canonical source: ' + id);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8'), context, {timeout: 5000});

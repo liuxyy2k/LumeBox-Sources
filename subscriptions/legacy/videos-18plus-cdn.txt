@@ -1,0 +1,76 @@
+# 视频 · 18+ / 成人向（单独一份，想看的自己加）
+#
+# 与 videos-hd 分开，是因为这份是成人内容：不想看的人不该在「影视综合」那一条里被动拿到。
+# 内容自查记录（做之前查过，不是无脑接站）：
+#   · 站方 RTA 标注 18+，题材为成人动画 / 番剧流派；
+#   · 它自带的 489 个标签（genre / theme / cast）里没有 loli / shota / child 这类
+#     未成年人形象标签；站内检索 shota、lolicon 均为 0 条，loli 只命中 1 部而其标签是
+#     OVAs / Creampie / Paizuri（即用词碰巧出现在简介里）。
+#
+# 环境提示：
+#   · Hentai2W 直连被 Cloudflare 拦，需要给这个源单独配代理（同欧乐 / 华视）。
+#   · 站点有年龄门，脚本会自动过一次（GET /age-gate → POST 带 XSRF → 拿 age_confirmed
+#     Cookie，缓存在源本地 6 小时），并把 Cookie 一起交给播放内核。
+#   · 播放地址按 episodeId 可预测：/stream/{id}/master.m3u8，实测 200 + #EXTM3U。
+#
+# 每个文件都是单文件源脚本（`// LumeSource: {...}` 身份头），也可以单独下载导入。
+# 2026-10-25 新增五源：
+#   · 快猫（yue5xi5.xyz）：短视频；接口是 AES-128-CBC 加密 + md5 签名（脚本自带纯 JS 实现），
+#     detail 用站点自己的游客号 60364099 过登录；实测 150 条 is_play 全 1，没有 VIP 播放锁。
+#   · ThePornJoy（thepornjoy.org）：KVS tube；详情页内联签名 mp4，实测 206 + video/mp4；
+#     登录只影响收藏/评论，播放免费。镜像 www.thepornjoy.org（301 回主域）。
+#   · 好妻网（haoqi7.com）：TanStack Start SSR；数据走免 token 的 /_serverFn（seroval 编码）；
+#     **VIP 锁只在前端**：SSR 把整片 m3u8 直给匿名请求，前端播放器才挑试看地址。
+#     分段时长对得上站点 duration（716s→239 段/717s 等），不是 2 分钟试看。**必须配代理**。
+#   · 41看片（xfdxv.414459.lifestyle:8283）：543786 / 542372 两个短链壳的落点；
+#     首页 Fernet 加密配置解出 apiBase sm-api.wieuc.com，m3u8 直链（3 线路 × 多清晰度）。
+#   · SpankBang（spankbang.com）：**Cloudflare JS 挑战**，本机 403 无法取页；
+#     脚本按 NEED_WEBVIEW_VERIFY 收口，需在 App 网页视图过校验后复用 Cookie，
+#     解析规则在没有实测样本的情况下按兜底锚点写（详见脚本头注释）。
+#   · HSTV（d1nu1x3tadacmt.cloudfront.net，Vue3 前端）：`POST /api/app/mine/login/h5`
+#     匿名设备登录就能拿 JWT（不用注册），列表/搜索/详情全通，**免费条目是整片 m3u8**；
+#     但金币/VIP 条目 `playPolicy.result=PREVIEW` —— 服务端只发 15 秒试看（这段锁在服务端，破不了）。
+#     hstv.fun 那套 Angular 壳的 `/js` RPC 被 WAF 按 IP 全挡，没接。
+# ── 第三批（2026-10-25 夜）新增四源：
+#   · 9sex（9sex.com）：ThinkPHP 站；`/index/movie/info.html?id=` 给 hls 地址，
+#     必须同时带 Accept + Accept-Language + X-Requested-With（少一个就 500/回 HTML）。
+#     VIP 片服务端回「请先登录」不给地址 → 免费片照播、VIP 片抛可读错误。**需代理**。
+#     分类「可爱萝莉」不接、列表层按标题剔除。
+#   · 快猫镜像站（mwx43zd.xyz）：快猫同族 UI 但**不同后端**（ThinkPHP + AES-128-CBC hex 密文 +
+#     md5(升序query+salt) 签名）；免费片匿名整片 m3u8；付费/VIP/搜索都是服务端 401 门禁（不伪造）。
+#     镜像 4dxzevb.xyz（同一 bundle + 官方地址接口指向它）。
+#   · 月色视频（ys.ph3ywdns.icu）：**Flutter Web 其实有 REST 接口**（dart2js 里明文常量，
+#     AES-128-CBC key=IV=LqzCOd16vnYhOHTz）；`videos/switch_line` 绕开 detail 的按 IP 游客配额，
+#     匿名拿整片 HLS（164 段/1638.9s 与 duration 吻合）。直连可用。
+#   · 海角（haijiao.com）：接口三重 Base64 解码；**播放地址只对登录态下发**（匿名 url 恒空），
+#     需在「源设置 → 账号登入」填账号密码（signin 不需验证码）。元数据/搜索全通。**需代理**。
+#   · 爱豆（ww15.aido8.icu）：`/awsapi/vod/*.php` 加密 JSON（AES-128-CBC，key=iv=reverse(String(t*299)+'1')），
+#     匿名就能拿整片 m3u8（VIP 只是角标）；`ww1..ww20` 是多线路同站，mirrors 取三条。
+#     注意：封面是逐字节反转的 JPEG（App 显示占位图）；`/awsapi` 与 `/api/m3u8` 只认桌面 UA。
+#   · 汤头条（p1.wgbqoiqv.com）：Nuxt 壳 + 独立接口域 `api4.z3h4q3fjy.cc/pwa.php`，
+#     AES-256-CFB + MD5(hex(SHA256(...))) 签名；免费片整片，付费片服务端只给 ~2 分钟试看（已如实标注）。
+#   · hxc（h4dh3.com）：Vue3 + obfuscator；`{endata: AES-256-CBC(json), ents: AES-256-CBC(北京墙上时间秒)}`
+#     —— ents 必须用北京墙上时间（发 UTC 一律 607 非法请求）。**VIP 真破解**：`/videos/getPreUrl` 匿名给签名地址，
+#     签名只覆盖路径不覆盖区间，**删掉 start/end 就是整片**（2214s 标称 → 738 段/2214.3s）。
+#   · Butterfly（d1q6v0m0fmxvl0.cloudfront.net）：Butterfly 壳独立部署，interfaceKey `0a958fb9…`；
+#     POST 带 `{data: AES-128-CBC(payload,"BxJand%xf5h3sycH")}` 信封，匿名设备登录即整片 m3u8。
+#   · Butterfly2（d17rhkrwip15vt.cloudfront.net）：同 SDK 另一运营方（只换 interfaceKey `vEukA…` 与 API 域，
+#     API 在 `32sdhsudan.com` 等三台，页面域 `/api/app` 是 405 静态托管）；只开热门流，搜索退化为本地过滤。
+#   ⚠️ 同族三套（HSTV / Butterfly / Butterfly2）interfaceKey 各不相同，**不能互为镜像**，各自一个源。
+#   ⚠️ 不做：daga88n.com（「萝莉窝」，以未成年为卖点）。
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Hentai2W.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/快猫.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/ThePornJoy.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/好妻网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/41看片.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/SpankBang.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/好色TV.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/9sex.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/快猫镜像站.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/月色视频.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/海角.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/爱豆.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/汤头条.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/hxc.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Butterfly.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Butterfly2.js

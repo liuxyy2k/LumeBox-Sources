@@ -1,30 +1,37 @@
 # LumeBox 源仓库
 
-在 APP 的“总订阅导入导出”中添加[总订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all)，一次导入全部分类；已有用户可用“一键同步全部订阅”更新。
+订阅入口统一放在 `subscriptions/`，分类与分级数据放在 `metadata/`。根目录只保留说明和各功能目录。
 
-## 分类入口
+## 一次导入
 
-| 分类 | 独立源数 | 导入入口 | APP 所属板块 |
+- [国内 CDN 线路](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/all.json)
+- [GitHub 原站线路](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/all.json)
+
+在 APP 的“总订阅导入导出”中选择线路或粘贴链接。国内 CDN 线路的清单和脚本都走 CDN；能否直连取决于当前网络，更新可能有 CDN 缓存延迟。两条线路内容相同，选择一条即可。
+
+## 按需分类
+
+| 分类 | 独立源数 | 原站 | 国内 CDN |
 | --- | ---: | --- | --- |
-| 漫画 | 48 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/comic.txt) | 漫画 |
-| 美图 | 3 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/photo.txt) | 漫画 |
-| 影视 | 10 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/movie.txt) | 视频 |
-| 视频与直播 | 72 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/video.txt) | 视频 |
-| 有声小说 | 6 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/audiobook.txt) | 视频 |
+| 漫画 | 48 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/comic.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/comic.txt) |
+| 美图 | 3 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/photo.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/photo.txt) |
+| 影视 | 10 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/movie.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/movie.txt) |
+| 视频与直播 | 72 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/video.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/video.txt) |
+| 有声小说 | 6 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/audiobook.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/audiobook.txt) |
 
-共 **139 个独立源**，按 ID 去重。每个源在总订阅中只出现一次，兼容副本与同 ID 重复脚本已删除。旧订阅清单入口保留，被删除文件的旧单独地址不再可用。
+共 **139 个独立源**，同 ID 不重复收录。美图导入 APP 漫画板块，有声导入视频板块。
 
-18+ 是内容分级，与上述内容类型分别管理；未分级不代表全年龄适用。图标、封面和播放实时可用性没有经过全站逐项验证，静态检查通过不代表站点可用。
+## 仓库目录
 
-## 查看与维护
+| 目录 | 内容 |
+| --- | --- |
+| `subscriptions/` | 所有订阅入口；`cdn/` 是国内 CDN 线路；`legacy/` 为迁移用旧子集 |
+| `metadata/` | 唯一源目录、18+ 分级与旧地址迁移表 |
+| `comic/`、`photo/` | 漫画、美图源脚本 |
+| `movie/`、`video/`、`audiobook/` | 影视、视频、有声源脚本，分别存放 |
+| `docs/` | 使用与维护说明 |
+| `tools/`、`snapshots/`、`licenses/` | 工具、回归样本、授权 |
 
-- [完整源目录](docs/源目录.md)：名称、版本、分类、分级及兼容副本。
-- [旧地址兼容表](docs/源分类与兼容地址.md)：已有订阅可以继续使用。
-- [维护说明](docs/README.md)：生成清单与离线验证命令。
-- `catalog.json` 是维护用索引，不是 APP 导入地址；`content-ratings.json` 保存分级依据。
-- `comic/`、`photo/`、`movie/`、`video/`、`audiobook/` 保存脚本。实际分类以目录索引为准；影视和有声中仍有历史脚本位于 `video/`，分类清单已经分别归类。
-- `tools/` 保存生成与测试工具；`snapshots/` 保存离线回归样本；`licenses/` 保存授权材料。
+[完整源目录](docs/源目录.md) · [地址迁移说明](docs/源分类与兼容地址.md) · [维护说明](docs/README.md)
 
-## 兼容综合入口
-
-[漫画与美图](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics) · [影视、视频与有声](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos)。新用户使用上方分类入口即可，无需叠加导入扩展清单。
+旧根目录订阅文件已收起，需要配套新版 APP 自动迁移旧地址，或使用上方新入口。18+ 是内容分级；未分级不代表全年龄。目录整理与离线检查不代表所有封面、图标和播放当前可用。

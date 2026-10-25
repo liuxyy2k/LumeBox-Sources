@@ -1,0 +1,47 @@
+[
+  {
+    "from": "video/A123TV.js",
+    "to": "movie/A123TV.js",
+    "id": "a123tv"
+  },
+  {
+    "from": "video/华视影院.js",
+    "to": "movie/华视影院.js",
+    "id": "huavod"
+  },
+  {
+    "from": "video/播剧网.js",
+    "to": "movie/播剧网.js",
+    "id": "ysxq-boju"
+  },
+  {
+    "from": "video/欧乐影院.js",
+    "to": "movie/欧乐影院.js",
+    "id": "olehdtv"
+  },
+  {
+    "from": "video/短剧网.js",
+    "to": "movie/短剧网.js",
+    "id": "duanju2"
+  },
+  {
+    "from": "video/飞流视频.js",
+    "to": "movie/飞流视频.js",
+    "id": "flixflop"
+  },
+  {
+    "from": "video/饭搭子影视.js",
+    "to": "movie/饭搭子影视.js",
+    "id": "fdzys"
+  },
+  {
+    "from": "video/夜读小说听书.js",
+    "to": "audiobook/夜读小说听书.js",
+    "id": "xnovel_audiobook"
+  },
+  {
+    "from": "video/小黄书听书.js",
+    "to": "audiobook/小黄书听书.js",
+    "id": "xchina_audiobook"
+  }
+]

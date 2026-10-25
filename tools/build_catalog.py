@@ -36,7 +36,7 @@ def read_sources():
             meta = json.loads(match[1])
             relative = path.relative_to(ROOT).as_posix()
             found.setdefault(meta['id'], []).append((relative, meta))
-    ratings = json.loads((ROOT / 'content-ratings.json').read_text(encoding='utf-8'))['sources']
+    ratings = json.loads((ROOT / 'metadata/content-ratings.json').read_text(encoding='utf-8'))['sources']
     rows = []
     for sid, candidates in found.items():
         preferred = PREFERRED.get(sid)
@@ -72,105 +72,69 @@ def manifest(rows, heading):
         row['url'] + '\n' for row in rows)
 
 
+CDN = 'https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/'
+LEGACY = {
+    'all': 'subscriptions/all.json',
+    'comics': 'subscriptions/comics.txt', 'photos': 'subscriptions/comics.txt',
+    '漫画订阅.js': 'subscriptions/comics.txt',
+    'comic/sources.js': 'subscriptions/comics.txt', 'comic/sources.txt': 'subscriptions/comics.txt',
+    'photo/sources.txt': 'subscriptions/comics.txt',
+    'videos': 'subscriptions/videos.txt', 'movies': 'subscriptions/videos.txt',
+    '视频订阅.js': 'subscriptions/videos.txt',
+    'video/sources.js': 'subscriptions/videos.txt', 'video/sources.txt': 'subscriptions/videos.txt',
+    'movie/sources.txt': 'subscriptions/videos.txt',
+    'audiobooks': 'subscriptions/audiobook.txt',
+    **{name: 'subscriptions/legacy/' + name + '.txt'
+       for name in ('videos-hd', 'videos-18plus', 'videos-hd-cdn', 'videos-18plus-cdn')},
+}
+
+LEGACY.update({item['from']: item['to'] for item in json.loads((ROOT / 'metadata/moved-scripts.json').read_text(encoding='utf-8'))})
+
+
 def build():
     rows = read_sources()
     groups = {kind: [row for row in rows if row['kind'] == kind] for kind in KINDS}
     out = {}
     for kind, label in KINDS.items():
-        out['subscriptions/' + kind + '.txt'] = manifest(groups[kind], label)
-    comic = groups['comic'] + groups['photo']
-    video = groups['movie'] + groups['video'] + groups['audiobook']
-    out['comics'] = manifest(comic, '漫画与美图（兼容综合入口）')
-    out['videos'] = manifest(video, '影视、视频与有声（兼容综合入口）')
-    out['漫画订阅.js'] = out['comics']
-    out['视频订阅.js'] = out['videos']
-    for filename, kind in [('movies', 'movie'), ('photos', 'photo'), ('audiobooks', 'audiobook')]:
-        out[filename] = manifest(groups[kind], KINDS[kind])
-    for folder, members in [('comic', comic), ('video', video)]:
-        for name in ('sources.js', 'sources.txt'):
-            out[folder + '/' + name] = manifest(members, '旧地址兼容 · ' + folder)
-    out['all'] = json.dumps({
-        'format': 'lume.total-subscription', 'version': 1,
-        'sections': {
-            'comic': [url('subscriptions/' + kind + '.txt') for kind in ('comic', 'photo')],
-            'video': [url('subscriptions/' + kind + '.txt') for kind in ('movie', 'video', 'audiobook')],
-        },
+        raw = manifest(groups[kind], label)
+        out['subscriptions/' + kind + '.txt'] = raw
+        # Every script URL is CDN-hosted too; the route never falls back to raw.
+        out['subscriptions/cdn/' + kind + '.txt'] = raw.replace(RAW, CDN)
+    for name, kinds in [('comics', ('comic','photo')), ('videos', ('movie','video','audiobook'))]:
+        raw = manifest([row for kind in kinds for row in groups[kind]], name)
+        out['subscriptions/' + name + '.txt'] = raw
+        out['subscriptions/cdn/' + name + '.txt'] = raw.replace(RAW, CDN)
+    for is_cdn in (False, True):
+        prefix = CDN if is_cdn else RAW
+        folder = 'subscriptions/cdn/' if is_cdn else 'subscriptions/'
+        out[folder + 'all.json'] = json.dumps({
+            'format': 'lume.total-subscription', 'version': 1,
+            'sections': {
+                'comic': [prefix + folder + kind + '.txt' for kind in ('comic','photo')],
+                'video': [prefix + folder + kind + '.txt' for kind in ('movie','video','audiobook')],
+            },
+        }, ensure_ascii=False, indent=2) + '\n'
+    out['metadata/catalog.json'] = json.dumps({
+        'format':'lume.source-catalog', 'version':1,
+        'counts':{kind:len(members) for kind,members in groups.items()},
+        'verification':'Metadata inventory only; not a live cover or playback availability report.',
+        'sources':rows,
     }, ensure_ascii=False, indent=2) + '\n'
-    out['catalog.json'] = json.dumps({
-        'format': 'lume.source-catalog', 'version': 1,
-        'counts': {kind: len(members) for kind, members in groups.items()},
-        'verification': 'Metadata inventory only; not a live cover or playback availability report.',
-        'sources': rows,
-    }, ensure_ascii=False, indent=2) + '\n'
-    # Existing CDN aliases must represent exactly the corresponding raw list.
-    removed_file = ROOT / 'docs/removed-duplicates.json'
-    removed_entries = json.loads(removed_file.read_text(encoding='utf-8'))['entries'] if removed_file.exists() else []
+    out['metadata/legacy-paths.json'] = json.dumps(LEGACY, ensure_ascii=False, indent=2) + '\n'
     for name in ('videos-hd', 'videos-18plus'):
-        legacy = (ROOT / name).read_text(encoding='utf-8')
-        for entry in removed_entries:
-            legacy = legacy.replace(url(entry['removed']), url(entry['retained']))
-        out[name] = legacy
-        lines = legacy.splitlines()
-        entries = [line.strip() for line in lines if line.startswith(RAW)]
-        out[name + '-cdn'] = '# 兼容 CDN 入口；可能有缓存延迟\n' + ''.join(
-            'https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/' + line[len(RAW):] + '\n'
-            for line in entries)
-    out['README.md'] = '''# LumeBox 源仓库
-
-在 APP 的“总订阅导入导出”中添加[总订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all)，一次导入全部分类；已有用户可用“一键同步全部订阅”更新。
-
-## 分类入口
-
-| 分类 | 独立源数 | 导入入口 | APP 所属板块 |
-| --- | ---: | --- | --- |
-''' + ''.join(f"| {KINDS[kind]} | {len(groups[kind])} | [订阅]({url('subscriptions/' + kind + '.txt')}) | {'漫画' if kind in ('comic', 'photo') else '视频'} |\n" for kind in KINDS) + f'''
-共 **{len(rows)} 个独立源**，按 ID 去重。每个源在总订阅中只出现一次，兼容副本与同 ID 重复脚本已删除。旧订阅清单入口保留，被删除文件的旧单独地址不再可用。
-
-18+ 是内容分级，与上述内容类型分别管理；未分级不代表全年龄适用。图标、封面和播放实时可用性没有经过全站逐项验证，静态检查通过不代表站点可用。
-
-## 查看与维护
-
-- [完整源目录](docs/源目录.md)：名称、版本、分类、分级及兼容副本。
-- [旧地址兼容表](docs/源分类与兼容地址.md)：已有订阅可以继续使用。
-- [维护说明](docs/README.md)：生成清单与离线验证命令。
-- `catalog.json` 是维护用索引，不是 APP 导入地址；`content-ratings.json` 保存分级依据。
-- `comic/`、`photo/`、`movie/`、`video/`、`audiobook/` 保存脚本。实际分类以目录索引为准；影视和有声中仍有历史脚本位于 `video/`，分类清单已经分别归类。
-- `tools/` 保存生成与测试工具；`snapshots/` 保存离线回归样本；`licenses/` 保存授权材料。
-
-## 兼容综合入口
-
-[漫画与美图](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics) · [影视、视频与有声](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos)。新用户使用上方分类入口即可，无需叠加导入扩展清单。
-'''
-    directory = '# 源目录\n\n由脚本首行元数据生成，同一 ID 只列一次。[返回入口](../README.md)。\n\n分级“未分级”表示尚无明确结论，不表示全年龄；此目录不声明实时封面或播放可用。\n'
-    for kind, label in KINDS.items():
-        directory += f'\n## {label}（{len(groups[kind])}）\n\n| 源 | 版本 | 分级 | 兼容副本数 |\n| --- | --- | --- | ---: |\n'
+        text = (ROOT / ('subscriptions/legacy/' + name + '.txt')).read_text(encoding='utf-8')
+        for old, new in LEGACY.items():
+            text = text.replace(RAW + old, RAW + new)
+        out['subscriptions/legacy/' + name + '.txt'] = text
+        out['subscriptions/legacy/' + name + '-cdn.txt'] = text.replace(RAW, CDN)
+    out['README.md'] = '# LumeBox 源仓库\n\n订阅入口统一放在 `subscriptions/`，分类与分级数据放在 `metadata/`。根目录只保留说明和各功能目录。\n\n## 一次导入\n\n- [国内 CDN 线路](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/all.json)\n- [GitHub 原站线路](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/all.json)\n\n在 APP 的“总订阅导入导出”中选择线路或粘贴链接。国内 CDN 线路的清单和脚本都走 CDN；能否直连取决于当前网络，更新可能有 CDN 缓存延迟。两条线路内容相同，选择一条即可。\n\n## 按需分类\n\n| 分类 | 独立源数 | 原站 | 国内 CDN |\n| --- | ---: | --- | --- |\n' + ''.join(f"| {KINDS[kind]} | {len(groups[kind])} | [订阅]({RAW}subscriptions/{kind}.txt) | [订阅]({CDN}subscriptions/cdn/{kind}.txt) |\n" for kind in KINDS) + f"\n共 **{len(rows)} 个独立源**，同 ID 不重复收录。美图导入 APP 漫画板块，有声导入视频板块。\n" + '\n## 仓库目录\n\n| 目录 | 内容 |\n| --- | --- |\n| `subscriptions/` | 所有订阅入口；`cdn/` 是国内 CDN 线路；`legacy/` 为迁移用旧子集 |\n| `metadata/` | 唯一源目录、18+ 分级与旧地址迁移表 |\n| `comic/`、`photo/` | 漫画、美图源脚本 |\n| `movie/`、`video/`、`audiobook/` | 影视、视频、有声源脚本，分别存放 |\n| `docs/` | 使用与维护说明 |\n| `tools/`、`snapshots/`、`licenses/` | 工具、回归样本、授权 |\n\n[完整源目录](docs/源目录.md) · [地址迁移说明](docs/源分类与兼容地址.md) · [维护说明](docs/README.md)\n\n旧根目录订阅文件已收起，需要配套新版 APP 自动迁移旧地址，或使用上方新入口。18+ 是内容分级；未分级不代表全年龄。目录整理与离线检查不代表所有封面、图标和播放当前可用。\n'
+    directory = '# 源目录\n\n同一 ID 只列一次。[返回入口](../README.md)。分级“未分级”不是全年龄结论；本目录不是实时可用性报告。\n'
+    for kind,label in KINDS.items():
+        directory += f'\n## {label}（{len(groups[kind])}）\n\n| 源 | 版本 | 分级 |\n| --- | --- | --- |\n'
         for row in groups[kind]:
-            directory += f"| [{row['name']}](../{urllib.parse.quote(row['path'])}) | {row['version']} | {'18+' if row['rating'] == '18+' else '未分级'} | {len(row['aliases'])} |\n"
-    removed_path = ROOT / 'docs/removed-duplicates.json'
-    removed = json.loads(removed_path.read_text(encoding='utf-8'))['entries'] if removed_path.exists() else []
-    directory += '\n## 已删除的重复脚本\n\n仅删除下列重复文件；同一 ID 的保留版本继续提供。原单独文件地址不再可用。\n\n| ID | 保留版本 | 已删除文件 |\n| --- | --- | --- |\n'
-    for entry in removed:
-        directory += f"| `{entry['id']}` | `{entry['retained']}` | `{entry['removed']}` |\n"
+            directory += f"| [{row['name']}](../{urllib.parse.quote(row['path'])}) | {row['version']} | {'18+' if row['rating']=='18+' else '未分级'} |\n"
     out['docs/源目录.md'] = directory
-    out['docs/源分类与兼容地址.md'] = '''# 分类与旧地址兼容
-
-总订阅 `all` 现在只展开 `subscriptions/` 下的五类清单，各源按 ID 唯一收录。APP 仍按漫画、视频两个板块承接；美图归漫画，有声归视频。
-
-| 旧地址 | 兼容行为 |
-| --- | --- |
-| `comics`、`漫画订阅.js`、`comic/sources.js`、`comic/sources.txt` | 漫画与美图综合入口 |
-| `videos`、`视频订阅.js`、`video/sources.js`、`video/sources.txt` | 影视、视频、听书综合入口 |
-| `movies` | 完整影视分类 |
-| `photos` | 完整美图分类 |
-| `audiobooks` | 完整有声分类 |
-| `videos-hd`、`videos-18plus` 及其 `-cdn` 版本 | 保留原有子集，不再与总订阅重复展开 |
-
-已删除 6 个兼容副本和同 ID 重复脚本，原单独文件地址停止使用，具体路径与保留版本见[源目录](源目录.md)。其余脚本和旧清单入口保留；没有修改源脚本的账号、播放地址或内容解析。
-
-旧综合清单与分类清单可以导入同一个 APP；为减少重复下载，建议只保存总订阅，或只保存需要的分类。删除订阅前先确认 APP 的保留源选项，避免误删个人收藏。
-
-纯文字小说源此前已移除；有声小说是音频，继续保留。详情见[源目录](源目录.md)。
-'''
+    out['docs/源分类与兼容地址.md'] = '# 订阅地址迁移\n\n根目录不再平铺各类清单。所有入口在 `subscriptions/`，索引数据在 `metadata/`；脚本 ID 和有效脚本原地址不变。\n\n新版 APP 会把已保存的旧官方清单地址迁移到新地址，保留启用状态、成员与排除记录。旧版 APP 不认识迁移规则，需要升级或重新填写 README 的新地址。迁移表见 `metadata/legacy-paths.json`；这不是服务器 HTTP 重定向，直接用浏览器打开已删除的旧文件地址仍会 404。\n\n选择国内 CDN 线路时，总订阅、分类清单与脚本均走 CDN，不再把子链接指回 raw.githubusercontent.com。原站线路仍可选。两条线路的 ID 集合一致，无需同时导入。\n\n已删除的重复脚本记录在 `metadata/removed-duplicates.json`。需要查看历史内容时使用 Git 历史。封面、图标和播放的实时检测独立进行，不由清单目录的检查结果代替。\n'
     return out
 
 

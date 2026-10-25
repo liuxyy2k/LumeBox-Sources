@@ -1,4 +1,4 @@
-# 漫画与美图（兼容综合入口）
+# comics
 # 自动生成；修改脚本后运行 python tools/build_catalog.py
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/127漫画.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/177漫畫.js
