@@ -44,6 +44,11 @@
 #     匿名拿整片 HLS（164 段/1638.9s 与 duration 吻合）。直连可用。
 #   · 海角（haijiao.com）：接口三重 Base64 解码；**播放地址只对登录态下发**（匿名 url 恒空），
 #     需在「源设置 → 账号登入」填账号密码（signin 不需验证码）。元数据/搜索全通。**需代理**。
+#   · 爱豆（ww15.aido8.icu）：`/awsapi/vod/*.php` 加密 JSON（AES-128-CBC，key=iv=reverse(String(t*299)+'1')），
+#     匿名就能拿整片 m3u8（VIP 只是角标）；`ww1..ww20` 是多线路同站，mirrors 取三条。
+#     注意：封面是逐字节反转的 JPEG（App 显示占位图）；`/awsapi` 与 `/api/m3u8` 只认桌面 UA。
+#   · 汤头条（p1.wgbqoiqv.com）：Nuxt 壳 + 独立接口域 `api4.z3h4q3fjy.cc/pwa.php`，
+#     AES-256-CFB + MD5(hex(SHA256(...))) 签名；免费片整片，付费片服务端只给 ~2 分钟试看（已如实标注）。
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
@@ -55,3 +60,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/9sex.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫镜像站.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/汤头条.js
