@@ -41,3 +41,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/37tmrj.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/8x8x.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/云老婆.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嗨碰.js
