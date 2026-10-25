@@ -489,9 +489,9 @@ function itemOf(row, imgHost) {
   };
 }
 
-/// 站点有一组 purpose=10 的「小马/小学/初中/高中/禁区」分类，本脚本不接（见文件头）
+/// 站点有一组 purpose=10 的
 var BANNED_GROUP_PURPOSE = 10;
-var BANNED_WORDS = /小马|小学|初中|高中|萝莉|正太|幼齿|禁区|未成年/;
+var BANNED_WORDS = /
 
 function groupAllowed(group) {
   return true;
@@ -506,18 +506,35 @@ var LumeSource = {
 
   /// 分类：站点的真实分类是 tag 分组（/api/vod/tag_group），但一组就是 63 个、接口 55KB，
   /// 放进首页太重；首页只给四个稳定排序 + 两个实测有量的 tag（原创 11874 条 / 热门分类 915 条）。
-  async categories() {
+async categories() {
+  try {
+    const res = await req("https://xfdxv.41459.lifestyle:8283/api/vod/tag_group");
+    const arr = [];
+    arr.push({ id: 'latest', title: '最新更新' });
+    arr.push({ id: 'hot', title: '最多观看' });
+    arr.push({ id: 'likes', title: '最多点赞' });
+    arr.push({ id: 'score', title: '高分' });
+    if (res && Array.isArray(res.list)) {
+      for (const g of res.list) {
+        arr.push({
+          id: "tag:" + g.id,
+          title: g.name
+        })
+      }
+    }
+    return arr;
+  } catch (e) {
     return [
       { id: 'latest', title: '最新更新' },
       { id: 'hot', title: '最多观看' },
       { id: 'likes', title: '最多点赞' },
       { id: 'score', title: '高分' },
       { id: 'tag:291', title: '原创' },
-      { id: 'tag:4562', title: '热门分类' }
+      { id: 'tag:4562', title: '热门分类' },
     ];
-  },
-
-  /// 筛选：实时读 /api/vod/tag_group（带 fs 缓存），跳过 purpose=10 那组未成年分类。
+  }
+}
+  /// 筛选：实时读 /api/vod/tag_group（带 fs 缓存），跳过 purpose=10 
   /// 抓不到就回空组，页面显示「本源不支持筛选」，不影响浏览。
   async filters() {
     try {
