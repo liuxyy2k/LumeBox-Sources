@@ -1,0 +1,41 @@
+{
+  "reason": "2026-10-26 用户要求删除兼容副本与同 ID 重复条目",
+  "entries": [
+    {
+      "id": "z8pt_comic",
+      "retained": "photo/Z8PT图库.js",
+      "removed": "comic/Z8PT图库.js",
+      "sha256": "2a5b4b34ed4a1a6701c27113b68b1acdd9644ef38e01ef74c4426ab44f7deb55"
+    },
+    {
+      "id": "luttt_video",
+      "retained": "movie/北觅影视.js",
+      "removed": "video/北觅影视.js",
+      "sha256": "3328ec668b69bea8982d42a3ceefb45732f5ed1fcef5702639a2e14dae897990"
+    },
+    {
+      "id": "gztv5_video",
+      "retained": "movie/瓜子影视.js",
+      "removed": "video/瓜子影视.js",
+      "sha256": "24adb581452d2bab17ce9ffd622e1dca0e607c8bbe1fefbeaaab678985cf5704"
+    },
+    {
+      "id": "jpyy2_video",
+      "retained": "movie/金牌影院.js",
+      "removed": "video/金牌影院.js",
+      "sha256": "f0497e5aa11bd4c270aac38fdf4fe693df0ed58e666145bf80298aa447f51de1"
+    },
+    {
+      "id": "jiuse91_video",
+      "retained": "video/九色91Porny.js",
+      "removed": "video/91PORNY九色.js",
+      "sha256": "e4934f08e812d65abd301cea9a5e7d6c9f21d3f97647e3687cc12653c360128f"
+    },
+    {
+      "id": "hstv_video",
+      "retained": "video/好色TV.js",
+      "removed": "video/HSTV.js",
+      "sha256": "9b93b080c6204948e8a703de303b83d789c056372a9ea0cb655930ca0d5b8d86"
+    }
+  ]
+}

@@ -1,5 +1,17 @@
-# 视频 · 18+ / 成人向 · jsDelivr CDN 版（国内网络用这一份）
-#
-# 与 videos-18plus 内容相同，只把脚本地址换成 jsDelivr（raw.githubusercontent.com
-# 在国内常被重置）。代价：jsDelivr 对 @main 有缓存（最长约 12 小时）。
+# 兼容 CDN 入口；可能有缓存延迟
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Hentai2W.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/快猫.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/ThePornJoy.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/好妻网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/41看片.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/SpankBang.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/好色TV.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/9sex.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/快猫镜像站.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/月色视频.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/海角.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/爱豆.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/汤头条.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/hxc.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Butterfly.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/Butterfly2.js

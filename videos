@@ -1,100 +1,90 @@
-# 视频 / 影视订阅
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H动漫一号.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H動漫網.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/大哥视频.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/成人动漫.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/查特直播.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜糖助眠.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/小黄书听书.js
+# 影视、视频与有声（兼容综合入口）
+# 自动生成；修改脚本后运行 python tools/build_catalog.py
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/A123TV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/北觅影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/华视影院.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/播剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/欧乐影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/瓜子影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/短剧网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌影院.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/九色91Porny.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好色TV.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn视频.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色影库.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线上看.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XVideos.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XNXX.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamster.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/VoyeurHit.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/YouJizz.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/RedTube.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Fcw.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/99jj38.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/85PO.js
-#
-# 2026-10 新增四个（全部 18+；内容自查记录见 content-ratings.json 的 evidence）：
-#   · Zoo Sex Farm（zoosexfarm.com）/ About Porno（aboutporno.net）—— 兽交题材静态站：
-#     详情页直接内嵌 mp4（302 到 st*.mediacnt.com），签名带时间戳，每次播放现取；
-#     两站都没有搜索、也没有能用的分类页（/top/ 是友链页，条目一律 410），只给「最新」翻页。
-#   · Kaotic（kaotic.com）—— 事故 / 暴力 / 战争一类**真实事件影像**（含血腥画面，不是成人站）：
-#     13 个分类 + 搜索 /mediaSearch/?search=，视频是 CDN 签名 mp4，图集条目直接出图片列表。
-#   · 逆次元ACG（发布页 02.uno → 实际站 www.niacg.com）—— 里番 / 3D / 同人 / 会员视频：
-#     DPlayer 多档 mp4（会员视频是 m3u8）。站点在 Cloudflare 后面，App 直连会被挑战，
-#     脚本会退到 App 的网页渲染，或让你在网页视图里过一次校验。
-# 四个源都要单独配代理（国内直连 TCP 不通）。
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ZooSexFarm.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AboutPorno.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Kaotic.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/逆次元ACG.js
-
-# 2026-10 新增：夜读小说听书（x-novel.com 的有声小说标签页 /tag/audio）
-#   · 章节页 <audio src="https://upload.xchina.io/mp3/{书号}/{章序}.mp3"> 是直链音频（206 audio/mpeg，无签名），
-#     脚本返回 kind:'audio'，用视频板块的播放器听；没有配音的普通小说回落到 kind:'text' 正文。
-#   · 站内搜索 /search?q=、列表 /tag/audio[/{页}]（含 sort=hot|rating|comment|words）、全部 /novels[/{页}]。
-#   · 站点在 Cloudflare 后面，直连吃 WAF 时请给本源配代理或走一次网页视图。
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PornTrex.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HorrorPorn.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamsterLive.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Chaturbetter.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/LXXLXX.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/啪啪啦.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XTUBE.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱情岛.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureTube.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/飞流视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/饭搭子影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/1024Videos.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/四虎.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/618208.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/UNCams.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MyFreeCams.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/37tmrj.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/8x8x.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/云老婆.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嗨碰.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ArtOfZoo.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/三级片.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91PORNY九色.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆社.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/杏吧.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Familyporn.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AsianStreetMeat.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureNL.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Pornhub.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/FakeHub.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TXXX.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好妻网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/41看片.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/SpankBang.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HSTV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/618208.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/85PO.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/8x8x.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/9sex.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫镜像站.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色视频.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/汤头条.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hxc.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AboutPorno.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ArtOfZoo.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AsianStreetMeat.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Butterfly.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Butterfly2.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Chaturbetter.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/FakeHub.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Familyporn.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HorrorPorn.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hxc.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H动漫一号.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H動漫網.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Kaotic.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/LXXLXX.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureNL.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureTube.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MyFreeCams.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Pornhub.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PornTrex.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PTT线上看.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/RedTube.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/SpankBang.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TwiXive推特.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/TXXX.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/UNCams.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/VoyeurHit.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamster.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamsterLive.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XNXX.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XTUBE.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/XVideos.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/YouJizz.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ZooSexFarm.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/三级片.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/99jj38.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/九色91Porny.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/云老婆.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色影库.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/啪啪啦.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嗨碰.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/四虎.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/大哥视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好妻网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好色TV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Fcw.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫镜像站.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/成人动漫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色视频.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/杏吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/查特直播.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/汤头条.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱情岛.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜糖助眠.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/逆次元ACG.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆社.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/小黄书听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js

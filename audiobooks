@@ -1,6 +1,8 @@
-# 有声小说订阅（视频板块 → 有声小说）
-# 2026-10-25：需要验证码的站点请先在 App 的源站网页验证。
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js
+# 有声小说
+# 自动生成；修改脚本后运行 python tools/build_catalog.py
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/小黄书听书.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js

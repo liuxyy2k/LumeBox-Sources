@@ -7,8 +7,10 @@ const crypto = require('node:crypto');
 
 function load(id, category, pages) {
   const context = {};
-  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', category,
-    require('./source_files.json')[id + '_' + category + '.js']), 'utf8'), context, {timeout: 5000});
+  const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, '../catalog.json'), 'utf8'));
+  const entry = catalog.sources.find(row => row.id === id + '_' + category);
+  assert.ok(entry, 'missing canonical source: ' + id);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8'), context, {timeout: 5000});
   context.LumeSource.http = {get: async url => {
     const p = new URL(url).pathname;
     assert.ok(p in pages, 'unexpected route: ' + p);

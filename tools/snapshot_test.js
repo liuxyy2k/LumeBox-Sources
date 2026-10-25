@@ -27,7 +27,7 @@ var ROOT = path.join(__dirname, '..');
 
 /// 按文件名在 board 目录（comic / novel / video）里找脚本。
 function findScript(file) {
-  var boards = ['comic', 'novel', 'video'];
+  var boards = ['comic', 'photo', 'movie', 'video', 'audiobook'];
   for (var i = 0; i < boards.length; i++) {
     var candidate = path.join(ROOT, boards[i], file);
     if (fs.existsSync(candidate)) return candidate;

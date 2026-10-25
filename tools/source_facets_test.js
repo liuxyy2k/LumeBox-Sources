@@ -62,7 +62,7 @@ async function qTcmsCheck(file, param, expectStatus) {
 }
 
 async function lutttCheck() {
-  const source = load('video/北觅影视.js');
+  const source = load('movie/北觅影视.js');
   const snapshot = fs.readFileSync(path.join(root, 'snapshots', 'luttt_filters.html'), 'utf8');
   const urls = stubGet(source, snapshot);
 
@@ -86,7 +86,7 @@ async function lutttCheck() {
   // 越界段位不写（白名单 1..11，且不允许覆盖页码段）。
   await source.list({ categoryId: '1', page: 1, filters: { bad: '8|9' } });
   assert.match(urls[urls.length - 1], /\/vodshow\/1-----------.html$/, '第 8 段不被筛选覆盖');
-  console.log('video/北觅影视.js：苹果CMS 筛选条解析 + 段位回填通过');
+  console.log('movie/北觅影视.js：苹果CMS 筛选条解析 + 段位回填通过');
 }
 
 /// 禁漫天堂（18comic）：分类来自站点自己的书库/排行/标签地址，筛选是 URL 里的

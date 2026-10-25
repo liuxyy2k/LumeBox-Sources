@@ -2,88 +2,91 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
 const root = path.join(__dirname, '..');
+const read = file => fs.readFileSync(path.join(root, file), 'utf8').replace(/^\uFEFF/, '');
+const lines = file => read(file).split(/\r?\n/).filter(line => line.startsWith('https://'));
+const localPath = url => decodeURIComponent(new URL(url).pathname.split('/main/')[1]);
+const catalog = JSON.parse(read('catalog.json'));
+const metadata = file => JSON.parse(read(file).match(/\/\/ LumeSource: (\{[^\n]+\})/)[1]);
 
-test('retired novel adapters, manifests and ratings are absent', () => {
-  for (const name of ['novel', 'novels', '小说订阅.js']) {
-    assert.equal(fs.existsSync(path.join(root, name)), false, name);
-  }
-  assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'all'), 'utf8')).sections.novel, undefined);
-  for (const manifest of ['comics', 'videos', '漫画订阅.js', '视频订阅.js']) {
-    assert.doesNotMatch(fs.readFileSync(path.join(root, manifest), 'utf8'), /\/novel\//);
-  }
-  assert.doesNotMatch(fs.readFileSync(path.join(root, 'content-ratings.json'), 'utf8'), /"[^"\n]*_novel"/);
+test('retired novel adapters and manifests stay absent', () => {
+  for (const file of ['novel', 'novels', '小说订阅.js']) assert.equal(fs.existsSync(path.join(root, file)), false);
+  assert.equal(JSON.parse(read('all')).sections.novel, undefined);
 });
 
-test('Canonical manifests point to existing Chinese filenames with matching runtime names and versions', () => {
-  let count = 0;
-  const ids = new Set();
-  for (const entry of ['comics','videos']) {
-    const manifest = fs.readFileSync(path.join(root, entry), 'utf8');
-    assert.ok(fs.readFileSync(path.join(root,'README.md'),'utf8').includes('/main/'+entry+')'));
-    for (const line of manifest.split(/\r?\n/).filter(x => x.startsWith('https://'))) {
-      const relative = decodeURIComponent(new URL(line).pathname.split('/main/')[1]);
-      assert.match(path.basename(relative), /[\u4e00-\u9fff]/);
-      const source = fs.readFileSync(path.join(root, relative), 'utf8');
-      const metadata = JSON.parse(source.match(/\/\/ LumeSource: (\{[^\n]+\})/)[1]);
-      const context = {};
-      vm.runInNewContext(source, context, {timeout:5000});
-      assert.equal(context.LumeSource.name, metadata.name, relative);
-      assert.equal(context.LumeSource.version, metadata.version, relative);
-      assert.ok(!ids.has(metadata.id), 'Each source belongs to one subscription: '+metadata.id);
-      ids.add(metadata.id);
-      count++;
+test('catalog covers every adapter exactly once with matching metadata and ratings', () => {
+  const files = ['comic','photo','movie','video','audiobook'].flatMap(folder =>
+    fs.readdirSync(path.join(root, folder)).filter(name => name.endsWith('.js'))
+      .map(name => folder + '/' + name).filter(file => /^\/\/ LumeSource:/m.test(read(file))));
+  const ids = files.map(file => metadata(file).id);
+  assert.equal(new Set(ids).size, ids.length, 'Duplicate IDs must be deleted, not just hidden from the manifest');
+  assert.deepEqual(new Set(catalog.sources.map(row => row.id)), new Set(ids));
+  const ratings = JSON.parse(read('content-ratings.json')).sources;
+  for (const row of catalog.sources) {
+    const meta = metadata(row.path);
+    assert.equal(meta.id, row.id);
+    assert.equal(meta.version, row.version);
+    assert.equal(meta.name, row.name);
+    assert.equal(meta.category, row.appSection);
+    assert.equal(row.rating, ratings[row.id]?.rating || 'unknown');
+    assert.deepEqual(row.aliases, []);
+  }
+});
+
+test('five classifications are disjoint and match the generated inventory', () => {
+  const urls = [];
+  for (const kind of ['comic','photo','movie','video','audiobook']) {
+    const actual = lines('subscriptions/' + kind + '.txt');
+    const expected = catalog.sources.filter(row => row.kind === kind).map(row => row.url);
+    assert.deepEqual(actual, expected);
+    assert.equal(actual.length, catalog.counts[kind]);
+    actual.forEach(url => assert.ok(fs.statSync(path.join(root, localPath(url))).isFile()));
+    urls.push(...actual);
+  }
+  assert.equal(new Set(urls).size, urls.length);
+  assert.equal(urls.length, catalog.sources.length);
+});
+
+test('total subscription routes all IDs once to the proper APP section', () => {
+  const total = JSON.parse(read('all'));
+  assert.equal(total.format, 'lume.total-subscription');
+  const ids = [];
+  for (const [section, manifests] of Object.entries(total.sections)) {
+    for (const manifest of manifests) {
+      for (const url of lines(localPath(manifest))) {
+        const meta = metadata(localPath(url));
+        assert.equal(meta.category, section);
+        ids.push(meta.id);
+      }
     }
   }
-  assert.equal(count, 43);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.deepEqual(new Set(ids), new Set(catalog.sources.map(row => row.id)));
 });
 
-test('two subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
-  const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
-  assert.equal(lines('audiobooks').length,4);
-  assert.equal(lines('photos').length,1);
-  assert.equal(lines('movies').length,3);
-  const current=['comics','videos'].flatMap(lines);
-  const legacy=['漫画订阅.js','视频订阅.js'].flatMap(lines);
-  assert.deepEqual(new Set(current),new Set(legacy));
-  assert.equal(new Set(current).size,current.length);
-  const total=JSON.parse(fs.readFileSync(path.join(root,'all'),'utf8'));
-  assert.equal(total.format,'lume.total-subscription');
-  assert.equal(total.version,1);
-  assert.deepEqual(total.sections, {
-    comic:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics'],
-    video:['https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos'],
-  });
-  assert.ok(lines('comics').some(line=>line.includes('/photo/')));
-  assert.ok(lines('videos').some(line=>line.includes('/movie/')));
-});
-
-test('active content directories exist and legacy script URLs mirror canonical files', () => {
-  for (const dir of ['audiobook','comic','photo','movie','video']) {
-    assert.ok(fs.statSync(path.join(root,dir)).isDirectory());
-  }
-  for (const [oldDir,newDir,name] of [
-    ['comic','photo','Z8PT图库.js'], ['video','movie','瓜子影视.js'],
-    ['video','movie','金牌影院.js'], ['video','movie','北觅影视.js'],
+test('old manifests remain complete aliases while deleted scripts are absent', () => {
+  for (const [canonical, aliases] of [
+    ['comics', ['漫画订阅.js','comic/sources.js','comic/sources.txt']],
+    ['videos', ['视频订阅.js','video/sources.js','video/sources.txt']],
   ]) {
-    const read = dir => fs.readFileSync(path.join(root,dir,name),'utf8').replace(/\r\n/g,'\n');
-    assert.equal(read(oldDir).replace(/^\/\/ 兼容地址镜像[^\n]*\n/m,''), read(newDir));
+    for (const alias of aliases) assert.deepEqual(lines(alias), lines(canonical));
+  }
+  const combined = [...lines('comics'), ...lines('videos')];
+  assert.equal(new Set(combined).size, catalog.sources.length);
+  for (const item of JSON.parse(read('docs/removed-duplicates.json')).entries) {
+    assert.equal(fs.existsSync(path.join(root, item.removed)), false);
+    assert.equal(metadata(item.retained).id, item.id);
   }
 });
 
-test('new audiobook subscription is included in canonical and legacy video manifests', () => {
-  const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
-  const audio = lines('audiobooks');
-  assert.equal(audio.length, 4);
-  for (const url of audio) {
-    assert.ok(lines('videos').includes(url));
-    assert.ok(lines('视频订阅.js').includes(url));
-    const file = decodeURIComponent(new URL(url).pathname.split('/main/')[1]);
-    const script = fs.readFileSync(path.join(root,file),'utf8');
-    const meta = JSON.parse(script.match(/LumeSource: (\{[^\n]+\})/)[1]);
-    assert.equal(meta.category,'video');
-    assert.equal(meta.mediaType,'audio');
-    assert.equal(meta.group,'有声小说');
+test('standalone category and CDN aliases match their complete raw manifests', () => {
+  for (const [alias, kind] of [['movies','movie'],['photos','photo'],['audiobooks','audiobook']]) {
+    assert.deepEqual(lines(alias), lines('subscriptions/' + kind + '.txt'));
+  }
+  for (const file of ['videos-hd','videos-18plus']) {
+    const raw = lines(file).map(localPath);
+    for (const relative of raw) assert.ok(fs.statSync(path.join(root, relative)).isFile());
+    const cdn = lines(file + '-cdn').map(url => decodeURIComponent(new URL(url).pathname.split('@main/')[1]));
+    assert.deepEqual(cdn, raw);
   }
 });
