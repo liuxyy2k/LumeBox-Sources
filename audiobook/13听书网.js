@@ -1,0 +1,75 @@
+// LumeSource: {"id":"ting13_audiobook","name":"13听书网","version":"1.0.0","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"}
+// Standalone build: node tools/build_audiobooks.cjs
+// Only public site catalogues and player requests; no account or paid-content bypass.
+var H = {
+  base: '', name: '', ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+  clean: function (s) { return this.entity(String(s || '').replace(/<script\b[\s\S]*?<\/script>/gi,'').replace(/<style\b[\s\S]*?<\/style>/gi,'').replace(/<\/(?:p|div|section|li|h\d)>|<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'' )).replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim(); },
+  entity: function(s) {return String(s||'').replace(/&(?:amp|quot|apos|lt|gt|nbsp);|&#(?:x[0-9a-f]+|\d+);/gi,function(v){var map={'&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>','&nbsp;':' '};if(map[v])return map[v];var code=v.charAt(2)==='x'?parseInt(v.slice(3),16):parseInt(v.slice(2),10);return Number.isFinite(code)?String.fromCodePoint(code):v;});},
+  attr: function(s,k) {var m=new RegExp('(?:^|\\s)'+k+'\\s*=\\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\\s>]+))','i').exec(s||'');return this.entity(m?(m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:m[3]):'');},
+  abs: function(u,from) {u=this.entity(u).trim();if(!u)return '';if(/^https?:\/\//i.test(u))return u;if(u.indexOf('//')===0)return 'https:'+u;var b=from||this.base;if(u.charAt(0)==='/')return /^https?:\/\/[^/]+/.exec(b)[0]+u;return b.replace(/[^/]*$/,'')+u;},
+  headers: function(page) {return {'User-Agent':this.ua,'Referer':page||this.base+'/'};},
+  response: function(r) {if(!r)throw new Error(this.name+'：没有网络响应');var s=r.status;if(s===403||s===503||s===521)throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+s+'）');if(s!==200)throw new Error(this.name+'：请求失败（HTTP '+s+'）');var b=String(r.body||'');if(/cf-chl-|Just a moment|cf-turnstile|<title>\s*人机校验/i.test(b))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证');return b;},
+  get: async function(u) {return this.response(await LumeSource.http.get(this.abs(u,this.base+'/'),{headers:this.headers()}));},
+  post: async function(u,data) {var h=this.headers();h['Content-Type']='application/x-www-form-urlencoded';h['X-Requested-With']='XMLHttpRequest';return this.response(await LumeSource.http.post(this.abs(u,this.base+'/'),data,{headers:h}));},
+  json: async function(u) {try{return JSON.parse(await this.get(u));}catch(e){if(/NEED_WEBVIEW_VERIFY|HTTP/.test(String(e)))throw e;throw new Error(this.name+'：数据格式已变化');}},
+  tree: function(html) {html=String(html).replace(/<!--[^]*?-->/g,'').replace(/<script\b[^]*?<\/script>|<style\b[^]*?<\/style>/gi,'');var root={tag:'root',attrs:{},children:[],raw:''},stack=[root],re=/<\/?([a-z][\w:-]*)\b([^>]*)>|([^<]+)/gi,m;while((m=re.exec(html))){var parent=stack[stack.length-1];if(m[3]){parent.children.push({tag:'#text',raw:m[3],attrs:{},children:[]});continue;}var tag=m[1].toLowerCase();if(m[0].charAt(1)==='/'){for(var i=stack.length-1;i>0;i--)if(stack[i].tag===tag){stack.length=i;break;}continue;}var attrs={},ar=/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g,a;while((a=ar.exec(m[2])))attrs[a[1].toLowerCase()]=H.entity(a[2]!==undefined?a[2]:a[3]!==undefined?a[3]:a[4]);var node={tag:tag,attrs:attrs,children:[],raw:'',parent:parent};parent.children.push(node);if(!/^(?:img|input|br|hr|meta|link|source|area|embed|wbr)$/.test(tag)&&! /\/$/.test(m[2]))stack.push(node);}return root;},
+  all: function(node,pred) {var out=[],stack=[node];while(stack.length){var n=stack.pop();if(pred(n))out.push(n);if(n.tag==='script'||n.tag==='style')continue;for(var i=n.children.length-1;i>=0;i--)stack.push(n.children[i]);}return out;},
+  cls: function(n,c) {return (' '+(n.attrs.class||'')+' ').indexOf(' '+c+' ')>=0;},
+  text: function(root) {if(!root)return '';if(root.tag==='#text')return this.entity(root.raw);if(root.tag==='script'||root.tag==='style')return '';var frames=[{node:root,i:0,parts:[]}];while(true){var top=frames[frames.length-1],node=top.node;if(top.i<node.children.length){var child=node.children[top.i++];if(child.tag==='#text'){top.parts.push(this.entity(child.raw));continue;}if(child.tag==='script'||child.tag==='style'){top.parts.push('');continue;}frames.push({node:child,i:0,parts:[]});continue;}var rendered=this.clean(top.parts.join(/^(?:p|div|section|article|li|br)$/.test(node.tag)?'\n':''));frames.pop();if(!frames.length)return rendered;frames[frames.length-1].parts.push(rendered);}},
+  first: function(node,pred) {return this.all(node,pred)[0];},
+  links: function(node,pattern) {return this.all(node,function(n){return n.tag==='a'&&pattern.test(n.attrs.href||'');});},
+  image: function(node) {var img=this.first(node,function(n){return n.tag==='img';});return img?this.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs['data-lazy-src']||img.attrs.src,this.base+'/'):null;},
+  title: function(tree) {var h=this.first(tree,function(n){return n.tag==='h1';});if(h)return this.text(h);var meta=this.first(tree,function(n){return n.tag==='meta'&&(n.attrs.property==='og:title'||n.attrs.name==='title');});if(meta)return meta.attrs.content;return this.text(this.first(tree,function(n){return n.tag==='title';}));},
+  cover: function(tree) {var n=this.first(tree,function(n){return n.tag==='meta'&&n.attrs.property==='og:image';});return n?this.abs(n.attrs.content):null;},
+  unique: function(items) {var seen={};return items.filter(function(i){if(!i.id||seen[i.id]||!i.title)return false;seen[i.id]=true;return true;});},
+  next: function(tree,page) {return this.links(tree,new RegExp('(?:[?&]page=|/page/|/page-)(?:'+(page+1)+')(?:\\D|$)')).length>0;},
+  imageContent: function(images,page) {if(!images.length)throw new Error(this.name+'：没有读取到正文图片');var headers={};images.forEach(function(u){headers[u]=H.headers(page);});return {kind:'images',images:images,imageHeaders:headers};},
+  textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
+};
+
+// Bounded metadata cache; playback URLs are always resolved again (they expire).
+var T={cache:{},
+ body:function(response,url){var html=H.response(response);if(/var reversed\s*=|地址已更新|<title>Loading|系统安全验证|__refresh_waf_uid/i.test(html))throw new Error('NEED_WEBVIEW_VERIFY: '+H.abs(url||'/')+' 请先在源站网页完成验证后重试');return html;},
+ searchItems:function(html,pattern,keyword){var items=this.items(html,pattern);if(!keyword)return items;var clean=function(s){return String(s).toLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');},key=clean(keyword);return items.filter(function(i){return clean(i.title).indexOf(key)>=0;});},
+ get:async function(path,fresh){var u=H.abs(path,H.base+'/'),v=this.cache[u];if(!fresh&&v&&Date.now()-v.time<120000)return v.body;var r=await LumeSource.http.get(u,{headers:H.headers(u)});var s;try{s=this.body(r,u);}catch(error){if(!LumeSource.webFallback||!LumeSource.web||!LumeSource.web.render||String(error).indexOf('NEED_WEBVIEW_VERIFY')<0)throw error;var page=await LumeSource.web.render({url:u,userAgent:H.ua,headers:H.headers(u),timeoutMs:7000,steps:[{type:'wait',selector:'.book-title, .playlist, .book-dt'}]});s=this.body({status:200,body:page&&page.html||''},u);}if(!fresh){if(Object.keys(this.cache).length>=16)this.cache={};this.cache[u]={time:Date.now(),body:s};}return s;},
+ path:function(u){return H.entity(u).replace(/^https?:\/\/[^/]+/i,'');},
+ meta:function(tree,key){var n=H.first(tree,function(n){return n.tag==='meta'&&(n.attrs.property===key||n.attrs.name===key);});return n?n.attrs.content:'';},
+ items:function(html,pattern){var tree=H.tree(html),out=[],seen={},rank={};H.links(tree,pattern).forEach(function(a){var id=T.path(a.attrs.href),img=H.first(a,function(n){return n.tag==='img';}),title=H.text(a),score=img?1:3;if(img)title=img.attrs.alt||img.attrs.title||title;title=H.clean(title).replace(/有声小说$/,'');var quoted=/^《([^》]+)》/.exec(title);if(quoted)title=quoted[1];if(!title||/^(?:立即收听|开始收听|[\d.]+[万亿]?(?:集|次)?)$/.test(title))return;var p=a;for(var i=0;i<4&&!img&&p.parent;i++){p=p.parent;img=H.first(p,function(n){return n.tag==='img';});}var cover=img?H.abs(img.attrs['data-original']||img.attrs['data-src']||img.attrs.src):null;if(seen[id]){if(!seen[id].cover&&cover)seen[id].cover=cover;if(score>rank[id]){seen[id].title=title;rank[id]=score;}return;}var item={id:id,title:title,cover:cover,coverHeaders:H.headers()};seen[id]=item;rank[id]=score;out.push(item);});return out;},
+ details:function(html,id){var tree=H.tree(html),title=H.title(tree).replace(/有声小说$/,'').trim(),cover=H.cover(tree);if(!cover){var imgs=H.all(tree,function(n){return n.tag==='img';});for(var i=0;i<imgs.length;i++){var img=imgs[i];if((img.attrs.alt||'').indexOf(title)>=0){cover=H.abs(img.attrs['data-original']||img.attrs.src);break;}}}return {id:id,title:title,cover:cover,coverHeaders:H.headers(),description:H.clean(this.meta(tree,'og:description')||this.meta(tree,'description'))};},
+ chapters:function(html,pattern){var tree=H.tree(html);var list=H.first(tree,function(n){return n.attrs.id==='playlist'||H.cls(n,'playlist')||H.cls(n,'info-li');});var anchors=H.links(list||tree,pattern);return H.unique(anchors.map(function(a){return {id:T.path(a.attrs.href),title:H.text(a)};})).filter(function(c){return !/^(立即收听|开始收听|继续收听|上一集|下一集)$/.test(c.title);});},
+ categories:function(html,pattern){var tree=H.tree(html);return H.unique(H.links(tree,pattern).map(function(a){return {id:T.path(a.attrs.href),title:H.text(a)};}));},
+ next:function(html,page){var t=H.tree(html);return H.all(t,function(n){return n.tag==='a'&&(/^(下一页|下页|下一頁|›|»|>)$/.test(H.text(n))||n.attrs.rel==='next');}).length>0;},
+ audio:function(url,page){url=H.entity(String(url||'')).replace(/\\\//g,'/');if(!/^https?:\/\//i.test(url))throw new Error(H.name+'：未取得音频地址，请在源站检查该章节');return {kind:'audio',url:url,headers:H.headers(H.abs(page))};},
+ variable:function(html,name){var m=new RegExp('\\b'+name+'\\s*=\\s*(["\x27])([\\s\\S]*?)\\1').exec(html);return m?m[2]:'';},
+ range:function(text){var m=H.clean(text).match(/(?:第)?\s*(\d+)\s*[-—~～]\s*(\d+)/);return m?{start:Number(m[1]),end:Number(m[2])}:null;},
+ slots:function(html,pattern){var tree=H.tree(html),nodes=H.all(tree,function(n){return (n.tag==='a'||n.tag==='option')&&pattern.test(n.attrs.href||n.attrs.value||'')&&T.range(H.text(n));});var out=[],seen={};nodes.forEach(function(n){var r=T.range(H.text(n)),p=T.path(n.attrs.href||n.attrs.value);if(seen[r.start])return;seen[r.start]=true;out.push({page:p,start:r.start,end:r.end});});return out.sort(function(a,b){return a.start-b.start;});},
+ virtual:function(slots,known){var out=[];slots.forEach(function(s){for(var n=s.start;n<=s.end;n++){var k=n-s.start;out.push({id:JSON.stringify({page:s.page,offset:k}),title:known&&s.start===1&&known[k]?known[k].title:'第'+n+'集'});}});return out;},
+ resolve:function(html,pattern,offset){var a=this.chapters(html,pattern);if(!a[offset])throw new Error(H.name+'：目录发生变化，请刷新章节后重试');return a[offset].id;},
+ decrypt:async function(data,key,iv){var out=await LumeSource.tools.aes({data:data,key:key,iv:iv,mode:'CBC',encrypt:false});return LumeSource.tools.base64Decode(out);}
+};
+
+H.base="https://www.ting13.cc";H.name="13听书网";
+var LumeSource=Object.assign({"id":"ting13_audiobook","name":"13听书网","version":"1.0.0","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"},{
+webFallback:true,
+categories:async function(){return T.categories(await T.get('/'),/^\/yousheng\/[a-z]+\/lastupdate\.html$/);},
+home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/youshengxiaoshuo\/\d+\/$/)}];},
+list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),html;
+ if(k){html=T.body(await LumeSource.http.post(H.base+'/novelsearch/search/result.html','searchword='+encodeURIComponent(k)+'&page='+p,{headers:Object.assign(H.headers(),{'Content-Type':'application/x-www-form-urlencoded'})}));}
+ else{var u=o.categoryId||'/yousheng/xuanhuan/lastupdate.html';if(p>1)u=u.replace(/\.html$/,'/'+p+'.html');html=await T.get(u);}
+ return {items:T.searchItems(html,/^\/youshengxiaoshuo\/\d+\/$/,k),hasMore:T.next(html,p)};},
+directory:async function(id){var t=H.tree(await T.get(id)),a=H.first(t,function(n){return n.tag==='a'&&H.cls(n,'dirurl');});if(!a)throw new Error('13听书网：未找到全部章节入口');return T.path(a.attrs.href).split('?')[0];},
+chapters:async function(o){var dir=await this.directory(o.id),html=await T.get(dir+'?page=1&sort=asc'),known=T.chapters(html,/^\/play\/\d+_\d+_\d+\.html$/),slots=T.slots(html,/^\/tingdirs\//);if(!slots.length)return known;
+ if(slots[0].start>1)slots.unshift({page:dir+'?page=1&sort=asc',start:1,end:known.length});
+ var out=[];slots.forEach(function(s,i){for(var n=s.start;n<=s.end;n++)out.push({id:JSON.stringify({book:o.id,part:i+1,offset:n-s.start}),title:i===0&&known[n-1]?known[n-1].title:'第'+n+'集'});});return out;},
+detail:async function(o){return T.details(await T.get(o.id),o.id);},
+signature:function(token){var alphabet='PXhw7U1B0a9kQDKZsTjIASmOeNzxYG4CHo1JyRfg2b8FLpEvr3FtVnlqMidu6c',out='';for(var i=0;i<token.length;i++){var index=alphabet.indexOf(token[i]);out+=alphabet[Math.floor(Math.random()*62)]+(index<0?token[i]:alphabet[(index+3)%62])+alphabet[Math.floor(Math.random()*62)];}return out;},
+content:async function(o){var id=o.chapterId;if(id.charAt(0)==='{'){var entry=JSON.parse(id),dir=await this.directory(entry.book);id=T.resolve(await T.get(dir+'?page='+entry.part+'&sort=asc'),/^\/play\/\d+_\d+_\d+\.html$/,entry.offset);}
+ if(LumeSource.web&&LumeSource.web.render){ var page=await LumeSource.web.render({url:H.abs(id),userAgent:H.ua,timeoutMs:7000,steps:[{type:'wait',selector:'audio[src]'}],script:"var audio=document.querySelector('audio[src]');return audio?audio.src:null;"});
+ return T.audio(page&&page.result,id);}
+ var html=await T.get(id,true),tree=H.tree(html),nid=T.meta(tree,'_b'),cid=T.meta(tree,'_p'),token=T.meta(tree,'_c'),sort=T.meta(tree,'_d')||'read';
+ if(!nid||!cid)throw new Error('NEED_WEBVIEW_VERIFY: '+H.abs(id)+' 请打开播放页完成验证后重试');
+ var headers=Object.assign(H.headers(H.abs(id)),{'Content-Type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest','Origin':H.base,'sc':token,'sp':this.signature(token)});
+ var r=T.body(await LumeSource.http.post(H.base+'/api/mapi/play','nid='+encodeURIComponent(nid)+'&cid='+encodeURIComponent(cid)+'&sort='+encodeURIComponent(sort),{headers:headers})),data=JSON.parse(r);
+ return T.audio(data.url||(data.data&&data.data.url),id);
+}
+});

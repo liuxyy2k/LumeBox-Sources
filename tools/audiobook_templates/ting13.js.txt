@@ -1,0 +1,22 @@
+webFallback:true,
+categories:async function(){return T.categories(await T.get('/'),/^\/yousheng\/[a-z]+\/lastupdate\.html$/);},
+home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/youshengxiaoshuo\/\d+\/$/)}];},
+list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),html;
+ if(k){html=T.body(await LumeSource.http.post(H.base+'/novelsearch/search/result.html','searchword='+encodeURIComponent(k)+'&page='+p,{headers:Object.assign(H.headers(),{'Content-Type':'application/x-www-form-urlencoded'})}));}
+ else{var u=o.categoryId||'/yousheng/xuanhuan/lastupdate.html';if(p>1)u=u.replace(/\.html$/,'/'+p+'.html');html=await T.get(u);}
+ return {items:T.searchItems(html,/^\/youshengxiaoshuo\/\d+\/$/,k),hasMore:T.next(html,p)};},
+directory:async function(id){var t=H.tree(await T.get(id)),a=H.first(t,function(n){return n.tag==='a'&&H.cls(n,'dirurl');});if(!a)throw new Error('13听书网：未找到全部章节入口');return T.path(a.attrs.href).split('?')[0];},
+chapters:async function(o){var dir=await this.directory(o.id),html=await T.get(dir+'?page=1&sort=asc'),known=T.chapters(html,/^\/play\/\d+_\d+_\d+\.html$/),slots=T.slots(html,/^\/tingdirs\//);if(!slots.length)return known;
+ if(slots[0].start>1)slots.unshift({page:dir+'?page=1&sort=asc',start:1,end:known.length});
+ var out=[];slots.forEach(function(s,i){for(var n=s.start;n<=s.end;n++)out.push({id:JSON.stringify({book:o.id,part:i+1,offset:n-s.start}),title:i===0&&known[n-1]?known[n-1].title:'第'+n+'集'});});return out;},
+detail:async function(o){return T.details(await T.get(o.id),o.id);},
+signature:function(token){var alphabet='PXhw7U1B0a9kQDKZsTjIASmOeNzxYG4CHo1JyRfg2b8FLpEvr3FtVnlqMidu6c',out='';for(var i=0;i<token.length;i++){var index=alphabet.indexOf(token[i]);out+=alphabet[Math.floor(Math.random()*62)]+(index<0?token[i]:alphabet[(index+3)%62])+alphabet[Math.floor(Math.random()*62)];}return out;},
+content:async function(o){var id=o.chapterId;if(id.charAt(0)==='{'){var entry=JSON.parse(id),dir=await this.directory(entry.book);id=T.resolve(await T.get(dir+'?page='+entry.part+'&sort=asc'),/^\/play\/\d+_\d+_\d+\.html$/,entry.offset);}
+ if(LumeSource.web&&LumeSource.web.render){ var page=await LumeSource.web.render({url:H.abs(id),userAgent:H.ua,timeoutMs:7000,steps:[{type:'wait',selector:'audio[src]'}],script:"var audio=document.querySelector('audio[src]');return audio?audio.src:null;"});
+ return T.audio(page&&page.result,id);}
+ var html=await T.get(id,true),tree=H.tree(html),nid=T.meta(tree,'_b'),cid=T.meta(tree,'_p'),token=T.meta(tree,'_c'),sort=T.meta(tree,'_d')||'read';
+ if(!nid||!cid)throw new Error('NEED_WEBVIEW_VERIFY: '+H.abs(id)+' 请打开播放页完成验证后重试');
+ var headers=Object.assign(H.headers(H.abs(id)),{'Content-Type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest','Origin':H.base,'sc':token,'sp':this.signature(token)});
+ var r=T.body(await LumeSource.http.post(H.base+'/api/mapi/play','nid='+encodeURIComponent(nid)+'&cid='+encodeURIComponent(cid)+'&sort='+encodeURIComponent(sort),{headers:headers})),data=JSON.parse(r);
+ return T.audio(data.url||(data.data&&data.data.url),id);
+}

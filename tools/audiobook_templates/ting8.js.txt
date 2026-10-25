@@ -1,0 +1,6 @@
+categories:async function(){return T.categories(await T.get('/'),/^\/books\/\d+\.html$/);},
+home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/mp3\/\d+\.html$/)}];},
+list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),u=k?'/search.php?searchword='+encodeURIComponent(k)+'&page='+p:(o.categoryId||'/books/1.html');if(!k&&p>1)u=u.replace(/\.html$/,'-'+p+'.html');var html=await T.get(u);return {items:T.searchItems(html,/^\/mp3\/\d+\.html$/,k),hasMore:T.next(html,p)||new RegExp('/books/\\d+-'+(p+1)+'\\.html').test(html)};},
+detail:async function(o){return T.details(await T.get(o.id),o.id);},
+chapters:async function(o){return T.chapters(await T.get(o.id),/^\/play\/\d+-\d+-\d+\.html$/).map(function(c){var m=/\/(\d+)-(\d+)-(\d+)\.html$/.exec(c.id);c.line='线路'+(Number(m[2])+1);return c;});},
+content:async function(o){var html=await T.get(o.chapterId,true),url=T.variable(html,'now');return T.audio(url,o.chapterId);}

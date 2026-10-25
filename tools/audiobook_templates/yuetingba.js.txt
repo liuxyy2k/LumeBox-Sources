@@ -1,0 +1,15 @@
+categories:async function(){return T.categories(await T.get('/'),/^\/book\/[a-z0-9]+\/1$/);},
+home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/book\/detail\/[a-f0-9-]+\/0$/)}];},
+list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),u=k?'/Search?type=1&name='+encodeURIComponent(k)+'&page='+p:(o.categoryId||'/book/1/1').replace(/\/\d+$/,'/'+p),html=await T.get(u);return {items:T.searchItems(html,/^\/book\/detail\/[a-f0-9-]+\/0$/,k),hasMore:T.next(html,p)};},
+detail:async function(o){return T.details(await T.get(o.id),o.id);},
+pageChapters:function(html){var tree=H.tree(html),a=H.all(tree,function(n){return n.tag==='a'&&n.attrs.title&&/^testFn\(/.test(n.attrs.onclick||'');});return H.unique(a.map(function(n){var m=/testFn\('([^']+)'\)/.exec(n.attrs.onclick);return {id:m?m[1]:'',title:n.attrs.title};}));},
+chapters:async function(o){var html=await T.get(o.id),known=this.pageChapters(html),slots=T.slots(html,/^\/book\/detail\/[a-f0-9-]+\/\d+$/);return slots.length?T.virtual(slots,known):known;},
+content:async function(o){var html=await T.get(o.id),id=o.chapterId;if(id.charAt(0)==='{'){var entry=JSON.parse(id),items=this.pageChapters(await T.get(entry.page));if(!items[entry.offset])throw new Error('悦听吧：目录已更新，请刷新章节');id=items[entry.offset].id;}
+ var info=JSON.parse(await T.get('/api/app/docs-listen/'+encodeURIComponent(id)+'/ting-with-efi',true));if(info.code||info.error||!info.efi)throw new Error('悦听吧：'+(info.message||'该章节暂不可播放，请到源站检查权限'));
+ var secret='xMiP5W1DHBxC5PwQ5oj5QfRn0tsT5UBk',assl=T.variable(html,'assl').replace(secret,''),servers=JSON.parse(await T.decrypt(assl,'le95G3hnFDJsBE+1/v9eYw==','IvswQFEUdKYf+d1wKpYLTg=='));
+ var key='',iv='',raw=id.replace(/-/g,''),time=info.creationTime.replace(/[-:T. ]/g,'').padEnd(20,'0');for(var i=0;i<raw.length;i++)key+=String.fromCharCode(raw.charCodeAt(i)+Number(time[i%20]));for(var j=20;j>4;j--)iv+=String.fromCharCode(raw.charCodeAt(j)+Number(time[j-1]));
+ var file=await T.decrypt(info.efi,await LumeSource.tools.base64Encode(key),await LumeSource.tools.base64Encode(iv)),name=file.split('/').pop(),book=info.bookId,tail=book.split('-').pop();
+ var candidates=servers.filter(function(s){return s.AsType=='1'&&s.Type==='A';}),bound=candidates.filter(function(s){return s.BookIds&&s.BookIds.indexOf(tail)>=0;});candidates=bound.length?bound:candidates.filter(function(s){return (!s.BookIds||!s.BookIds.trim())&&s.Ratio>0;});
+ candidates.sort(function(a,b){return Number(b.Ratio||0)-Number(a.Ratio||0);});var server=candidates[0];if(!server)throw new Error('悦听吧：源站未提供可用音频服务器');
+ var py=T.variable(html,'py');if(/_p$/.test(server.Name))file='/'+py+'_'+book+'/'+name;else if(/_b$/.test(server.Name))file='/myfiles/host/listen/booksdir/'+py+'_'+book+'/'+name;
+ var expire=Math.floor(Date.now()/1000)+600,token=await LumeSource.tools.digest('md5',name+'|'+expire+'|'+secret);return T.audio(server.Scheme+'://'+server.Value+':'+server.Port+file+'?token='+token+'&expire='+expire,o.id);}

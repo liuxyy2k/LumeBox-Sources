@@ -1,0 +1,12 @@
+categories:async function(){return T.categories(await T.get('/'),/^\/yousheng\/[a-z]+\.html$/);},
+home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/tingshu\/\d+\/$/)}];},
+list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),html;
+ if(k){var data='searchtype=novelname&searchword='+encodeURIComponent(k)+'&page='+p;html=T.body(await LumeSource.http.post(H.base+'/so/search.html',data,{headers:Object.assign(H.headers(),{'Content-Type':'application/x-www-form-urlencoded'})}));}
+ else{var u=o.categoryId||'/yousheng/xuanhuan.html';if(p>1)u=u.replace(/\.html$/,'/'+p+'.html');html=await T.get(u);}
+ return {items:T.searchItems(html,/^\/tingshu\/\d+\/$/,k),hasMore:T.next(html,p)};},
+detail:async function(o){return T.details(await T.get(o.id),o.id);},
+chapters:async function(o){var html=await T.get(o.id),known=T.chapters(html,/^\/tingshu\/\d+\/\d+\.html$/),slots=T.slots(html,/^\/tingshu\/\d+\/(?:p\d+\.html)?$/);return slots.length?T.virtual(slots,known):known;},
+content:async function(o){var id=o.chapterId;if(id.charAt(0)==='{'){var entry=JSON.parse(id);id=T.resolve(await T.get(entry.page),/^\/tingshu\/\d+\/\d+\.html$/,entry.offset);}
+ var html=await T.get(id,true),tree=H.tree(html),frame=H.first(tree,function(n){return n.tag==='iframe'&&/^\/player\//.test(n.attrs.src||'');});
+ if(!frame)throw new Error('麒麟听书：源站没有提供播放入口');
+ var player=await T.get(frame.attrs.src,true),m=/\burl\d+\s*=\s*['"]([^'"]+)['"]/.exec(player);if(!m)m=/\bmp3\s*:\s*['"](https?:[^'"]+)['"]/.exec(player);return T.audio(m&&m[1],id);}

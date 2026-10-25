@@ -32,3 +32,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/1024Vide
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/四虎.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/618208.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/UNCams.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/麒麟听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13听书网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js

@@ -41,7 +41,7 @@ test('Canonical manifests point to existing Chinese filenames with matching runt
 
 test('two subscriptions are disjoint, total routes by section, legacy links retain all sources', () => {
   const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
-  assert.equal(lines('audiobooks').length,0);
+  assert.equal(lines('audiobooks').length,4);
   assert.equal(lines('photos').length,1);
   assert.equal(lines('movies').length,3);
   const current=['comics','videos'].flatMap(lines);
@@ -69,5 +69,21 @@ test('active content directories exist and legacy script URLs mirror canonical f
   ]) {
     const read = dir => fs.readFileSync(path.join(root,dir,name),'utf8').replace(/\r\n/g,'\n');
     assert.equal(read(oldDir).replace(/^\/\/ 兼容地址镜像[^\n]*\n/m,''), read(newDir));
+  }
+});
+
+test('new audiobook subscription is included in canonical and legacy video manifests', () => {
+  const lines = name => fs.readFileSync(path.join(root,name),'utf8').split(/\r?\n/).filter(line=>line.startsWith('https://'));
+  const audio = lines('audiobooks');
+  assert.equal(audio.length, 4);
+  for (const url of audio) {
+    assert.ok(lines('videos').includes(url));
+    assert.ok(lines('视频订阅.js').includes(url));
+    const file = decodeURIComponent(new URL(url).pathname.split('/main/')[1]);
+    const script = fs.readFileSync(path.join(root,file),'utf8');
+    const meta = JSON.parse(script.match(/LumeSource: (\{[^\n]+\})/)[1]);
+    assert.equal(meta.category,'video');
+    assert.equal(meta.mediaType,'audio');
+    assert.equal(meta.group,'有声小说');
   }
 });
