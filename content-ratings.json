@@ -199,6 +199,21 @@
     },
     "pica177_comic": {
       "rating": "18+"
+    },
+    "maturetube_video": {
+      "rating": "18+"
+    },
+    "v1024_video": {
+      "rating": "18+"
+    },
+    "yidan17_comic": {
+      "rating": "18+"
+    },
+    "hu4_video": {
+      "rating": "18+"
+    },
+    "s618208_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -254,6 +269,11 @@
     "xtube_video": "XTUBE（zh.xtube.com，成人直播/视频站，全站 18+；doppiocdn HLS 直链）",
     "aqd_video": "爱情岛（38.148.206.8 站群，成人视频站，全站 18+；页面是 crypt_html_js 混淆，脚本内置解码）",
     "ikanmanhua_comic": "愛看漫畫（ikanmanhua.org，成人 H 漫画站，全站 18+）",
-    "pica177_comic": "177漫畫（177pica.com，日文/中文成人 H 漫画与全彩 CG 站，全站 18+）"
+    "pica177_comic": "177漫畫（177pica.com，日文/中文成人 H 漫画与全彩 CG 站，全站 18+）",
+    "maturetube_video": "MatureTube（maturetube.com，成人聚合搜索站，全站 18+；取页走直连→web.render→jina 三级）",
+    "v1024_video": "1024Videos（1024videos.com，中文成人视频站，全站 18+；接口 POST v2.cdn199.com/js，CryptoJS 信封口令 xxx）",
+    "yidan17_comic": "一耽女孩（yidan17.club，BL 耽美漫画站，全站 18+；uni-app H5，POST /api/getComic*）",
+    "hu4_video": "四虎（4hu.tv，成人视频站，全站 18+；/json 接口是 AES-256-CBC，脚本自带纯 JS AES；直连吃 CF 时走 web.render）",
+    "s618208_video": "618208（618208.xyz，成人视频站，全站 18+；苹果CMS 改造版，m3u8 直链）"
   }
 }
