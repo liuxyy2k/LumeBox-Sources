@@ -220,6 +220,9 @@
     },
     "mfc_video": {
       "rating": "18+"
+    },
+    "lu320_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -282,6 +285,7 @@
     "hu4_video": "四虎（4hu.tv，成人视频站，全站 18+；/json 接口是 AES-256-CBC，脚本自带纯 JS AES；直连吃 CF 时走 web.render）",
     "s618208_video": "618208（618208.xyz，成人视频站，全站 18+；苹果CMS 改造版，m3u8 直链）",
     "uncams_video": "UN Cams（uncams.com，成人直播站，全站 18+；房间列表走 /api/ts/roomlist/room-list/，播放给 webplayer）",
-    "mfc_video": "MyFreeCams（myfreecams.com，成人直播站，全站 18+；在线列表由 WebSocket 填充，源内用网页渲染取列表、播放走 webplayer）"
+    "mfc_video": "MyFreeCams（myfreecams.com，成人直播站，全站 18+；在线列表由 WebSocket 填充，源内用网页渲染取列表、播放走 webplayer）",
+    "lu320_video": "320lu 小视频（yd.kmuan.com:66 / 111.62.156.183:66，成人短视频站，全站 18+；播放走 kan.php 现取一次性签名 mp4）"
   }
 }

@@ -37,3 +37,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/13�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/听书吧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/悦听吧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MyFreeCams.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小视频.js
