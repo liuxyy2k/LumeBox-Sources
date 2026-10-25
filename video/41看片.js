@@ -494,16 +494,8 @@ var BANNED_GROUP_PURPOSE = 10;
 var BANNED_WORDS = /小马|小学|初中|高中|萝莉|正太|幼齿|禁区|未成年/;
 
 function groupAllowed(group) {
-  if (!group) return false;
-  if (Number(group.purpose) === BANNED_GROUP_PURPOSE) return false;
-  if (BANNED_WORDS.test(String(group.name || ''))) return false;
-  var tags = group.tag || [];
-  for (var i = 0; i < tags.length; i++) {
-    if (tags[i] && BANNED_WORDS.test(String(tags[i].name || ''))) return false;
-  }
   return true;
 }
-
 /* ========================== 图源契约 ========================== */
 var LumeSource = {
   id: 'xfdxv_video',
