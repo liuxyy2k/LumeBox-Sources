@@ -50,3 +50,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/杏吧.j
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Familyporn.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AsianStreetMeat.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/MatureNL.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Pornhub.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/FakeHub.js

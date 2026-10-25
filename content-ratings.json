@@ -256,6 +256,12 @@
     },
     "maturenl_video": {
       "rating": "18+"
+    },
+    "pornhub_video": {
+      "rating": "18+"
+    },
+    "fakehub_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -330,6 +336,8 @@
     "sex8_video": "杏吧/性吧（sex8.cc，Discuz 华语成人社区，65 个内容专版：樱花小猫/伍貳柒捌/粉墨人生/玩偶姐姐/刘玥/原创乱倫大神…，全站 18+；游客可直接取帖子内嵌 m3u8）",
     "familyporn_video": "Familyporn.tv（英文 taboo/step- 免费 tube，KVS；部分视频 video_url 指向付费墙、event_reporting2 是统计像素，源内用 Range 验 content-type 后才返回）",
     "asm_video": "Asian Street Meat（asianstreetmeat.com，东南亚街头题材付费站，公开 214 个现场官方 trailer，cdn.streetmeatasia.com 直链 200 video/mp4）",
-    "maturenl_video": "Mature.nl（熟女/年长题材会员库，更新页公开 trailer_soft.mp4，CDN 签名带 validfrom/validto 时间窗）"
+    "maturenl_video": "Mature.nl（熟女/年长题材会员库，更新页公开 trailer_soft.mp4，CDN 签名带 validfrom/validto 时间窗）",
+    "pornhub_video": "Pornhub（pornhub.com，全品类综合大站，全站 18+；mediaDefinitions 的 HLS 需带 Platform: pc 头才不再 410，实测 1080p master.m3u8 200）",
+    "fakehub_video": "FakeHub（fakehub.com，PublicAgent/FakeTaxi 等品牌合集，全站 18+；场景页官方预览 mp4 实测 206/50MB。publicagent.com 本身只是落地页无片源）"
   }
 }
