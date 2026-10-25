@@ -49,6 +49,15 @@
 #     注意：封面是逐字节反转的 JPEG（App 显示占位图）；`/awsapi` 与 `/api/m3u8` 只认桌面 UA。
 #   · 汤头条（p1.wgbqoiqv.com）：Nuxt 壳 + 独立接口域 `api4.z3h4q3fjy.cc/pwa.php`，
 #     AES-256-CFB + MD5(hex(SHA256(...))) 签名；免费片整片，付费片服务端只给 ~2 分钟试看（已如实标注）。
+#   · hxc（h4dh3.com）：Vue3 + obfuscator；`{endata: AES-256-CBC(json), ents: AES-256-CBC(北京墙上时间秒)}`
+#     —— ents 必须用北京墙上时间（发 UTC 一律 607 非法请求）。**VIP 真破解**：`/videos/getPreUrl` 匿名给签名地址，
+#     签名只覆盖路径不覆盖区间，**删掉 start/end 就是整片**（2214s 标称 → 738 段/2214.3s）。
+#   · Butterfly（d1q6v0m0fmxvl0.cloudfront.net）：Butterfly 壳独立部署，interfaceKey `0a958fb9…`；
+#     POST 带 `{data: AES-128-CBC(payload,"BxJand%xf5h3sycH")}` 信封，匿名设备登录即整片 m3u8。
+#   · Butterfly2（d17rhkrwip15vt.cloudfront.net）：同 SDK 另一运营方（只换 interfaceKey `vEukA…` 与 API 域，
+#     API 在 `32sdhsudan.com` 等三台，页面域 `/api/app` 是 405 静态托管）；只开热门流，搜索退化为本地过滤。
+#   ⚠️ 同族三套（HSTV / Butterfly / Butterfly2）interfaceKey 各不相同，**不能互为镜像**，各自一个源。
+#   ⚠️ 不做：daga88n.com（「萝莉窝」，以未成年为卖点）。
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
@@ -62,3 +71,6 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/汤头条.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hxc.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Butterfly.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Butterfly2.js
