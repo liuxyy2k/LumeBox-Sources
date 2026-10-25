@@ -547,7 +547,7 @@ var LumeSource = {
           }
           if (!options.length) continue;
           groups.push({ id: 'tag:' + group.id, title: String(group.name || ('分组 ' + group.id)), options: options });
-          if (groups.length >= 10) break;
+      
         }
         cached = groups;
         try {
