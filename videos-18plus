@@ -14,11 +14,22 @@
 #   · 播放地址按 episodeId 可预测：/stream/{id}/master.m3u8，实测 200 + #EXTM3U。
 #
 # 每个文件都是单文件源脚本（`// LumeSource: {...}` 身份头），也可以单独下载导入。
-# 2026-10-25 新增两源：
+# 2026-10-25 新增五源：
 #   · 快猫（yue5xi5.xyz）：短视频；接口是 AES-128-CBC 加密 + md5 签名（脚本自带纯 JS 实现），
 #     detail 用站点自己的游客号 60364099 过登录；实测 150 条 is_play 全 1，没有 VIP 播放锁。
 #   · ThePornJoy（thepornjoy.org）：KVS tube；详情页内联签名 mp4，实测 206 + video/mp4；
 #     登录只影响收藏/评论，播放免费。镜像 www.thepornjoy.org（301 回主域）。
+#   · 好妻网（haoqi7.com）：TanStack Start SSR；数据走免 token 的 /_serverFn（seroval 编码）；
+#     **VIP 锁只在前端**：SSR 把整片 m3u8 直给匿名请求，前端播放器才挑试看地址。
+#     分段时长对得上站点 duration（716s→239 段/717s 等），不是 2 分钟试看。**必须配代理**。
+#   · 41看片（xfdxv.414459.lifestyle:8283）：543786 / 542372 两个短链壳的落点；
+#     首页 Fernet 加密配置解出 apiBase sm-api.wieuc.com，m3u8 直链（3 线路 × 多清晰度）。
+#   · SpankBang（spankbang.com）：**Cloudflare JS 挑战**，本机 403 无法取页；
+#     脚本按 NEED_WEBVIEW_VERIFY 收口，需在 App 网页视图过校验后复用 Cookie，
+#     解析规则在没有实测样本的情况下按兜底锚点写（详见脚本头注释）。
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/好妻网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/41看片.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/SpankBang.js

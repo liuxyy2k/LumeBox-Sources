@@ -7,9 +7,9 @@
 | 入口 | 收录内容 | 源数量 |
 | --- | --- | ---: |
 | [漫画 / 美图](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comics) | 漫画与图片源 | 51 |
-| [视频 / 影视](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos) | 视频、影视、直播与听书源 | 50 |
+| [视频 / 影视](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/videos) | 视频、影视、直播与听书源 | 71 |
 | [有声小说](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobooks) | 麒麟听书、13听书网、听书吧、悦听吧 | 4 |
-| [总订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all) | 漫画与视频全部分组，按板块导入 | 109 |
+| [总订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/all) | 漫画与视频全部分组，按板块导入 | 132 |
 
 在 App 的源选择页点击「+」，选择订阅导入并粘贴对应入口的链接。
 
