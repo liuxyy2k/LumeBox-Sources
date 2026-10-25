@@ -34,15 +34,22 @@
 //     · 站点标成免费（access_type=1）的片子也一样：detail 里 can_play=false、is_unlocked=false，url 仍为空；
 //     · 拿猜出来的直链撞 CDN（…/<hash>/49.m3u8、index.m3u8、加 .txt 后缀…）全部 404；
 //     · 页面是纯 SPA，没有 SSR / og:video 可蹭（/homepage/video/{id} 回的还是同一个空壳）。
-//   结论：**海角把播放地址绑在登录态上**（X-User-Token / X-User-Id），匿名只能拿元数据 + 封面。
+//   结论：**海角的播放地址不是「登录就有」，登录之后还要「解锁」**。
+//   2026-10-25 用真实登录态（浏览器登录后导出的 token + uid=17761204）实测：
+//     · GET /api/topic/att/{attachment_id}  带着 X-User-Token / X-User-Id / Cookie → 200，
+//       但 3 条线路（普通1 / 普通2 / VIP线路）的 `url` **仍然全为空**（逐层 base64 解出来确认过）；
+//     · 详情行里带 `is_unlocked` / `can_play` 两个字段 —— 说明还差一步 `POST /api/attachment`
+//       的解锁动作（观影券 / VIP / 花积分），那是站点账务，本源不去绕、不代刷。
 //   所以本源：
 //     1) 元数据（分类 / 列表 / 搜索 / 详情 / 封面 / 线路名）匿名全部可用；
 //     2) content 拿不到地址时**抛可读错误**，把上面这段证据写进报错里 —— 不伪造、不拿别的片顶替；
 //     3) 支持登录：账号密码填「源设置 → 账号登入」，或把浏览器 Cookie（含 token=、uid=）
 //        粘到「网络配置」，本源用 /api/login/signin 换 token 并带 X-User-Token / X-User-Id 重取地址。
-//        ——登录后大部分片子还要「观影券 / VIP」，那是站点账务，本源不去绕。
+//        ——登录只解决「身份」，片子本身还要「解锁」，那一步本源不做。
+//        注：Cookie 里可能同时存在别的域的同名 uid（例如广告域 ad.* 的 16 位十六进制 uid），
+//        本源优先取**纯数字**的那个（海角的 uid 是数字），避免把广告 uid 当账号 id 发出去。
 //     4) 站点 HLS 的 EXT-X-KEY 密钥在播放器里还要过一层 wasm（同名 .jpg 参与计算，
-//        play 页 `jquery_key`），**这点没能验证**（匿名拿不到一条地址）；如果哪天拿到地址却
+//        play 页 `jquery_key`），**这点没能验证**（拿不到一条真实地址）；如果哪天解锁后拿到地址却
 //        解不出画面，大概率是这个原因，不是解析错了。
 //
 // ── 未成年相关的分类/标签：分类树里「服装 → 学生」(#20)、「特色 → 校园」(#40) 属于未成年指向，
@@ -227,10 +234,24 @@ var AUTH_MEMORY = null;
 function authFromCookie(cookieText) {
   var text = String(cookieText || '');
   if (!text) return null;
-  var token = /(?:^|;\s*)token=([^;]+)/i.exec(text);
-  var uid = /(?:^|;\s*)uid=([^;]+)/i.exec(text);
-  if (token && uid) return { token: token[1].trim(), uid: uid[1].trim() };
-  return null;
+  var tokenMatch = /(?:^|;\s*)token=([^;]+)/i.exec(text);
+  if (!tokenMatch) return null;
+  // Cookie 里常有别的域的同名 uid（例：广告域 ad.* 写的 16 位十六进制）。
+  // 海角自己的 uid 是纯数字，所以优先取纯数字那个，取不到才退回第一个。
+  var allUids = [];
+  var uidPattern = /(?:^|;\s*)uid=([^;]+)/gi;
+  var hit;
+  while ((hit = uidPattern.exec(text)) !== null) allUids.push(String(hit[1]).trim());
+  if (!allUids.length) return null;
+  var numeric = null;
+  for (var index = 0; index < allUids.length; index++) {
+    if (/^\d+$/.test(allUids[index])) {
+      numeric = allUids[index];
+      break;
+    }
+  }
+  var uid = numeric || allUids[0];
+  return { token: tokenMatch[1].trim(), uid: uid };
 }
 
 /// 登录态来源：Cookie（宿主注入的 config.cookie）> fs 缓存 > 账号密码换 token。
