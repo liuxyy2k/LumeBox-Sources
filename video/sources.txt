@@ -1,4 +1,4 @@
-# 视频订阅（本目录全部 47 个源，按文件名排序）
+# 视频订阅（本目录全部 49 个源，按文件名排序）
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/85PO.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn视频.js
@@ -46,3 +46,5 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/啪啪�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/小黄书听书.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/亚色影库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜读小说听书.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js

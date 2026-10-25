@@ -14,4 +14,11 @@
 #   · 播放地址按 episodeId 可预测：/stream/{id}/master.m3u8，实测 200 + #EXTM3U。
 #
 # 每个文件都是单文件源脚本（`// LumeSource: {...}` 身份头），也可以单独下载导入。
+# 2026-10-25 新增两源：
+#   · 快猫（yue5xi5.xyz）：短视频；接口是 AES-128-CBC 加密 + md5 签名（脚本自带纯 JS 实现），
+#     detail 用站点自己的游客号 60364099 过登录；实测 150 条 is_play 全 1，没有 VIP 播放锁。
+#   · ThePornJoy（thepornjoy.org）：KVS tube；详情页内联签名 mp4，实测 206 + video/mp4；
+#     登录只影响收藏/评论，播放免费。镜像 www.thepornjoy.org（301 回主域）。
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/快猫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js
