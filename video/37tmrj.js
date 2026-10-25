@@ -1,4 +1,5 @@
-// LumeSource: {"id":"tmrj37_video","name":"37tmrj","version":"1.0.0","category":"video","mirrors":["https://www.37tmrj.com"]}
+// LumeSource: {"id":"tmrj37_video","name":"37tmrj","version":"1.0.0","category":"video","group":"影视","mirrors":["https://www.37tmrj.com","https://www.24nbfp.com"]}
+// 发布页：www.24nbfp.com/index.htm → 直接 302 到 37tmrj，可当镜像切换
 //
 // 站点：37tmrj（https://www.37tmrj.com，成人影视/小说/图片综合站，全站 18+）
 //
