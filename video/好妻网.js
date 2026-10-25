@@ -166,6 +166,22 @@ function clean(text) {
 }
 
 /// 相对地址补绝对（站点的封面/头像本来就是绝对地址，这里兜住相对的）
+/* ════════ 封面：*.ceb / *.geb 是 AES-256-ECB 加密过的 `data:image/...` 文本 ════════
+ * 站点前端 ree() 的做法是 fetch 二进制 → base64 → AES-256-ECB/Pkcs7 → 得到一个 data URI。
+ * 这活儿交给 App 的图片管线更合适：这里只声明「怎么解」，不用在 JS 沙箱里跑纯 JS AES
+ * （实测 275KB 纯 JS 要 2.7s，原生 AES ~20ms）。
+ * 约定：cover 写成 `lume-enc://aes-ecb/<base64url(key)>/<原始地址>`。
+ * key = "82758dd12749c777ef579f1839ceea6a"（32 个 ASCII 字符 ⇒ AES-256）。
+ */
+var CEB_KEY_URL = 'ODI3NThkZDEyNzQ5Yzc3N2VmNTc5ZjE4MzljZWVhNmE';
+
+/// 封面地址 → 管线能直接吃的地址（加密封面声明成 lume-enc URI）
+function coverOf(url) {
+  var text = String(url || '');
+  if (!/\.(ceb|geb)(\?|$)/i.test(text)) return text;
+  return 'lume-enc://aes-ecb/' + CEB_KEY_URL + '/' + text;
+}
+
 function absolute(url) {
   var value = entity(unescapeJs(String(url == null ? '' : url))).trim();
   if (!value) return '';
@@ -540,7 +556,7 @@ function parseDetail(html, id) {
   return {
     id: id,
     title: clean(title) || id,
-    cover: absolute(cover),
+    cover: coverOf(absolute(cover)),
     m3u8: String(m3u8 || '').trim(),
     preview: String(preview || '').trim(),
     publisher: clean(publisher),
