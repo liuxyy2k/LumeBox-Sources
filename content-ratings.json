@@ -214,6 +214,9 @@
     },
     "s618208_video": {
       "rating": "18+"
+    },
+    "uncams_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -274,6 +277,7 @@
     "v1024_video": "1024Videos（1024videos.com，中文成人视频站，全站 18+；接口 POST v2.cdn199.com/js，CryptoJS 信封口令 xxx）",
     "yidan17_comic": "一耽女孩（yidan17.club，BL 耽美漫画站，全站 18+；uni-app H5，POST /api/getComic*）",
     "hu4_video": "四虎（4hu.tv，成人视频站，全站 18+；/json 接口是 AES-256-CBC，脚本自带纯 JS AES；直连吃 CF 时走 web.render）",
-    "s618208_video": "618208（618208.xyz，成人视频站，全站 18+；苹果CMS 改造版，m3u8 直链）"
+    "s618208_video": "618208（618208.xyz，成人视频站，全站 18+；苹果CMS 改造版，m3u8 直链）",
+    "uncams_video": "UN Cams（uncams.com，成人直播站，全站 18+；房间列表走 /api/ts/roomlist/room-list/，播放给 webplayer）"
   }
 }
