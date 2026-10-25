@@ -223,6 +223,9 @@
     },
     "lu320_video": {
       "rating": "18+"
+    },
+    "tmrj37_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -286,6 +289,7 @@
     "s618208_video": "618208（618208.xyz，成人视频站，全站 18+；苹果CMS 改造版，m3u8 直链）",
     "uncams_video": "UN Cams（uncams.com，成人直播站，全站 18+；房间列表走 /api/ts/roomlist/room-list/，播放给 webplayer）",
     "mfc_video": "MyFreeCams（myfreecams.com，成人直播站，全站 18+；在线列表由 WebSocket 填充，源内用网页渲染取列表、播放走 webplayer）",
-    "lu320_video": "320lu 小视频（yd.kmuan.com:66 / 111.62.156.183:66，成人短视频站，全站 18+；播放走 kan.php 现取一次性签名 mp4）"
+    "lu320_video": "320lu 小视频（yd.kmuan.com:66 / 111.62.156.183:66，成人短视频站，全站 18+；播放走 kan.php 现取一次性签名 mp4）",
+    "tmrj37_video": "37tmrj（37tmrj.com，成人影视/小说/图片综合站，全站 18+；接口是 XOR2 加密信封，源内用网页渲染取页面）"
   }
 }
