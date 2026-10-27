@@ -503,8 +503,7 @@ var LumeSource = {
   category: 'video',
   mirrors: ['https://xfdxv.414459.lifestyle:8283'],
 
-  /// 分类：站点的真实分类是 tag 分组（/api/vod/tag_group），但一组就是 63 个、接口 55KB，
-  /// 放进首页太重；首页只给四个稳定排序 + 两个实测有量的 tag（原创 11874 条 / 热门分类 915 条）。
+
   async categories() {
     return [
       { id: 'latest', title: '最新更新' },
@@ -516,8 +515,7 @@ var LumeSource = {
     ];
   },
 
-  /// 筛选：实时读 /api/vod/tag_group（带 fs 缓存），跳过 purpose=10 那组未成年分类。
-  /// 抓不到就回空组，页面显示「本源不支持筛选」，不影响浏览。
+ 
   async filters() {
     try {
       var cached = null;
