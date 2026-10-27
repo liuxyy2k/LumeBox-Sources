@@ -2,10 +2,10 @@
   "format": "lume.source-catalog",
   "version": 1,
   "counts": {
-    "comic": 48,
-    "photo": 3,
+    "comic": 49,
+    "photo": 4,
     "movie": 10,
-    "video": 72,
+    "video": 74,
     "audiobook": 6
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -479,6 +479,18 @@
       "iconDeclared": false
     },
     {
+      "id": "gamebus_comic",
+      "name": "绅游巴士漫画",
+      "version": "1.0.0",
+      "kind": "comic",
+      "appSection": "comic",
+      "path": "comic/绅游巴士漫画.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/绅游巴士漫画.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "rmtt2_comic",
       "name": "肉漫天堂",
       "version": "1.0.0",
@@ -582,6 +594,18 @@
       "appSection": "comic",
       "path": "comic/龙禁漫.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/龙禁漫.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "cg1_photo",
+      "name": "91吃瓜图集",
+      "version": "1.0.0",
+      "kind": "photo",
+      "appSection": "comic",
+      "path": "photo/91吃瓜图集.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/photo/91吃瓜图集.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -851,6 +875,18 @@
       "iconDeclared": false
     },
     {
+      "id": "cg1_video",
+      "name": "91吃瓜视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/91吃瓜视频.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91吃瓜视频.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "jiuxse_video",
       "name": "9sex 18+",
       "version": "1.0.0",
@@ -894,6 +930,18 @@
       "appSection": "video",
       "path": "video/AsianStreetMeat.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/AsianStreetMeat.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "betareel_video",
+      "name": "BetaTok",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/BetaTok.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/BetaTok.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -966,18 +1014,6 @@
       "appSection": "video",
       "path": "video/Hentai2W.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Hentai2W.js",
-      "aliases": [],
-      "rating": "18+",
-      "iconDeclared": false
-    },
-    {
-      "id": "horrorporn_video",
-      "name": "HorrorPorn",
-      "version": "1.0.0",
-      "kind": "video",
-      "appSection": "video",
-      "path": "video/HorrorPorn.js",
-      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/HorrorPorn.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1554,6 +1590,18 @@
       "appSection": "video",
       "path": "video/爱豆.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "gamebus_video",
+      "name": "绅游巴士",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/绅游巴士.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/绅游巴士.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false

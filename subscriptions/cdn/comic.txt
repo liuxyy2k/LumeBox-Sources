@@ -39,6 +39,7 @@ https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/禁漫大王.j
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/禁漫天堂.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/禁漫岛.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/紳士漫畫.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/绅游巴士漫画.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/肉漫天堂.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/肉漫屋.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/comic/腐宅BoyLove.js
