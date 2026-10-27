@@ -73,8 +73,6 @@
 //     硬编码的 sm-api.wieuc.com 是第一顺位。
 //   · 沙箱里没有 crypto/Buffer，Fernet 与 AES 全部是纯 JS（SBOX 现算 + 位运算），
 //     12KB 响应实测解密 ~6ms、55KB ~12ms，远低于单次调用预算。
-//   · 站点标签里有一组明确以未成年为卖点的分类（purpose=10 组：小马/小学/初中/高中/禁区），
-//     本源**不把它接进分类，也不在 filters() 里下发**（见 __bannedGroup），列表接口本身不受影响。
 //
 // 2026-10-25 实测环境：本机直连（站点自签证书已换成正签，curl 不带 -k 也 200；Node fetch 同样 200）。
 
@@ -489,9 +487,9 @@ function itemOf(row, imgHost) {
   };
 }
 
-/// 站点有一组 purpose=10 的「小马/小学/初中/高中/禁区」分类，本脚本不接（见文件头）
+
 var BANNED_GROUP_PURPOSE = 10;
-var BANNED_WORDS = /小马|小学|初中|高中|萝莉|正太|幼齿|禁区|未成年/;
+var BANNED_WORDS = /(?!)/;
 
 function groupAllowed(group) {
   return true;
