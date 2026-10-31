@@ -382,7 +382,7 @@ var LumeSource = {
   requiresSettings: ['commonSettings', 'settingsActions'],
   mirrors: MIRRORS,
   network: 'direct',
-  icon: HOST + '/favicon.ico',
+  icon: 'https://zizi.staticimgjs.org/uploads/2026/05/logo-2.png',
   commonSettings: [
     {
       key: 'quality', title: '清晰度', type: 'select',
