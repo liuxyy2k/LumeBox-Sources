@@ -709,7 +709,7 @@
     {
       "id": "bttwo_video",
       "name": "两个BT影视",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "kind": "movie",
       "appSection": "video",
       "path": "video/两个BT影视.js",
