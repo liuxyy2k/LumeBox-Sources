@@ -865,7 +865,7 @@
     {
       "id": "wbbb_video",
       "name": "歪比巴卜",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "kind": "movie",
       "appSection": "video",
       "path": "video/歪比巴卜.js",
