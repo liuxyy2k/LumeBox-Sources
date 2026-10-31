@@ -889,7 +889,7 @@
     {
       "id": "iyf_video",
       "name": "爱壹帆",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "video/爱壹帆.js",
