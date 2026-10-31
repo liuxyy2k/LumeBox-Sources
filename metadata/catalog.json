@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 26,
+    "movie": 29,
     "video": 116,
     "audiobook": 7
   },
@@ -683,6 +683,18 @@
       "iconDeclared": true
     },
     {
+      "id": "libvio_video",
+      "name": "LIBVIO",
+      "version": "2.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/LIBVIO.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/LIBVIO.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "ppnix_video",
       "name": "PPnix",
       "version": "1.0.0",
@@ -702,6 +714,18 @@
       "appSection": "video",
       "path": "video/两个BT影视.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/两个BT影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "bahaotv_video",
+      "name": "八号影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/八号影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/八号影视.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
@@ -750,6 +774,18 @@
       "appSection": "video",
       "path": "video/厂长资源.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/厂长资源.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "kkys_video",
+      "name": "可可影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/可可影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/可可影视.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
@@ -829,7 +865,7 @@
     {
       "id": "wbbb_video",
       "name": "歪比巴卜",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kind": "movie",
       "appSection": "video",
       "path": "video/歪比巴卜.js",
