@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 18,
+    "movie": 20,
     "video": 116,
     "audiobook": 7
   },
@@ -683,6 +683,18 @@
       "iconDeclared": true
     },
     {
+      "id": "bttwo_video",
+      "name": "两个BT影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/两个BT影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/两个BT影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "luttt_video",
       "name": "北觅影视",
       "version": "1.1.1",
@@ -693,6 +705,18 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": false
+    },
+    {
+      "id": "qqys01_movie",
+      "name": "千千影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/千千影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/千千影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
     },
     {
       "id": "huavod",
