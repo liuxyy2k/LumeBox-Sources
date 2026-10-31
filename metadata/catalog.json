@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 16,
+    "movie": 17,
     "video": 116,
     "audiobook": 7
   },
@@ -657,6 +657,18 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": false
+    },
+    {
+      "id": "fourk_video",
+      "name": "4k影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/4k影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/4k影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
     },
     {
       "id": "a123tv",
