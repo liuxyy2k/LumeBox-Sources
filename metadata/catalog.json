@@ -385,7 +385,7 @@
     {
       "id": "manwa_comic",
       "name": "漫蛙",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kind": "comic",
       "appSection": "comic",
       "path": "comic/漫蛙.js",

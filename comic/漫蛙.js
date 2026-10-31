@@ -1,4 +1,4 @@
-// LumeSource: {"id":"manwa_comic","name":"漫蛙","version":"1.0.0","category":"comic","icon":"https://mwappimgs.cc/static/images/apple-touch-icon-192x192.png"}
+// LumeSource: {"id":"manwa_comic","name":"漫蛙","version":"2.0.0","category":"comic","mirrors":["https://manwa2.com","https://manwa.me"],"icon":"https://manwa2.com/template/wap/manwame/img/apple-touch-icon-192x192.png"}
 // Embedded into each source by tools/build_requested_sources.py; no remote code imports.
 var H = {
   base: '', name: '漫蛙', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
@@ -24,157 +24,389 @@ var H = {
   next: function(tree,page) {return this.links(tree,new RegExp('(?:[?&]page=|/page/|/page-)(?:'+(page+1)+')(?:\\D|$)')).length>0;},
   imageContent: function(images,page) {if(!images.length)throw new Error(this.name+'：没有读取到正文图片');var headers={};images.forEach(function(u){headers[u]=H.headers(page);});return {kind:'images',images:images,imageHeaders:headers};},
   textContent: function(text) {if(!text||text.length<20)throw new Error(this.name+'：没有读取到正文，请确认章节是否需要登录');return {kind:'text',text:text};}
+,
+// ---- 纯 JS 加密原语（base64 / UTF-8 / AES-128-CBC），从 sources/comic/ihanman.js 复用 ----
+    __b64decode(text) {
+      var map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+      var out = [];
+      var buf = 0;
+      var bits = 0;
+      var str = String(text || '');
+      for (var i = 0; i < str.length; i++) {
+        var ch = str.charAt(i);
+        if (ch === '=') break;
+        var v = map.indexOf(ch);
+        if (v < 0) continue;
+        buf = ((buf << 6) | v) & 0xffffff;
+        bits += 6;
+        if (bits >= 8) {
+          bits -= 8;
+          out.push((buf >> bits) & 0xff);
+        }
+      }
+      return out;
+    },
+
+    __b64encode(text) {
+      var map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+      var bytes = this.__utf8Bytes(String(text));
+      var out = '';
+      var i = 0;
+      while (i < bytes.length) {
+        var b0 = bytes[i++];
+        var b1 = i < bytes.length ? bytes[i++] : -1;
+        var b2 = i < bytes.length ? bytes[i++] : -1;
+        var n = (b0 << 16) | ((b1 < 0 ? 0 : b1) << 8) | (b2 < 0 ? 0 : b2);
+        out += map.charAt((n >> 18) & 63) + map.charAt((n >> 12) & 63);
+        out += b1 < 0 ? '=' : map.charAt((n >> 6) & 63);
+        out += b2 < 0 ? '=' : map.charAt(n & 63);
+      }
+      return out;
+    },
+
+    __utf8Bytes(text) {
+      var out = [];
+      for (var i = 0; i < text.length; i++) {
+        var code = text.charCodeAt(i);
+        if (code < 0x80) out.push(code);
+        else if (code < 0x800) {
+          out.push(0xc0 | (code >> 6), 0x80 | (code & 0x3f));
+        } else if (code >= 0xd800 && code <= 0xdbff && i + 1 < text.length) {
+          var low = text.charCodeAt(i + 1);
+          var cp = 0x10000 + ((code - 0xd800) << 10) + (low - 0xdc00);
+          i++;
+          out.push(0xf0 | (cp >> 18), 0x80 | ((cp >> 12) & 0x3f), 0x80 | ((cp >> 6) & 0x3f), 0x80 | (cp & 0x3f));
+        } else {
+          out.push(0xe0 | (code >> 12), 0x80 | ((code >> 6) & 0x3f), 0x80 | (code & 0x3f));
+        }
+      }
+      return out;
+    },
+
+    __utf8(bytes) {
+      var out = '';
+      var i = 0;
+      while (i < bytes.length) {
+        var b = bytes[i++];
+        if (b < 0x80) {
+          out += String.fromCharCode(b);
+        } else if (b >= 0xc0 && b < 0xe0 && i < bytes.length) {
+          out += String.fromCharCode(((b & 0x1f) << 6) | (bytes[i++] & 0x3f));
+        } else if (b >= 0xe0 && b < 0xf0 && i + 1 < bytes.length) {
+          var c1 = bytes[i++];
+          var c2 = bytes[i++];
+          out += String.fromCharCode(((b & 0x0f) << 12) | ((c1 & 0x3f) << 6) | (c2 & 0x3f));
+        } else if (b >= 0xf0 && i + 2 < bytes.length) {
+          var d1 = bytes[i++];
+          var d2 = bytes[i++];
+          var d3 = bytes[i++];
+          var cp = ((b & 0x07) << 18) | ((d1 & 0x3f) << 12) | ((d2 & 0x3f) << 6) | (d3 & 0x3f);
+          cp -= 0x10000;
+          out += String.fromCharCode(0xd800 + (cp >> 10), 0xdc00 + (cp & 0x3ff));
+        }
+      }
+      return out;
+    },
+
+    __unpad(bytes) {
+      var n = bytes.length ? bytes[bytes.length - 1] : 0;
+      if (n > 0 && n <= 16 && n <= bytes.length) return bytes.slice(0, bytes.length - n);
+      return bytes;
+    },
+
+    __aesCbcDecrypt(key, iv, ct) {
+      this.__aesInit();
+      var w = this.__aesExpandKey(key);
+      var out = [];
+      var prev = iv.slice(0);
+      var i;
+      var j;
+      for (i = 0; i + 16 <= ct.length; i += 16) {
+        var block = this.__aesDecryptBlock(w, ct.slice(i, i + 16));
+        for (j = 0; j < 16; j++) out.push((block[j] ^ prev[j]) & 0xff);
+        prev = ct.slice(i, i + 16);
+      }
+      return out;
+    },
+
+    __aesInit() {
+      if (this.__sbox) return;
+      var sbox = new Array(256);
+      var inv = new Array(256);
+      var p = 1;
+      var q = 1;
+      var guard = 0;
+      do {
+        if (++guard > 400) break;
+        p = (p ^ ((p << 1) & 0xff) ^ ((p & 0x80) ? 0x1b : 0)) & 0xff;
+        q = (q ^ (q << 1)) & 0xff;
+        q = (q ^ (q << 2)) & 0xff;
+        q = (q ^ (q << 4)) & 0xff;
+        if (q & 0x80) q = (q ^ 0x09) & 0xff;
+        var x = (q ^ this.__rotl(q, 1) ^ this.__rotl(q, 2) ^ this.__rotl(q, 3) ^ this.__rotl(q, 4)) & 0xff;
+        sbox[p] = (x ^ 0x63) & 0xff;
+      } while (p !== 1);
+      sbox[0] = 0x63;
+      for (var i = 0; i < 256; i++) inv[sbox[i]] = i;
+      this.__sbox = sbox;
+      this.__inv = inv;
+    },
+
+    __rotl(value, n) {
+      return ((value << n) | (value >>> (8 - n))) & 0xff;
+    },
+
+    __xtime(value) {
+      return ((value << 1) ^ ((value & 0x80) ? 0x1b : 0)) & 0xff;
+    },
+
+    __aesExpandKey(key) {
+      var w = new Array(176);
+      var i;
+      for (i = 0; i < 16; i++) w[i] = key[i] & 0xff;
+      var rcon = 1;
+      for (i = 16; i < 176; i += 4) {
+        var t0 = w[i - 4];
+        var t1 = w[i - 3];
+        var t2 = w[i - 2];
+        var t3 = w[i - 1];
+        if (i % 16 === 0) {
+          var tmp = t0;
+          t0 = this.__sbox[t1] ^ rcon;
+          t1 = this.__sbox[t2];
+          t2 = this.__sbox[t3];
+          t3 = this.__sbox[tmp];
+          rcon = this.__xtime(rcon);
+        }
+        w[i] = w[i - 16] ^ t0;
+        w[i + 1] = w[i - 15] ^ t1;
+        w[i + 2] = w[i - 14] ^ t2;
+        w[i + 3] = w[i - 13] ^ t3;
+      }
+      return w;
+    },
+
+    __aesDecryptBlock(w, input) {
+      var s = input.slice(0);
+      this.__addRoundKey(s, w, 10);
+      for (var round = 9; round >= 1; round--) {
+        this.__invShiftRows(s);
+        this.__invSubBytes(s);
+        this.__addRoundKey(s, w, round);
+        this.__invMixColumns(s);
+      }
+      this.__invShiftRows(s);
+      this.__invSubBytes(s);
+      this.__addRoundKey(s, w, 0);
+      return s;
+    },
+
+    __addRoundKey(s, w, round) {
+      var base = round * 16;
+      for (var i = 0; i < 16; i++) s[i] = (s[i] ^ w[base + i]) & 0xff;
+    },
+
+    __invSubBytes(s) {
+      for (var i = 0; i < 16; i++) s[i] = this.__inv[s[i]];
+    },
+
+    __invShiftRows(s) {
+      var copy = s.slice(0);
+      for (var r = 1; r < 4; r++) {
+        for (var c = 0; c < 4; c++) {
+          s[r + 4 * c] = copy[r + 4 * ((c - r + 4) % 4)];
+        }
+      }
+    },
+
+    __invMixColumns(s) {
+      for (var c = 0; c < 4; c++) {
+        var i = 4 * c;
+        var a0 = s[i];
+        var a1 = s[i + 1];
+        var a2 = s[i + 2];
+        var a3 = s[i + 3];
+        s[i] = (this.__gmul(a0, 14) ^ this.__gmul(a1, 11) ^ this.__gmul(a2, 13) ^ this.__gmul(a3, 9)) & 0xff;
+        s[i + 1] = (this.__gmul(a0, 9) ^ this.__gmul(a1, 14) ^ this.__gmul(a2, 11) ^ this.__gmul(a3, 13)) & 0xff;
+        s[i + 2] = (this.__gmul(a0, 13) ^ this.__gmul(a1, 9) ^ this.__gmul(a2, 14) ^ this.__gmul(a3, 11)) & 0xff;
+        s[i + 3] = (this.__gmul(a0, 11) ^ this.__gmul(a1, 13) ^ this.__gmul(a2, 9) ^ this.__gmul(a3, 14)) & 0xff;
+      }
+    },
+
+    __gmul(a, b) {
+      var p = 0;
+      var x = a & 0xff;
+      var y = b & 0xff;
+      for (var i = 0; i < 8; i++) {
+        if (y & 1) p ^= x;
+        var high = x & 0x80;
+        x = (x << 1) & 0xff;
+        if (high) x ^= 0x1b;
+        y >>= 1;
+      }
+      return p & 0xff;
+    },
+
+    // ---------------------------------------------------------------- 基础工具
+
+    async __get(url) {
+      var response = await LumeSource.http.get(url, {
+        headers: {
+          'Referer': BASE_URL + '/',
+          'Accept': 'text/html,application/xhtml+xml',
+          'Accept-Language': 'zh-CN,zh;q=0.9'
+        }
+      });
+      var status = response ? response.status : 0;
+      var body = response && response.body ? String(response.body) : '';
+      if (status !== 200) {
+        if (status === 403 || status === 503 || status === 429 ||
+          /just a moment|__cf_chl|challenge-platform|cf-mitigated/i.test(body)) {
+          throw new Error('NEED_WEBVIEW_VERIFY：爱韩漫 需要网页视图过一次 Cloudflare 校验（HTTP ' + status + ' ' + url + '）');
+        }
+        throw new Error('拉取失败：HTTP ' + status + ' ' + url);
+      }
+      if (/<title>\s*Just a moment/i.test(body)) {
+        throw new Error('NEED_WEBVIEW_VERIFY：爱韩漫 需要网页视图过一次 Cloudflare 校验（' + url + '）');
+      }
+      return body;
+    },
+
+
+  /// 漫蛙章节页里 `var params = '<base64>'`：AES-128-CBC(PKCS7)，key 固定，
+  /// 明文前 16 字节是站点的随机填充（用任何 IV 解都只会坏掉第一块），所以解完从第一个 `{` 开始解析。
+  __decryptManwa(blob) {
+    var bytes = this.__b64decode(String(blob || ''));
+    if (bytes.length < 32) throw new Error('章节数据太短（' + bytes.length + ' 字节）');
+    var key = [];
+    var keyText = '9S8$vJnU2ANeSRoF';
+    for (var i = 0; i < keyText.length; i++) key.push(keyText.charCodeAt(i) & 0xff);
+    var iv = [];
+    for (var j = 0; j < 16; j++) iv.push(0);
+    var plain = this.__unpad(this.__aesCbcDecrypt(key, iv, bytes));
+    // 明文开头是站点塞的 16 字节随机填充（UTF-8 解码会炸），JSON 一定从 16 字节边界开始，
+    // 所以按块边界逐个试，取第一个能 parse 的。
+    for (var off = 0; off + 16 <= plain.length; off += 16) {
+      if (plain[off] !== 0x7b) continue;
+      try {
+        return JSON.parse(this.__utf8(plain.slice(off)));
+      } catch (e) { /* 继续试下一块 */ }
+    }
+    throw new Error('章节数据解不开（站点可能换密钥）');
+  },
 };
 
-H.base="https://manwa.me";H.name="漫蛙";
-var LumeSource={id:"manwa_comic",name:"漫蛙",version:"1.0.0",category:"comic",
-async home(){var r=await this.list({page:1});return [{title:"最新",items:r.items.slice(0,12)}];},
 
-// 分类（用户口径：分类筛选要按网页给全）：站点自己的入口 + 筛选条上的五组。
-//   分类分类 gender：-1 全部 / 2 一般向 / 0 BL向 / 1 禁漫 / 3 TL向 / 4 GL向
-//   地区 area：'' 全部 / 2 韩国 / 3 日漫 / 4 国漫 / 5 台漫 / 6 其他 / 1 未分类
-//   状态 end：'' 全部 / 2 连载中 / 1 完结
-//   排序 sort：-1 最新 / 0 最旧 / 1 收藏 / 2 新漫
-//   标签 tag：站点 booklist 页 tags 那一排（下面按站点自己的值列全）
-// 这些 id 就是站点 `/booklist?...` 查询串里的值，list() 原样拼回去。
+H.hosts=["https://manwa2.com","https://manwa.me"];H.name="漫蛙";
+H.base=(LumeSource.config&&LumeSource.config.domain?String(LumeSource.config.domain):"").replace(/\/+$/,"")||H.hosts[0];
+
+/// 镜像自动切换：先用手选/默认的域名，失败（连不上 / 403 人机校验 / 非 200）就挨个换下一个。
+/// 哪个成功就把 H.base 记住，后面同一批请求都走它，不会每次重试。
+H.get=async function(u){
+  var list=[this.base].concat(this.hosts.filter(function(h){return h!==this.base;}));
+  var lastErr=null;
+  for(var i=0;i<list.length;i++){
+    var b=list[i];
+    try{
+      var r=await LumeSource.http.get(this.abs(u,b+'/'),{headers:this.headers(b+'/')});
+      if(r&&(r.status===403||r.status===503||r.status===521))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（HTTP '+r.status+' '+b+'）');
+      if(!r||r.status!==200)throw new Error(this.name+'：'+b+' 请求失败（HTTP '+(r&&r.status)+'）');
+      var body=String(r.body||'');
+      if(/cf-chl-|Just a moment|challenge-platform/i.test(body))throw new Error('NEED_WEBVIEW_VERIFY：'+this.name+' 需要网页验证（'+b+'）');
+      this.base=b;
+      return body;
+    }catch(e){lastErr=e;}
+  }
+  throw lastErr||new Error(this.name+'：所有镜像都连不上');
+};
+var LumeSource={id:"manwa_comic",name:"漫蛙",version:"2.0.0",category:"comic",
+icon:"https://manwa2.com/template/wap/manwame/img/apple-touch-icon-192x192.png",
+mirrors:H.hosts,
+
+settings:[
+  {key:'publishPage',type:'action',action:'openWebsite',title:'打开发布页',url:'https://manwa2.top/',
+   description:'漫蛙的官方导航页（会给出当前可用的域名）'},
+  {key:'note',type:'info',title:'站点说明',
+   description:'漫蛙漫画。本源按 manwa2.com 的页面结构解析：/comic/<数字> 详情、/chapter/<漫画>/<话> 章节、' +
+     '整章图片在章节页的 var params 里（AES-128-CBC，源里用纯 JS 解）。镜像：manwa2.com（实测可用）、' +
+     'manwa.me（官方域名，有 Cloudflare 人机校验，需要网页视图过验证）；换镜像时域名后面的路径完全一样，' +
+     '所以把域名填进「切换线路」即可。这个镜像没有筛选条、也没有 ?page= 翻页，所以只给四个入口、不做假筛选。'}
+],
+
+// 首页：拿「最近更新」（这个镜像是服务端渲染，能稳定出 30 条）
+async home(){const r=await this.list({categoryId:"/custom/update",page:1});return [{title:"最近更新",items:r.items.slice(0,12)}];},
+
+// 分类：镜像站点自己的四个入口（全部/最近更新/排行榜 + 首页推荐）
 async categories(){
   return [
     {id:'/',title:'推荐'},
-    {id:'/booklist',title:'全部'},
-    {id:'/update',title:'最近更新'},
-    {id:'/rank',title:'排行榜'},
-    {id:'/rank?type=end',title:'完结榜'}
+    {id:'/category',title:'全部'},
+    {id:'/custom/update',title:'最近更新'},
+    {id:'/custom/top',title:'排行榜'}
   ];
 },
-async filters(){
-  return {groups:[
-    {id:'gender',title:'分类',options:[
-      {id:'-1',title:'全部'},{id:'2',title:'一般向'},{id:'0',title:'BL向'},
-      {id:'1',title:'禁漫'},{id:'3',title:'TL向'},{id:'4',title:'GL向'}
-    ]},
-    {id:'area',title:'地区',options:[
-      {id:'',title:'全部'},{id:'2',title:'韩国'},{id:'3',title:'日漫'},
-      {id:'4',title:'国漫'},{id:'5',title:'台漫'},{id:'6',title:'其他'},
-      {id:'1',title:'未分类'}
-    ]},
-    {id:'end',title:'状态',options:[
-      {id:'',title:'全部'},{id:'2',title:'连载中'},{id:'1',title:'完结'}
-    ]},
-    {id:'sort',title:'排序',options:[
-      {id:'-1',title:'最新'},{id:'0',title:'最旧'},{id:'1',title:'收藏'},{id:'2',title:'新漫'}
-    ]},
-    {id:'tag',title:'标签',options:[
-      {id:'',title:'全部'},{id:'中文',title:'中文'},{id:'巨乳',title:'巨乳'},
-      {id:'中出',title:'中出'},{id:'口交',title:'口交'},{id:'19R',title:'19R'},
-      {id:'透视',title:'透视'},{id:'全彩',title:'全彩'},{id:'日漫',title:'日漫'},
-      {id:'群交',title:'群交'},{id:'校服',title:'校服'},{id:'日文',title:'日文'},
-      {id:'女性向',title:'女性向'},{id:'乳交',title:'乳交'},{id:'韩漫',title:'韩漫'},
-      {id:'肛交',title:'肛交'}
-    ]}
-  ]};
-},
 
-/// 把筛选选择拼进书库地址（站点自己的查询串参数）。
-///
-/// 值走白名单：认不出的（含 App 把空 id 换成标题的「全部」）一律当作没选，
-/// 不把任意串拼进地址。筛选是书库页的功能，选了筛选就落到 `/booklist`。
-__withFacets: function (url, filters) {
-  var base = String(url == null ? '' : url).trim() || '/booklist';
-  var wanted = {
-    gender: this.__facetValue(filters && filters.gender, ['-1', '0', '1', '2', '3', '4']),
-    area: this.__facetValue(filters && filters.area, ['1', '2', '3', '4', '5', '6']),
-    end: this.__facetValue(filters && filters.end, ['1', '2']),
-    sort: this.__facetValue(filters && filters.sort, ['-1', '0', '1', '2'])
-  };
-  var tag = this.__facetText(filters && filters.tag);
-  var picked = false;
-  for (var key in wanted) {
-    if (wanted[key]) picked = true;
-  }
-  if (tag) picked = true;
-  if (!picked) return base;
-  if (base.indexOf('/booklist') !== 0) base = '/booklist';
-  var parts = base.split('?');
-  var params = {};
-  var order = [];
-  var query = parts.length > 1 ? parts[1] : '';
-  query.split('&').forEach(function (pair) {
-    if (!pair) return;
-    var i = pair.indexOf('=');
-    var name = i < 0 ? pair : pair.slice(0, i);
-    var value = i < 0 ? '' : pair.slice(i + 1);
-    if (!name || order.indexOf(name) >= 0) return;
-    order.push(name);
-    params[name] = value;
-  });
-  for (var name2 in wanted) {
-    if (wanted[name2]) params[name2] = wanted[name2];
-  }
-  if (tag) params.tag = tag;
-  var out = [];
-  order.forEach(function (name) {
-    if (params[name] !== undefined) out.push(name + '=' + params[name]);
-  });
-  ['tag', 'gender', 'area', 'end', 'sort'].forEach(function (name) {
-    if (params[name] === undefined || order.indexOf(name) >= 0) return;
-    out.push(name + '=' + params[name]);
-  });
-  return parts[0] + (out.length ? '?' + out.join('&') : '');
-},
+// 筛选：这个镜像（manwa2）没有筛选条，也没有 `?page=` 分页（两页都返回同一批），
+// 所以如实不给假选项——不给空壳筛选，也不伪造翻页。
+async filters(){return {groups:[]};},
 
-__facetValue: function (value, allowed) {
-  var text = String(value == null ? '' : value).split(',')[0];
-  return allowed.indexOf(text) >= 0 ? text : '';
-},
-
-__facetText: function (value) {
-  var text = String(value == null ? '' : value).split(',')[0].trim();
-  if (!text || text === '全部') return '';
-  if (!/^[^&#?\/]+$/.test(text)) return '';
-  return encodeURIComponent(text);
-},
-
-/// 分页：站点自己的分页器是 `<a data-page="N">`（**没有 href**），
-/// 只看链接会永远判成「没有下一页」，书库就翻不动。
-__hasMore: function (html, page) {
-  var next = page + 1;
-  var text = String(html);
-  if (text.indexOf('data-page="' + next + '"') >= 0) return true;
-  if (text.indexOf("data-page='" + next + "'") >= 0) return true;
-  if (new RegExp('[?&]page=' + next + '(\\D|$)').test(text)) return true;
-  return false;
-},
 async list(a){
   a=a||{};
-  var p=Number(a.page)||1;
-  if(p<1)p=1;
-  var u=this.__withFacets(a.categoryId||'/',a.filters);
-  if(p>1)u+=(u.indexOf('?')>=0?'&':'?')+'page='+p;
+  var u=String(a.categoryId||'/').trim()||'/';
   var html=await H.get(u);
   var t=H.tree(html);
-  var items=H.unique(H.links(t,/^\/book\/\d+$/).map(function(n){var scope=n;for(var i=0;i<2&&scope.parent;i++)scope=scope.parent;var title=H.text(n)||H.text(H.first(scope,function(x){return H.cls(x,'manga-list-2-title');}));return {id:n.attrs.href,title:title,cover:H.image(scope),coverHeaders:H.headers()};}));
-  if(a.keyword)items=items.filter(function(i){return i.title.indexOf(a.keyword)>=0;});
-  var more=this.__hasMore(html,p);
+  var items=H.unique(H.links(t,/^\/comic\/\d+$/).map(function(n){
+    var id=n.attrs.href;
+    var title=(n.attrs.title||'').trim()||H.text(n);
+    var scope=n;
+    for(var i=0;i<2&&scope.parent;i++)scope=scope.parent;
+    var cover=H.image(scope);
+    if(!cover){var up=n;for(var k=0;k<3&&up.parent;k++){up=up.parent;cover=H.image(up);if(cover)break;}}
+    return {id:id,title:title,cover:cover,coverHeaders:H.headers()};
+  }));
+  if(a.keyword){
+    var kw=String(a.keyword);
+    items=items.filter(function(i){return i.title.indexOf(kw)>=0;});
+  }
   if(!items.length)console.warn('[manwa] 列表没解析出条目：'+u+'（'+html.length+' 字符）');
-  return {items:items,hasMore:more};
+  return {items:items,hasMore:false};
 },
-/// 详情：标题 `h1.detail-main-info-title`、封面 `div.detail-main-cover` 里的 img。
-///
-/// **封面必须只认站点图床**（`/static/upload…`）：之前是「从标题往上找第一个 img」，
-/// 结果抓到页头的站点 logo（`/static/images/new_logo.svg`）——SVG 解不了码，
-/// 真机日志里一串「图片解码失败: new_logo.svg」就是这么来的。
+
+// 详情：h1.detail-main-info-title / .detail-main-cover 里的封面（图床是 img1.baipiaoguai.org、newmwtuyuan23.cc 这些）
 async detail(a){
-  var t=H.tree(await H.get(a.id));
+  var html=await H.get(a.id);
+  var t=H.tree(html);
   var title=H.first(t,function(n){return H.cls(n,'detail-main-info-title');});
   var box=H.first(t,function(n){return H.cls(n,'detail-main-cover');});
-  var cover=H.first(box||t,function(n){
-    return n.tag==='img'&&/\/static\/upload/.test(n.attrs['data-original']||n.attrs['data-src']||n.attrs.src||'');
-  });
-  var url=cover?(cover.attrs['data-original']||cover.attrs['data-src']||cover.attrs.src):'';
-  if(!url&&box)url=H.image(box)||'';
-  return {id:a.id,title:H.text(title)||H.title(t),cover:url?H.abs(url,H.base+'/'):null,coverHeaders:H.headers()};
+  var img=box?H.first(box,function(n){return n.tag==='img';}):null;
+  var url=img?(img.attrs['data-original']||img.attrs['data-src']||img.attrs.src||''):'';
+  return {
+    id:a.id,
+    title:H.text(title)||H.title(t),
+    cover:url?H.abs(url,H.base+'/'):null,
+    coverHeaders:H.headers(),
+    description:''
+  };
 },
-async chapters(a){var t=H.tree(await H.get(a.id));return H.unique(H.links(t,/^\/chapter\/\d+$/).map(function(n){return {id:n.attrs.href,title:H.text(n)};}));},
-async content(a){var page=H.abs(a.chapterId),t=H.tree(await H.get(page));var images=H.all(t,function(n){return n.tag==='img'&&H.cls(n,'content-img');}).map(function(n){return H.abs(n.attrs['data-r-src']||'');}).filter(Boolean);var result=H.imageContent(images,page);images.forEach(function(u){result.imageHeaders[u]['X-Lume-Image-Encoding']='aes-cbc-pkcs7';result.imageHeaders[u]['X-Lume-Image-Key']='my2ecret782ecret';result.imageHeaders[u]['X-Lume-Image-IV']='my2ecret782ecret';});return result;}
+
+// 章节：/chapter/<comic>/<chapter>，标题在 `title` 或链接文字里（第001话）
+async chapters(a){
+  var t=H.tree(await H.get(a.id));
+  return H.unique(H.links(t,/^\/chapter\/\d+\/\d+$/).map(function(n){
+    return {id:n.attrs.href,title:(n.attrs.title||'').trim()||H.text(n)};
+  }));
+},
+
+// 正文：整章图片的地址在 `var params` 里，AES 解出来是 {images:[…]}；图片本身是明文 webp。
+async content(a){
+  var page=H.abs(a.chapterId);
+  var html=await H.get(page);
+  var m=/var\s+params\s*=\s*'([^']+)'/.exec(html);
+  if(!m)throw new Error(H.name+'：章节页里没有 params（可能要求登录或站点改版）');
+  var data=H.__decryptManwa(m[1]);
+  var images=(data&&data.images||[]).map(function(u){return H.abs(u,H.base+'/');}).filter(Boolean);
+  return H.imageContent(images,page);
+}
 
 };
+if (typeof module !== 'undefined' && module.exports) module.exports = LumeSource;
