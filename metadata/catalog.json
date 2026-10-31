@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 20,
+    "movie": 26,
     "video": 116,
     "audiobook": 7
   },
@@ -683,6 +683,18 @@
       "iconDeclared": true
     },
     {
+      "id": "ppnix_video",
+      "name": "PPnix",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/PPnix.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PPnix.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "bttwo_video",
       "name": "两个BT影视",
       "version": "2.0.0",
@@ -731,6 +743,18 @@
       "iconDeclared": true
     },
     {
+      "id": "czzy_video",
+      "name": "厂长资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/厂长资源.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/厂长资源.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "gulu_python_video",
       "name": "咕噜咕噜",
       "version": "1.0.1",
@@ -741,6 +765,42 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": false
+    },
+    {
+      "id": "didahd_video",
+      "name": "嘀嗒影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/嘀嗒影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嘀嗒影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "duoduo_video",
+      "name": "多多追剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/多多追剧.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/多多追剧.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "ziziys_video",
+      "name": "子子影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/子子影视.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/子子影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
     },
     {
       "id": "ysxq-boju",
@@ -786,6 +846,18 @@
       "appSection": "video",
       "path": "movie/注视影视.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/注视影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "iyf_video",
+      "name": "爱壹帆",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/爱壹帆.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱壹帆.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
