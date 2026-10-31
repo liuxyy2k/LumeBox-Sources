@@ -685,7 +685,7 @@
     {
       "id": "bttwo_video",
       "name": "两个BT影视",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kind": "movie",
       "appSection": "video",
       "path": "video/两个BT影视.js",
