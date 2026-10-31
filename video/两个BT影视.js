@@ -296,12 +296,32 @@ function signPlayUrl(dataid, slug, quality, userlink, stamp) {
     '&s=' + s + '&t=' + t + '&k=' + enc(playKey(userlink));
 }
 
+// 站点会一次返回多档：1080 免费，4K 常带 isvip/locked 且 url 是占位符 "1"。
+// 只取「未锁定 + 非 VIP + 真 http 地址」的那一档，绝不把锁定档当成可播地址。
 function pickUrl(rows) {
   var list = rows || [];
+  var best = '';
   for (var i = 0; i < list.length; i++) {
-    if (list[i] && list[i].url) return String(list[i].url);
+    var row = list[i];
+    if (!row || !row.url) continue;
+    var url = String(row.url);
+    if (!/^https?:\/\//i.test(url)) continue;
+    if (row.isvip === true || row.locked === true) continue;
+    if (!best) best = url;
   }
-  return '';
+  return best;
+}
+// 站点是否把这一集全部标成 VIP/锁定（用于给出准确提示）
+function lockedOnly(rows) {
+  var list = rows || [];
+  if (!list.length) return false;
+  for (var i = 0; i < list.length; i++) {
+    var row = list[i];
+    if (row && /^https?:\/\//i.test(String(row.url || '')) && row.isvip !== true && row.locked !== true) {
+      return false;
+    }
+  }
+  return true;
 }
 function requestPlay(path) {
   return getJson(path).catch(function () {
@@ -330,13 +350,22 @@ async function resolveEpisode(episode, userlink) {
   if (settings && settings.quality === '1080') quality = '1080';
   var now = Date.now ? Date.now() : new Date().getTime();
   var attempt = await requestPlay(signPlayUrl(episode.dataid, episode.slug, quality, userlink, now));
-  if (usable(attempt)) return pickUrl(attempt.data.data.quality_urls);
+  if (usable(attempt)) {
+    var url = pickUrl(attempt.data.data.quality_urls);
+    if (url) return url;
+    if (lockedOnly(attempt.data.data.quality_urls)) {
+      throw new Error('这一集在站点上只有 VIP/4K 档（返回的地址是锁定的占位值），1080p 未开放，本源不绕过。');
+    }
+  }
 
   // 时间戳偏差过大时站点会拒签：用页面 nb-st 再试一次
   var stamp = await siteStamp(episode.slug);
   if (stamp && String(stamp) !== String(now)) {
     attempt = await requestPlay(signPlayUrl(episode.dataid, episode.slug, quality, userlink, stamp));
-    if (usable(attempt)) return pickUrl(attempt.data.data.quality_urls);
+    if (usable(attempt)) {
+      var retryUrl = pickUrl(attempt.data.data.quality_urls);
+      if (retryUrl) return retryUrl;
+    }
   }
 
   var data = attempt.data || {};
