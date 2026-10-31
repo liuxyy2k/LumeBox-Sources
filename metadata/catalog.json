@@ -709,7 +709,7 @@
     {
       "id": "bttwo_video",
       "name": "两个BT影视",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "video/两个BT影视.js",
@@ -721,7 +721,7 @@
     {
       "id": "bahaotv_video",
       "name": "八号影视",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "movie/八号影视.js",
