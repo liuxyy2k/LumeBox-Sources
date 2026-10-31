@@ -163,3 +163,4 @@ x8x8_detail.html
 x8x8_search.json
 x8x8_recommend.txt
 x8x8_master.m3u8
+qqys01_fixture.json
