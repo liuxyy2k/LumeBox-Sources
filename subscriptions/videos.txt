@@ -10,6 +10,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/欧乐�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/注视影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/独播库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/瓜子影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看剧AI.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/短剧网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蝴蝶影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌影院.js

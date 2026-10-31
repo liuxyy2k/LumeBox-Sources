@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 15,
+    "movie": 16,
     "video": 116,
     "audiobook": 7
   },
@@ -762,6 +762,18 @@
       "appSection": "video",
       "path": "movie/瓜子影视.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/瓜子影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "kanju_ai_video",
+      "name": "看剧AI",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/看剧AI.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看剧AI.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
