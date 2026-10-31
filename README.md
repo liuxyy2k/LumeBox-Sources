@@ -23,6 +23,20 @@
 
 共 **205 个独立源**，同 ID 不重复收录。美图导入 APP 漫画板块，有声导入视频板块。
 
+## 2026-11-01 漫蛙 v2.0.0（comic/漫蛙.js）
+
+原源打 `manwa.me`，整站 403「Just a moment…」（Cloudflare），App 里打开是空白；`/book/<id>`、`/booklist?gender=` 这些老路径也已不存在。
+本版换到实测可用的 **manwa2.com**，并把章节正文的加密解开了：
+
+- 详情 `/comic/<数字>`、章节 `/chapter/<漫画>/<话>`、正文在章节页 `var params='<base64>'` 里，
+  AES-128-CBC（key `9S8$vJnU2ANeSRoF`）解出 `{"images":[…80 张…]}`；明文前 16 字节是随机填充，
+  按 16 字节块边界试 JSON.parse；图片本身是明文 webp（旧版那层 `my2ecret782ecret` 图片加密已不需要）。
+- **镜像自动切换**：`H.get` 先用手选/默认域名，403 / 非 200 / 连不上就换下一个（manwa2.com ↔ manwa.me），成功即记住。
+- 实测：manwa2.com 可用；manwa.me 官方域名有 Cloudflare（留作手选）；manwa3/4/5、manwa1/7/9 全 302 到
+  `gotowww.aipages.dev` 广告页（已废）；manwa2.top / manwa360.cc 只是导航壳（1.2 KB SPA）。
+- 验证：`node tools/lume-source-check.mjs` → PASS（home 12 / list 40 / chapters 21 / content 80 张图 / 首图 200 webp）；
+  镜像切换单测：domain 指到 manwa.me（403）→ 自动落到 manwa2.com 拿到 30 条。
+
 ## 仓库目录
 
 | 目录 | 内容 |
