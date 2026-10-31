@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 17,
+    "movie": 18,
     "video": 116,
     "audiobook": 7
   },
@@ -738,6 +738,18 @@
       "appSection": "video",
       "path": "movie/欧乐影院.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/欧乐影院.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "wbbb_video",
+      "name": "歪比巴卜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/歪比巴卜.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/歪比巴卜.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
