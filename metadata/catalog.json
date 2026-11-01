@@ -1453,7 +1453,7 @@
     {
       "id": "lxxlxx_video",
       "name": "LXXLXX",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "video",
       "appSection": "video",
       "path": "video/LXXLXX.js",
@@ -2185,14 +2185,14 @@
     {
       "id": "haijiao_video",
       "name": "海角 18+",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "kind": "video",
       "appSection": "video",
       "path": "video/海角.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角.js",
       "aliases": [],
       "rating": "18+",
-      "iconDeclared": false
+      "iconDeclared": true
     },
     {
       "id": "haijiaoqing_video",
