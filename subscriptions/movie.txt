@@ -1,5 +1,6 @@
 # 影视
 # 自动生成；修改脚本后运行 python tools/build_catalog.py
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/360资源.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/360资源站.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/4k影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/A123TV.js
@@ -18,6 +19,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嘀嗒�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/多多追剧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/子子影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/播剧网.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/暴风资源.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/欧乐影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/歪比巴卜.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/注视影视.js

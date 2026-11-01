@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 31,
+    "movie": 33,
     "video": 119,
     "audiobook": 7
   },
@@ -647,6 +647,18 @@
       "iconDeclared": true
     },
     {
+      "id": "zy360_video",
+      "name": "360资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/360资源.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/360资源.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "web-07a5a1a92631",
       "name": "360资源站",
       "version": "1.0.2",
@@ -858,6 +870,18 @@
       "appSection": "video",
       "path": "movie/播剧网.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/播剧网.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "bfzy_video",
+      "name": "暴风资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/暴风资源.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/暴风资源.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
