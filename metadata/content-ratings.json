@@ -522,6 +522,9 @@
     },
     "mitaow_video": {
       "rating": "18+"
+    },
+    "mitaovideo_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -641,6 +644,7 @@
     "heroero_video": "HeroEro（heroero.com，明星/电影性爱片段合集，全站 18+；国内直连需代理）",
     "qinav_video": "Qinav（qinav.com，亚洲情色/国产自拍/无码专区等成人分区，全站 18+；国内直连需代理）",
     "madoutv_video": "麻豆TV（b5wesi2.xyz，umi SPA + spi.d5c4a712.com 后端）：麻豆传媒/糖心/蜜桃/天美/SWAG/JVID/日本AV 等 60 个成人厂牌频道，全站 18+；接口 AES-256-CBC + md5 签名，匿名可取列表与 HLS 直链。",
-    "mitaow_video": "蜜桃网（admire/base/access.mdskbdjb.cc，mitaow50.com 只是地址发布页）：吃瓜爆料、网红黑料与国产厂牌，SSR 页面，详情 DPlayer data-config 直给签名 m3u8，全站 18+。"
+    "mitaow_video": "蜜桃网（admire/base/access.mdskbdjb.cc，mitaow50.com 只是地址发布页）：吃瓜爆料、网红黑料与国产厂牌，SSR 页面，详情 DPlayer data-config 直给签名 m3u8，全站 18+。",
+    "mitaovideo_video": "蜜桃视频（1mt8w.sbs / 1mth5.sbs 同站）：国产/日韩/网黄/欧美/AI剧/动漫六频道约 10 万条，列表与详情服务端注入 APP_DATA，播放需 CDN 签名（源内已复刻密钥），全站 18+。"
   }
 }
