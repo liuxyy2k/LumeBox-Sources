@@ -865,7 +865,7 @@
     {
       "id": "ysd_video",
       "name": "影视岛",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "video/yingshidao.js",
