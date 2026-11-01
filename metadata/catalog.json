@@ -853,7 +853,7 @@
     {
       "id": "ziziys_video",
       "name": "子子影视",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "video/子子影视.js",
@@ -2005,7 +2005,7 @@
     {
       "id": "d9y1w_video",
       "name": "四色视频 18+",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "kind": "video",
       "appSection": "video",
       "path": "video/四色视频.js",
@@ -2305,7 +2305,7 @@
     {
       "id": "yuxiu_video",
       "name": "玉羞园",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "kind": "video",
       "appSection": "video",
       "path": "video/玉羞园.js",
@@ -2425,7 +2425,7 @@
     {
       "id": "fplayer_video",
       "name": "飞播",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "video",
       "appSection": "video",
       "path": "video/飞播.js",
