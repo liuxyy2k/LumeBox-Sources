@@ -865,7 +865,7 @@
     {
       "id": "ysd_video",
       "name": "影视岛",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kind": "movie",
       "appSection": "video",
       "path": "video/影视岛.js",
