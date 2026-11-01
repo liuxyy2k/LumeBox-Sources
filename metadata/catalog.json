@@ -5,7 +5,7 @@
     "comic": 48,
     "photo": 5,
     "movie": 29,
-    "video": 117,
+    "video": 118,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2289,6 +2289,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "mitaow_video",
+      "name": "蜜桃网",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/蜜桃网.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜桃网.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "mtav_video",
