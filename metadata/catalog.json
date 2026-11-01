@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 29,
+    "movie": 31,
     "video": 119,
     "audiobook": 7
   },
@@ -731,6 +731,18 @@
       "iconDeclared": true
     },
     {
+      "id": "gimy_video",
+      "name": "劇迷",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/劇迷.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/劇迷.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
       "id": "luttt_video",
       "name": "北觅影视",
       "version": "1.1.1",
@@ -930,6 +942,18 @@
       "appSection": "video",
       "path": "video/看剧AI.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看剧AI.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "kpkuang_video",
+      "name": "看片狂人",
+      "version": "1.1.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/看片狂人.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看片狂人.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true

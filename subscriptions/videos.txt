@@ -7,6 +7,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/LIBVIO.j
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PPnix.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/两个BT影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/八号影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/劇迷.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/北觅影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/千千影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/华视影院.js
@@ -24,6 +25,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱壹�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/独播库.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/瓜子影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看剧AI.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看片狂人.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/短剧网.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蝴蝶影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌影院.js
