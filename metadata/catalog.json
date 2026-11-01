@@ -301,7 +301,7 @@
     {
       "id": "bakamh_comic",
       "name": "巴卡漫画",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "kind": "comic",
       "appSection": "comic",
       "path": "comic/巴卡漫画.js",

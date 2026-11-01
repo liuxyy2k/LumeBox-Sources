@@ -86,3 +86,45 @@ test('baka: account is never automatically submitted to a custom unrecognized ho
  s.http={get:async()=>({status:200,body:locked}),post:async()=>{posts++;return {status:200,body:''};}};
  await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/网页登录确认/);assert.equal(posts,0);
 });
+
+
+test('baka: selected mirror is used on first reader entry, including old absolute chapter URLs', async () => {
+ const s=source();s.config={domain:'https://bakamh.ru/'};const requests=[];
+ s.http={get:async(url,options)=>{requests.push({url,options});return {status:200,body:reading};}};
+ const c=await s.content({chapterId:'https://bakamh.com/manga/sample/c-1/'});
+ assert.equal(requests[0].url,'https://bakamh.ru/manga/sample/c-1/');
+ assert.equal(requests[0].options.headers.Referer,'https://bakamh.ru/');
+ assert.equal(c.imageHeaders[c.images[0]].Referer,'https://bakamh.ru/manga/sample/c-1/');
+});
+test('baka: mirror switch applies to list, search, detail, chapters and reading without an HTTP failure', async () => {
+ const s=source();s.config={domain:'https://bakamh.com'};const requests=[];
+ s.http={get:async url=>{requests.push(url);return {status:200,body:card+reading+'<h1>Sample</h1><a href="/manga/sample/c-1/">1</a>'};},
+ post:async url=>{requests.push(url);return {status:200,body:'{"data":[]}'};}};
+ await s.list({page:1});
+ s.config={domain:'https://baka3.cfd'};
+ await s.list({page:2});await s.list({keyword:'sample'});await s.detail({id:'/manga/sample/'});
+ await s.chapters({id:'/manga/sample/'});await s.content({chapterId:'/manga/sample/c-1/'});
+ assert.ok(requests.slice(1).every(u=>u.startsWith('https://baka3.cfd/')));
+});
+test('baka: logging in on selected mirror never posts credentials to old host', async () => {
+ const s=source();s.config={domain:'https://bakamh.ru',account:'test',password:'fixture'};let logged=false;const calls=[];
+ s.http={get:async url=>{calls.push(url);return {status:200,body:url.endsWith('/wp-login.php')?form:logged?reading:locked};},
+ post:async(url,body)=>{calls.push(url);logged=true;assert.equal(new URLSearchParams(body).get('redirect_to'),'https://bakamh.ru/');return {status:200,body:'logged-in'};}};
+ assert.equal((await s.content({chapterId:'/manga/sample/c-1/'})).images.length,2);
+ assert.ok(calls.every(u=>u.startsWith('https://bakamh.ru/')));
+});
+test('baka: failed login on one host does not suppress login after switching mirrors', async () => {
+ const s=source();s.config={domain:'https://bakamh.com',account:'test',password:'fixture'};let logged=false;const posts=[];
+ s.http={get:async url=>({status:200,body:url.endsWith('/wp-login.php')?form:logged?reading:locked}),
+ post:async url=>{posts.push(url);logged=url.startsWith('https://bakamh.ru/');return {status:200,body:logged?'logged-in':'<div id="login_error">error</div>'};}};
+ await assert.rejects(()=>s.content({chapterId:'/manga/sample/c-1/'}),/登录失败/);
+ s.config={...s.config,domain:'https://bakamh.ru'};
+ assert.equal((await s.content({chapterId:'/manga/sample/c-1/'})).images.length,2);
+ assert.deepEqual(posts,['https://bakamh.com/wp-login.php','https://bakamh.ru/wp-login.php']);
+});
+test('baka: healthy selected host is never replaced by an automatic primary probe', async () => {
+ const s=source();s.config={domain:'https://bakamh.ru'};const calls=[];
+ s.http={get:async url=>{calls.push(url);return {status:200,body:reading};}};
+ await s.content({chapterId:'/manga/sample/c-1/'});await s.content({chapterId:'/manga/sample/c-2/'});
+ assert.equal(calls.length,2);assert.ok(calls.every(u=>u.startsWith('https://bakamh.ru/')));
+});
