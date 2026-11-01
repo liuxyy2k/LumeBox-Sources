@@ -142,6 +142,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/蜜糖�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/逆次元ACG.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/野果短剧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/飞播.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆TV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆社.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果短剧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js

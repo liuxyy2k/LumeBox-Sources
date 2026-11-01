@@ -5,7 +5,7 @@
     "comic": 48,
     "photo": 5,
     "movie": 29,
-    "video": 116,
+    "video": 117,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2349,6 +2349,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "madoutv_video",
+      "name": "麻豆TV",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/麻豆TV.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆TV.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "madou_club_video",

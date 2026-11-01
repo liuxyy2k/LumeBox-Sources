@@ -516,6 +516,9 @@
     "ho5ho_comic": {
       "rating": "18+",
       "evidence": "ho5ho：中文全彩 H 漫/A 漫（Madara）"
+    },
+    "madoutv_video": {
+      "rating": "18+"
     }
   },
   "evidence": {
@@ -633,6 +636,7 @@
     "porn9188_video": "9188色情网（9188porn.com，macCMS；麻豆/SWAG/91制片厂等 18 个厂牌栏目，全站 18+；国内直连需代理）",
     "mtav_video": "蜜桃视频（mtav.art，麻豆/蜜桃影像/果冻传媒 合集，全站 18+；国内直连需代理）",
     "heroero_video": "HeroEro（heroero.com，明星/电影性爱片段合集，全站 18+；国内直连需代理）",
-    "qinav_video": "Qinav（qinav.com，亚洲情色/国产自拍/无码专区等成人分区，全站 18+；国内直连需代理）"
+    "qinav_video": "Qinav（qinav.com，亚洲情色/国产自拍/无码专区等成人分区，全站 18+；国内直连需代理）",
+    "madoutv_video": "麻豆TV（b5wesi2.xyz，umi SPA + spi.d5c4a712.com 后端）：麻豆传媒/糖心/蜜桃/天美/SWAG/JVID/日本AV 等 60 个成人厂牌频道，全站 18+；接口 AES-256-CBC + md5 签名，匿名可取列表与 HLS 直链。"
   }
 }
