@@ -18,6 +18,7 @@ https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/咕噜咕噜.p
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/嘀嗒影视.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/多多追剧.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/子子影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/影视岛.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/播剧网.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/暴风资源.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/欧乐影院.js

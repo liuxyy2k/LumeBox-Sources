@@ -4,7 +4,7 @@
   "counts": {
     "comic": 48,
     "photo": 5,
-    "movie": 33,
+    "movie": 34,
     "video": 119,
     "audiobook": 7
   },
@@ -858,6 +858,18 @@
       "appSection": "video",
       "path": "video/子子影视.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/子子影视.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": true
+    },
+    {
+      "id": "ysd_video",
+      "name": "影视岛",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "video/影视岛.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/影视岛.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
