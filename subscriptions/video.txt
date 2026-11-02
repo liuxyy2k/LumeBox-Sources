@@ -1,6 +1,7 @@
 # 视频与直播
 # 自动生成；修改脚本后运行 python tools/build_catalog.py
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/1024Videos.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18ak漫画视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/41看片.js

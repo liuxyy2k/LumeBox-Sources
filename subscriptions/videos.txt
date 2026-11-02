@@ -35,6 +35,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/飞流视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/饭搭子影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/1024Videos.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18ak漫画视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/18AV.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/320lu小视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/41看片.js
