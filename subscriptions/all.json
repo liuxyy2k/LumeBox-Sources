@@ -4,12 +4,13 @@
   "sections": {
     "comic": [
       "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/comic.txt",
-      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/photo.txt"
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/photo.txt",
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/novel.txt",
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/audiobook.txt"
     ],
     "video": [
       "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/movie.txt",
-      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/video.txt",
-      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/audiobook.txt"
+      "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/video.txt"
     ]
   }
 }

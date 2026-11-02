@@ -10,7 +10,7 @@ import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-KINDS = {'comic', 'photo', 'movie', 'video', 'audiobook'}
+KINDS = {'comic', 'photo', 'movie', 'video', 'audiobook', 'novel'}
 
 
 def git(*args):
@@ -37,7 +37,7 @@ def validate_script(path, content):
     if any(not isinstance(meta.get(key), str) or not meta[key].strip() for key in ('name', 'version')):
         raise ValueError('Missing source name/version')
     kind = path.split('/')[0]
-    categories = ('comic', 'photo') if kind in ('comic', 'photo') else ('video', 'audiobook')
+    categories = ('comic', 'photo', 'novel') if kind in ('comic', 'photo', 'novel') else ('video', 'audiobook')
     if meta.get('category') not in categories or meta.get('contentCategory') not in ('movie', 'adult'):
         raise ValueError('Source category/contentCategory mismatch')
     if kind == 'movie' and meta['contentCategory'] != 'movie':

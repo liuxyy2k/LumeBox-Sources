@@ -15,6 +15,10 @@ class SourceClassificationsTest(unittest.TestCase):
         for sid in ['asmrba_video', 'asmrhoney_video']:
             self.assertEqual(rows[sid]['rating'], '18+')
         self.assertEqual(rows['yueting_video']['kind'], 'audiobook')
+        self.assertEqual(rows['yueting_video']['appSection'], 'comic')
+        total = json.loads(build_catalog.build()['subscriptions/all.json'])
+        self.assertIn(build_catalog.RAW + 'subscriptions/audiobook.txt', total['sections']['comic'])
+        self.assertNotIn(build_catalog.RAW + 'subscriptions/audiobook.txt', total['sections']['video'])
 
     def test_new_video_source_cannot_publish_without_content_classification(self):
         with tempfile.TemporaryDirectory() as temporary:

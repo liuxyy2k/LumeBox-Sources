@@ -1,0 +1,2 @@
+# 文字小说
+# 自动生成；修改脚本后运行 python tools/build_catalog.py
