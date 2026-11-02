@@ -2,7 +2,7 @@
   "format": "lume.source-catalog",
   "version": 1,
   "counts": {
-    "comic": 49,
+    "comic": 50,
     "photo": 5,
     "movie": 34,
     "video": 127,
@@ -21,6 +21,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
+    },
+    {
+      "id": "akmh_comic",
+      "name": "18ak漫画",
+      "version": "1.0.0",
+      "kind": "comic",
+      "appSection": "comic",
+      "path": "comic/18ak漫画.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/18ak漫画.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
     },
     {
       "id": "mmcg18_comic",

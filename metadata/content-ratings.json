@@ -561,6 +561,10 @@
   "livebox_video": {
    "rating": "18+",
    "evidence": "直播盒子（api.hclyz.com:81）：成人直播平台聚合，130 个平台主播 flv 直链，来自「暮色」App 内置源"
+  },
+  "akmh_comic": {
+   "rating": "18+",
+   "evidence": "18ak漫画（www.18akmanhua.com）漫画板块：成人漫画库 6599 部，来自「暮色」App 内置源"
   }
  },
  "evidence": {
