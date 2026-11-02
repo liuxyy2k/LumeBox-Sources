@@ -2354,7 +2354,7 @@
     {
       "id": "lao4j_video",
       "name": "火力视频",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "kind": "video",
       "appSection": "video",
       "path": "video/火力视频.js",
