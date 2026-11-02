@@ -5,7 +5,7 @@
     "comic": 49,
     "photo": 5,
     "movie": 34,
-    "video": 125,
+    "video": 126,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -1497,6 +1497,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
+    },
+    {
+      "id": "insav_video",
+      "name": "INSAV",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/INSAV.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/INSAV.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
     },
     {
       "id": "iwara_video",
