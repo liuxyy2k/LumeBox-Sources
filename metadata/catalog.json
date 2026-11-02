@@ -5,7 +5,7 @@
     "comic": 49,
     "photo": 5,
     "movie": 34,
-    "video": 121,
+    "video": 122,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2514,6 +2514,18 @@
       "appSection": "video",
       "path": "video/黄果剧场.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
+    },
+    {
+      "id": "hsckzy_video",
+      "name": "黄色仓库",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/黄色仓库.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄色仓库.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true

@@ -121,3 +121,4 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆TV
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆社.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果短剧.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄果剧场.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/黄色仓库.js
