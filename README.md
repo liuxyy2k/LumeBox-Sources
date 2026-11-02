@@ -41,8 +41,11 @@
 - 发布页 `alicesw.click`（另有 `www.asw5.cc`）写进源设置；镜像 `alicesw.com`（海外主站）、
   `alicesw1.homes`（大陆备用，简体同源）、`alicesw.tw`（繁体站，结构一致）。发布页给出的
   `alicesw.quest` 只是另一个发布页（没有正文）。源站按 IP 拒美国 Utah，源标注 `network:"proxy"`。
+- **1.1.0 列表封面**：站点列表页没有封面，源里按 id 并发抓详情页取 `.imgbox img`
+  （32 并发、单请求 1500ms 超时、列表 2400ms / 首页 3200ms 预算），封面 URL 用 `LumeSource.fs`
+  缓存 12 小时、最多 380 条。冷启动 `list()` 2.5s 覆盖 31/31，缓存命中 0.78s；`home()` 2.7s 覆盖 34/48。
 - 验证：`node tools/lume-source-check.mjs sources/comic/alicesw.js` → PASS
-  （home 6 板块 / list 31 / detail 封面+标签 / chapters 8 / content 13693 字正文 393ms）。
+  （home 6 板块 34/48 有封面 / list 31 条 31/31 有封面 / detail 封面+标签 / chapters 8 / content 13693 字正文约 390ms）。
 
 ## 2026-11-01 漫蛙 v2.0.0（comic/漫蛙.js）
 
