@@ -1,8 +1,7 @@
 name: Publish sources from LumeBox App
 
 on:
-  push:
-    branches: ['lumebox/manage-*']
+  create:
   workflow_dispatch:
 
 permissions:
@@ -14,6 +13,7 @@ concurrency:
 
 jobs:
   publish:
+    if: github.event_name == 'workflow_dispatch' || (github.event.ref_type == 'branch' && startsWith(github.event.ref, 'lumebox/manage-'))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -26,7 +26,7 @@ jobs:
           python3 -m unittest discover -s tools -p 'test_cdn_purge.py' -v
           python3 -m unittest discover -s tools -p 'test_python_catalog.py' -v
       - name: Validate candidate against current main
-        if: github.event_name == 'push'
+        if: github.event_name == 'create'
         id: base
         run: |
           git fetch origin main
@@ -38,7 +38,7 @@ jobs:
           python3 tools/build_catalog.py
           python3 tools/build_catalog.py --check
       - name: Commit generated catalog and publish to main
-        if: github.event_name == 'push'
+        if: github.event_name == 'create'
         run: |
           git config user.name 'LumeBox source publisher'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -48,7 +48,7 @@ jobs:
           fi
           git push origin HEAD:refs/heads/main
       - name: Purge CDN and verify actual bytes on both routes
-        if: github.event_name == 'push'
+        if: github.event_name == 'create'
         env:
           SOURCE_REPOSITORY: ${{ github.repository }}
           SOURCE_BEFORE: ${{ steps.base.outputs.sha }}
