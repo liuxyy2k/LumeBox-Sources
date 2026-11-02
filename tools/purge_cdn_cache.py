@@ -1,5 +1,6 @@
 """Invalidate mutable jsDelivr @main URLs after a source publication."""
 import argparse
+import hashlib
 import json
 import pathlib
 import re
@@ -91,6 +92,14 @@ def partition_paths(paths, present, aliases):
     return kept, removed
 
 
+def verify_current(repository, path, expected, *, opener=urllib.request.urlopen):
+    """Purge throttling is harmless only when the served bytes are already current."""
+    url = purge_url(repository, path).replace('purge.jsdelivr.net', 'cdn.jsdelivr.net', 1)
+    with opener(url, timeout=25) as response:
+        actual = response.read()
+    return hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repository', required=True)
@@ -107,8 +116,18 @@ def main():
         try:
             print(json.dumps(purge_one(args.repository, path), ensure_ascii=True), flush=True)
         except Exception as error:
-            failures.append(str(error))
-            print(json.dumps({'path': path, 'error': str(error)}, ensure_ascii=True), flush=True)
+            current = False
+            try:
+                target = aliases.get(path, path)
+                expected = subprocess.check_output(['git', 'show', f'{args.after}:{target}'], cwd=ROOT)
+                current = verify_current(args.repository, path, expected)
+            except Exception:
+                pass
+            if current:
+                print(json.dumps({'path': path, 'status': 'verified-current', 'purgeError': str(error)}, ensure_ascii=True), flush=True)
+            else:
+                failures.append(str(error))
+                print(json.dumps({'path': path, 'error': str(error)}, ensure_ascii=True), flush=True)
     print(f'Purged {len(paths) - len(failures)}/{len(paths)} published paths'
           f'{f" (skipped {len(deleted)} deleted)" if deleted else ""}')
     return 1 if failures else 0

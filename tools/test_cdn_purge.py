@@ -10,6 +10,7 @@ from purge_cdn_cache import (
     published_paths,
     purge_one,
     purge_url,
+    verify_current,
 )
 
 
@@ -49,6 +50,13 @@ class CdnPurgeTests(unittest.TestCase):
             return io.StringIO('{"status":"finished","paths":{}}')
         with self.assertRaises(RuntimeError):
             purge_one('owner/sources', 'video/a.js', opener=opener, sleep=lambda _: None)
+
+    def test_throttled_purge_can_only_be_accepted_for_exact_current_bytes(self):
+        def opener(url, timeout):
+            self.assertEqual(url, 'https://cdn.jsdelivr.net/gh/owner/sources@main/video/a.js')
+            return io.BytesIO(b'new-source')
+        self.assertTrue(verify_current('owner/sources', 'video/a.js', b'new-source', opener=opener))
+        self.assertFalse(verify_current('owner/sources', 'video/a.js', b'old-source', opener=opener))
 
     def test_changed_paths_preserve_unicode_and_spaces_and_deleted_files(self):
         with patch('purge_cdn_cache.subprocess.check_output', return_value='video/41看片.js\0video/removed.js\0'.encode()) as run:
