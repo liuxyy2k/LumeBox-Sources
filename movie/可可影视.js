@@ -1,4 +1,4 @@
-// LumeSource: {"id":"kkys_video","name":"可可影视","version":"1.0.1","category":"video","contentCategory":"movie","settingsApiVersion":2,"requiresSettings":["commonSettings","settingsActions"],"mirrors":["https://www.kkys03.com"],"network":"direct","icon":"https://vf.wkcyvs.cn/vod_pc_static_kkdy/images/p/logo.png"}
+// LumeSource: {"id":"kkys_video","name":"可可影视","version":"1.0.2","category":"video","contentCategory":"movie","settingsApiVersion":2,"requiresSettings":["commonSettings","settingsActions"],"mirrors":["https://www.kkys03.com"],"network":"direct","icon":"https://vf.wkcyvs.cn/vod_pc_static_kkdy/images/p/logo.png"}
 // LumeRuntime: javascript
 //
 // 站点：可可影视（kkys03.com）。
@@ -155,10 +155,12 @@ function solveChallenge(html) {
 // ------------------------------------------------------------------ 会话（cookie + 搜索令牌）
 var SESSION = { cookie: '', token: '', imageHost: '' };
 var sessionLoaded = false;
+var sessionDomain = '';
 var DETAIL_CACHE = {};
 async function restoreSession() {
-  if (sessionLoaded) return;
-  sessionLoaded = true;
+  if (sessionLoaded && sessionDomain === base()) return;
+  sessionLoaded = true; sessionDomain = base();
+  SESSION.cookie = ''; SESSION.token = ''; SESSION.imageHost = '';
   try {
     var value = JSON.parse(await readPersistent('kkys-session.json') || '{}');
     if (value.domain === base() && value.ua === UA && Date.now() - value.time < 6 * 3600000) {
@@ -390,7 +392,7 @@ function parsePlayUrl(html) {
 var LumeSource = {
   id: 'kkys_video',
   name: '可可影视',
-  version: '1.0.1',
+  version: '1.0.2',
   category: 'video',
   contentCategory: 'movie',
   settingsApiVersion: 2,

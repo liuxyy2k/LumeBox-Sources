@@ -1,4 +1,4 @@
-// LumeSource: {"id":"czzy_video","name":"厂长资源","version":"1.0.2","category":"video","contentCategory":"movie","settingsApiVersion":2,"requiresSettings":["settingsActions"],"mirrors":["https://www.4kcz.com","https://czzy.top","https://www.cz4k.com"],"network":"direct","icon":"https://www.4kcz.com/favicon.ico"}
+// LumeSource: {"id":"czzy_video","name":"厂长资源","version":"1.0.3","category":"video","contentCategory":"movie","settingsApiVersion":2,"requiresSettings":["settingsActions"],"mirrors":["https://www.4kcz.com","https://czzy.top","https://www.cz4k.com"],"network":"direct","icon":"https://www.4kcz.com/favicon.ico"}
 // LumeRuntime: javascript
 //
 // 站点：厂长资源 CZZY（导航页 https://cz01.vip/ → 新地址 www.4kcz.com，易记 cz01.tv；
@@ -89,6 +89,7 @@ var YEARS = [
 var discoveredHost = '';
 var detailCache = {};
 var hostLoaded = false;
+var loadedDomain = '';
 async function readPersistent(key) {
   if (LumeSource.storage && LumeSource.storage.get) return LumeSource.storage.get(key, '');
   return LumeSource.fs.readText(key);
@@ -113,11 +114,11 @@ function clean(text) {
   return unescapeHtml(String(text == null ? '' : text).replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
 }
 async function readHost() {
-  if (hostLoaded) return;
-  hostLoaded = true;
+  var configured = String(LumeSource.config && LumeSource.config.domain || HOST).replace(/\/+$/, '');
+  if (hostLoaded && loadedDomain === configured) return;
+  hostLoaded = true; loadedDomain = configured; discoveredHost = '';
   try {
     var record = JSON.parse(await readPersistent('czzy-host.json') || '{}');
-    var configured = String(LumeSource.config && LumeSource.config.domain || HOST).replace(/\/+$/, '');
     if (record.configured === configured && Date.now() - record.time < 6 * 3600000 && /^https:\/\/[a-z0-9.-]+$/i.test(record.host)) discoveredHost = record.host;
   } catch (_) {}
 }
@@ -293,7 +294,7 @@ function hasNext(html, page, query) {
 var LumeSource = {
   id: 'czzy_video',
   name: '厂长资源',
-  version: '1.0.2',
+  version: '1.0.3',
   category: 'video',
   contentCategory: 'movie',
   settingsApiVersion: 2,
