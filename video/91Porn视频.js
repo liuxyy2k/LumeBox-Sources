@@ -1,4 +1,4 @@
-// LumeSource: {"id":"porn91_video","name":"91Porn","version":"1.0.0","category":"video","mirrors":["https://91porn.com","https://www.91porn.com"]}
+// LumeSource: {"id":"porn91_video","name":"91Porn","version":"1.1.0","category":"video","mirrors":["https://91porn.com","https://www.91porn.com","https://we.killcovid2020.com"]}
 // 站点：https://91porn.com（91porn 原站；服务端渲染的老式 PHP 站）
 //
 // ## 抓取口径（每条都对着实时页面核过）
@@ -29,6 +29,15 @@
 //          **解一次百分号编码 → 取 `<source src='…'>`** 就是带签名的 mp4 直链。
 //          实测该 mp4 带不带 Referer 都回 206；签名带过期时间（e=），所以每次播放都重新取详情。
 //
+// ## v1.1.0（2026-11-02，从「暮色」App 内置 91pron 模块对照后回补）
+// 1. **标题语言**：站点按 Accept-Language 出标题，request 里不带这一头会拿到机器翻译的英文
+//    （[original] The young woman on Xiaohongshu is Horny.），带上 zh-CN 才是原文
+//    （[原创]小红书上的少妇就是骚）。这一条对观感影响最大。
+// 2. **高清分类**：category=hd 的卡片指向 `view_video_hd.php?viewkey=…&page=1&viewtype=basic&category=hd`，
+//    普通详情页对这批条目没有播放器；条目正则改成 `view_video(_hd)?\.php`，
+//    content() 在普通页解不出地址时自动退到 HD 页再取一次。
+// 3. **新镜像**：`we.killcovid2020.com`（暮色 App 内置的 91pron 入口，实测 200、列表/详情/播放全通）。
+//
 // ## 纪律
 // 1. base() 优先用宿主注入的域名（换镜像 / 手填域名立刻生效），站内相对地址按 base() 补全。
 // 2. 列表里混着广告位（外链 gif/裸 IP），只认 `view_video.php?viewkey=`。
@@ -53,9 +62,9 @@ function base() {
 var LumeSource = {
   id: 'porn91_video',
   name: '91Porn',
-  version: '1.0.0',
+  version: '1.1.0',
   category: 'video',
-  mirrors: ['https://91porn.com', 'https://www.91porn.com'],
+  mirrors: ['https://91porn.com', 'https://www.91porn.com', 'https://we.killcovid2020.com'],
 
   /// 首页：最近加精一屏。
   async home() {
@@ -72,7 +81,8 @@ var LumeSource = {
       { id: 'top', title: '评分最高' },
       { id: 'tf', title: '收藏最多' },
       { id: 'md', title: '讨论最多' },
-      { id: 'long', title: '长视频' }
+      { id: 'long', title: '长视频' },
+      { id: 'hd', title: '高清' }
     ];
   },
 
@@ -129,6 +139,18 @@ var LumeSource = {
     var html = await this.__get(path);
     var url = this.__media(html);
     if (!url) {
+      // 高清分类（category=hd）的条目：列表卡片指向 view_video_hd.php，
+      // 普通详情页照样 200 但没有播放器，这里再试 HD 版一次。
+      var hdPath = '/view_video_hd.php?viewkey=' + encodeURIComponent(id)
+        + '&page=1&viewtype=basic&category=hd';
+      var hdHtml = await this.__get(hdPath);
+      var hdUrl = this.__media(hdHtml);
+      if (hdUrl) {
+        html = hdHtml;
+        url = hdUrl;
+      }
+    }
+    if (!url) {
       throw new Error('91Porn：详情页里没解出播放地址（' + path
         + '）——站点可能改版，或该视频需要登录/VIP');
     }
@@ -144,7 +166,13 @@ var LumeSource = {
   async __get(path) {
     var url = /^https?:/i.test(path) ? path : base() + path;
     var response = await LumeSource.http.get(url, {
-      headers: { 'Referer': base() + '/', 'User-Agent': UA }
+      // 站点按 Accept-Language 决定标题语言：不带就回英文（[original] The young woman…），
+      // 带 zh-CN 才是上传者原文（[原创] 小红书上的少妇就是骚）。
+      headers: {
+        'Referer': base() + '/',
+        'User-Agent': UA,
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.6'
+      }
     });
     var status = response ? Number(response.status) : 0;
     var body = response && response.body ? String(response.body) : '';
@@ -201,7 +229,7 @@ var LumeSource = {
       if (at < 0) break;
       index = at + 12;
       var win = text.slice(at, at + ITEM_WINDOW);
-      var key = /view_video\.php\?viewkey=([0-9A-Za-z]+)/.exec(win);
+      var key = /view_video(?:_hd)?\.php\?viewkey=([0-9A-Za-z]+)/.exec(win);
       if (!key) continue;
       var id = key[1];
       if (seen[id]) continue;
