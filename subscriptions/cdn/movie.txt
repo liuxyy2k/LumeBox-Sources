@@ -12,7 +12,7 @@ https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/劇迷.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/北觅影视.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/千千影视.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/华视影院.js
-https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/厂长资源.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/czzy.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/kkys.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/咕噜咕噜.py
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/嘀嗒影视.js
