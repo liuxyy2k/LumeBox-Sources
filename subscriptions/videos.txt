@@ -70,7 +70,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hstream.
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/hxc.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H动漫一号.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/H動漫網.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/INSAV.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/INSAV视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Kaotic.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/KKAV-2.js
