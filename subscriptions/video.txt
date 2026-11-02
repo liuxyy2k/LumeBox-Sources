@@ -111,6 +111,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱情�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱播爱播.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/爱豆.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/玉羞园.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/直播盒子.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/第一女優網.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/绅游巴士.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/老司机在线.js
