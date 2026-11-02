@@ -2233,7 +2233,7 @@
     {
       "id": "chengshe_video",
       "name": "橙涩视频",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kind": "video",
       "appSection": "video",
       "path": "video/橙涩视频.js",
