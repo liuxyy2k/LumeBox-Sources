@@ -808,8 +808,8 @@
       "version": "1.0.2",
       "kind": "movie",
       "appSection": "video",
-      "path": "movie/可可影视.js",
-      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/可可影视.js",
+      "path": "movie/kkys.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/kkys.js",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true

@@ -1,0 +1,36 @@
+# 影视
+# 自动生成；修改脚本后运行 python tools/build_catalog.py
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/360资源.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/360资源站.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/4k影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/A123TV.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/LIBVIO.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/PPnix.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/两个BT影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/八号影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/劇迷.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/北觅影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/千千影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/华视影院.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/厂长资源.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/kkys.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/咕噜咕噜.py
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/嘀嗒影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/多多追剧.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/子子影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/yingshidao.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/播剧网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/暴风资源.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/欧乐影院.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/歪比巴卜.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/注视影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/爱壹帆.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/独播库.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/瓜子影视.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/看剧AI.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/看片狂人.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/短剧网.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/蝴蝶影院.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/金牌影院.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/飞流视频.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/movie/饭搭子影视.js

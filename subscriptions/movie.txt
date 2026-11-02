@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/北觅�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/千千影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/华视影院.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/厂长资源.js
-https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/可可影视.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/kkys.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/咕噜咕噜.py
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/嘀嗒影视.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/多多追剧.js
