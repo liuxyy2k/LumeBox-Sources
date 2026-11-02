@@ -15,14 +15,34 @@
 
 | 分类 | 独立源数 | 原站 | 国内 CDN |
 | --- | ---: | --- | --- |
-| 漫画 | 50 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/comic.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/comic.txt) |
+| 漫画 | 51 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/comic.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/comic.txt) |
 | 美图 | 5 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/photo.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/photo.txt) |
 | 影视 | 34 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/movie.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/movie.txt) |
 | 视频与直播 | 128 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/video.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/video.txt) |
 | 有声小说 | 7 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/audiobook.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/audiobook.txt) |
 | 文字小说 | 0 | [订阅](https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/subscriptions/novel.txt) | [订阅](https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/subscriptions/cdn/novel.txt) |
 
-共 **224 个独立源**，同 ID 不重复收录。漫画、美图、文字小说、有声导入 APP 漫画板块；影视、视频导入视频板块。
+共 **225 个独立源**，同 ID 不重复收录。漫画、美图、文字小说、有声导入 APP 漫画板块；影视、视频导入视频板块。
+
+## 2026-11-03 爱丽丝书屋（comic/爱丽丝书屋.js）
+
+`alicesw.com` 成人网络小说站（全站 18+，diyquge 模板的静态 HTML，无接口无加密）。本源按**文字小说**交付：
+列表/详情声明 `mediaType:"novel"`，正文返回 `kind:"text"`，App 归入漫画板块的「小说」分类并打开文字阅读器。
+
+- 结构：题材分类 `/lists/{id}.html?page=N`、总列表 `/all/order/{排序}+desc.html?page=N`、
+  题材+排序 `/all/id/{id}/order/{排序}+desc.html`、原创专区 `/original.html`、
+  排行 `/other/rank_hits/order/hits_day|hits_week|hits_month|hits.html`（单页 30 条、不分页）、
+  搜索 `/search.html?q={词}&f=_all&sort=relevance&p=N`（10 条/页）、详情 `/novel/{id}.html`、
+  目录 `/other/chapters/id/{id}.html`（**一次给全**，实测 6972 章 / 666 KB 单页）、
+  正文 `/book/{书号}/{章节hash}.html`。
+- 注意 `/novel/{id}` 与 `/book/{书号}` 的编号**不是同一个**，章节地址只能从目录页取。
+- 35 个分类（最近更新 / 四个排行 / 原创专区 / 29 个题材）+ 排序筛选（最近更新 / 人气最高 / 字数最多）；
+  排行与原创专区走站点固定路径，排序对它们不生效。
+- 发布页 `alicesw.click`（另有 `www.asw5.cc`）写进源设置；镜像 `alicesw.com`（海外主站）、
+  `alicesw1.homes`（大陆备用，简体同源）、`alicesw.tw`（繁体站，结构一致）。发布页给出的
+  `alicesw.quest` 只是另一个发布页（没有正文）。源站按 IP 拒美国 Utah，源标注 `network:"proxy"`。
+- 验证：`node tools/lume-source-check.mjs sources/comic/alicesw.js` → PASS
+  （home 6 板块 / list 31 / detail 封面+标签 / chapters 8 / content 13693 字正文 393ms）。
 
 ## 2026-11-01 漫蛙 v2.0.0（comic/漫蛙.js）
 

@@ -36,6 +36,7 @@ https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫小�
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫蛙.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/漫香阁.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/熱辣漫畫.js
+https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱丽丝书屋.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱韩漫.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/禁漫大王.js
 https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/禁漫天堂.js

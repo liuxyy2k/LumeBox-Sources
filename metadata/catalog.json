@@ -2,7 +2,7 @@
   "format": "lume.source-catalog",
   "version": 1,
   "counts": {
-    "comic": 50,
+    "comic": 51,
     "photo": 5,
     "movie": 34,
     "video": 128,
@@ -442,6 +442,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
+    },
+    {
+      "id": "alicesw_comic",
+      "name": "爱丽丝书屋",
+      "version": "1.0.0",
+      "kind": "comic",
+      "appSection": "comic",
+      "path": "comic/爱丽丝书屋.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/爱丽丝书屋.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
     },
     {
       "id": "ihanman_comic",
