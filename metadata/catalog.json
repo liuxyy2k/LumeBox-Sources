@@ -5,7 +5,7 @@
     "comic": 48,
     "photo": 5,
     "movie": 34,
-    "video": 119,
+    "video": 120,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2226,6 +2226,18 @@
       "appSection": "video",
       "path": "video/栀莲短剧.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/栀莲短剧.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
+    },
+    {
+      "id": "chengshe_video",
+      "name": "橙涩视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/橙涩视频.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/橙涩视频.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
