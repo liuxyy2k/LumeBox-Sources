@@ -2,7 +2,7 @@
   "format": "lume.source-catalog",
   "version": 1,
   "counts": {
-    "comic": 48,
+    "comic": 49,
     "photo": 5,
     "movie": 34,
     "video": 120,
@@ -117,6 +117,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
+    },
+    {
+      "id": "itsacg_comic",
+      "name": "ITsACG 漫画",
+      "version": "1.0.0",
+      "kind": "comic",
+      "appSection": "comic",
+      "path": "comic/ITsACG漫画.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/ITsACG漫画.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
     },
     {
       "id": "jcomic_comic",
