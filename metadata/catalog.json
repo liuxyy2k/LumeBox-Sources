@@ -5,7 +5,7 @@
     "comic": 50,
     "photo": 5,
     "movie": 34,
-    "video": 127,
+    "video": 128,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2418,6 +2418,18 @@
       "appSection": "video",
       "path": "video/直播盒子.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/直播盒子.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
+    },
+    {
+      "id": "kpdz_video",
+      "name": "看片视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/看片视频.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/看片视频.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true

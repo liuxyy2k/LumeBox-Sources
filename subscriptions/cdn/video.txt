@@ -112,6 +112,7 @@ https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/爱播爱播.j
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/爱豆.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/玉羞园.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/直播盒子.js
+https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/看片视频.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/第一女優網.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/绅游巴士.js
 https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/video/老司机在线.js

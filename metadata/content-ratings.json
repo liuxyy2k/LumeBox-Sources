@@ -565,6 +565,10 @@
   "akmh_comic": {
    "rating": "18+",
    "evidence": "18ak漫画（www.18akmanhua.com）漫画板块：成人漫画库 6599 部，来自「暮色」App 内置源"
+  },
+  "kpdz_video": {
+   "rating": "18+",
+   "evidence": "看片视频（KPDZ.APP）：成人视频站，接口 sm-api.wieuc.com 返回 Fernet 密文，23 万+ 条、标签 6000+，来自「暮色」App 内置源"
   }
  },
  "evidence": {
