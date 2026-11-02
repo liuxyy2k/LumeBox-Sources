@@ -5,7 +5,7 @@
     "comic": 49,
     "photo": 5,
     "movie": 34,
-    "video": 122,
+    "video": 123,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2298,6 +2298,18 @@
       "appSection": "video",
       "path": "video/海角情-2.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/海角情-2.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
+    },
+    {
+      "id": "lao4j_video",
+      "name": "火力视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/火力视频.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/火力视频.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
