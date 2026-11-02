@@ -1081,7 +1081,7 @@
     {
       "id": "akmh_video",
       "name": "18ak漫画·视频",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "kind": "video",
       "appSection": "video",
       "path": "video/18ak漫画视频.js",
