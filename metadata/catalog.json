@@ -5,7 +5,7 @@
     "comic": 49,
     "photo": 5,
     "movie": 34,
-    "video": 123,
+    "video": 124,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -2217,6 +2217,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
+    },
+    {
+      "id": "uaa_video",
+      "name": "有爱爱 UAA",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/有爱爱.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/有爱爱.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
     },
     {
       "id": "sex8_video",
