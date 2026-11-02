@@ -5,7 +5,7 @@
     "comic": 49,
     "photo": 5,
     "movie": 34,
-    "video": 120,
+    "video": 121,
     "audiobook": 7
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -121,7 +121,7 @@
     {
       "id": "itsacg_comic",
       "name": "ITsACG 漫画",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "kind": "comic",
       "appSection": "comic",
       "path": "comic/ITsACG漫画.js",
@@ -2046,6 +2046,18 @@
       "appSection": "video",
       "path": "video/在线影院.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/在线影院.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": true
+    },
+    {
+      "id": "yeshezy_video",
+      "name": "夜社资源",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/夜社资源.js",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/夜社资源.js",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
