@@ -11,7 +11,7 @@ import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PUBLIC_FOLDERS = {'comic', 'photo', 'movie', 'video', 'audiobook', 'web', 'subscriptions', 'metadata'}
+PUBLIC_FOLDERS = {'comic', 'photo', 'movie', 'video', 'audiobook', 'novel', 'web', 'subscriptions', 'metadata'}
 
 
 def published_paths(paths, aliases=()):
