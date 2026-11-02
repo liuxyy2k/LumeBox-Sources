@@ -1,0 +1,58 @@
+name: Publish sources from LumeBox App
+
+on:
+  push:
+    branches: ['lumebox/manage-*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: source-cdn-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Test publishing tools without running source scripts
+        run: |
+          python3 -m unittest discover -s tools -p 'test_app_publication.py' -v
+          python3 -m unittest discover -s tools -p 'test_cdn_purge.py' -v
+          python3 -m unittest discover -s tools -p 'test_python_catalog.py' -v
+      - name: Validate candidate against current main
+        if: github.event_name == 'push'
+        id: base
+        run: |
+          git fetch origin main
+          BASE=$(git rev-parse origin/main)
+          python3 tools/app_source_publish.py --base "$BASE"
+          echo "sha=$BASE" >> "$GITHUB_OUTPUT"
+      - name: Build and verify all subscription routes
+        run: |
+          python3 tools/build_catalog.py
+          python3 tools/build_catalog.py --check
+      - name: Commit generated catalog and publish to main
+        if: github.event_name == 'push'
+        run: |
+          git config user.name 'LumeBox source publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add subscriptions metadata/catalog.json metadata/legacy-paths.json README.md docs/源目录.md docs/源分类与兼容地址.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: synchronize subscriptions for App source change'
+          fi
+          git push origin HEAD:refs/heads/main
+      - name: Purge CDN and verify actual bytes on both routes
+        if: github.event_name == 'push'
+        env:
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          SOURCE_BEFORE: ${{ steps.base.outputs.sha }}
+        run: |
+          AFTER=$(git rev-parse HEAD)
+          python3 tools/purge_cdn_cache.py --repository "$SOURCE_REPOSITORY" --before "$SOURCE_BEFORE" --after "$AFTER"
+          python3 tools/verify_app_publication.py --repository "$SOURCE_REPOSITORY" --before "$SOURCE_BEFORE" --after "$AFTER"
