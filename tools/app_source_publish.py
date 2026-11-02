@@ -85,8 +85,27 @@ def validate_candidate(base):
     return changes
 
 
+def update_ratings(changes):
+    path = ROOT / 'metadata/content-ratings.json'
+    ratings = json.loads(path.read_text(encoding='utf-8'))
+    updated = False
+    for name, status in changes.items():
+        if status != 'A':
+            continue
+        meta = validate_script(name, (ROOT / name).read_bytes())
+        if meta['contentCategory'] == 'adult':
+            ratings['sources'][meta['id']] = {
+                'rating': '18+', 'evidence': 'App-published source declares contentCategory adult',
+            }
+            updated = True
+    if updated:
+        path.write_text(json.dumps(ratings, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', required=True)
     options = parser.parse_args()
-    print(json.dumps(validate_candidate(options.base), ensure_ascii=True))
+    changes = validate_candidate(options.base)
+    update_ratings(changes)
+    print(json.dumps(changes, ensure_ascii=True))

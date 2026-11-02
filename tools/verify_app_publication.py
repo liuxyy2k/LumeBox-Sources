@@ -17,9 +17,11 @@ def matches(url, expected, opener=urllib.request.urlopen):
         with opener(url, timeout=25) as response:
             if expected is None:
                 return False
-            return hashlib.sha256(response.read()).digest() == hashlib.sha256(expected).digest()
+            return hashlib.sha256(response.read(len(expected) + 1)).digest() == hashlib.sha256(expected).digest()
     except urllib.error.HTTPError as error:
-        return expected is None and error.code == 404
+        missing = error.code == 404
+        error.close()
+        return expected is None and missing
     except OSError:
         return False
 

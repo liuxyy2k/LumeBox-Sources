@@ -42,7 +42,7 @@ jobs:
         run: |
           git config user.name 'LumeBox source publisher'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add subscriptions metadata/catalog.json metadata/legacy-paths.json README.md docs/源目录.md docs/源分类与兼容地址.md
+          git add subscriptions metadata/catalog.json metadata/content-ratings.json metadata/legacy-paths.json README.md docs/源目录.md docs/源分类与兼容地址.md
           if ! git diff --cached --quiet; then
             git commit -m 'build: synchronize subscriptions for App source change'
           fi
@@ -54,5 +54,5 @@ jobs:
           SOURCE_BEFORE: ${{ steps.base.outputs.sha }}
         run: |
           AFTER=$(git rev-parse HEAD)
-          python3 tools/purge_cdn_cache.py --repository "$SOURCE_REPOSITORY" --before "$SOURCE_BEFORE" --after "$AFTER"
+          python3 tools/purge_cdn_cache.py --repository "$SOURCE_REPOSITORY" --before "$SOURCE_BEFORE" --after "$AFTER" || echo 'Purge pending; checking actual published bytes next'
           python3 tools/verify_app_publication.py --repository "$SOURCE_REPOSITORY" --before "$SOURCE_BEFORE" --after "$AFTER"
