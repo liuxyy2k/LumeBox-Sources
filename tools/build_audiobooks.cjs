@@ -13,7 +13,7 @@ for (const [id, name, base, template] of [
   const previous = fs.existsSync(target)
     ? JSON.parse(fs.readFileSync(target, 'utf8').split('\n')[0].replace(/^\/\/ LumeSource:\s*/, ''))
     : {};
-  const identity = { ...previous, id, name, version: '1.0.2', category: 'video', group: '有声小说', mediaType: 'audio', icon: previous.icon || base + '/favicon.ico' };
+  const identity = { ...previous, id, name, version: '1.0.3', category: 'comic', group: '有声小说', mediaType: 'audio', icon: previous.icon || base + '/favicon.ico' };
   const body = fs.readFileSync(path.join(__dirname, 'audiobook_templates', template + '.js.txt'), 'utf8');
   fs.writeFileSync(path.join(root, 'audiobook', name + '.js'),
     '// LumeSource: ' + JSON.stringify(identity) + '\n' +

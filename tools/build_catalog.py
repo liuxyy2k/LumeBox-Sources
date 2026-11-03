@@ -55,14 +55,14 @@ def read_sources():
                               if pair[0].split('/')[0] in ('photo', 'movie', 'audiobook')),
                              candidates[0])
         path, meta = canonical
-        if sid in MOVIES or meta.get('contentCategory') == 'movie':
-            kind = 'movie'
-        elif meta.get('mediaType') == 'audio' or meta.get('category') == 'audiobook' or sid.endswith('_audiobook'):
+        if meta.get('mediaType') == 'audio' or meta.get('category') == 'audiobook' or sid.endswith('_audiobook'):
             kind = 'audiobook'
         elif meta.get('category') == 'novel' or path.startswith('novel/'):
             kind = 'novel'
         elif path.startswith('photo/'):
             kind = 'photo'
+        elif sid in MOVIES or meta.get('contentCategory') == 'movie':
+            kind = 'movie'
         else:
             kind = 'comic' if meta.get('category') == 'comic' else 'video'
         if kind == 'video' and meta.get('contentCategory') not in ('movie', 'adult') and ratings.get(sid, {}).get('rating') != '18+':

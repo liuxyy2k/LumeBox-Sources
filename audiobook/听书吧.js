@@ -1,4 +1,4 @@
-// LumeSource: {"id":"ting8_audiobook","name":"听书吧","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting8.cc/templets/tingshu/images/favicon_tx.ico"}
+// LumeSource: {"id":"ting8_audiobook","name":"听书吧","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.ting8.cc/templets/tingshu/images/favicon_tx.ico"}
 // Standalone build: node tools/build_audiobooks.cjs
 // Only public site catalogues and player requests; no account or paid-content bypass.
 var H = {
@@ -50,7 +50,7 @@ var T={cache:{},
 };
 
 H.base="https://www.ting8.cc";H.name="听书吧";
-var LumeSource=Object.assign({"id":"ting8_audiobook","name":"听书吧","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting8.cc/templets/tingshu/images/favicon_tx.ico"},{
+var LumeSource=Object.assign({"id":"ting8_audiobook","name":"听书吧","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.ting8.cc/templets/tingshu/images/favicon_tx.ico"},{
 categories:async function(){return T.categories(await T.get('/'),/^\/books\/\d+\.html$/);},
 home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/mp3\/\d+\.html$/)}];},
 list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),u=k?'/search.php?searchword='+encodeURIComponent(k)+'&page='+p:(o.categoryId||'/books/1.html');if(!k&&p>1)u=u.replace(/\.html$/,'-'+p+'.html');var html=await T.get(u);return {items:T.searchItems(html,/^\/mp3\/\d+\.html$/,k),hasMore:T.next(html,p)||new RegExp('/books/\\d+-'+(p+1)+'\\.html').test(html)};},

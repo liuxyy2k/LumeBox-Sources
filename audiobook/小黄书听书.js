@@ -1,4 +1,4 @@
-// LumeSource: {"id":"xchina_audiobook","name":"小黄书听书","version":"1.0.1","category":"video","group":"听书","icon":"https://xchina.co/assets/img/favicon.png"}
+// LumeSource: {"id":"xchina_audiobook","name":"小黄书听书","version":"1.0.2","category":"comic","group":"听书","icon":"https://xchina.co/assets/img/favicon.png","mediaType":"audio"}
 //
 // 小黄书 xChina 的**有声小说（听书）**：站点把有声作品放在「有声小说」题材下
 // （/fiction-tag/999，实测 2,039 部），每一章的语音版是页面里的
@@ -43,7 +43,7 @@ var H = {
 };
 
 H.base="https://xchina.co";H.name="小黄书听书";
-var LumeSource={id:"xchina_audiobook",name:"小黄书听书",version:"1.0.1",category:"video",group:"听书",
+var LumeSource={id:"xchina_audiobook",name:"小黄书听书",version:"1.0.2",category:"comic",mediaType:"audio",group:"听书",
 icon:"https://xchina.co/assets/img/favicon.png",
 
 /// 真站的「有声小说」题材（/fiction-tag/999）就是听书目录。

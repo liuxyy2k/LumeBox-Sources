@@ -81,6 +81,10 @@ class CandidateTests(unittest.TestCase):
 
 
 class ValidationTests(unittest.TestCase):
+    def test_audiobook_uses_comic_category_without_video_rating(self):
+        content = b'// LumeSource: {"id":"example_audiobook","name":"Audio","version":"1","category":"comic","mediaType":"audio"}\nvar LumeSource = {};'
+        self.assertEqual(publish.validate_script('audiobook/example.js', content)['category'], 'comic')
+
     def test_paths_and_syntax_and_categories(self):
         for path in ('../x.py', 'video/a/b.py', 'tools/a.py', 'video/.x.py', 'video/a\\b.py'):
             self.assertFalse(publish.valid_path(path))

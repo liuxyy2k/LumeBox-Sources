@@ -37,8 +37,9 @@ def validate_script(path, content):
     if any(not isinstance(meta.get(key), str) or not meta[key].strip() for key in ('name', 'version')):
         raise ValueError('Missing source name/version')
     kind = path.split('/')[0]
-    categories = ('comic', 'photo', 'novel') if kind in ('comic', 'photo', 'novel') else ('video', 'audiobook')
-    if meta.get('category') not in categories or meta.get('contentCategory') not in ('movie', 'adult'):
+    reading = kind in ('comic', 'photo', 'novel', 'audiobook')
+    categories = ('comic', 'photo', 'novel', 'audiobook', 'video') if kind == 'audiobook' else ('comic', 'photo', 'novel') if reading else ('video', 'audiobook')
+    if meta.get('category') not in categories or (not reading and meta.get('contentCategory') not in ('movie', 'adult')):
         raise ValueError('Source category/contentCategory mismatch')
     if kind == 'movie' and meta['contentCategory'] != 'movie':
         raise ValueError('Movie directory requires movie contentCategory')
@@ -93,7 +94,7 @@ def update_ratings(changes):
         if status != 'A':
             continue
         meta = validate_script(name, (ROOT / name).read_bytes())
-        if meta['contentCategory'] == 'adult':
+        if meta.get('contentCategory') == 'adult':
             ratings['sources'][meta['id']] = {
                 'rating': '18+', 'evidence': 'App-published source declares contentCategory adult',
             }

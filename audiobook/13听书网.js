@@ -1,4 +1,4 @@
-// LumeSource: {"id":"ting13_audiobook","name":"13听书网","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"}
+// LumeSource: {"id":"ting13_audiobook","name":"13听书网","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"}
 // Standalone build: node tools/build_audiobooks.cjs
 // Only public site catalogues and player requests; no account or paid-content bypass.
 var H = {
@@ -50,7 +50,7 @@ var T={cache:{},
 };
 
 H.base="https://www.ting13.cc";H.name="13听书网";
-var LumeSource=Object.assign({"id":"ting13_audiobook","name":"13听书网","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"},{
+var LumeSource=Object.assign({"id":"ting13_audiobook","name":"13听书网","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.ting13.cc/favicon.ico"},{
 webFallback:true,
 categories:async function(){return T.categories(await T.get('/'),/^\/yousheng\/[a-z]+\/lastupdate\.html$/);},
 home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/youshengxiaoshuo\/\d+\/$/)}];},

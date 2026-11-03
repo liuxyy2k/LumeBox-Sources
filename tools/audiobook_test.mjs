@@ -25,7 +25,7 @@ for (const name of names.filter(n => !only || n === only)) {
   const s = context.LumeSource;
   s.tools = tools;
   assert.equal(s.mediaType, 'audio');
-  assert.equal(s.category, 'video');
+  assert.equal(s.category, 'comic');
   assert.equal(s.group, '有声小说');
   const { T } = context;
   // Full-text search pages also include unrelated recommendations: never show them as matches.

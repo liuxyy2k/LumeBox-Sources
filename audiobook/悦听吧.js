@@ -1,4 +1,4 @@
-// LumeSource: {"id":"yuetingba_audiobook","name":"悦听吧","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"http://www.yuetingba.cn/favicon.ico"}
+// LumeSource: {"id":"yuetingba_audiobook","name":"悦听吧","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"http://www.yuetingba.cn/favicon.ico"}
 // Standalone build: node tools/build_audiobooks.cjs
 // Only public site catalogues and player requests; no account or paid-content bypass.
 var H = {
@@ -50,7 +50,7 @@ var T={cache:{},
 };
 
 H.base="http://www.yuetingba.cn";H.name="悦听吧";
-var LumeSource=Object.assign({"id":"yuetingba_audiobook","name":"悦听吧","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"http://www.yuetingba.cn/favicon.ico"},{
+var LumeSource=Object.assign({"id":"yuetingba_audiobook","name":"悦听吧","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"http://www.yuetingba.cn/favicon.ico"},{
 categories:async function(){return T.categories(await T.get('/'),/^\/book\/[a-z0-9]+\/1$/);},
 home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/book\/detail\/[a-f0-9-]+\/0$/)}];},
 list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),u=k?'/Search?type=1&name='+encodeURIComponent(k)+'&page='+p:(o.categoryId||'/book/1/1').replace(/\/\d+$/,'/'+p),html=await T.get(u);return {items:T.searchItems(html,/^\/book\/detail\/[a-f0-9-]+\/0$/,k),hasMore:T.next(html,p)};},

@@ -1,4 +1,4 @@
-﻿// LumeSource: {"id":"xnovel_audiobook","name":"夜读小说听书","version":"1.0.0","category":"video","group":"听书","mirrors":["https://x-novel.com"]}
+// LumeSource: {"id":"xnovel_audiobook","name":"夜读小说听书","version":"1.0.1","category":"comic","group":"听书","mirrors":["https://x-novel.com"],"mediaType":"audio"}
 //
 // 站点：夜读小说（https://x-novel.com，成人小说站，全站 18+；与 xChina 共用 upload.xchina.io 音频 CDN）
 // 本源专门做**有声小说**那一路（就是 https://x-novel.com/tag/audio 这个标签页）。
@@ -222,8 +222,8 @@ async function chapterPage(slug, number) {
 var LumeSource = {
   id: 'xnovel_audiobook',
   name: '夜读小说听书',
-  version: '1.0.0',
-  category: 'video',
+  version: '1.0.1',
+  category: 'comic', mediaType: 'audio',
   group: '听书',
   mirrors: ['https://x-novel.com'],
 

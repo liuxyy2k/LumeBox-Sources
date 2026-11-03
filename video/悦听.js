@@ -1,4 +1,4 @@
-// LumeSource: {"id":"yueting_video","name":"悦听","version":"1.0.0","category":"audiobook","settingsApiVersion":2,"requiresSettings":["commonSettings","settingsActions"],"endpoints":{"site":["https://www.yuetingba.cn"]},"network":"proxy","icon":"https://www.yuetingba.cn/favicon.ico"}
+// LumeSource: {"id":"yueting_video","name":"悦听","version":"1.0.1","category":"comic","settingsApiVersion":2,"requiresSettings":["commonSettings","settingsActions"],"endpoints":{"site":["https://www.yuetingba.cn"]},"network":"proxy","icon":"https://www.yuetingba.cn/favicon.ico","mediaType":"audio"}
 // LumeRuntime: javascript
 //
 // 站点：悦听（https://www.yuetingba.cn）—— 有声书 SSR 站。
@@ -54,7 +54,7 @@ function parseBook(html) {
 }
 
 var LumeSource = {
-  id: 'yueting_video', name: '悦听', version: '1.0.0', category: 'audiobook',
+  id: 'yueting_video', name: '悦听', version: '1.0.1', category: 'comic', mediaType: 'audio',
   settingsApiVersion: 2, requiresSettings: ['commonSettings', 'settingsActions'],
   endpoints: { site: ['https://www.yuetingba.cn'] },
   commonSettings: [{ key: 'pageSize', default: 24, min: 1, max: 50 }, { key: 'playbackMode', default: 'auto' }],

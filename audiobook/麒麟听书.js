@@ -1,4 +1,4 @@
-// LumeSource: {"id":"qilin70_audiobook","name":"麒麟听书","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.70ts.com/favicon.ico"}
+// LumeSource: {"id":"qilin70_audiobook","name":"麒麟听书","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.70ts.com/favicon.ico"}
 // Standalone build: node tools/build_audiobooks.cjs
 // Only public site catalogues and player requests; no account or paid-content bypass.
 var H = {
@@ -50,7 +50,7 @@ var T={cache:{},
 };
 
 H.base="https://www.70ts.com";H.name="麒麟听书";
-var LumeSource=Object.assign({"id":"qilin70_audiobook","name":"麒麟听书","version":"1.0.2","category":"video","group":"有声小说","mediaType":"audio","icon":"https://www.70ts.com/favicon.ico"},{
+var LumeSource=Object.assign({"id":"qilin70_audiobook","name":"麒麟听书","version":"1.0.3","category":"comic","group":"有声小说","mediaType":"audio","icon":"https://www.70ts.com/favicon.ico"},{
 categories:async function(){return T.categories(await T.get('/'),/^\/yousheng\/[a-z]+\.html$/);},
 home:async function(){return [{title:'听书推荐',items:T.items(await T.get('/'),/^\/tingshu\/\d+\/$/)}];},
 list:async function(o){o=o||{};var p=Number(o.page)||1,k=String(o.keyword||'').trim(),html;
