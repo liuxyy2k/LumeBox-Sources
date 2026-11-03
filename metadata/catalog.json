@@ -2,11 +2,11 @@
   "format": "lume.source-catalog",
   "version": 1,
   "counts": {
-    "comic": 51,
+    "comic": 52,
     "photo": 5,
-    "movie": 34,
-    "video": 128,
-    "audiobook": 7,
+    "movie": 249,
+    "video": 200,
+    "audiobook": 23,
     "novel": 0
   },
   "verification": "Metadata inventory only; not a live cover or playback availability report.",
@@ -262,6 +262,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_3db0009711aa84f1",
+      "name": "包子漫画",
+      "version": "1.0.0",
+      "kind": "comic",
+      "appSection": "comic",
+      "path": "comic/PY-包子漫画-11aa84f1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/PY-包子漫画-11aa84f1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "mh18_comic",
@@ -684,6 +696,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_7979574afc2c0a00",
+      "name": "1234影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]1234影视-fc2c0a00.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]1234影视-fc2c0a00.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_db4e8180075a888b",
+      "name": "28短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]28短剧-075a888b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]28短剧-075a888b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "zy360_video",
       "name": "360资源",
       "version": "1.0.0",
@@ -708,6 +744,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_63ecb1fc3a2a3605",
+      "name": "37电影网",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]37电影网-3a2a3605.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]37电影网-3a2a3605.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "fourk_video",
       "name": "4k影视",
       "version": "1.0.0",
@@ -718,6 +766,126 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_7db66b268a783ce7",
+      "name": "555影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]555影视-8a783ce7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]555影视-8a783ce7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_87b8801bc2e8a609",
+      "name": "555电影-优化分页和播放速度",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-555电影-优化分页和播放速度-c2e8a609.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-555电影-优化分页和播放速度-c2e8a609.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_42661404c46f81e5",
+      "name": "55影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]55影院-c46f81e5.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]55影院-c46f81e5.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_871b4f0a5d79a4d1",
+      "name": "55短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]55短剧-5d79a4d1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]55短剧-5d79a4d1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_085da8c5dab9000c",
+      "name": "6080影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]6080影视-dab9000c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]6080影视-dab9000c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0e28c58fdf9378fa",
+      "name": "6080新视觉",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]6080新视觉-df9378fa.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]6080新视觉-df9378fa.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_70c676fc21972526",
+      "name": "66在线",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-66在线-21972526.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-66在线-21972526.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e9a613053a54d006",
+      "name": "66大片网",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]66大片网-3a54d006.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]66大片网-3a54d006.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_07e1021602a98044",
+      "name": "808影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]808影院-02a98044.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]808影院-02a98044.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_64981e88f300aebc",
+      "name": "91短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-91短剧-f300aebc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-91短剧-f300aebc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "a123tv",
@@ -732,6 +900,90 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_e4e66e8e4a177eab",
+      "name": "bilibili",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]bilibili-4a177eab.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]bilibili-4a177eab.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e574edf5d1c1c44f",
+      "name": "CNFLIX",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]CNFLIX-d1c1c44f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]CNFLIX-d1c1c44f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_72d36727864dc0b1",
+      "name": "E佬苹果",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]E佬苹果-864dc0b1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]E佬苹果-864dc0b1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6f04cdd515922436",
+      "name": "FoFo影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]FoFo影院-15922436.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]FoFo影院-15922436.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d58b04a02d1b7300",
+      "name": "freeok",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-freeok-2d1b7300.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-freeok-2d1b7300.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_9f4d9bab9e13d89f",
+      "name": "freeok_t4",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-freeok_t4-9e13d89f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-freeok_t4-9e13d89f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_569654c2fbaa3415",
+      "name": "ik4k影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]ik4k影院-fbaa3415.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]ik4k影院-fbaa3415.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "libvio_video",
       "name": "LIBVIO",
       "version": "2.0.0",
@@ -742,6 +994,42 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_7c5d7b6c5c77cf9d",
+      "name": "LIBVIO",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]LIBVIO-5c77cf9d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]LIBVIO-5c77cf9d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0da2be2e17d33f6c",
+      "name": "MiFun动漫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]MiFun动漫-17d33f6c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]MiFun动漫-17d33f6c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_de255e79bf25d1c3",
+      "name": "pomo",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]pomo-bf25d1c3.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]pomo-bf25d1c3.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "ppnix_video",
@@ -756,6 +1044,102 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_44719bfd0218759d",
+      "name": "TVB云播",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-TVB云播-0218759d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-TVB云播-0218759d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f789c0ee3e49953b",
+      "name": "TVB云播代理版@easy",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-TVB云播代理版@easy-3e49953b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-TVB云播代理版@easy-3e49953b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0ded581b1f037c6a",
+      "name": "vidhub",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]vidhub-1f037c6a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]vidhub-1f037c6a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_83d3b660192c7229",
+      "name": "VS影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]VS影院-192c7229.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]VS影院-192c7229.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7abd20946a3f2c2b",
+      "name": "ZIP0影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]ZIP0影视-6a3f2c2b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]ZIP0影视-6a3f2c2b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5533f39f0e3a8304",
+      "name": "一席",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]一席-0e3a8304.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]一席-0e3a8304.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1588dfced869bc24",
+      "name": "一起刷",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]一起刷-d869bc24.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]一起刷-d869bc24.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5143713be5803ff1",
+      "name": "一起影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]一起影视-e5803ff1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]一起影视-e5803ff1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "bttwo_video",
       "name": "两个BT影视",
       "version": "2.0.2",
@@ -766,6 +1150,126 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_537b3c3dd2127ac0",
+      "name": "云朵视频",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]云朵视频-d2127ac0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]云朵视频-d2127ac0.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_43b83c097f5c6ede",
+      "name": "五五短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]五五短剧-7f5c6ede.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]五五短剧-7f5c6ede.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b37368ce4ebcbb56",
+      "name": "人妖影视-TVBox爬虫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-人妖影视-TVBox爬虫-4ebcbb56.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-人妖影视-TVBox爬虫-4ebcbb56.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e4509b2d3d386ce7",
+      "name": "仙腾影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]仙腾影院-3d386ce7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]仙腾影院-3d386ce7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_61e65da5246100f7",
+      "name": "优酷",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]优酷-246100f7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]优酷-246100f7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_799fa26da2ca30f1",
+      "name": "低端影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]低端影视-a2ca30f1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]低端影视-a2ca30f1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f348b2c1b34e1a86",
+      "name": "兄弟影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]兄弟影视-b34e1a86.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]兄弟影视-b34e1a86.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_9fbce06c9f67e96c",
+      "name": "免扫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]免扫-9f67e96c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]免扫-9f67e96c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a7c6032d8aa60ad3",
+      "name": "兔岛影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]兔岛影院-8aa60ad3.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]兔岛影院-8aa60ad3.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3bbf0bfcea77d69c",
+      "name": "全能短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]全能短剧-ea77d69c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]全能短剧-ea77d69c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "bahaotv_video",
@@ -780,6 +1284,114 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_343f3fc863c883db",
+      "name": "八度影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]八度影院-63c883db.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]八度影院-63c883db.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e71417e60c0183c4",
+      "name": "八戒影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]八戒影视-0c0183c4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]八戒影视-0c0183c4.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_688ffb5831919a41",
+      "name": "共和国动漫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]共和国动漫-31919a41.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]共和国动漫-31919a41.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ad3a893058d83e10",
+      "name": "共青春",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]共青春-58d83e10.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]共青春-58d83e10.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_eeb98be3e2e6af3d",
+      "name": "农民影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]农民影视-e2e6af3d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]农民影视-e2e6af3d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f5ff9168ceeafcb1",
+      "name": "初见影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]初见影视-ceeafcb1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]初见影视-ceeafcb1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_97fea8a9c435b34a",
+      "name": "剧下饭4K",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-剧下饭4K-c435b34a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-剧下饭4K-c435b34a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a4f983cc0d22f19e",
+      "name": "剧透社",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]剧透社-0d22f19e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]剧透社-0d22f19e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e367a60aa229ab60",
+      "name": "剧集网",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]剧集网-a229ab60.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]剧集网-a229ab60.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "gimy_video",
       "name": "劇迷",
       "version": "1.0.0",
@@ -790,6 +1402,18 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_131197dd89419f10",
+      "name": "动漫巴士",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]动漫巴士-89419f10.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]动漫巴士-89419f10.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "luttt_video",
@@ -816,6 +1440,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_c6d39acdcfc4d274",
+      "name": "华人ok影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-华人ok影院-cfc4d274.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-华人ok影院-cfc4d274.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "huavod",
       "name": "华视影院",
       "version": "1.0.1",
@@ -826,6 +1462,18 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_3960807865f4640c",
+      "name": "厂长影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]厂长影视-65f4640c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]厂长影视-65f4640c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "czzy_video",
@@ -840,6 +1488,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_a18dcda29c60dcb9",
+      "name": "厂长资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]厂长资源-9c60dcb9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]厂长资源-9c60dcb9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_fb6c16543656db34",
+      "name": "可可",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-可可-3656db34.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-可可-3656db34.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "kkys_video",
       "name": "可可影视",
       "version": "1.0.2",
@@ -852,6 +1524,42 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_769a6a7b8f799430",
+      "name": "君念影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]君念影院-8f799430.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]君念影院-8f799430.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0aaf64b34be002fc",
+      "name": "周六影库",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]周六影库-4be002fc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]周六影库-4be002fc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_23bbbd828dcb9d1a",
+      "name": "咕噜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]咕噜-8dcb9d1a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]咕噜-8dcb9d1a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "gulu_python_video",
       "name": "咕噜咕噜",
       "version": "1.0.1",
@@ -859,6 +1567,90 @@
       "appSection": "video",
       "path": "movie/咕噜咕噜.py",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/咕噜咕噜.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_608941541d9f77a7",
+      "name": "咕噜咕噜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]咕噜咕噜-1d9f77a7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]咕噜咕噜-1d9f77a7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7b1edf6c0d807ee8",
+      "name": "咕噜咕噜4K",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-咕噜咕噜4K-0d807ee8.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-咕噜咕噜4K-0d807ee8.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_db1abbe7cb47a854",
+      "name": "咖啡直播",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[球]咖啡直播-cb47a854.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[球]咖啡直播-cb47a854.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d56559ed7e7b71dd",
+      "name": "咸鱼影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]咸鱼影视-7e7b71dd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]咸鱼影视-7e7b71dd.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a880695366dfbadc",
+      "name": "哈密瓜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]哈密瓜-66dfbadc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]哈密瓜-66dfbadc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_452b42090c617199",
+      "name": "喵特影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-喵特影视-0c617199.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-喵特影视-0c617199.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3a0450fc3f378ddd",
+      "name": "嗷呜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]嗷呜-3f378ddd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]嗷呜-3f378ddd.py",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": false
@@ -876,6 +1668,66 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_831b5a81987beee2",
+      "name": "嘀嗒影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]嘀嗒影视-987beee2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]嘀嗒影视-987beee2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5b61d3fcc67e9f9c",
+      "name": "囧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]囧-c67e9f9c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]囧-c67e9f9c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_23413dafc17e4c4a",
+      "name": "在线短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]在线短剧-c17e4c4a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]在线短剧-c17e4c4a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_18f7fc12945ede90",
+      "name": "夏日影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]夏日影院-945ede90.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]夏日影院-945ede90.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_213ff2dd48c62f2e",
+      "name": "多多影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]多多影视-48c62f2e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]多多影视-48c62f2e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "duoduo_video",
       "name": "多多追剧",
       "version": "1.0.0",
@@ -886,6 +1738,150 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_be1d06fc11453af8",
+      "name": "多瑙影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]多瑙影院-11453af8.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]多瑙影院-11453af8.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_81ecb01417eaeca1",
+      "name": "多聚短剧[短]",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-多聚短剧[短]-17eaeca1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-多聚短剧[短]-17eaeca1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_784bc6e029829a5d",
+      "name": "大白鲨影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]大白鲨影院-29829a5d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]大白鲨影院-29829a5d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e83614a56b898439",
+      "name": "大米星球",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-大米星球-6b898439.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-大米星球-6b898439.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f2916f12c18cedde",
+      "name": "大象短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-大象短剧-c18cedde.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-大象短剧-c18cedde.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_11491da77f7f08da",
+      "name": "大马猴",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]大马猴-7f7f08da.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]大马猴-7f7f08da.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d2a33e1b5b952491",
+      "name": "央视网",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[直]央视网-5b952491.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[直]央视网-5b952491.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c600baf290ecb412",
+      "name": "央视频2+1",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-央视频2+1-90ecb412.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-央视频2+1-90ecb412.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b4334e9c998297ae",
+      "name": "央视频v2",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-央视频v2-998297ae.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-央视频v2-998297ae.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ff7a0a538c290737",
+      "name": "奇优影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]奇优影院-8c290737.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]奇优影院-8c290737.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e5b9452f4a36a52c",
+      "name": "奇点影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]奇点影视-4a36a52c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]奇点影视-4a36a52c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c68561e63b89a407",
+      "name": "威视TV",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]威视TV-3b89a407.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]威视TV-3b89a407.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "ziziys_video",
@@ -900,6 +1896,138 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_b2973bccf64c05a9",
+      "name": "小汤圆影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-小汤圆影视-f64c05a9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-小汤圆影视-f64c05a9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_cff9607037bf97d1",
+      "name": "小皮影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]小皮影院-37bf97d1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]小皮影院-37bf97d1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0c17f49b1c641032",
+      "name": "小苹果",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]小苹果-1c641032.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]小苹果-1c641032.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_001faf91a4770ecd",
+      "name": "小霸王",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-小霸王-a4770ecd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-小霸王-a4770ecd.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_324971fc9c927a11",
+      "name": "小鸡暴走",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]小鸡暴走-9c927a11.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]小鸡暴走-9c927a11.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_87c14e8d6b12a716",
+      "name": "山水影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]山水影视-6b12a716.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]山水影视-6b12a716.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ac8f1f7df59d4d17",
+      "name": "开心影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]开心影院-f59d4d17.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]开心影院-f59d4d17.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ea2aca47b7977304",
+      "name": "开心短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]开心短剧-b7977304.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]开心短剧-b7977304.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a418e863534a0b43",
+      "name": "开端影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]开端影视-534a0b43.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]开端影视-534a0b43.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_065d812aa40289a7",
+      "name": "影巢",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]影巢-a40289a7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]影巢-a40289a7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b22f87bb78f73b61",
+      "name": "影探4K",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-影探4K-78f73b61.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-影探4K-78f73b61.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "ysd_video",
       "name": "影视岛",
       "version": "2.0.2",
@@ -910,6 +2038,78 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_49f8501006a800f7",
+      "name": "影视秒播",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]影视秒播-06a800f7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]影视秒播-06a800f7.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_114d8da99a465841",
+      "name": "手机影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]手机影院-9a465841.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]手机影院-9a465841.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1cfb278297039d87",
+      "name": "打屁屁影视-TVBox爬虫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-打屁屁影视-TVBox爬虫-97039d87.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-打屁屁影视-TVBox爬虫-97039d87.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_52e1024741cafc7b",
+      "name": "抖音",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]抖音-41cafc7b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]抖音-41cafc7b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a2c291ed6bd65b17",
+      "name": "指针资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-指针资源-6bd65b17.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-指针资源-6bd65b17.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c2cde9fd0d1d7679",
+      "name": "搜剧AI",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]搜剧AI-0d1d7679.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]搜剧AI-0d1d7679.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "ysxq-boju",
@@ -924,6 +2124,78 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_b142afb8ff17a5f4",
+      "name": "无极电影",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]无极电影-ff17a5f4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]无极电影-ff17a5f4.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ee629453324b159f",
+      "name": "星辰",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]星辰-324b159f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]星辰-324b159f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_24477affe97027c2",
+      "name": "星辰影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]星辰影院-e97027c2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]星辰影院-e97027c2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6f1b690c202ac6ff",
+      "name": "映刻短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]映刻短剧-202ac6ff.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]映刻短剧-202ac6ff.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_41242ab5e043646f",
+      "name": "暖秋剧场",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-暖秋剧场-e043646f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-暖秋剧场-e043646f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d72d1f2cd7ae72f5",
+      "name": "暗网禁地-TVBox爬虫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-暗网禁地-TVBox爬虫-d7ae72f5.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-暗网禁地-TVBox爬虫-d7ae72f5.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "bfzy_video",
       "name": "暴风资源",
       "version": "1.0.0",
@@ -934,6 +2206,138 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_593c26c5819b9a47",
+      "name": "木鸡影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-木鸡影视-819b9a47.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-木鸡影视-819b9a47.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_647bf760176b9987",
+      "name": "果果短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]果果短剧-176b9987.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]果果短剧-176b9987.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0a75377394c35bbd",
+      "name": "枝枝影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]枝枝影视-94c35bbd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]枝枝影视-94c35bbd.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c48f4acb2411f4b0",
+      "name": "枫叶",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]枫叶-2411f4b0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]枫叶-2411f4b0.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_810dcc1a23c2aa71",
+      "name": "枫叶4K",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]枫叶4K-23c2aa71.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]枫叶4K-23c2aa71.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e05ad2f6a978c1e2",
+      "name": "枫叶影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]枫叶影院-a978c1e2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]枫叶影院-a978c1e2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2764aa6327619c3d",
+      "name": "樱之空动漫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]樱之空动漫-27619c3d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]樱之空动漫-27619c3d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1c81d35ad842abca",
+      "name": "樱桃短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]樱桃短剧-d842abca.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]樱桃短剧-d842abca.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f3248df0a97aeb65",
+      "name": "樱花动漫-修正版",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-樱花动漫-修正版-a97aeb65.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-樱花动漫-修正版-a97aeb65.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_bb9cdee55d2a4bef",
+      "name": "橘汁4K",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-橘汁4K-5d2a4bef.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-橘汁4K-5d2a4bef.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_92255386464cf576",
+      "name": "欣欣影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]欣欣影视-464cf576.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]欣欣影视-464cf576.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "olehdtv",
@@ -948,6 +2352,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_a408542921959d96",
+      "name": "歪比",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]歪比-21959d96.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]歪比-21959d96.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "wbbb_video",
       "name": "歪比巴卜",
       "version": "3.0.0",
@@ -958,6 +2374,90 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_b29b18c16ac08cc0",
+      "name": "毒口条影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]毒口条影视-6ac08cc0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]毒口条影视-6ac08cc0.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_db9b2fd18d92e42f",
+      "name": "毒舌影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]毒舌影视-8d92e42f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]毒舌影视-8d92e42f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_201210673c607af9",
+      "name": "毒舌短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]毒舌短剧-3c607af9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]毒舌短剧-3c607af9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6cebbeaa7a3b5c48",
+      "name": "河马剧场",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]河马剧场-7a3b5c48.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]河马剧场-7a3b5c48.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_075c86ca4fd37410",
+      "name": "河马短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]河马短剧-4fd37410.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]河马短剧-4fd37410.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3f855f8522dd5b5b",
+      "name": "泡泡影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]泡泡影院-22dd5b5b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]泡泡影院-22dd5b5b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_925c95e7b7aaa83e",
+      "name": "泥视频",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]泥视频-b7aaa83e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]泥视频-b7aaa83e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "gaze_video",
@@ -972,6 +2472,66 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_a9eb03a0e97e2170",
+      "name": "浮生影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-浮生影院-e97e2170.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-浮生影院-e97e2170.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_be60e97204ef9323",
+      "name": "淫花宫TVBox标准爬虫_已修复",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-淫花宫TVBox标准爬虫_已修复-04ef9323.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-淫花宫TVBox标准爬虫_已修复-04ef9323.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_094e2ad44431b20e",
+      "name": "火云",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]火云-4431b20e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]火云-4431b20e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_bd57310df18dac2e",
+      "name": "热播APP",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]热播APP-f18dac2e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]热播APP-f18dac2e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6d05ff8be3697ebc",
+      "name": "热播之家",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-热播之家-e3697ebc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-热播之家-e3697ebc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "iyf_video",
       "name": "爱壹帆",
       "version": "1.0.1",
@@ -982,6 +2542,90 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_ddc832918699dc21",
+      "name": "爱奇艺",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]爱奇艺-8699dc21.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]爱奇艺-8699dc21.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_61828c5193661184",
+      "name": "爱瓜影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]爱瓜影视-93661184.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]爱瓜影视-93661184.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_534f1d5cb378bab2",
+      "name": "爱看去广告",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-爱看去广告-b378bab2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-爱看去广告-b378bab2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_13880794412d19bf",
+      "name": "爱看机器人",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]爱看机器人-412d19bf.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]爱看机器人-412d19bf.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6a802ce95f8a878d",
+      "name": "片吧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-片吧-5f8a878d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-片吧-5f8a878d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_aa02e1aa6c9d43a6",
+      "name": "牛牛短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]牛牛短剧-6c9d43a6.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]牛牛短剧-6c9d43a6.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5b09984005456104",
+      "name": "特狗影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]特狗影视-05456104.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]特狗影视-05456104.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "duboku_video",
@@ -996,6 +2640,42 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_f1d84c121555f3ac",
+      "name": "独播库",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]独播库-1555f3ac.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]独播库-1555f3ac.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e888239349452c23",
+      "name": "瓜子",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]瓜子-49452c23.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]瓜子-49452c23.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_064e11751b08f9ad",
+      "name": "瓜子APP",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]瓜子APP-1b08f9ad.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]瓜子APP-1b08f9ad.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "gztv5_video",
       "name": "瓜子影视",
       "version": "3.1.1",
@@ -1006,6 +2686,102 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_f9bbf80d150aaaaf",
+      "name": "瓜子影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-瓜子影视-150aaaaf.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-瓜子影视-150aaaaf.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_be30bd47513ba587",
+      "name": "电影云集",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]电影云集-513ba587.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]电影云集-513ba587.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_4a0bc0431ebfe7c1",
+      "name": "电影天堂",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]电影天堂-1ebfe7c1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]电影天堂-1ebfe7c1.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_993294588784ff1d",
+      "name": "电影猎手",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]电影猎手-8784ff1d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]电影猎手-8784ff1d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c095be55f9e90579",
+      "name": "番茄短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]番茄短剧-f9e90579.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]番茄短剧-f9e90579.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_95deede3b64e528b",
+      "name": "白洋影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]白洋影院-b64e528b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]白洋影院-b64e528b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a9704e1678ca9744",
+      "name": "百花影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]百花影院-78ca9744.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]百花影院-78ca9744.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5e253b3a0ec38afe",
+      "name": "直播平台",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[直]直播平台-0ec38afe.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[直]直播平台-0ec38afe.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "kanju_ai_video",
@@ -1020,6 +2796,42 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_f65a4d872bb681d6",
+      "name": "看剧AI",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]看剧AI-2bb681d6.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]看剧AI-2bb681d6.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e7bc59f2d7f63d46",
+      "name": "看剧AI19",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]看剧AI19-d7f63d46.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]看剧AI19-d7f63d46.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_64ceb620e22492f6",
+      "name": "看戏影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]看戏影视-e22492f6.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]看戏影视-e22492f6.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "kpkuang_video",
       "name": "看片狂人",
       "version": "1.1.0",
@@ -1030,6 +2842,54 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_fde89f0b6492bc44",
+      "name": "真狼影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]真狼影视-6492bc44.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]真狼影视-6492bc44.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6982f17aed4ab7c4",
+      "name": "短剧大全",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-短剧大全-ed4ab7c4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-短剧大全-ed4ab7c4.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_70be7dfb14695197",
+      "name": "短剧大全",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]短剧大全-14695197.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]短剧大全-14695197.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_bf6a8d8b152b9614",
+      "name": "短剧巴士",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]短剧巴士-152b9614.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]短剧巴士-152b9614.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "duanju2",
@@ -1044,6 +2904,318 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_f7f7f0f39edb8c94",
+      "name": "石榴短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]石榴短剧-9edb8c94.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]石榴短剧-9edb8c94.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6d5cb947c01cbc41",
+      "name": "移动4k(1)",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-移动4k(1)-c01cbc41.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-移动4k(1)-c01cbc41.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e88ef0f6572c32c9",
+      "name": "第七影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]第七影院-572c32c9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]第七影院-572c32c9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_72f5390ac34b4723",
+      "name": "第九短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]第九短剧-c34b4723.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]第九短剧-c34b4723.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8360a725adb67c3a",
+      "name": "米饭",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]米饭-adb67c3a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]米饭-adb67c3a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_9192fd18fc6d2a1f",
+      "name": "糯米短剧(2)",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-糯米短剧(2)-fc6d2a1f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-糯米短剧(2)-fc6d2a1f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ea52afa4592bad5f",
+      "name": "红果不夜版",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-红果不夜版-592bad5f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-红果不夜版-592bad5f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_35a3cad513046b24",
+      "name": "红果短剧加了个排行榜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-红果短剧加了个排行榜-13046b24.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-红果短剧加了个排行榜-13046b24.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_fabc7fcae616b963",
+      "name": "红果短剧最终版",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]红果短剧最终版-e616b963.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]红果短剧最终版-e616b963.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_14f8952e96fc93a9",
+      "name": "红豆",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]红豆-96fc93a9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]红豆-96fc93a9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_9ce25f405ce5d7ff",
+      "name": "红豆短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]红豆短剧-5ce5d7ff.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]红豆短剧-5ce5d7ff.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0cdad90866f04990",
+      "name": "经典老片",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-经典老片-66f04990.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-经典老片-66f04990.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3753a49d8697dcb2",
+      "name": "网飞TV",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]网飞TV-8697dcb2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]网飞TV-8697dcb2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2fd23fc9d4027dac",
+      "name": "网飞猫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-网飞猫-d4027dac.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-网飞猫-d4027dac.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_07aa21697ce4b1ab",
+      "name": "美剧天堂",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]美剧天堂-7ce4b1ab.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]美剧天堂-7ce4b1ab.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c3d79a1e454fc672",
+      "name": "聚合直播",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-聚合直播-454fc672.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-聚合直播-454fc672.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5a1114600fb99d40",
+      "name": "聚合短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-聚合短剧-0fb99d40.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-聚合短剧-0fb99d40.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_01147e86bfdf744b",
+      "name": "腾讯",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]腾讯-bfdf744b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]腾讯-bfdf744b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_128f056a10b18a1f",
+      "name": "芒果TV",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]芒果TV-10b18a1f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]芒果TV-10b18a1f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5fc0e8b7bd3199f3",
+      "name": "芭蕉剧场",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]芭蕉剧场-bd3199f3.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]芭蕉剧场-bd3199f3.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d375a0a5750ba48e",
+      "name": "苹果视频",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]苹果视频-750ba48e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]苹果视频-750ba48e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_fbe9975a6ce0cd6a",
+      "name": "茶杯狐",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]茶杯狐-6ce0cd6a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]茶杯狐-6ce0cd6a.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_58dc0a6459c062a9",
+      "name": "草莓影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]草莓影视-59c062a9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]草莓影视-59c062a9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_48de1e1d1d830f39",
+      "name": "莫小影",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]莫小影-1d830f39.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]莫小影-1d830f39.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c9a9c96d2415b4c4",
+      "name": "虎牙斗鱼网易",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]虎牙斗鱼网易-2415b4c4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]虎牙斗鱼网易-2415b4c4.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6a03caead878fef0",
+      "name": "蚕驰短剧",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[短]蚕驰短剧-d878fef0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[短]蚕驰短剧-d878fef0.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "ptt_drama",
       "name": "蝴蝶影院",
       "version": "1.0.2",
@@ -1056,6 +3228,174 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_870476673caf7ee9",
+      "name": "蝶卡影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]蝶卡影视-3caf7ee9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]蝶卡影视-3caf7ee9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_da6ea27be64c7b26",
+      "name": "袋鼠影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]袋鼠影视-e64c7b26.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]袋鼠影视-e64c7b26.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_fe77d10688265501",
+      "name": "西瓜视频",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]西瓜视频-88265501.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]西瓜视频-88265501.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e869746b00b8e961",
+      "name": "观风影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]观风影视-00b8e961.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]观风影视-00b8e961.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_94085671350e1ef9",
+      "name": "视觉影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]视觉影院-350e1ef9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]视觉影院-350e1ef9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3214775d2b8e264b",
+      "name": "豆花影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-豆花影视-2b8e264b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-豆花影视-2b8e264b.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3095e9f9d9808b91",
+      "name": "追光影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]追光影视-d9808b91.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]追光影视-d9808b91.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3dbed41dbb6aa390",
+      "name": "追剧达人",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]追剧达人-bb6aa390.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]追剧达人-bb6aa390.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a864f45d8ba3e038",
+      "name": "追影",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]追影-8ba3e038.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]追影-8ba3e038.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b4d38902c5a8127e",
+      "name": "速搜",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]速搜-c5a8127e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]速搜-c5a8127e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5aaffcee5106b16d",
+      "name": "采集聚合",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]采集聚合-5106b16d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]采集聚合-5106b16d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2046cc0308d1abbe",
+      "name": "重口味影院-TVBox爬虫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-重口味影院-TVBox爬虫-08d1abbe.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-重口味影院-TVBox爬虫-08d1abbe.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7342ef5af4f4f5f2",
+      "name": "金牌APP",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-金牌APP-f4f4f5f2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-金牌APP-f4f4f5f2.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e6634c1602e45126",
+      "name": "金牌APP",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]金牌APP-02e45126.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]金牌APP-02e45126.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "jpyy2_video",
       "name": "金牌影院",
       "version": "1.0.1",
@@ -1063,6 +3403,102 @@
       "appSection": "video",
       "path": "movie/金牌影院.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/金牌影院.js",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7a942e6e865a884c",
+      "name": "金牌影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-金牌影院-865a884c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-金牌影院-865a884c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b83c0a4aaec72bff",
+      "name": "青牛影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]青牛影视-aec72bff.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]青牛影视-aec72bff.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7595d27a0e8af877",
+      "name": "青空次元",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]青空次元-0e8af877.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]青空次元-0e8af877.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6f5036103aa948aa",
+      "name": "青蛙影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]青蛙影视-3aa948aa.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]青蛙影视-3aa948aa.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_90dbfc6fe9db75c3",
+      "name": "非凡资源",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]非凡资源-e9db75c3.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]非凡资源-e9db75c3.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0128db8e04f974cc",
+      "name": "韩剧巴士",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]韩剧巴士-04f974cc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]韩剧巴士-04f974cc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3f6ff2dbde597e52",
+      "name": "韩小圈",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]韩小圈-de597e52.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]韩小圈-de597e52.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d02c67edc7f18344",
+      "name": "飞快TV",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]飞快TV-c7f18344.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]飞快TV-c7f18344.py",
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": false
@@ -1080,6 +3516,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_674db407cf2f8f4e",
+      "name": "飞牛影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]飞牛影视-cf2f8f4e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]飞牛影视-cf2f8f4e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "fdzys",
       "name": "饭搭子影视",
       "version": "1.0.1",
@@ -1090,6 +3538,150 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_7c1a68237e9d0439",
+      "name": "饭搭子影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]饭搭子影视-7e9d0439.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]饭搭子影视-7e9d0439.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_bd177c93282bd2ea",
+      "name": "骚火影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]骚火影视-282bd2ea.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]骚火影视-282bd2ea.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1b229dfa35eb7708",
+      "name": "骚火电影",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]骚火电影-35eb7708.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]骚火电影-35eb7708.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6ba204ffc660e366",
+      "name": "高清点播",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]高清点播-c660e366.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]高清点播-c660e366.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1d7b0e8b80e5457e",
+      "name": "魔法影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]魔法影视-80e5457e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]魔法影视-80e5457e.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8301b49420f5b124",
+      "name": "鱼塘社",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]鱼塘社-20f5b124.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]鱼塘社-20f5b124.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6cf8b8d724b8dbac",
+      "name": "麒麟影视",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]麒麟影视-24b8dbac.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]麒麟影视-24b8dbac.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_689abd30afec83ad",
+      "name": "麦田影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[影]麦田影院-afec83ad.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[影]麦田影院-afec83ad.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c01f4efa0cb1fb8d",
+      "name": "黑猫动漫",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-[漫]黑猫动漫-0cb1fb8d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-[漫]黑猫动漫-0cb1fb8d.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ad3bda6e4bc0f0eb",
+      "name": "🎬xb6v電影",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-🎬xb6v電影-4bc0f0eb.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-🎬xb6v電影-4bc0f0eb.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_e7316e247146a526",
+      "name": "🎬电影天堂",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-🎬电影天堂-7146a526.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-🎬电影天堂-7146a526.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b9fc8a4e9a42d00f",
+      "name": "🎬金牌影院",
+      "version": "1.0.0",
+      "kind": "movie",
+      "appSection": "video",
+      "path": "movie/PY-🎬金牌影院-9a42d00f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/movie/PY-🎬金牌影院-9a42d00f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "v1024_video",
@@ -1128,6 +3720,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_5ae710262db60781",
+      "name": "18jspa",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-18jspa-2db60781.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-18jspa-2db60781.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "lu320_video",
       "name": "320lu小视频",
       "version": "1.0.0",
@@ -1152,6 +3756,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_a0e18a45cf84fc00",
+      "name": "618",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]618-cf84fc00.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]618-cf84fc00.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "s618208_video",
       "name": "618208",
       "version": "1.0.0",
@@ -1174,6 +3790,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_347be6b91aa06257",
+      "name": "74P福利图",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]74P福利图-1aa06257.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]74P福利图-1aa06257.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "p85_video",
@@ -1231,6 +3859,18 @@
       "appSection": "video",
       "path": "video/91Porn视频.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/91Porn视频.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_974c88bd7ff4e50e",
+      "name": "91porna",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-91porna-7ff4e50e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-91porna-7ff4e50e.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1356,6 +3996,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_c8c7380efd79eaa4",
+      "name": "babestation",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-babestation-fd79eaa4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-babestation-fd79eaa4.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b11f4ecce820a17c",
+      "name": "badnews",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-badnews-e820a17c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-badnews-e820a17c.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "betareel_video",
       "name": "BetaTok",
       "version": "1.0.0",
@@ -1380,6 +4044,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_848d31242beb0ab9",
+      "name": "bzsp005-去广告",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-bzsp005-去广告-2beb0ab9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-bzsp005-去广告-2beb0ab9.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "cartoonporn_video",
       "name": "CartoonPorn",
       "version": "1.0.0",
@@ -1399,6 +4075,18 @@
       "appSection": "video",
       "path": "video/Chaturbetter.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Chaturbetter.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1fd0a1be766d7b05",
+      "name": "eporner大站",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-eporner大站-766d7b05.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-eporner大站-766d7b05.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1452,6 +4140,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_169f40b6923802fe",
+      "name": "hanime",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-hanime-923802fe.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-hanime-923802fe.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8535d5c4a40c0174",
+      "name": "Hanime1（免翻）",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-Hanime1（免翻）-a40c0174.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-Hanime1（免翻）-a40c0174.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "hentai2w",
       "name": "Hentai2W",
       "version": "1.0.0",
@@ -1476,6 +4188,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_373136a3ed1617f1",
+      "name": "hqporner",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-hqporner-ed1617f1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-hqporner-ed1617f1.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "hstream_video",
       "name": "hstream",
       "version": "1.0.0",
@@ -1486,6 +4210,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_f837697be39f3e55",
+      "name": "huajy_v1_0",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-huajy_v1_0-e39f3e55.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-huajy_v1_0-e39f3e55.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "h4dh3_video",
@@ -1543,6 +4279,18 @@
       "appSection": "video",
       "path": "video/Iwara视频.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Iwara视频.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_4c860756bba96c00",
+      "name": "jiujiu",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-jiujiu-bba96c00.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-jiujiu-bba96c00.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1608,6 +4356,30 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_6c2cc842049cd28d",
+      "name": "Missav（免翻）",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-Missav（免翻）-049cd28d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-Missav（免翻）-049cd28d.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_c20d21a3b2666142",
+      "name": "mjv011(1)",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]mjv011(1)-b2666142.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]mjv011(1)-b2666142.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "mfc_video",
       "name": "MyFreeCams",
       "version": "1.0.1",
@@ -1642,6 +4414,30 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_87e83502384a0eba",
+      "name": "porna91",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-porna91-384a0eba.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-porna91-384a0eba.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_67127010003a8ec7",
+      "name": "pornav",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-pornav-003a8ec7.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-pornav-003a8ec7.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "pornhub_video",
@@ -1764,6 +4560,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_039fc633d5411ce5",
+      "name": "sweetpornos",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-sweetpornos-d5411ce5.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-sweetpornos-d5411ce5.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "theavporn_video",
       "name": "TheAVPorn",
       "version": "1.0.0",
@@ -1783,6 +4591,18 @@
       "appSection": "video",
       "path": "video/ThePornJoy.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/ThePornJoy.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_044068473e0303be",
+      "name": "Twitter精选",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-Twitter精选-3e0303be.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-Twitter精选-3e0303be.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1860,6 +4680,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_14c974b7e43130e0",
+      "name": "VPorn",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]VPorn-e43130e0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]VPorn-e43130e0.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "xcamtube_video",
       "name": "XCamTube",
       "version": "1.0.0",
@@ -1870,6 +4702,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_1ca85e9f09038929",
+      "name": "XChina",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-XChina-09038929.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-XChina-09038929.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "xhamster_video",
@@ -1891,6 +4735,18 @@
       "appSection": "video",
       "path": "video/xHamsterLive.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/xHamsterLive.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_28f71b72956965f4",
+      "name": "xn--69",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-xn--69-956965f4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-xn--69-956965f4.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1932,6 +4788,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_4cdfb404f7da5cca",
+      "name": "xx9已过验证",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-xx9已过验证-f7da5cca.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-xx9已过验证-f7da5cca.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "xxxfollow_video",
       "name": "XXXfollow",
       "version": "1.0.0",
@@ -1944,6 +4812,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_3d7dffbaeec81d24",
+      "name": "X红颜",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-X红颜-eec81d24.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-X红颜-eec81d24.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "youjizz_video",
       "name": "YouJizz",
       "version": "1.0.0",
@@ -1951,6 +4831,18 @@
       "appSection": "video",
       "path": "video/YouJizz.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/YouJizz.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_f103a317c218faad",
+      "name": "YouTube",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]YouTube-c218faad.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]YouTube-c218faad.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -1992,6 +4884,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_5e60e725a825e9e1",
+      "name": "久久网",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-久久网-a825e9e1.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-久久网-a825e9e1.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "jiuse91_video",
       "name": "九色91Porny",
       "version": "1.0.0",
@@ -2028,6 +4932,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_080362d6222f8d32",
+      "name": "优化hong",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-优化hong-222f8d32.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-优化hong-222f8d32.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "oreno3d_video",
       "name": "俺の3Dエロ動画",
       "version": "1.0.0",
@@ -2038,6 +4954,54 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_035ad44c7cfa4911",
+      "name": "午夜影视",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-午夜影视-7cfa4911.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-午夜影视-7cfa4911.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a8990556ad2e6277",
+      "name": "原创乱伦",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-原创乱伦-ad2e6277.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-原创乱伦-ad2e6277.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_b6ab593a7e33e63d",
+      "name": "原创辣妹",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-原创辣妹-7e33e63d.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-原创辣妹-7e33e63d.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_9932d9ac3e3680fd",
+      "name": "原创辣妹-去广告",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-原创辣妹-去广告-3e3680fd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-原创辣妹-去广告-3e3680fd.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "papalah_video",
@@ -2098,6 +5062,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_404e583d4c7b09a0",
+      "name": "夜勾心事",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-夜勾心事-4c7b09a0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-夜勾心事-4c7b09a0.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "yeshezy_video",
@@ -2184,6 +5160,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_f02cdca2ef3b69ca",
+      "name": "小淫虫",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-小淫虫-ef3b69ca.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-小淫虫-ef3b69ca.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_491ad8064be66652",
+      "name": "小穴生",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-小穴生-4be66652.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-小穴生-4be66652.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "xiaohuangniao_video",
       "name": "小黄鸟",
       "version": "1.0.0",
@@ -2196,6 +5196,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_6b049c4e0b2b3ff6",
+      "name": "少女破处",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-少女破处-0b2b3ff6.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-少女破处-0b2b3ff6.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0cab865ff159c1fd",
+      "name": "居屋短剧",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]居屋短剧-f159c1fd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]居屋短剧-f159c1fd.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "fcw_video",
       "name": "废柴视频",
       "version": "1.0.0",
@@ -2203,6 +5227,18 @@
       "appSection": "video",
       "path": "video/Fcw.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/Fcw.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_0fa95981ae4f3015",
+      "name": "快感研究所",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-快感研究所-ae4f3015.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-快感研究所-ae4f3015.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -2232,6 +5268,30 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_e3c62fdc39efc998",
+      "name": "怦然心动",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]怦然心动-39efc998.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]怦然心动-39efc998.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_549496d6e862b0db",
+      "name": "成人B站",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-成人B站-e862b0db.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-成人B站-e862b0db.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "xanimu_video",
       "name": "成人动漫",
       "version": "1.0.2",
@@ -2239,6 +5299,18 @@
       "appSection": "video",
       "path": "video/成人动漫.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/成人动漫.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_bbbc0c3df2696c99",
+      "name": "我秀直播",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-我秀直播-f2696c99.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-我秀直播-f2696c99.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -2256,6 +5328,42 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_52a1686b1efed9a8",
+      "name": "暗夜蜜桃",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-暗夜蜜桃-1efed9a8.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-暗夜蜜桃-1efed9a8.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ee97103063bb832a",
+      "name": "暗黑蜜桃🔞",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-暗黑蜜桃🔞-63bb832a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-暗黑蜜桃🔞-63bb832a.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_a75ceff6963d4930",
+      "name": "月之祠",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-月之祠-963d4930.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-月之祠-963d4930.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "yuese_video",
       "name": "月色视频 18+",
       "version": "1.0.1",
@@ -2263,6 +5371,18 @@
       "appSection": "video",
       "path": "video/月色视频-2.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/月色视频-2.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8d2f80865c942d19",
+      "name": "有料",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-有料-5c942d19.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-有料-5c942d19.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -2278,6 +5398,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_6ff24041e6c8c703",
+      "name": "未来影院",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]未来影院-e6c8c703.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]未来影院-e6c8c703.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "sex8_video",
@@ -2304,6 +5436,18 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_daf13bb5f32259b4",
+      "name": "柳州丈母",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-柳州丈母-f32259b4.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-柳州丈母-f32259b4.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "zhilian-duanju",
       "name": "栀莲短剧",
       "version": "1.0.1",
@@ -2316,6 +5460,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_188d3d5770e9c9dc",
+      "name": "桃花视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-桃花视频-70e9c9dc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-桃花视频-70e9c9dc.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "chengshe_video",
       "name": "橙涩视频",
       "version": "2.2.0",
@@ -2326,6 +5482,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_212b74af09e423b2",
+      "name": "欲语心镜",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-欲语心镜-09e423b2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-欲语心镜-09e423b2.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "tangtoutiao_video",
@@ -2364,6 +5532,42 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_b7bf8b0f1eb0e1da",
+      "name": "海角情-修复",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-海角情-修复-1eb0e1da.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-海角情-修复-1eb0e1da.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8834e2ad23fa3ad9",
+      "name": "深夜电影",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-深夜电影-23fa3ad9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-深夜电影-23fa3ad9.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_eb5d0c9439edad02",
+      "name": "深夜短剧",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-深夜短剧-39edad02.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-深夜短剧-39edad02.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "lao4j_video",
       "name": "火力视频",
       "version": "2.0.1",
@@ -2374,6 +5578,18 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_55b2e6841964471b",
+      "name": "熊猫直播",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]熊猫直播-1964471b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]熊猫直播-1964471b.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "aqd_video",
@@ -2424,6 +5640,42 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_78875f382dd4a609",
+      "name": "玩物社区",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-玩物社区-2dd4a609.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-玩物社区-2dd4a609.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8150f4dc8fbe64db",
+      "name": "玩物社区_T3v1.5",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-玩物社区_T3v1.5-8fbe64db.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-玩物社区_T3v1.5-8fbe64db.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8f4699005dff15c2",
+      "name": "白嫖之王-封面修复第二版",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-白嫖之王-封面修复第二版-5dff15c2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-白嫖之王-封面修复第二版-5dff15c2.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "livebox_video",
       "name": "直播盒子",
       "version": "1.0.0",
@@ -2448,6 +5700,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_2802226610d4e6c2",
+      "name": "神秘电影",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]神秘电影-10d4e6c2.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]神秘电影-10d4e6c2.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_13192b0f19124210",
+      "name": "章鱼",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-章鱼-19124210.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-章鱼-19124210.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "pornbest_video",
       "name": "第一女優網",
       "version": "1.0.2",
@@ -2460,6 +5736,18 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_7a615a369fb3f055",
+      "name": "红裹视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-红裹视频-9fb3f055.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-红裹视频-9fb3f055.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "gamebus_video",
       "name": "绅游巴士",
       "version": "1.0.0",
@@ -2467,6 +5755,30 @@
       "appSection": "video",
       "path": "video/绅游巴士.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/绅游巴士.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3042d332a8ee89e5",
+      "name": "美不胜收（免翻）",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-美不胜收（免翻）-a8ee89e5.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-美不胜收（免翻）-a8ee89e5.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_1545f23820617dc8",
+      "name": "美人姬",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-美人姬-20617dc8.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-美人姬-20617dc8.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -2482,6 +5794,42 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_794ea446a150d735",
+      "name": "花街影院",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-花街影院-a150d735.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-花街影院-a150d735.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8d4d40be57ae814e",
+      "name": "萝莉岛",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-萝莉岛-57ae814e.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-萝莉岛-57ae814e.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_8d8b8d926b7d858a",
+      "name": "蘑菇视频",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-蘑菇视频-6b7d858a.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-蘑菇视频-6b7d858a.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
     },
     {
       "id": "mitaow_video",
@@ -2532,6 +5880,42 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_02c9b149e1a6c17c",
+      "name": "蝙蝠视频🔞",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[成人]蝙蝠视频🔞-e1a6c17c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[成人]蝙蝠视频🔞-e1a6c17c.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_6801804eecf1b0ce",
+      "name": "蝴蝶影院(广告去不干净)iOS版本",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-蝴蝶影院(广告去不干净)iOS版本-ecf1b0ce.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-蝴蝶影院(广告去不干净)iOS版本-ecf1b0ce.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_723fd810eaeae521",
+      "name": "路漫漫",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-路漫漫-eaeae521.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-路漫漫-eaeae521.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "niacg_video",
       "name": "逆次元ACG",
       "version": "1.0.1",
@@ -2556,6 +5940,42 @@
       "iconDeclared": false
     },
     {
+      "id": "pypack_ccbbb52aea68400b",
+      "name": "金典AV",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-金典AV-ea68400b.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-金典AV-ea68400b.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_ac18f1ead1d18b21",
+      "name": "陌陌一夜情",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-陌陌一夜情-d1d18b21.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-陌陌一夜情-d1d18b21.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_66515b5817a196f0",
+      "name": "韩三伦理",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]韩三伦理-17a196f0.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]韩三伦理-17a196f0.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "fplayer_video",
       "name": "飞播",
       "version": "1.0.1",
@@ -2575,6 +5995,18 @@
       "appSection": "video",
       "path": "video/麻豆TV.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/麻豆TV.js",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2629ee05b2ac3eaf",
+      "name": "麻豆影院",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-麻豆影院-b2ac3eaf.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-麻豆影院-b2ac3eaf.py",
       "aliases": [],
       "rating": "18+",
       "iconDeclared": false
@@ -2628,6 +6060,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_40321f7e9e507396",
+      "name": "黄豆短剧",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-[瑟]黄豆短剧-9e507396.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-[瑟]黄豆短剧-9e507396.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_df3dd9f97a066d9f",
+      "name": "黑料718 (1)",
+      "version": "1.0.0",
+      "kind": "video",
+      "appSection": "video",
+      "path": "video/PY-黑料718 (1)-7a066d9f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/PY-黑料718 (1)-7a066d9f.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
       "id": "ting13_audiobook",
       "name": "13听书网",
       "version": "1.0.3",
@@ -2640,6 +6096,66 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_0a38a94491b6d4ad",
+      "name": "275听书",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[书]275听书-91b6d4ad.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[书]275听书-91b6d4ad.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_71f0984fc2a49e62",
+      "name": "ASMR吧",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[助眠]ASMR吧-c2a49e62.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[助眠]ASMR吧-c2a49e62.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2851ce49fc3515a6",
+      "name": "DJ呦呦",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]DJ呦呦-fc3515a6.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]DJ呦呦-fc3515a6.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2784373fa1b88dcc",
+      "name": "DJ哟哟",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]DJ哟哟-a1b88dcc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]DJ哟哟-a1b88dcc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_05ee36942eaae8d8",
+      "name": "千千音乐",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]千千音乐-2eaae8d8.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]千千音乐-2eaae8d8.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "ting8_audiobook",
       "name": "听书吧",
       "version": "1.0.3",
@@ -2650,6 +6166,54 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_241cc4ba6578014c",
+      "name": "听友",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[书]听友-6578014c.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[书]听友-6578014c.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_7982247df297fb8f",
+      "name": "听友小说",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-听友小说-f297fb8f.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-听友小说-f297fb8f.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_5a4fda6ee8d6b9de",
+      "name": "喜马拉雅",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[书]喜马拉雅-e8d6b9de.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[书]喜马拉雅-e8d6b9de.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d4247c27474147de",
+      "name": "多聚听书",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-多聚听书-474147de.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-多聚听书-474147de.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "xnovel_audiobook",
@@ -2676,6 +6240,30 @@
       "iconDeclared": true
     },
     {
+      "id": "pypack_c71045345421e4cd",
+      "name": "影子音乐",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]影子音乐-5421e4cd.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]影子音乐-5421e4cd.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_d50ffac90ff60a17",
+      "name": "悦听",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[书]悦听-0ff60a17.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[书]悦听-0ff60a17.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
       "id": "yueting_video",
       "name": "悦听",
       "version": "1.0.1",
@@ -2698,6 +6286,66 @@
       "aliases": [],
       "rating": "unknown",
       "iconDeclared": true
+    },
+    {
+      "id": "pypack_2e82f50f93f015bc",
+      "name": "易听书网",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[书]易听书网-93f015bc.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[书]易听书网-93f015bc.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_352c21db33be3427",
+      "name": "星梦Asmr",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[瑟]星梦Asmr-33be3427.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[瑟]星梦Asmr-33be3427.py",
+      "aliases": [],
+      "rating": "18+",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_2fbb2303f1279fa9",
+      "name": "爱听音乐",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]爱听音乐-f1279fa9.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]爱听音乐-f1279fa9.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_961950b86e0baa12",
+      "name": "酷我",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]酷我-6e0baa12.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]酷我-6e0baa12.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
+    },
+    {
+      "id": "pypack_3372eb152a943dca",
+      "name": "音乐聚合",
+      "version": "1.0.0",
+      "kind": "audiobook",
+      "appSection": "comic",
+      "path": "audiobook/PY-[音]音乐聚合-2a943dca.py",
+      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/audiobook/PY-[音]音乐聚合-2a943dca.py",
+      "aliases": [],
+      "rating": "unknown",
+      "iconDeclared": false
     },
     {
       "id": "qilin70_audiobook",

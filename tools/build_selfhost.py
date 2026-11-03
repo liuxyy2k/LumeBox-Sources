@@ -24,13 +24,13 @@ import shutil
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SOURCE_DIRS = ('comic', 'photo', 'movie', 'video', 'audiobook', 'web')
+SOURCE_DIRS = ('comic', 'photo', 'movie', 'video', 'audiobook', 'novel', 'web')
 RAW = 'https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/'
 CDN = 'https://cdn.jsdelivr.net/gh/teng662858/LumeBox-Sources@main/'
 # 总订阅里只保留这几份清单
 ALL_SECTIONS = {
-    'comic': ('comic', 'photo'),
-    'video': ('movie', 'video', 'audiobook'),
+    'comic': ('comic', 'photo', 'novel', 'audiobook', 'python-comic'),
+    'video': ('movie', 'video', 'python-video'),
 }
 
 
@@ -53,7 +53,7 @@ def rewrite(text, base):
 
 def manifest_sources():
     """要产出的清单：分类 txt + 合并 txt。命名与订阅端一致。"""
-    names = ['comic', 'photo', 'movie', 'video', 'audiobook']
+    names = ['comic', 'photo', 'movie', 'video', 'audiobook', 'novel', 'python-comic', 'python-video']
     return names + ['comics', 'videos']
 
 
@@ -120,6 +120,13 @@ def build(base, out, clean=False):
     }
     (out / 'subscriptions/all.json').write_text(
         json.dumps(total, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
+
+    python_total = {
+        'format': 'lume.total-subscription', 'version': 1,
+        'sections': {section: [base + 'subscriptions/python-' + section + '.txt'] for section in ('comic', 'video')},
+    }
+    (out / 'subscriptions/python.json').write_text(
+        json.dumps(python_total, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
 
     # 目录索引：方便用浏览器/curl 一眼看出内容是否刷新
     (out / 'index.html').write_text(
