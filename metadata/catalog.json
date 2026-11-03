@@ -1526,7 +1526,7 @@
     {
       "id": "insav_video",
       "name": "INSAV",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "kind": "video",
       "appSection": "video",
       "path": "video/INSAV视频.js",
