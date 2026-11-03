@@ -758,7 +758,7 @@
     {
       "id": "fourk_video",
       "name": "4k影视",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "kind": "movie",
       "appSection": "video",
       "path": "video/4k影视.js",
