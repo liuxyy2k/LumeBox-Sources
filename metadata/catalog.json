@@ -5,7 +5,7 @@
     "comic": 52,
     "photo": 5,
     "movie": 249,
-    "video": 200,
+    "video": 199,
     "audiobook": 23,
     "novel": 0
   },
@@ -4318,18 +4318,6 @@
       "aliases": [],
       "rating": "18+",
       "iconDeclared": true
-    },
-    {
-      "id": "lxxlxx_video",
-      "name": "LXXLXX",
-      "version": "1.1.1",
-      "kind": "video",
-      "appSection": "video",
-      "path": "video/LXXLXX.js",
-      "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/video/LXXLXX.js",
-      "aliases": [],
-      "rating": "18+",
-      "iconDeclared": false
     },
     {
       "id": "maturenl_video",
