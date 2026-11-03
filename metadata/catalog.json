@@ -458,7 +458,7 @@
     {
       "id": "alicesw_comic",
       "name": "爱丽丝书屋",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "kind": "comic",
       "appSection": "comic",
       "path": "comic/爱丽丝书屋.js",
@@ -602,14 +602,14 @@
     {
       "id": "antbyw_comic",
       "name": "蚂蚁搬运",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "comic",
       "appSection": "comic",
       "path": "comic/蚂蚁搬运.js",
       "url": "https://raw.githubusercontent.com/teng662858/LumeBox-Sources/main/comic/蚂蚁搬运.js",
       "aliases": [],
       "rating": "18+",
-      "iconDeclared": false
+      "iconDeclared": true
     },
     {
       "id": "nnhanman_comic",
