@@ -2198,7 +2198,7 @@
     {
       "id": "bfzy_video",
       "name": "暴风资源",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "movie",
       "appSection": "video",
       "path": "video/暴风资源.js",
@@ -5018,7 +5018,7 @@
     {
       "id": "d9y1w_video",
       "name": "四色视频 18+",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "kind": "video",
       "appSection": "video",
       "path": "video/四色视频.js",
@@ -5378,7 +5378,7 @@
     {
       "id": "uaa_video",
       "name": "有爱爱 UAA",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "kind": "video",
       "appSection": "video",
       "path": "video/有爱爱.js",
