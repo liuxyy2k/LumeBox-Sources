@@ -28,7 +28,7 @@ def short_hash(text):
 
 
 def url(path):
-    return RAW + path
+    return RAW + path.replace(' ', '%20')
 
 
 def read_sources():

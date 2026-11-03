@@ -29,6 +29,12 @@ class PythonCollectionTests(unittest.TestCase):
                             self.assertEqual(expected[canonical]['appSection'], section)
                             found[canonical] += 1
             self.assertEqual(dict(found), {url: 1 for url in expected})
+        for name in ('subscriptions/python-video.txt', 'subscriptions/python-comic.txt',
+                     'subscriptions/cdn/python-video.txt', 'subscriptions/cdn/python-comic.txt'):
+            for line in outputs[name].splitlines():
+                if line and not line.startswith('#'):
+                    self.assertNotIn(' ', line, name)
+        self.assertIn('%20', outputs['subscriptions/python-video.txt'])
 
     def test_inventory_preserves_body_and_quarantines_failures(self):
         index = json.loads((build_catalog.ROOT / 'metadata/python-collection.json').read_text('utf-8'))
