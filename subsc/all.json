@@ -1,0 +1,18 @@
+{
+  "format": "lume.total-subscription",
+  "version": 1,
+  "sections": {
+    "comic": [
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/comic.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/photo.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/novel.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/audiobook.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/python-comic.txt"
+    ],
+    "video": [
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/movie.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/video.txt",
+      "https://raw.githubusercontent.com/liuxyy2k/LumeBox-Sources/main/subscriptions/python-video.txt"
+    ]
+  }
+}
