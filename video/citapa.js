@@ -133,6 +133,7 @@ var LumeSource = {
   name: '茶杯狐',
   version: '1.0.0',
   category: 'video',
+  contentCategory: 'movie',
   settingsApiVersion: 2,
   requiresSettings: ['commonSettings', 'settingsActions'],
   endpoints: { site: ['https://citapa.com'] },
